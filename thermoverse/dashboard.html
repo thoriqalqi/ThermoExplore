@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Analitik — ThermoVerse</title>
+    <meta name="description" content="Dasbor analitik ThermoVerse — lihat XP, skor berpikir, dan kategori akhirmu.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <style>
+        .dash-hero {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 20px 20px;
+            align-items: center;
+        }
+
+        .dash-hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--red);
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .dash-hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .trophy-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #trophy-canvas {
+            border-radius: 16px;
+            border: 1px solid rgba(232, 34, 10, 0.2);
+            box-shadow: 0 0 40px rgba(232, 34, 10, 0.15);
+        }
+
+        .trophy-label {
+            font-family: var(--font-heading);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.12rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Stat cards */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        .stat-card {
+            perspective: 800px;
+            height: 140px;
+        }
+
+        .stat-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-card:hover .stat-card-inner {
+            transform: rotateY(12deg) rotateX(-5deg);
+        }
+
+        .stat-card-face {
+            position: absolute;
+            inset: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        .stat-card-face::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--red), var(--orange));
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.06rem;
+        }
+
+        /* Content */
+        .dash-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            margin-top: 40px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-header-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: var(--glow-red);
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.08rem;
+            text-transform: uppercase;
+        }
+
+        @media (max-width:768px) {
+            .dash-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .trophy-panel {
+                display: none;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="energy-pulse"></div>
+        <div class="loading-text">Memuat Dasbor...</div>
+    </div>
+    <div id="page-transition"></div>
+    <canvas id="particle-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div id="badge-popup">
+        <div class="badge-popup-icon">🏆</div>
+        <div class="badge-popup-content">
+            <div class="badge-popup-title">🎖 Lencana Terbuka!</div>
+            <div class="badge-popup-name">Nama Lencana</div>
+        </div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-logo">Thermo<span>Verse</span></a>
+        <ul class="nav-links">
+            <li><a href="map.html">Peta Misi</a></li>
+            <li><a href="index.html">Beranda</a></li>
+        </ul>
+        <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="dash-hero">
+            <div>
+                <div class="dash-hero-label">📊 Pusat Komando Analitik</div>
+                <h1 class="dash-hero-title">Laporan <span class="text-neon">Performa</span><br>Ekspedisimu</h1>
+                <p style="color:var(--text-secondary);font-size:1rem;line-height:1.7">Ringkasan lengkap hasil ekspedisi
+                    ThermoVerse kamu di semua tiga zona.</p>
+                <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+                    <a href="map.html" class="btn btn-primary" style="font-size:0.75rem;padding:12px 24px">🗺️ Peta
+                        Misi</a>
+                    <button class="btn btn-ghost" style="font-size:0.75rem;padding:12px 24px"
+                        onclick="if(confirm('Reset semua progres?')){ThermoGame.resetState();location.reload()}">🔄
+                        Reset</button>
+                </div>
+            </div>
+            <div class="trophy-panel">
+                <canvas id="trophy-canvas" width="240" height="280"></canvas>
+                <div class="trophy-label">TROFI KAMU</div>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-card-inner">
+                    <div class="stat-card-face">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value text-orange" id="stat-xp">0</div>
+                        <div class="stat-label">Total XP</div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-inner">
+                    <div class="stat-card-face">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value text-neon" id="stat-completion">0%</div>
+                        <div class="stat-label">Penyelesaian</div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-inner">
+                    <div class="stat-card-face">
+                        <div class="stat-icon">🗺️</div>
+                        <div class="stat-value" id="stat-zones">0/3</div>
+                        <div class="stat-label">Zona Selesai</div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-inner">
+                    <div class="stat-card-face">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value" id="stat-badges">0</div>
+                        <div class="stat-label">Lencana</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dash-content">
+            <div class="section-header">
+                <div class="section-header-dot"></div>
+                <h2>Indikator Berpikir</h2>
+            </div>
+            <div class="indicators-grid" id="indicators-grid"></div>
+
+            <div class="section-header">
+                <div class="section-header-dot" style="background:var(--orange);box-shadow:var(--glow-orange)"></div>
+                <h2>Grafik Performa</h2>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-title">
+                        <div class="chart-title-dot"></div>Profil Berpikir — Radar
+                    </div>
+                    <canvas id="radar-chart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">
+                        <div class="chart-title-dot" style="background:var(--orange);box-shadow:var(--glow-orange)">
+                        </div>Skor Per Zona — Batang
+                    </div>
+                    <canvas id="bar-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <div class="section-header-dot" style="background:var(--white)"></div>
+                <h2>Kategori Akhir</h2>
+            </div>
+            <div class="final-category-card">
+                <div class="category-label">KATEGORI INTELEKTUAL KAMU</div>
+                <div style="font-size:4rem;margin-bottom:8px" id="category-emoji">🌱</div>
+                <div class="category-value" id="category-value">Pemula</div>
+                <div class="category-range" id="category-range">Selesaikan zona untuk membuka kategorimu</div>
+                <div
+                    style="margin-top:24px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:0.82rem;color:var(--text-muted)">
+                    <span>🌱 &lt;60% — Pemula</span>
+                    <span>📈 60–74% — Berkembang</span>
+                    <span>🔬 75–89% — Analitis</span>
+                    <span>🚀 90–100% — Penjelajah Lanjutan</span>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <div class="section-header-dot" style="background:var(--orange);box-shadow:var(--glow-orange)"></div>
+                <h2>Koleksi Lencana</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-bottom:40px"
+                id="dashboard-badges-container"></div>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/badges.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/dashboard.js"></script>
+
+    <script>
+        // 3D Trophy (red/orange colors)
+        (function () {
+            const canvas = document.getElementById('trophy-canvas');
+            if (!canvas || !window.THREE) return;
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(240, 280);
+            renderer.setClearColor(0x000000, 0);
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, 240 / 280, 0.1, 100);
+            camera.position.set(0, 1, 6);
+            camera.lookAt(0, 0.3, 0);
+            const ambient = new THREE.AmbientLight(0x220a00, 0.5); scene.add(ambient);
+            const dl1 = new THREE.DirectionalLight(0xff5500, 1.2); dl1.position.set(3, 5, 3); scene.add(dl1);
+            const dl2 = new THREE.DirectionalLight(0xff8800, 0.6); dl2.position.set(-3, -2, 2); scene.add(dl2);
+            const pl = new THREE.PointLight(0xff4400, 2, 8); pl.position.set(0, 3, 2); scene.add(pl);
+            const trophy = TV3D.createTrophy(scene, [0, 0, 0]);
+            // Red-orange colors
+            trophy.cup.material.color.setHex(0xff5500);
+            trophy.cup.material.emissive.setHex(0xff3300);
+            const starGeo = new THREE.OctahedronGeometry(0.18);
+            const starMat = new THREE.MeshStandardMaterial({ color: 0xff8800, emissive: 0xff5500, emissiveIntensity: 1, metalness: 0.5 });
+            const star = new THREE.Mesh(starGeo, starMat); star.position.set(0, 1.7, 0); scene.add(star);
+            const starLight = new THREE.PointLight(0xff8800, 3, 3); starLight.position.copy(star.position); scene.add(starLight);
+            let t = 0;
+            function loopTrophy() { requestAnimationFrame(loopTrophy); t += 0.01; trophy.group.rotation.y += 0.008; star.rotation.x += 0.02; star.rotation.z += 0.015; star.position.y = 1.7 + 0.06 * Math.sin(t * 2); starLight.intensity = 3 + Math.sin(t * 3); pl.intensity = 2 + Math.sin(t * 1.5) * 0.5; renderer.render(scene, camera); }
+            loopTrophy();
+        })();
+
+        // GSAP entrance
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.stat-card', { opacity: 0, y: 30, rotateX: -15, stagger: 0.12, duration: 0.6, ease: 'back.out(1.5)', delay: 0.5 });
+            gsap.from('.chart-card', { opacity: 0, y: 20, stagger: 0.15, duration: 0.5, ease: 'power2.out', delay: 0.8 });
+            gsap.from('.final-category-card', { opacity: 0, scale: 0.95, duration: 0.6, ease: 'back.out(1.2)', delay: 1.0 });
+        });
+    </script>
+</body>
+
+</html>

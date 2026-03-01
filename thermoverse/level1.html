@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona 1: Hukum Dasar Termodinamika — ThermoVerse</title>
+    <meta name="description"
+        content="Zona 1 kuis termodinamika: 10 soal tentang hukum-hukum energi dan perpindahan kalor.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <style>
+        .quiz-layout {
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 28px;
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 30px 20px 80px;
+        }
+
+        .mol3d-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
+        }
+
+        #molecule-canvas {
+            border-radius: 50%;
+            border: 1px solid rgba(232, 34, 10, 0.3);
+            box-shadow: 0 0 30px rgba(232, 34, 10, 0.2);
+        }
+
+        .mol-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 850px) {
+            .quiz-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .mol3d-panel {
+                display: none;
+            }
+        }
+    </style>
+    <script>
+        window.QUIZ_CONFIG = {
+            zoneKey: 'zone1',
+            thinkingKeys: ['critical', 'systemic', 'scientific', 'innovative'],
+            questions: [
+                {
+                    text: "Apa yang dinyatakan oleh Hukum Pertama Termodinamika?", category: "Hukum Dasar", thinking: "scientific",
+                    options: ["Energi tidak dapat diciptakan atau dimusnahkan, hanya diubah bentuknya", "Kalor mengalir dari benda dingin ke benda panas", "Entropi selalu berkurang dalam sistem terisolasi", "Semua proses spontan bersifat reversibel"], correct: 0
+                },
+                {
+                    text: "Proses termodinamika manakah yang berlangsung pada suhu konstan?", category: "Proses", thinking: "critical",
+                    options: ["Adiabatik", "Isobarik", "Isotermal", "Isokhorik"], correct: 2
+                },
+                {
+                    text: "Entropi merupakan ukuran dari apa?", category: "Konsep", thinking: "scientific",
+                    options: ["Kerja yang dilakukan sistem", "Ketidakteraturan atau keacakan suatu sistem", "Perubahan suhu", "Energi kinetik molekul"], correct: 1
+                },
+                {
+                    text: "Dalam siklus Carnot, apa yang menentukan efisiensi termal maksimum?", category: "Siklus", thinking: "systemic",
+                    options: ["Jenis fluida kerja yang digunakan", "Suhu reservoir panas dan dingin", "Tekanan sistem", "Volume silinder"], correct: 1
+                },
+                {
+                    text: "Modus perpindahan kalor mana yang TIDAK memerlukan medium?", category: "Perpindahan Kalor", thinking: "scientific",
+                    options: ["Konduksi", "Konveksi", "Radiasi", "Adveksi"], correct: 2
+                },
+                {
+                    text: "Hukum Kedua Termodinamika menyatakan bahwa dalam proses alam apapun:", category: "Hukum Dasar", thinking: "critical",
+                    options: ["Total energi meningkat", "Entropi alam semesta meningkat", "Suhu selalu menurun", "Tekanan tetap konstan"], correct: 1
+                },
+                {
+                    text: "Rumus efisiensi termal mesin kalor adalah:", category: "Efisiensi", thinking: "systemic",
+                    options: ["η = W/Qh = 1 − (Qc/Qh)", "η = Qh/W", "η = Qc − Qh", "η = T × ΔS"], correct: 0
+                },
+                {
+                    text: "Hukum manakah yang dikenal sebagai Hukum Nol Termodinamika?", category: "Hukum Dasar", thinking: "critical",
+                    options: ["Entropi meningkat seiring waktu", "Energi kekal", "Jika A setimbang dengan B dan B setimbang dengan C, maka A setimbang dengan C", "Kalor mengalir secara spontan dari panas ke dingin"], correct: 2
+                },
+                {
+                    text: "Jenis sistem apakah yang tidak bertukar materi maupun energi dengan lingkungannya?", category: "Sistem", thinking: "innovative",
+                    options: ["Sistem terbuka", "Sistem tertutup", "Sistem terisolasi", "Sistem adiabatik"], correct: 2
+                },
+                {
+                    text: "Dalam proses adiabatik, berapa nilai perpindahan kalor (Q)?", category: "Proses", thinking: "systemic",
+                    options: ["Q = 1", "Q = maksimum", "Q = 0", "Q = ΔU"], correct: 2
+                }
+            ]
+        };
+    </script>
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="energy-pulse"></div>
+        <div class="loading-text">Memuat Zona 1...</div>
+    </div>
+    <div id="page-transition"></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="badge-popup">
+        <div class="badge-popup-icon">🏆</div>
+        <div class="badge-popup-content">
+            <div class="badge-popup-title">🎖 Lencana Terbuka!</div>
+            <div class="badge-popup-name">Nama Lencana</div>
+        </div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="map.html" class="nav-logo">Thermo<span>Verse</span></a>
+        <ul class="nav-links">
+            <li><a href="map.html">← Peta Misi</a></li>
+        </ul>
+        <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="quiz-layout">
+            <div>
+                <div class="quiz-header">
+                    <div class="quiz-title">🔥 ZONA 1 — HUKUM DASAR TERMODINAMIKA</div>
+                    <div class="quiz-meta">
+                        <div class="timer-display" id="timer-display">⏱ 15:00</div>
+                        <div class="quiz-xp-badge">⚡ <span id="nav-xp-value-2">0</span> XP</div>
+                    </div>
+                </div>
+
+                <div class="question-progress" style="margin-bottom:20px">
+                    <div class="progress-label">
+                        <span>Soal <span id="question-current">1</span> dari <span id="question-total">10</span></span>
+                        <span id="progress-pct">0%</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar-q" style="width:0%"></div>
+                    </div>
+                </div>
+
+                <div id="quiz-container">
+                    <div class="question-card">
+                        <div class="question-indicator">
+                            <div class="q-dot"></div>
+                            <span class="question-category" id="question-category">Kategori</span>
+                        </div>
+                        <div class="question-text" id="question-text">Memuat...</div>
+                        <div class="options-grid" id="options-container"></div>
+                        <div class="feedback-pill" id="feedback-pill"></div>
+                    </div>
+                    <div class="next-btn-wrap">
+                        <button class="btn btn-primary" id="next-btn" style="display:none"
+                            onclick="Quiz.nextQuestion()">Soal Berikutnya →</button>
+                    </div>
+                </div>
+
+                <div class="result-screen" id="result-screen">
+                    <div class="result-score-ring">
+                        <div class="result-score-value" id="result-score-value">0%</div>
+                        <div class="result-score-label">Skor</div>
+                    </div>
+                    <div class="result-xp-earned" id="result-xp-earned">+0 XP</div>
+                    <div class="result-message" id="result-message"></div>
+                    <div class="result-actions">
+                        <a href="map.html" class="btn btn-ghost">← Peta Misi</a>
+                        <a href="level2.html" class="btn btn-primary">Zona Berikutnya →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mol3d-panel" id="mol3d-wrap">
+                <canvas id="molecule-canvas" width="220" height="220"></canvas>
+                <div class="mol-label">PENDAMPING<br>MOLEKUL</div>
+                <div class="mol-reaction" id="mol-reaction" style="color:var(--text-muted)">Jawab untuk berinteraksi
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/badges.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+
+</html>

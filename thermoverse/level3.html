@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona 3: Sistem Lanjutan — ThermoVerse</title>
+    <meta name="description" content="Zona 3 kuis lanjutan termodinamika — tantangan terakhir ThermoVerse.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <style>
+        .quiz-layout {
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 28px;
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 30px 20px 80px;
+        }
+
+        .mol3d-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
+        }
+
+        #molecule-canvas {
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .mol-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        @media (max-width:850px) {
+            .quiz-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .mol3d-panel {
+                display: none;
+            }
+        }
+    </style>
+    <script>
+        window.QUIZ_CONFIG = {
+            zoneKey: 'zone3',
+            thinkingKeys: ['critical', 'systemic', 'scientific', 'innovative'],
+            questions: [
+                {
+                    text: "Dalam pembangkit listrik siklus gabungan, apa keunggulan utama dibanding siklus Brayton sederhana?", category: "Sistem Lanjutan", thinking: "systemic",
+                    options: ["Hanya biaya bahan bakar lebih rendah", "Panas buang turbin gas digunakan untuk menghasilkan uap tambahan, meningkatkan efisiensi", "Beroperasi pada suhu lebih rendah", "Tidak memerlukan sistem pendingin"], correct: 1
+                },
+                {
+                    text: "Siklus Rankine paling umum digunakan pada:", category: "Siklus Rekayasa", thinking: "scientific",
+                    options: ["Mesin turbin gas", "Kompresor refrigerasi", "Pembangkit listrik berbasis uap", "Reaktor fusi nuklir"], correct: 2
+                },
+                {
+                    text: "Prinsip apa yang dimanfaatkan generator termoelektrik (TEG)?", category: "Teknologi Inovatif", thinking: "innovative",
+                    options: ["Prinsip Bernoulli", "Efek Seebeck — menghasilkan listrik dari gradien suhu", "Hukum induksi Faraday", "Hukum Pascal"], correct: 1
+                },
+                {
+                    text: "Persamaan mana yang merepresentasikan pertidaksamaan Clausius dengan benar?", category: "Konsep Inti", thinking: "scientific",
+                    options: ["∮ dQ/T ≤ 0", "∮ dQ/T > 0", "∮ dQ × T = konstan", "∮ T dQ = 0"], correct: 0
+                },
+                {
+                    text: "Dalam analisis eksergi, 'destruksi eksergi' merepresentasikan:", category: "Eksergi", thinking: "critical",
+                    options: ["Kerja yang dilakukan sistem", "Kalor yang hilang ke lingkungan", "Irreversibilitas yang mengubah potensi kerja berguna menjadi entropi", "Kerja teoritis maksimum"], correct: 2
+                },
+                {
+                    text: "Pompa kalor dengan COP = 4 mengkonsumsi daya 1 kW dapat memberikan kalor sebesar:", category: "Pompa Kalor", thinking: "systemic",
+                    options: ["1 kW", "3 kW", "4 kW", "5 kW"], correct: 2
+                },
+                {
+                    text: "Mekanisme utama perpindahan kalor dalam pipa kalor (heat pipe) adalah:", category: "Perpindahan Kalor", thinking: "innovative",
+                    options: ["Konduksi murni melalui dinding pipa", "Perubahan fasa: evaporasi di sumber panas, kondensasi di sink panas", "Konveksi paksa cairan", "Radiasi melalui pipa"], correct: 1
+                },
+                {
+                    text: "Siklus CO₂ superkritis (sCO₂) menarik karena menawarkan:", category: "Siklus Lanjutan", thinking: "innovative",
+                    options: ["Hanya tekanan kondensasi sangat tinggi", "Turbomasinneri kompak dan efisiensi tinggi pada suhu tinggi", "Emisi karbon nol", "Tidak memerlukan sumber panas"], correct: 1
+                },
+                {
+                    text: "Dalam teknologi pinch untuk desain jaringan penukar panas, 'titik pinch' mengacu pada:", category: "Integrasi Proses", thinking: "systemic",
+                    options: ["Titik tekanan maksimum", "Perbedaan suhu minimum antara kurva komposit panas dan dingin", "Tempat dua aliran fluida bercampur", "Suhu penguapan optimal"], correct: 1
+                },
+                {
+                    text: "Besaran termodinamika mana yang merupakan besaran intensif?", category: "Sifat-Sifat", thinking: "critical",
+                    options: ["Energi dalam total", "Massa", "Volume", "Suhu"], correct: 3
+                }
+            ]
+        };
+    </script>
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="energy-pulse"></div>
+        <div class="loading-text">Memuat Zona 3...</div>
+    </div>
+    <div id="page-transition"></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="badge-popup">
+        <div class="badge-popup-icon">🏆</div>
+        <div class="badge-popup-content">
+            <div class="badge-popup-title">🎖 Lencana Terbuka!</div>
+            <div class="badge-popup-name">Nama Lencana</div>
+        </div>
+    </div>
+
+    <nav class="nav-bar">
+        <a href="map.html" class="nav-logo">Thermo<span>Verse</span></a>
+        <ul class="nav-links">
+            <li><a href="map.html">← Peta Misi</a></li>
+        </ul>
+        <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="quiz-layout">
+            <div>
+                <div class="quiz-header">
+                    <div class="quiz-title">🌌 ZONA 3 — SISTEM LANJUTAN</div>
+                    <div class="quiz-meta">
+                        <div class="timer-display" id="timer-display">⏱ 15:00</div>
+                        <div class="quiz-xp-badge" style="border-color:rgba(255,255,255,0.3);color:var(--white)">⚡ <span
+                                id="nav-xp-value-2">0</span> XP</div>
+                    </div>
+                </div>
+                <div class="question-progress" style="margin-bottom:20px">
+                    <div class="progress-label">
+                        <span>Soal <span id="question-current">1</span> dari <span id="question-total">10</span></span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar-q"
+                            style="width:0%;background:linear-gradient(90deg,var(--white),rgba(255,255,255,0.5))"></div>
+                    </div>
+                </div>
+
+                <div id="quiz-container">
+                    <div class="question-card" style="border-color:rgba(255,255,255,0.12)">
+                        <div class="question-indicator">
+                            <div class="q-dot" style="background:var(--white)"></div>
+                            <span class="question-category" id="question-category">Kategori</span>
+                        </div>
+                        <div class="question-text" id="question-text">Memuat...</div>
+                        <div class="options-grid" id="options-container"></div>
+                        <div class="feedback-pill" id="feedback-pill"></div>
+                    </div>
+                    <div class="next-btn-wrap">
+                        <button class="btn" id="next-btn"
+                            style="display:none;background:linear-gradient(135deg,#555,#888);color:var(--white)"
+                            onclick="Quiz.nextQuestion()">Soal Berikutnya →</button>
+                    </div>
+                </div>
+
+                <div class="result-screen" id="result-screen">
+                    <div class="result-score-ring" style="border-color:var(--white)">
+                        <div class="result-score-value" id="result-score-value" style="color:var(--white)">0%</div>
+                        <div class="result-score-label">Skor Akhir</div>
+                    </div>
+                    <div class="result-xp-earned" id="result-xp-earned">+0 XP</div>
+                    <div class="result-message" id="result-message"></div>
+                    <div
+                        style="font-family:var(--font-heading);font-size:0.85rem;color:var(--white);margin-bottom:24px">
+                        🏁 Zona 3 Selesai!</div>
+                    <div class="result-actions">
+                        <a href="map.html" class="btn btn-ghost">← Peta Misi</a>
+                        <a href="dashboard.html" class="btn btn-primary">📊 Analitik</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mol3d-panel" id="mol3d-wrap">
+                <canvas id="molecule-canvas" width="220" height="220"></canvas>
+                <div class="mol-label">PENDAMPING<br>MOLEKUL</div>
+                <div class="mol-reaction" id="mol-reaction" style="color:var(--text-muted)">Jawab untuk berinteraksi
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/badges.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+
+</html>

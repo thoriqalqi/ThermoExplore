@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "thermoexplore",
+  "builds": [
+    { "src": "thermoverse/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/thermoverse/$1" }
+  ]
+}

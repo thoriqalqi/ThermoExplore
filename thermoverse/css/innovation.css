@@ -1,0 +1,206 @@
+/* =============================================
+   Innovation Challenge Styles
+   ============================================= */
+
+.innovation-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px 80px;
+}
+
+.innovation-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.scenario-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glow);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 32px;
+}
+
+.scenario-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--neon-orange);
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.scenario-text {
+    font-size: 1rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+}
+
+/* ---- Upgrade Options ---- */
+.upgrades-section-title {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.selection-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.slots-remaining {
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    color: var(--neon-orange);
+}
+
+.upgrades-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.upgrade-card {
+    background: var(--bg-card2);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+}
+
+.upgrade-card:hover {
+    border-color: rgba(0, 212, 255, 0.4);
+    background: rgba(0, 212, 255, 0.04);
+}
+
+.upgrade-card.selected {
+    border-color: var(--neon-blue);
+    background: rgba(0, 212, 255, 0.08);
+    box-shadow: var(--glow-blue);
+}
+
+.upgrade-card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 22px;
+    height: 22px;
+    background: var(--neon-blue);
+    color: #000;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upgrade-icon {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.upgrade-name {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.upgrade-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* ---- Efficiency Result ---- */
+.efficiency-result {
+    display: none;
+    margin-top: 32px;
+    padding: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-glow);
+    border-radius: 16px;
+}
+
+.efficiency-result.show {
+    display: block;
+}
+
+.efficiency-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.efficiency-bar-track {
+    width: 100%;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.efficiency-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan));
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    width: 0%;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+}
+
+.efficiency-score-text {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    color: #000;
+}
+
+.efficiency-value {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.efficiency-explanation {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border-left: 3px solid var(--neon-blue);
+    margin-bottom: 20px;
+}
+
+.efficiency-xp-bonus {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--neon-orange);
+    text-shadow: var(--glow-orange);
+    margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+    .upgrades-grid {
+        grid-template-columns: 1fr;
+    }
+}

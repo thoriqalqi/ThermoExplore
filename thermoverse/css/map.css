@@ -1,0 +1,266 @@
+/* =============================================
+   Map Page Styles
+   ============================================= */
+
+.map-page {
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+}
+
+.map-header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+.map-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.map-title span {
+    color: var(--neon-blue);
+    text-shadow: var(--glow-blue);
+}
+
+.map-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* ---- Zones Grid ---- */
+.zones-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 60px auto;
+    align-items: flex-start;
+}
+
+/* ---- Zone Card ---- */
+.zone-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+    cursor: pointer;
+    transition: transform var(--transition);
+}
+
+.zone-card:hover .zone-circle {
+    transform: scale(1.06);
+}
+
+.zone-card.locked {
+    cursor: not-allowed;
+}
+
+.zone-card.locked .zone-circle {
+    opacity: 0.5;
+    filter: grayscale(0.6);
+}
+
+/* ---- Zone Circle (Floating Island) ---- */
+.zone-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition), box-shadow var(--transition);
+    background: var(--bg-card2);
+    border: 2px solid transparent;
+}
+
+.zone-circle.unlocked-blue {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), inset 0 0 40px rgba(0, 212, 255, 0.05);
+    animation: orbit-glow-blue 3s ease-in-out infinite alternate;
+}
+
+.zone-circle.unlocked-orange {
+    border-color: var(--neon-orange);
+    box-shadow: 0 0 30px rgba(255, 106, 0, 0.3), inset 0 0 40px rgba(255, 106, 0, 0.05);
+    animation: orbit-glow-orange 3s ease-in-out infinite alternate;
+}
+
+.zone-circle.unlocked-cyan {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.3), inset 0 0 40px rgba(0, 255, 204, 0.05);
+    animation: orbit-glow-cyan 3s ease-in-out infinite alternate;
+}
+
+.zone-circle.locked-state {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes orbit-glow-blue {
+    from {
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.2), inset 0 0 30px rgba(0, 212, 255, 0.03);
+    }
+
+    to {
+        box-shadow: 0 0 50px rgba(0, 212, 255, 0.5), inset 0 0 60px rgba(0, 212, 255, 0.08);
+    }
+}
+
+@keyframes orbit-glow-orange {
+    from {
+        box-shadow: 0 0 20px rgba(255, 106, 0, 0.2);
+    }
+
+    to {
+        box-shadow: 0 0 50px rgba(255, 106, 0, 0.5);
+    }
+}
+
+@keyframes orbit-glow-cyan {
+    from {
+        box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+    }
+
+    to {
+        box-shadow: 0 0 50px rgba(0, 255, 204, 0.5);
+    }
+}
+
+/* Floating animation */
+.zone-card:nth-child(1) .zone-circle {
+    animation-delay: 0s;
+}
+
+.zone-card:nth-child(2) .zone-circle {
+    animation-delay: -1s;
+}
+
+.zone-card:nth-child(3) .zone-circle {
+    animation-delay: -2s;
+}
+
+.zone-number {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--neon-blue);
+    text-shadow: var(--glow-blue);
+    line-height: 1;
+}
+
+.zone-icon {
+    font-size: 1.6rem;
+    margin-top: 4px;
+}
+
+.zone-lock {
+    font-size: 2.4rem;
+    opacity: 0.6;
+}
+
+/* ---- Zone Info ---- */
+.zone-info {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.zone-name {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08rem;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.zone-description {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+.zone-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+/* ---- Connection Lines ---- */
+.zone-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    margin-top: -80px;
+    z-index: 2;
+}
+
+.connector-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--neon-blue), rgba(0, 212, 255, 0.1));
+    position: relative;
+}
+
+.connector-line::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--neon-blue);
+    box-shadow: var(--glow-blue);
+}
+
+/* ---- Badges Section ---- */
+.badges-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+/* ---- Status Banner ---- */
+.status-banner {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-family: var(--font-mono);
+}
+
+@media (max-width: 768px) {
+    .zones-container {
+        gap: 40px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .zone-connector {
+        display: none;
+    }
+
+    .zone-circle {
+        width: 160px;
+        height: 160px;
+    }
+
+    .zone-number {
+        font-size: 1.8rem;
+    }
+}
