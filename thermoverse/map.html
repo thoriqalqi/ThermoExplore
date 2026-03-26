@@ -1,582 +1,785 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peta Misi — ThermoVerse</title>
-    <meta name="description" content="Peta petualangan ThermoVerse — pilih zonamu dan mulai ekspedisi!">
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* ==============================
-       Adventure Map Page
-       ============================== */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peta Misi — Anti-Gravity Agent</title>
+  <meta name="description" content="Peta misi Anti-Gravity Agent: pilih pulaumu dan mulai ekspedisi termodinamika!">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { overflow: hidden; background: #87CEEB; }
 
-        .map-page {
-            position: relative;
-            min-height: 100vh;
-        }
+    /* Full-screen Three.js canvas */
+    #map-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      cursor: grab;
+    }
+    #map-canvas:active { cursor: grabbing; }
 
-        /* Full-screen illustrated map background */
-        .map-bg-container {
-            position: relative;
-            width: 100%;
-            min-height: calc(100vh - 60px);
-            overflow: hidden;
-        }
+    /* UI Overlay */
+    .map-ui {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
 
-        .map-bg-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            filter: brightness(0.85) saturate(1.15);
-        }
+    /* Top Header */
+    .map-header {
+      position: absolute;
+      top: 74px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      pointer-events: none;
+    }
+    .map-header-badge {
+      display: inline-block;
+      background: white;
+      border-radius: 30px;
+      padding: 8px 24px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+      border: 2px solid rgba(124,58,237,0.15);
+      letter-spacing: 0.05rem;
+      margin-bottom: 10px;
+    }
+    .map-header-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: white;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .map-header-title span { color: #FDE68A; }
 
-        /* Dark gradient overlay for readability */
-        .map-bg-overlay {
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(to bottom, rgba(10, 10, 10, 0.55) 0%, transparent 25%, transparent 75%, rgba(10, 10, 10, 0.7) 100%),
-                linear-gradient(to right, rgba(10, 10, 10, 0.3) 0%, transparent 40%, transparent 60%, rgba(10, 10, 10, 0.3) 100%);
-            pointer-events: none;
-        }
+    /* Island Info Cards — appear on hover */
+    .island-tooltip {
+      position: absolute;
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      min-width: 220px;
+      box-shadow: var(--shadow-lg);
+      border-left: 4px solid var(--primary);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s ease;
+    }
+    .island-tooltip.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .tt-title { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text); margin-bottom: 4px; }
+    .tt-sub { font-size: 0.82rem; color: #6B7280; margin-bottom: 10px; line-height: 1.5; }
+    .tt-challenges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+    .tt-chip {
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.7rem; font-weight: 700;
+    }
+    .chip-ct { background: #FEF3C7; color: #D97706; }
+    .chip-st { background: #EDE9FE; color: #7C3AED; }
+    .chip-sci { background: #D1FAE5; color: #059669; }
+    .chip-inn { background: #FCE7F3; color: #DB2777; }
+    .tt-btn {
+      display: block; width: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--pink));
+      color: white; padding: 10px; border-radius: 10px;
+      font-weight: 800; font-size: 0.88rem;
+      text-align: center; text-decoration: none;
+      border: none; cursor: pointer;
+      transition: all 0.25s;
+    }
+    .tt-btn:hover { opacity: 0.9; transform: scale(1.02); }
+    .tt-btn.locked {
+      background: #E5E7EB; color: #9CA3AF; cursor: not-allowed;
+    }
+    .tt-lock { font-size: 0.75rem; color: #9CA3AF; text-align:center; margin-top: 6px; }
 
-        /* Header overlay on top of the map */
-        .map-header-overlay {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            z-index: 10;
-            pointer-events: none;
-        }
+    /* Bottom Info Bar */
+    .map-bottom-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(20px);
+      border-top: 2px solid rgba(124,58,237,0.1);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      pointer-events: all;
+    }
+    .bottom-bar-pills { display: flex; gap: 12px; flex-wrap: wrap; }
+    .zone-pill {
+      display: flex; align-items: center; gap: 10px;
+      background: white; border-radius: var(--radius-sm);
+      padding: 10px 16px;
+      border: 2px solid rgba(124,58,237,0.1);
+      box-shadow: var(--shadow-sm);
+    }
+    .zone-pill-icon { font-size: 1.3rem; }
+    .zone-pill-info { }
+    .zone-pill-name { font-size: 0.72rem; color: #6B7280; font-weight: 700; text-transform: uppercase; }
+    .zone-pill-pct { font-family: var(--font-heading); font-size: 1rem; }
+    .pct-1 { color: #F97316; }
+    .pct-2 { color: #7C3AED; }
+    .pct-3 { color: #10B981; }
+    .bottom-bar-actions { display: flex; gap: 10px; }
 
-        .map-header-badge {
-            display: inline-block;
-            background: rgba(232, 34, 10, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 124, 0, 0.5);
-            border-radius: 30px;
-            padding: 8px 24px;
-            font-family: var(--font-heading);
-            font-size: 0.75rem;
-            color: var(--white);
-            letter-spacing: 0.15rem;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
+    /* Click Hint */
+    .click-hint {
+      position: absolute;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-size: 0.8rem;
+      color: #4B5563;
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+      pointer-events: none;
+      animation: hintBounce 2s ease-in-out infinite;
+    }
+    @keyframes hintBounce {
+      0%,100%{ transform: translateX(-50%) translateY(0); }
+      50%{ transform: translateX(-50%) translateY(-6px); }
+    }
 
-        .map-title-overlay {
-            font-family: var(--font-heading);
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-weight: 900;
-            color: var(--white);
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
-            line-height: 1.1;
-        }
-
-        .map-title-overlay span {
-            background: linear-gradient(135deg, var(--red), var(--orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* ---- Zone Markers on the map ---- */
-        .zone-markers-layer {
-            position: absolute;
-            inset: 0;
-            z-index: 5;
-        }
-
-        /* Each marker is an absolute-positioned interactive element */
-        .zone-marker {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.25s ease;
-        }
-
-        .zone-marker:hover {
-            transform: scale(1.08) translateY(-4px);
-        }
-
-        .zone-marker.locked {
-            cursor: not-allowed;
-        }
-
-        .zone-marker.locked:hover {
-            transform: none;
-        }
-
-        /* 3D Canvas inside each marker */
-        .zone-marker-canvas {
-            border-radius: 50%;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-            display: block;
-        }
-
-        /* Wooden-sign style label below canvas */
-        .zone-sign {
-            margin-top: 10px;
-            background: linear-gradient(135deg, #8B4513, #6B3210);
-            border: 3px solid #5a2a0a;
-            border-radius: 8px;
-            padding: 8px 16px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 200, 100, 0.3);
-            min-width: 130px;
-        }
-
-        .zone-sign::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 12px;
-            background: #5a2a0a;
-        }
-
-        .zone-sign-num {
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
-            font-weight: 900;
-            color: #ffcc55;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-            line-height: 1;
-        }
-
-        .zone-sign-name {
-            font-size: 0.65rem;
-            color: rgba(255, 220, 150, 0.8);
-            font-weight: 600;
-            letter-spacing: 0.03rem;
-            margin-top: 2px;
-        }
-
-        .zone-sign-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 5px;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 0.6rem;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            letter-spacing: 0.05rem;
-        }
-
-        .zone-sign-status.buka {
-            background: rgba(34, 197, 94, 0.25);
-            color: #86efac;
-            border: 1px solid rgba(34, 197, 94, 0.4);
-        }
-
-        .zone-sign-status.kunci {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .zone-sign-status.selesai {
-            background: rgba(232, 34, 10, 0.25);
-            color: #fca5a5;
-            border: 1px solid rgba(232, 34, 10, 0.4);
-        }
-
-        /* Glow ring on unlocked zone */
-        .zone-marker.unlocked .zone-marker-canvas {
-            border: 2px solid rgba(255, 124, 0, 0.5);
-            box-shadow: 0 0 25px rgba(255, 124, 0, 0.4), 0 8px 30px rgba(0, 0, 0, 0.6);
-        }
-
-        .zone-marker.locked .zone-marker-canvas {
-            filter: grayscale(0.7) brightness(0.55);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Animated pulsing ring on active/unlocked zones */
-        .zone-pulse-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 110px;
-            height: 110px;
-            margin: -55px 0 0 -55px;
-            border-radius: 50%;
-            border: 2px solid var(--orange);
-            animation: zone-pulse 2s ease-out infinite;
-            pointer-events: none;
-            display: none;
-        }
-
-        .zone-marker.unlocked .zone-pulse-ring {
-            display: block;
-        }
-
-        @keyframes zone-pulse {
-            0% {
-                transform: scale(0.8);
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        /* ---- Connecting Path dots ---- */
-        .path-dot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 124, 0, 0.6);
-            box-shadow: 0 0 8px rgba(255, 124, 0, 0.5);
-            animation: path-blink 2s ease infinite;
-        }
-
-        @keyframes path-blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.2;
-            }
-        }
-
-        /* ---- Bottom info bar ---- */
-        .map-info-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(232, 34, 10, 0.2);
-            padding: 16px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
-            z-index: 10;
-        }
-
-        .info-bar-zones {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .info-zone-pill {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-        }
-
-        .info-zone-icon {
-            font-size: 1.2rem;
-        }
-
-        .info-zone-name {
-            font-family: var(--font-heading);
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            letter-spacing: 0.04rem;
-        }
-
-        .info-zone-pct {
-            font-family: var(--font-heading);
-            font-size: 0.8rem;
-            color: var(--orange);
-            font-weight: 700;
-        }
-
-        .info-bar-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 768px) {
-            .map-bg-container {
-                min-height: 80vh;
-            }
-
-            .zone-pulse-ring {
-                display: none !important;
-            }
-        }
-
-        /* ---- Badges section below map ---- */
-        .badges-section-map {
-            padding: 50px 24px 80px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .badges-grid-map {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 16px;
-            margin-top: 24px;
-        }
-    </style>
+    /* Progress Bar in tooltip */
+    .tt-progress { height: 6px; background: #E5E7EB; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+    .tt-progress-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+  </style>
 </head>
-
 <body>
-    <div id="loading-screen">
-        <div class="energy-pulse"></div>
-        <div class="loading-text">Memuat Peta Misi...</div>
-    </div>
-    <div id="page-transition"></div>
-    <canvas id="particle-canvas"></canvas>
+<div id="loading-screen">
+  <div class="energy-pulse"></div>
+  <div class="loading-text">🏝️ Memuat Peta Misi...</div>
+</div>
+<div id="page-transition"></div>
+<div id="badge-popup">
+  <div class="badge-popup-icon">🏆</div>
+  <div class="badge-popup-content">
+    <div class="badge-popup-title">🎖 Lencana Terbuka!</div>
+    <div class="badge-popup-name" id="badge-popup-name">Nama Lencana</div>
+  </div>
+</div>
 
-    <div id="badge-popup">
-        <div class="badge-popup-icon">🏆</div>
-        <div class="badge-popup-content">
-            <div class="badge-popup-title">🎖 Lencana Terbuka!</div>
-            <div class="badge-popup-name">Nama Lencana</div>
+<canvas id="map-canvas"></canvas>
+
+<nav class="nav-bar">
+  <a href="index.html" class="nav-logo">Anti<span>Gravity</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">🏠 Beranda</a></li>
+    <li><a href="dashboard.html">📊 Leaderboard</a></li>
+  </ul>
+  <div class="nav-xp">
+    <span class="xp-icon">⚡</span>
+    <span class="xp-value" id="nav-xp-value">0 XP</span>
+  </div>
+</nav>
+
+<div class="map-ui">
+  <div class="map-header">
+    <div class="map-header-badge">🗺️ PETA MISI ANTI-GRAVITY AGENT</div>
+    <div class="map-header-title">Pilih <span>Pulau Misimu</span></div>
+  </div>
+
+  <!-- Island 1 Tooltip -->
+  <div class="island-tooltip" id="tt-1" style="left:18%; top:45%;">
+    <div class="tt-title">🌋 Pulau Konsep</div>
+    <div class="tt-sub">Level 1: Konsep Termodinamika & Proses<br>Sistem terbuka, tertutup, dan terisolasi</div>
+    <div class="tt-challenges">
+      <span class="tt-chip chip-ct">🔍 Critical</span>
+      <span class="tt-chip chip-st">🔗 Systemic</span>
+      <span class="tt-chip chip-sci">🔬 Scientific</span>
+      <span class="tt-chip chip-inn">💡 Innovative</span>
+    </div>
+    <div class="tt-progress"><div class="tt-progress-fill" id="prog-1" style="width:0%; background: linear-gradient(90deg,#F97316,#EF4444)"></div></div>
+    <a href="level1.html" class="tt-btn" id="btn-z1">🚀 Masuk Misi Level 1</a>
+  </div>
+
+  <!-- Island 2 Tooltip -->
+  <div class="island-tooltip" id="tt-2" style="left:48%; top:20%;">
+    <div class="tt-title">⚡ Pulau Energi</div>
+    <div class="tt-sub">Level 2: Hukum I Termodinamika<br>Energi, kalor, dan kerja pada sistem</div>
+    <div class="tt-challenges">
+      <span class="tt-chip chip-ct">🔍 Critical</span>
+      <span class="tt-chip chip-st">🔗 Systemic</span>
+      <span class="tt-chip chip-sci">🔬 Scientific</span>
+      <span class="tt-chip chip-inn">💡 Innovative</span>
+    </div>
+    <div class="tt-progress"><div class="tt-progress-fill" id="prog-2" style="width:0%; background: linear-gradient(90deg,#7C3AED,#0EA5E9)"></div></div>
+    <a href="level2.html" class="tt-btn" id="btn-z2">🔒 Selesaikan Level 1 Dahulu</a>
+    <div class="tt-lock" id="lock-z2">Selesaikan Level 1 untuk membuka</div>
+  </div>
+
+  <!-- Island 3 Tooltip -->
+  <div class="island-tooltip" id="tt-3" style="right:12%; top:40%;">
+    <div class="tt-title">🌀 Pulau Entropi</div>
+    <div class="tt-sub">Level 3: Hukum II Termodinamika<br>Entropi, siklus Carnot, efisiensi termal</div>
+    <div class="tt-challenges">
+      <span class="tt-chip chip-ct">🔍 Critical</span>
+      <span class="tt-chip chip-st">🔗 Systemic</span>
+      <span class="tt-chip chip-sci">🔬 Scientific</span>
+      <span class="tt-chip chip-inn">💡 Innovative</span>
+    </div>
+    <div class="tt-progress"><div class="tt-progress-fill" id="prog-3" style="width:0%; background: linear-gradient(90deg,#10B981,#06B6D4)"></div></div>
+    <a href="level3.html" class="tt-btn" id="btn-z3">🔒 Selesaikan Level 2 Dahulu</a>
+    <div class="tt-lock" id="lock-z3">Selesaikan Level 2 untuk membuka</div>
+  </div>
+
+  <div class="click-hint">👆 Klik pulau untuk memulai misi!</div>
+
+  <div class="map-bottom-bar">
+    <div class="bottom-bar-pills">
+      <div class="zone-pill">
+        <div class="zone-pill-icon">🌋</div>
+        <div class="zone-pill-info">
+          <div class="zone-pill-name">Pulau Konsep</div>
+          <div class="zone-pill-pct pct-1" id="z1-pct">0%</div>
         </div>
-    </div>
-
-    <nav class="nav-bar">
-        <a href="index.html" class="nav-logo">Thermo<span>Verse</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Beranda</a></li>
-            <li><a href="dashboard.html">Analitik</a></li>
-        </ul>
-        <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
-    </nav>
-
-    <div class="map-page page-wrapper">
-        <div class="map-bg-container" id="map-bg-container">
-            <!-- Illustrated background -->
-            <img src="assets/map-bg.png" alt="Peta Petualangan ThermoVerse" class="map-bg-img" id="map-bg-img">
-            <div class="map-bg-overlay"></div>
-
-            <!-- Header -->
-            <div class="map-header-overlay">
-                <div class="map-header-badge">🗺️ PETA MISI — PILIH ZONA</div>
-                <div class="map-title-overlay">Pilih <span>Zonaму</span></div>
-            </div>
-
-            <!-- Zone Markers Layer -->
-            <div class="zone-markers-layer" id="zone-markers-layer">
-
-                <!-- ZONE 1 — bottom-left (Hutan) -->
-                <div class="zone-marker" id="zmark-1" style="left:20%;bottom:18%"
-                    onclick="gotoZone('level1.html','zone1')">
-                    <div class="zone-pulse-ring"></div>
-                    <canvas class="zone-marker-canvas" id="z1-canvas" width="100" height="100"></canvas>
-                    <div class="zone-sign">
-                        <div class="zone-sign-num">1</div>
-                        <div class="zone-sign-name">Thermodinamika</div>
-                        <div class="zone-sign-status" id="z1-status">🔵 Mulai</div>
-                    </div>
-                </div>
-
-                <!-- ZONE 2 — center-top (Pulau Energi) -->
-                <div class="zone-marker" id="zmark-2" style="left:42%;top:12%"
-                    onclick="gotoZone('level2.html','zone2')">
-                    <div class="zone-pulse-ring" style="border-color:var(--orange)"></div>
-                    <canvas class="zone-marker-canvas" id="z2-canvas" width="100" height="100"></canvas>
-                    <div class="zone-sign">
-                        <div class="zone-sign-num">2</div>
-                        <div class="zone-sign-name">Lab Inovasi</div>
-                        <div class="zone-sign-status kunci" id="z2-status">🔒 Terkunci</div>
-                    </div>
-                </div>
-
-                <!-- ZONE 3 — right (Gunung) -->
-                <div class="zone-marker" id="zmark-3" style="right:10%;top:30%"
-                    onclick="gotoZone('level3.html','zone3')">
-                    <div class="zone-pulse-ring" style="border-color:var(--white)"></div>
-                    <canvas class="zone-marker-canvas" id="z3-canvas" width="100" height="100"></canvas>
-                    <div class="zone-sign">
-                        <div class="zone-sign-num">3</div>
-                        <div class="zone-sign-name">Sistem Lanjutan</div>
-                        <div class="zone-sign-status kunci" id="z3-status">🔒 Terkunci</div>
-                    </div>
-                </div>
-
-                <!-- Animated path dots connecting zones -->
-                <div class="path-dot" style="left:32%;bottom:28%;" id="pd1"></div>
-                <div class="path-dot" style="left:37%;bottom:34%;" id="pd2" style="animation-delay:0.3s"></div>
-                <div class="path-dot" style="left:40%;bottom:40%;" id="pd3" style="animation-delay:0.6s"></div>
-                <div class="path-dot" style="left:42%;top:36%;" id="pd4" style="animation-delay:0.9s"></div>
-                <div class="path-dot" style="left:55%;top:28%;" id="pd5" style="animation-delay:0.4s"></div>
-                <div class="path-dot" style="left:65%;top:26%;" id="pd6" style="animation-delay:0.7s"></div>
-                <div class="path-dot" style="right:26%;top:32%;" id="pd7" style="animation-delay:1.0s"></div>
-            </div>
-
-            <!-- Bottom info bar -->
-            <div class="map-info-bar">
-                <div class="info-bar-zones">
-                    <div class="info-zone-pill">
-                        <span class="info-zone-icon">🔥</span>
-                        <div>
-                            <div class="info-zone-name">ZONA 1</div>
-                            <div class="info-zone-pct" id="z1-pct">0%</div>
-                        </div>
-                    </div>
-                    <div class="info-zone-pill">
-                        <span class="info-zone-icon">⚡</span>
-                        <div>
-                            <div class="info-zone-name">ZONA 2</div>
-                            <div class="info-zone-pct" id="z2-pct">0%</div>
-                        </div>
-                    </div>
-                    <div class="info-zone-pill">
-                        <span class="info-zone-icon">🌌</span>
-                        <div>
-                            <div class="info-zone-name">ZONA 3</div>
-                            <div class="info-zone-pct" id="z3-pct">0%</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-bar-actions">
-                    <a href="dashboard.html" class="btn btn-ghost" style="font-size:0.72rem;padding:10px 18px">📊
-                        Analitik</a>
-                </div>
-            </div>
+      </div>
+      <div class="zone-pill">
+        <div class="zone-pill-icon">⚡</div>
+        <div class="zone-pill-info">
+          <div class="zone-pill-name">Pulau Energi</div>
+          <div class="zone-pill-pct pct-2" id="z2-pct">0%</div>
         </div>
-
-        <!-- Badges -->
-        <section class="badges-section-map">
-            <div style="text-align:center;margin-bottom:8px">
-                <div class="divider"></div>
-                <h2 class="section-title" style="font-size:1.4rem">Koleksi <span>Lencana</span></h2>
-                <p class="section-subtitle" style="font-size:0.88rem">Buka lencana dengan menguasai setiap dimensi
-                    berpikir</p>
-            </div>
-            <div class="badges-grid-map" id="badges-container"></div>
-        </section>
+      </div>
+      <div class="zone-pill">
+        <div class="zone-pill-icon">🌀</div>
+        <div class="zone-pill-info">
+          <div class="zone-pill-name">Pulau Entropi</div>
+          <div class="zone-pill-pct pct-3" id="z3-pct">0%</div>
+        </div>
+      </div>
     </div>
+    <div class="bottom-bar-actions">
+      <a href="dashboard.html" class="btn btn-ghost" style="font-size:0.82rem; padding:10px 20px;">📊 Leaderboard</a>
+      <a href="index.html" class="btn btn-primary" style="font-size:0.82rem; padding:10px 20px;">🏠 Beranda</a>
+    </div>
+  </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/badges.js"></script>
-    <script src="js/three-scene.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="js/game.js"></script>
+<script>
+// ====================================================
+//  ANTI-GRAVITY AGENT — 3D Island Map (madbox.io style)
+//  Three.js hand-crafted 3 islands
+// ====================================================
 
-    <script>
-        function gotoZone(url, key) {
-            const state = ThermoGame.loadState();
-            if (!ThermoGame.isZoneUnlocked(state, key)) {
-                // Shake the locked marker
-                const marker = document.getElementById('zmark-' + key.replace('zone', ''));
-                if (marker && window.gsap) gsap.to(marker, { x: -10, duration: 0.06, yoyo: true, repeat: 5, ease: 'power1.inOut' });
-                return;
-            }
-            const overlay = document.getElementById('page-transition');
-            if (overlay && window.gsap) {
-                gsap.to(overlay, { opacity: 1, duration: 0.35, onComplete: () => { window.location.href = url; } });
-            } else { window.location.href = url; }
-        }
+(function () {
+  const canvas = document.getElementById('map-canvas');
+  const W = window.innerWidth, H = window.innerHeight;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const state = ThermoGame.loadState();
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.setClearColor(0x87CEEB); // sky blue
 
-            const zoneDefs = [
-                { key: 'zone1', markId: 'zmark-1', statusId: 'z1-status', pctId: 'z1-pct' },
-                { key: 'zone2', markId: 'zmark-2', statusId: 'z2-status', pctId: 'z2-pct' },
-                { key: 'zone3', markId: 'zmark-3', statusId: 'z3-status', pctId: 'z3-pct' },
-            ];
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x87CEEB, 40, 120);
 
-            zoneDefs.forEach(z => {
-                const unlocked = ThermoGame.isZoneUnlocked(state, z.key);
-                const zData = state.zones[z.key];
-                const score = zData?.score || 0;
-                const complete = zData?.completed;
-                const marker = document.getElementById(z.markId);
-                const statusEl = document.getElementById(z.statusId);
-                const pctEl = document.getElementById(z.pctId);
+  const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 200);
+  camera.position.set(0, 28, 55);
+  camera.lookAt(0, 0, 0);
 
-                if (pctEl) pctEl.textContent = score + '%';
+  // ---- Lights ----
+  const ambientLight = new THREE.AmbientLight(0xffd6ff, 0.9);
+  scene.add(ambientLight);
 
-                if (!unlocked) {
-                    marker?.classList.add('locked');
-                    if (statusEl) { statusEl.className = 'zone-sign-status kunci'; statusEl.textContent = '🔒 Terkunci'; }
-                } else if (complete) {
-                    marker?.classList.add('unlocked');
-                    if (statusEl) { statusEl.className = 'zone-sign-status selesai'; statusEl.textContent = '✅ Selesai ' + score + '%'; }
-                } else {
-                    marker?.classList.add('unlocked');
-                    if (statusEl) { statusEl.className = 'zone-sign-status buka'; statusEl.textContent = '🔵 Mulai'; }
-                }
-            });
+  const sunLight = new THREE.DirectionalLight(0xfffde7, 2.5);
+  sunLight.position.set(30, 60, 30);
+  sunLight.castShadow = true;
+  sunLight.shadow.mapSize.width = 2048;
+  sunLight.shadow.mapSize.height = 2048;
+  sunLight.shadow.camera.near = 0.5;
+  sunLight.shadow.camera.far = 150;
+  sunLight.shadow.camera.left = -60;
+  sunLight.shadow.camera.right = 60;
+  sunLight.shadow.camera.top = 60;
+  sunLight.shadow.camera.bottom = -60;
+  scene.add(sunLight);
 
-            BadgeSystem.renderBadges('badges-container', state);
+  const fillLight = new THREE.PointLight(0xEC4899, 1.2, 80);
+  fillLight.position.set(-30, 20, 10);
+  scene.add(fillLight);
 
-            // Entrance animations
-            gsap.from('.zone-marker', { opacity: 0, y: 30, scale: 0.8, stagger: 0.2, duration: 0.7, ease: 'back.out(1.5)', delay: 0.5 });
-            gsap.from('.path-dot', { opacity: 0, scale: 0, stagger: 0.1, duration: 0.4, ease: 'power2.out', delay: 1.2 });
+  // ---- Ocean Plane ----
+  const oceanGeo = new THREE.PlaneGeometry(200, 200, 60, 60);
+  const oceanMat = new THREE.MeshPhongMaterial({
+    color: 0x38BDF8,
+    emissive: 0x0EA5E9,
+    emissiveIntensity: 0.1,
+    transparent: true, opacity: 0.85,
+    shininess: 120, side: THREE.DoubleSide
+  });
+  const ocean = new THREE.Mesh(oceanGeo, oceanMat);
+  ocean.rotation.x = -Math.PI / 2;
+  ocean.position.y = -2;
+  ocean.receiveShadow = true;
+  scene.add(ocean);
+  // Animate ocean vertices
+  const oceanPositions = oceanGeo.attributes.position;
+  const oceanBaseY = [];
+  for (let i = 0; i < oceanPositions.count; i++) oceanBaseY.push(oceanPositions.getY(i));
 
-            // Build 3D portals
-            buildZonePortal('z1-canvas', 0xff3c00, 'torus', ThermoGame.isZoneUnlocked(state, 'zone1'));
-            buildZonePortal('z2-canvas', 0xff8c00, 'dodeca', ThermoGame.isZoneUnlocked(state, 'zone2'));
-            buildZonePortal('z3-canvas', 0xffffff, 'icosa', ThermoGame.isZoneUnlocked(state, 'zone3'));
+  // ---- Sky gradient background ----
+  const skyGeo = new THREE.SphereGeometry(150, 32, 32);
+  const skyMat = new THREE.ShaderMaterial({
+    uniforms: { topColor: { value: new THREE.Color(0x7EC8E3) }, bottomColor: { value: new THREE.Color(0xFFF9C4) } },
+    vertexShader: `varying vec3 vPos; void main(){ vPos=position; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader: `uniform vec3 topColor, bottomColor; varying vec3 vPos; void main(){ float t=clamp((vPos.y+150.0)/300.0,0.0,1.0); gl_FragColor=vec4(mix(bottomColor,topColor,t),1.0); }`,
+    side: THREE.BackSide
+  });
+  scene.add(new THREE.Mesh(skyGeo, skyMat));
+
+  // ---- Clouds ----
+  function makeCloud(x, y, z, scale) {
+    const g = new THREE.Group();
+    const mat = new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.88 });
+    const parts = [
+      [0, 0, 0, 1.4], [1.5, 0.3, 0, 1.1], [-1.5, 0.2, 0, 1.0],
+      [0, 0.6, 0, 1.0], [0.8, 0.8, 0.5, 0.8]
+    ];
+    parts.forEach(([px, py, pz, s]) => {
+      const m = new THREE.Mesh(new THREE.SphereGeometry(s, 10, 10), mat);
+      m.position.set(px, py, pz);
+      g.add(m);
+    });
+    g.position.set(x, y, z);
+    g.scale.setScalar(scale);
+    scene.add(g);
+    return g;
+  }
+  const clouds = [
+    makeCloud(-25, 22, -30, 2.5),
+    makeCloud(15, 28, -40, 2.0),
+    makeCloud(-10, 25, -20, 1.6),
+    makeCloud(30, 20, -25, 1.8),
+    makeCloud(5, 30, -50, 2.2),
+  ];
+
+  // ---- Helper: Island Builder ----
+  function buildIsland(cfg) {
+    const group = new THREE.Group();
+
+    // Base — rounded rock
+    const baseGeo = new THREE.CylinderGeometry(cfg.rTop, cfg.rBot, cfg.h, 16);
+    const baseMat = new THREE.MeshPhongMaterial({ color: cfg.rockColor, shininess: 30 });
+    const base = new THREE.Mesh(baseGeo, baseMat);
+    base.castShadow = true; base.receiveShadow = true;
+    group.add(base);
+
+    // Grass top
+    const grassGeo = new THREE.CylinderGeometry(cfg.rTop + 0.3, cfg.rTop - 0.5, 0.8, 16);
+    const grassMat = new THREE.MeshPhongMaterial({ color: cfg.grassColor, shininess: 20 });
+    const grass = new THREE.Mesh(grassGeo, grassMat);
+    grass.position.y = cfg.h / 2 + 0.2;
+    grass.castShadow = true;
+    group.add(grass);
+
+    // Dirt ring
+    const dirtGeo = new THREE.CylinderGeometry(cfg.rTop + 0.1, cfg.rTop + 0.3, 0.5, 16);
+    const dirtMat = new THREE.MeshPhongMaterial({ color: cfg.dirtColor });
+    const dirt = new THREE.Mesh(dirtGeo, dirtMat);
+    dirt.position.y = cfg.h / 2 - 0.6;
+    group.add(dirt);
+
+    // Trees / vegetation
+    cfg.trees.forEach(t => {
+      const tg = new THREE.Group();
+      // Trunk
+      const trunk = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.12, 0.18, t.h * 0.6, 8),
+        new THREE.MeshPhongMaterial({ color: 0x8B5A2B })
+      );
+      trunk.position.y = t.h * 0.3;
+      tg.add(trunk);
+      // Canopy layers
+      const treeColors = cfg.treeColors || [0x22C55E, 0x16A34A, 0x15803D];
+      for (let l = 0; l < 3; l++) {
+        const sz = (t.h * 0.55) - l * (t.h * 0.12);
+        const c = new THREE.Mesh(
+          new THREE.ConeGeometry(sz, sz * 1.2, 8),
+          new THREE.MeshPhongMaterial({ color: treeColors[l % treeColors.length], shininess: 20 })
+        );
+        c.position.y = t.h * 0.5 + l * (t.h * 0.25);
+        c.castShadow = true;
+        tg.add(c);
+      }
+      tg.position.set(t.x, cfg.h / 2 + 0.8, t.z);
+      tg.rotation.y = Math.random() * Math.PI * 2;
+      tg.castShadow = true;
+      group.add(tg);
+    });
+
+    // Unique feature
+    if (cfg.feature === 'volcano') {
+      // Volcano cone
+      const vc = new THREE.Mesh(
+        new THREE.ConeGeometry(1.8, 4, 12),
+        new THREE.MeshPhongMaterial({ color: 0x78350F })
+      );
+      vc.position.set(0, cfg.h / 2 + 2.8, 0);
+      vc.castShadow = true;
+      group.add(vc);
+      // Lava glow
+      const lavaGeo = new THREE.CylinderGeometry(0.5, 1.8, 0.5, 12);
+      const lavaMat = new THREE.MeshBasicMaterial({ color: 0xFF4500 });
+      const lava = new THREE.Mesh(lavaGeo, lavaMat);
+      lava.position.set(0, cfg.h / 2 + 4.6, 0);
+      group.add(lava);
+      const lavaLight = new THREE.PointLight(0xFF6600, 3, 15);
+      lavaLight.position.set(0, cfg.h / 2 + 5, 0);
+      group.add(lavaLight);
+      cfg._lavaLight = lavaLight;
+    }
+    if (cfg.feature === 'lightning') {
+      // Energy tower
+      const towerMat = new THREE.MeshPhongMaterial({ color: 0xA78BFA });
+      const tower = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.35, 5, 8), towerMat);
+      tower.position.set(0.5, cfg.h / 2 + 3, 0.5);
+      tower.castShadow = true;
+      group.add(tower);
+      // Crystal top
+      const crystal = new THREE.Mesh(
+        new THREE.OctahedronGeometry(0.7),
+        new THREE.MeshPhongMaterial({ color: 0x7C3AED, emissive: 0x4C1D95, emissiveIntensity: 0.5, transparent: true, opacity: 0.9 })
+      );
+      crystal.position.set(0.5, cfg.h / 2 + 5.8, 0.5);
+      group.add(crystal);
+      const crystalLight = new THREE.PointLight(0x7C3AED, 3, 18);
+      crystalLight.position.set(0.5, cfg.h / 2 + 6, 0.5);
+      group.add(crystalLight);
+      cfg._crystalLight = crystalLight;
+      cfg._crystal = crystal;
+    }
+    if (cfg.feature === 'whirlpool') {
+      // Swirl pillar (entropy vortex)
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * Math.PI * 2;
+        const s = new THREE.Mesh(
+          new THREE.BoxGeometry(0.15, 0.6 + i * 0.18, 0.15),
+          new THREE.MeshPhongMaterial({ color: 0x34D399, transparent: true, opacity: 0.8 + i * 0.015 })
+        );
+        const r = 0.5 + i * 0.08;
+        s.position.set(Math.cos(angle) * r, cfg.h / 2 + 1 + i * 0.3, Math.sin(angle) * r);
+        group.add(s);
+      }
+      cfg._swirlParts = group.children.slice(-12);
+      const tealLight = new THREE.PointLight(0x10B981, 3, 16);
+      tealLight.position.set(0, cfg.h / 2 + 3, 0);
+      group.add(tealLight);
+      cfg._tealLight = tealLight;
+    }
+
+    group.position.set(cfg.x, cfg.y, cfg.z);
+    scene.add(group);
+    return group;
+  }
+
+  // ---- Define 3 Islands ----
+  const islandDefs = [
+    {
+      // Island 1 — Left — Volcano / Warm orange
+      x: -18, y: 0, z: 5,
+      rTop: 7, rBot: 5, h: 5,
+      rockColor: 0xD97706, grassColor: 0x65A30D, dirtColor: 0x92400E,
+      feature: 'volcano',
+      treeColors: [0x84CC16, 0x65A30D, 0x4D7C0F],
+      trees: [
+        { x: -3, z: 2, h: 2.5 }, { x: 3.5, z: -1.5, h: 2.2 },
+        { x: -2, z: -3, h: 2.8 }, { x: 4, z: 3, h: 1.8 },
+        { x: -4.5, z: 0, h: 2 }
+      ]
+    },
+    {
+      // Island 2 — Center (higher, larger)
+      x: 4, y: 1, z: -14,
+      rTop: 8, rBot: 6, h: 6,
+      rockColor: 0x6D28D9, grassColor: 0x16A34A, dirtColor: 0x5B21B6,
+      feature: 'lightning',
+      treeColors: [0xA3E635, 0x4ADE80, 0x22C55E],
+      trees: [
+        { x: -4, z: 1, h: 2.8 }, { x: 4.5, z: 2, h: 2.5 },
+        { x: 2, z: -4, h: 3 }, { x: -3.5, z: -3, h: 2.3 },
+        { x: 5, z: -1, h: 2.0 }, { x: -5, z: 2.5, h: 2.2 }
+      ]
+    },
+    {
+      // Island 3 — Right — Teal / Entropy
+      x: 22, y: -0.5, z: 2,
+      rTop: 6.5, rBot: 4.5, h: 4.5,
+      rockColor: 0x065F46, grassColor: 0x10B981, dirtColor: 0x047857,
+      feature: 'whirlpool',
+      treeColors: [0x6EE7B7, 0x34D399, 0x10B981],
+      trees: [
+        { x: -3, z: 2, h: 2.5 }, { x: 3, z: -2, h: 2.2 },
+        { x: -2.5, z: -2.5, h: 2.8 }, { x: 3.5, z: 2.5, h: 2 }
+      ]
+    }
+  ];
+
+  const islands = islandDefs.map((def, i) => {
+    const group = buildIsland(def);
+    group.userData = { index: i, def };
+    return group;
+  });
+
+  // ---- Floating Particles around islands ----
+  function addIslandParticles(x, y, z, color, count = 20) {
+    const g = new THREE.Group();
+    for (let i = 0; i < count; i++) {
+      const m = new THREE.Mesh(
+        new THREE.SphereGeometry(0.08 + Math.random() * 0.12, 6, 6),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.6 + Math.random() * 0.4 })
+      );
+      const angle = Math.random() * Math.PI * 2;
+      const r = 5 + Math.random() * 4;
+      m.position.set(Math.cos(angle) * r, Math.random() * 5 + 2, Math.sin(angle) * r);
+      m._angle = angle; m._r = r;
+      m._speed = (Math.random() - 0.5) * 0.015;
+      m._yBase = m.position.y;
+      g.add(m);
+    }
+    g.position.set(x, y, z);
+    scene.add(g);
+    return g;
+  }
+  const particleGroups = [
+    addIslandParticles(-18, 0, 5, 0xFF8C00),
+    addIslandParticles(4, 1, -14, 0x7C3AED),
+    addIslandParticles(22, 0, 2, 0x10B981)
+  ];
+
+  // ---- Raycasting for island click ----
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  let hoveredIsland = -1;
+
+  function getIslandMeshes() {
+    const meshes = [];
+    islands.forEach((g, i) => {
+      g.traverse(c => { if (c.isMesh) { c.userData.islandIndex = i; meshes.push(c); } });
+    });
+    return meshes;
+  }
+
+  function showTooltip(idx) {
+    ['tt-1', 'tt-2', 'tt-3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('visible', i === idx);
+    });
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+    const meshes = getIslandMeshes();
+    const hits = raycaster.intersectObjects(meshes);
+    if (hits.length > 0) {
+      const idx = hits[0].object.userData.islandIndex;
+      if (idx !== hoveredIsland) {
+        hoveredIsland = idx;
+        showTooltip(idx);
+        canvas.style.cursor = 'pointer';
+      }
+    } else {
+      if (hoveredIsland !== -1) {
+        hoveredIsland = -1;
+        showTooltip(-1);
+        canvas.style.cursor = 'grab';
+      }
+    }
+  });
+
+  canvas.addEventListener('click', e => {
+    pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+    const meshes = getIslandMeshes();
+    const hits = raycaster.intersectObjects(meshes);
+    if (hits.length > 0) {
+      const idx = hits[0].object.userData.islandIndex;
+      showTooltip(idx);
+      // Jump island
+      const island = islands[idx];
+      let startY = island.position.y;
+      let jumpT = 0;
+      const jumpAnim = setInterval(() => {
+        jumpT += 0.12;
+        island.position.y = startY + Math.sin(jumpT) * 1.5;
+        if (jumpT >= Math.PI) { island.position.y = startY; clearInterval(jumpAnim); }
+      }, 16);
+    }
+  });
+
+  // Mouse / touch drag to rotate camera
+  let isDragging = false, dragStart = { x: 0, y: 0 };
+  let cameraTheta = 0, cameraPhi = 0.5;
+  const CAM_R = 58;
+
+  canvas.addEventListener('mousedown', e => { isDragging = true; dragStart = { x: e.clientX, y: e.clientY }; });
+  canvas.addEventListener('mouseup', () => isDragging = false);
+  canvas.addEventListener('mouseleave', () => isDragging = false);
+  canvas.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = (e.clientX - dragStart.x) * 0.005;
+    const dy = (e.clientY - dragStart.y) * 0.004;
+    cameraTheta -= dx;
+    cameraPhi = Math.max(0.15, Math.min(1.2, cameraPhi + dy));
+    dragStart = { x: e.clientX, y: e.clientY };
+  });
+
+  // Window resize
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+
+  // Update zone data
+  function updateZoneUI() {
+    const state = ThermoGame.loadState();
+    // Pcts
+    ['z1-pct', 'z2-pct', 'z3-pct'].forEach((id, i) => {
+      const key = 'zone' + (i + 1);
+      const score = state.zones[key]?.score || 0;
+      const el = document.getElementById(id);
+      if (el) el.textContent = score + '%';
+    });
+    // Progress bars
+    ['prog-1', 'prog-2', 'prog-3'].forEach((id, i) => {
+      const key = 'zone' + (i + 1);
+      const score = state.zones[key]?.score || 0;
+      const el = document.getElementById(id);
+      if (el) el.style.width = score + '%';
+    });
+    // Zone 2 button
+    const z2Unlocked = ThermoGame.isZoneUnlocked(state, 'zone2');
+    const btn2 = document.getElementById('btn-z2');
+    const lock2 = document.getElementById('lock-z2');
+    if (btn2) {
+      btn2.textContent = z2Unlocked ? '🚀 Masuk Misi Level 2' : '🔒 Terkunci';
+      btn2.href = z2Unlocked ? 'level2.html' : '#';
+      if (z2Unlocked) { btn2.classList.remove('locked'); if (lock2) lock2.style.display = 'none'; }
+    }
+    // Zone 3 button
+    const z3Unlocked = ThermoGame.isZoneUnlocked(state, 'zone3');
+    const btn3 = document.getElementById('btn-z3');
+    const lock3 = document.getElementById('lock-z3');
+    if (btn3) {
+      btn3.textContent = z3Unlocked ? '🚀 Masuk Misi Level 3' : '🔒 Terkunci';
+      btn3.href = z3Unlocked ? 'level3.html' : '#';
+      if (z3Unlocked) { btn3.classList.remove('locked'); if (lock3) lock3.style.display = 'none'; }
+    }
+    const navXp = document.getElementById('nav-xp-value');
+    if (navXp) navXp.textContent = state.xp + ' XP';
+  }
+
+  // ---- Main Animation Loop ----
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.012;
+
+    // Ocean wave animation
+    for (let i = 0; i < oceanPositions.count; i++) {
+      const x = oceanPositions.getX(i);
+      const z = oceanPositions.getZ(i);
+      oceanPositions.setY(i, oceanBaseY[i] + Math.sin(x * 0.3 + t) * 0.3 + Math.cos(z * 0.3 + t * 0.7) * 0.2);
+    }
+    oceanPositions.needsUpdate = true;
+    oceanGeo.computeVertexNormals();
+
+    // Island float animation
+    islands.forEach((isl, i) => {
+      isl.position.y = islandDefs[i].y + Math.sin(t * 0.5 + i * 1.3) * 0.4;
+      isl.rotation.y += 0.0008;
+    });
+
+    // Clouds drift
+    clouds.forEach((c, i) => {
+      c.position.x += 0.008 + i * 0.002;
+      if (c.position.x > 60) c.position.x = -60;
+    });
+
+    // Particle groups orbit
+    particleGroups.forEach(pg => {
+      pg.children.forEach(p => {
+        p._angle += p._speed;
+        p.position.x = Math.cos(p._angle) * p._r;
+        p.position.z = Math.sin(p._angle) * p._r;
+        p.position.y = p._yBase + Math.sin(t * 1.2 + p._angle) * 0.8;
+      });
+    });
+
+    // Special feature animations
+    islandDefs.forEach(def => {
+      if (def._lavaLight) def._lavaLight.intensity = 2.5 + Math.sin(t * 4) * 0.8;
+      if (def._crystalLight) def._crystalLight.intensity = 2.5 + Math.sin(t * 3) * 1;
+      if (def._crystal) {
+        def._crystal.rotation.y += 0.04;
+        def._crystal.rotation.x += 0.02;
+      }
+      if (def._tealLight) def._tealLight.intensity = 2 + Math.sin(t * 2.5) * 0.8;
+      if (def._swirlParts) {
+        def._swirlParts.forEach((p, i) => {
+          p.rotation.y = t * 1.5 + i * 0.5;
         });
+      }
+    });
 
-        function buildZonePortal(canvasId, color, shape, active) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas || !window.THREE) return;
+    // Camera orbit
+    camera.position.x = Math.sin(cameraTheta) * CAM_R * Math.sin(cameraPhi);
+    camera.position.y = Math.cos(cameraPhi) * CAM_R * 0.5 + 10;
+    camera.position.z = Math.cos(cameraTheta) * CAM_R * Math.sin(cameraPhi);
+    camera.lookAt(2, 2, -4);
 
-            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setSize(100, 100);
-            renderer.setClearColor(0x000000, 0);
+    renderer.render(scene, camera);
+  }
 
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
-            camera.position.z = 3.5;
-            TV3D.addLights(scene);
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.getElementById('loading-screen').classList.add('hidden');
+    }, 1400);
+    updateZoneUI();
 
-            const c = active ? color : 0x333333;
-            const portal = TV3D.createPortal(scene, c, shape, [0, 0, 0]);
-            const ptLight = new THREE.PointLight(c, active ? 2 : 0.3, 6);
-            ptLight.position.set(0, 0, 2);
-            scene.add(ptLight);
+    // Prevent tooltip links if locked
+    document.querySelectorAll('.tt-btn.locked').forEach(btn => {
+      btn.addEventListener('click', e => { e.preventDefault(); });
+    });
+  });
 
-            // Hover effect
-            const parent = canvas.closest('.zone-marker');
-            parent?.addEventListener('mouseenter', () => { if (!active) return; gsap.to(portal.group.scale, { x: 1.15, y: 1.15, z: 1.15, duration: 0.3, ease: 'power2.out' }); });
-            parent?.addEventListener('mouseleave', () => { gsap.to(portal.group.scale, { x: 1, y: 1, z: 1, duration: 0.3, ease: 'power2.in' }); });
+  // Page transitions
+  document.querySelectorAll('a[href]').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#') && !href.startsWith('http') && href !== '#') {
+        e.preventDefault();
+        const overlay = document.getElementById('page-transition');
+        overlay.style.opacity = 1;
+        setTimeout(() => { window.location.href = href; }, 350);
+      } else if (href === '#') { e.preventDefault(); }
+    });
+  });
 
-            let t = 0;
-            const spinSpeed = active ? 0.015 : 0.003;
-            function loop() {
-                requestAnimationFrame(loop);
-                t += 0.016;
-                portal.group.rotation.y += spinSpeed;
-                if (shape === 'torus') portal.mesh.rotation.x += 0.005;
-                ptLight.intensity = active ? 2 + Math.sin(t * 2.5) * 0.6 : 0.3;
-                renderer.render(scene, camera);
-            }
-            loop();
-        }
-    </script>
+  animate();
+})();
+</script>
 </body>
-
 </html>

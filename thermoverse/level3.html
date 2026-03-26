@@ -1,200 +1,397 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona 3: Sistem Lanjutan — ThermoVerse</title>
-    <meta name="description" content="Zona 3 kuis lanjutan termodinamika — tantangan terakhir ThermoVerse.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/quiz.css">
-    <style>
-        .quiz-layout {
-            display: grid;
-            grid-template-columns: 1fr 240px;
-            gap: 28px;
-            max-width: 1060px;
-            margin: 0 auto;
-            padding: 30px 20px 80px;
-        }
-
-        .mol3d-panel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 60px;
-        }
-
-        #molecule-canvas {
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-        }
-
-        .mol-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.1rem;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        @media (max-width:850px) {
-            .quiz-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .mol3d-panel {
-                display: none;
-            }
-        }
-    </style>
-    <script>
-        window.QUIZ_CONFIG = {
-            zoneKey: 'zone3',
-            thinkingKeys: ['critical', 'systemic', 'scientific', 'innovative'],
-            questions: [
-                {
-                    text: "Dalam pembangkit listrik siklus gabungan, apa keunggulan utama dibanding siklus Brayton sederhana?", category: "Sistem Lanjutan", thinking: "systemic",
-                    options: ["Hanya biaya bahan bakar lebih rendah", "Panas buang turbin gas digunakan untuk menghasilkan uap tambahan, meningkatkan efisiensi", "Beroperasi pada suhu lebih rendah", "Tidak memerlukan sistem pendingin"], correct: 1
-                },
-                {
-                    text: "Siklus Rankine paling umum digunakan pada:", category: "Siklus Rekayasa", thinking: "scientific",
-                    options: ["Mesin turbin gas", "Kompresor refrigerasi", "Pembangkit listrik berbasis uap", "Reaktor fusi nuklir"], correct: 2
-                },
-                {
-                    text: "Prinsip apa yang dimanfaatkan generator termoelektrik (TEG)?", category: "Teknologi Inovatif", thinking: "innovative",
-                    options: ["Prinsip Bernoulli", "Efek Seebeck — menghasilkan listrik dari gradien suhu", "Hukum induksi Faraday", "Hukum Pascal"], correct: 1
-                },
-                {
-                    text: "Persamaan mana yang merepresentasikan pertidaksamaan Clausius dengan benar?", category: "Konsep Inti", thinking: "scientific",
-                    options: ["∮ dQ/T ≤ 0", "∮ dQ/T > 0", "∮ dQ × T = konstan", "∮ T dQ = 0"], correct: 0
-                },
-                {
-                    text: "Dalam analisis eksergi, 'destruksi eksergi' merepresentasikan:", category: "Eksergi", thinking: "critical",
-                    options: ["Kerja yang dilakukan sistem", "Kalor yang hilang ke lingkungan", "Irreversibilitas yang mengubah potensi kerja berguna menjadi entropi", "Kerja teoritis maksimum"], correct: 2
-                },
-                {
-                    text: "Pompa kalor dengan COP = 4 mengkonsumsi daya 1 kW dapat memberikan kalor sebesar:", category: "Pompa Kalor", thinking: "systemic",
-                    options: ["1 kW", "3 kW", "4 kW", "5 kW"], correct: 2
-                },
-                {
-                    text: "Mekanisme utama perpindahan kalor dalam pipa kalor (heat pipe) adalah:", category: "Perpindahan Kalor", thinking: "innovative",
-                    options: ["Konduksi murni melalui dinding pipa", "Perubahan fasa: evaporasi di sumber panas, kondensasi di sink panas", "Konveksi paksa cairan", "Radiasi melalui pipa"], correct: 1
-                },
-                {
-                    text: "Siklus CO₂ superkritis (sCO₂) menarik karena menawarkan:", category: "Siklus Lanjutan", thinking: "innovative",
-                    options: ["Hanya tekanan kondensasi sangat tinggi", "Turbomasinneri kompak dan efisiensi tinggi pada suhu tinggi", "Emisi karbon nol", "Tidak memerlukan sumber panas"], correct: 1
-                },
-                {
-                    text: "Dalam teknologi pinch untuk desain jaringan penukar panas, 'titik pinch' mengacu pada:", category: "Integrasi Proses", thinking: "systemic",
-                    options: ["Titik tekanan maksimum", "Perbedaan suhu minimum antara kurva komposit panas dan dingin", "Tempat dua aliran fluida bercampur", "Suhu penguapan optimal"], correct: 1
-                },
-                {
-                    text: "Besaran termodinamika mana yang merupakan besaran intensif?", category: "Sifat-Sifat", thinking: "critical",
-                    options: ["Energi dalam total", "Massa", "Volume", "Suhu"], correct: 3
-                }
-            ]
-        };
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 3: Hukum II Termodinamika — Anti-Gravity Agent</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/quiz.css">
 </head>
-
 <body>
-    <div id="loading-screen">
-        <div class="energy-pulse"></div>
-        <div class="loading-text">Memuat Zona 3...</div>
-    </div>
-    <div id="page-transition"></div>
-    <canvas id="particle-canvas"></canvas>
+<div id="loading-screen"><div class="energy-pulse"></div><div class="loading-text">🌀 Memuat Level 3...</div></div>
+<div id="page-transition"></div>
 
-    <div id="badge-popup">
-        <div class="badge-popup-icon">🏆</div>
-        <div class="badge-popup-content">
-            <div class="badge-popup-title">🎖 Lencana Terbuka!</div>
-            <div class="badge-popup-name">Nama Lencana</div>
+<nav class="nav-bar">
+  <a href="map.html" class="nav-logo">Anti<span>Gravity</span></a>
+  <ul class="nav-links">
+    <li><a href="map.html">🗺️ Peta Misi</a></li>
+    <li><a href="dashboard.html">📊 Leaderboard</a></li>
+  </ul>
+  <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
+</nav>
+
+<div class="page-wrapper challenge-page">
+  <div class="challenge-wrapper">
+
+    <div class="level-header">
+      <div class="level-header-left">
+        <div class="level-badge" style="background:#D1FAE5;color:#059669;">🌀 LEVEL 3 · PULAU ENTROPI</div>
+        <div class="level-title">Hukum II Termodinamika</div>
+        <div class="level-subtitle">Entropi, Reversibilitas, Siklus Carnot, dan Efisiensi Termal • 4 Tantangan</div>
+      </div>
+      <div class="level-header-right">
+        <div class="xp-counter">
+          <div class="xp-counter-val" id="current-xp">0</div>
+          <div class="xp-counter-label">⚡ XP</div>
         </div>
-    </div>
-
-    <nav class="nav-bar">
-        <a href="map.html" class="nav-logo">Thermo<span>Verse</span></a>
-        <ul class="nav-links">
-            <li><a href="map.html">← Peta Misi</a></li>
-        </ul>
-        <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
-    </nav>
-
-    <div class="page-wrapper">
-        <div class="quiz-layout">
-            <div>
-                <div class="quiz-header">
-                    <div class="quiz-title">🌌 ZONA 3 — SISTEM LANJUTAN</div>
-                    <div class="quiz-meta">
-                        <div class="timer-display" id="timer-display">⏱ 15:00</div>
-                        <div class="quiz-xp-badge" style="border-color:rgba(255,255,255,0.3);color:var(--white)">⚡ <span
-                                id="nav-xp-value-2">0</span> XP</div>
-                    </div>
-                </div>
-                <div class="question-progress" style="margin-bottom:20px">
-                    <div class="progress-label">
-                        <span>Soal <span id="question-current">1</span> dari <span id="question-total">10</span></span>
-                    </div>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progress-bar-q"
-                            style="width:0%;background:linear-gradient(90deg,var(--white),rgba(255,255,255,0.5))"></div>
-                    </div>
-                </div>
-
-                <div id="quiz-container">
-                    <div class="question-card" style="border-color:rgba(255,255,255,0.12)">
-                        <div class="question-indicator">
-                            <div class="q-dot" style="background:var(--white)"></div>
-                            <span class="question-category" id="question-category">Kategori</span>
-                        </div>
-                        <div class="question-text" id="question-text">Memuat...</div>
-                        <div class="options-grid" id="options-container"></div>
-                        <div class="feedback-pill" id="feedback-pill"></div>
-                    </div>
-                    <div class="next-btn-wrap">
-                        <button class="btn" id="next-btn"
-                            style="display:none;background:linear-gradient(135deg,#555,#888);color:var(--white)"
-                            onclick="Quiz.nextQuestion()">Soal Berikutnya →</button>
-                    </div>
-                </div>
-
-                <div class="result-screen" id="result-screen">
-                    <div class="result-score-ring" style="border-color:var(--white)">
-                        <div class="result-score-value" id="result-score-value" style="color:var(--white)">0%</div>
-                        <div class="result-score-label">Skor Akhir</div>
-                    </div>
-                    <div class="result-xp-earned" id="result-xp-earned">+0 XP</div>
-                    <div class="result-message" id="result-message"></div>
-                    <div
-                        style="font-family:var(--font-heading);font-size:0.85rem;color:var(--white);margin-bottom:24px">
-                        🏁 Zona 3 Selesai!</div>
-                    <div class="result-actions">
-                        <a href="map.html" class="btn btn-ghost">← Peta Misi</a>
-                        <a href="dashboard.html" class="btn btn-primary">📊 Analitik</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mol3d-panel" id="mol3d-wrap">
-                <canvas id="molecule-canvas" width="220" height="220"></canvas>
-                <div class="mol-label">PENDAMPING<br>MOLEKUL</div>
-                <div class="mol-reaction" id="mol-reaction" style="color:var(--text-muted)">Jawab untuk berinteraksi
-                </div>
-            </div>
+        <div class="timer-box" id="main-timer">
+          <div class="timer-value" id="timer-val">05:00</div>
+          <div class="timer-label">⏱ Diskusi</div>
         </div>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/badges.js"></script>
-    <script src="js/three-scene.js"></script>
-    <script src="js/quiz.js"></script>
+    <div class="challenge-tabs">
+      <button class="tab-btn active" id="tab-ct" onclick="switchTab('ct')">🔍 Critical Thinking</button>
+      <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 Systemic Thinking</button>
+      <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 Scientific Thinking</button>
+      <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 Innovative Thinking</button>
+    </div>
+
+    <!-- CT -->
+    <div id="panel-ct" class="challenge-card">
+      <div class="challenge-card-title">🔍 Tantangan 1 — Critical Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Menganalisis konsep entropi dan Hukum II Termodinamika secara kritis melalui fenomena ketidakberaturan alam.</div>
+
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Diskusikan: Mengapa sebuah cangkir kopi yang jatuh dan pecah tidak bisa "kembali" dengan sendirinya? Hubungkan dengan konsep Hukum II!</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Konteks: Kopi dan Es</div>
+        <div class="scenario-text">Sepotong es (20°C, 50g) dimasukkan ke dalam segelas kopi panas (80°C, 200g). Setelah beberapa waktu, keduanya mencapai kesetimbangan termal pada suhu T_akhir. Kalor mengalir secara spontan dari kopi ke es — tidak pernah sebaliknya. Ini adalah manifestasi Hukum II Termodinamika.</div>
+        <div class="scenario-data"><span class="data-chip">T_es = 20°C, m=50g</span><span class="data-chip">T_kopi = 80°C, m=200g</span><span class="data-chip">c = 4200 J/kg·K</span></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔍 Soal Evaluasi</div>
+        <div class="question-text">Apa yang terjadi pada entropi total sistem (kopi + es) ketika keduanya mencapai kesetimbangan termal?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('ct',0,true,this)"><span class="option-key">A</span>Entropi total BERTAMBAH — proses spontan selalu meningkatkan entropi alam semesta (ΔS_total > 0)</button>
+          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">B</span>Entropi total BERKURANG karena sistem mencapai kesetimbangan (keteraturan meningkat)</button>
+          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">C</span>Entropi total tetap KONSTAN karena energi kekal (Hukum I)</button>
+          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">D</span>Entropi total tidak bisa ditentukan tanpa mengetahui kerja yang dilakukan</button>
+        </div>
+        <div class="feedback-box" id="fb-ct-0">
+          <div class="feedback-icon" id="fb-ct-0-icon"></div><div class="feedback-title" id="fb-ct-0-title"></div>
+          <div class="feedback-desc" id="fb-ct-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔍 Soal Analisis</div>
+        <div class="question-text">Mengapa kalor tidak mengalir secara spontan dari es ke kopi (dari dingin ke panas)? Pilih penjelasan yang paling tepat berdasarkan Hukum II!</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">A</span>Karena massa kopi lebih besar dari es sehingga menghambat aliran kalor balik</button>
+          <button class="option-btn" onclick="answerQ('ct',1,true,this)"><span class="option-key">B</span>Karena aliran kalor dari dingin ke panas akan mengurangi entropi alam semesta (ΔS < 0), yang bertentangan dengan Hukum II</button>
+          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">C</span>Karena energi tidak cukup untuk mendorong kalor ke arah yang berlawanan</button>
+          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">D</span>Karena Hukum I melarang transfer kalor dari sistem bersuhu rendah ke tinggi</button>
+        </div>
+        <div class="feedback-box" id="fb-ct-1">
+          <div class="feedback-icon" id="fb-ct-1-icon"></div><div class="feedback-title" id="fb-ct-1-title"></div>
+          <div class="feedback-desc" id="fb-ct-1-desc"></div>
+        </div>
+      </div>
+
+      <div class="reflection-box">
+        <div class="reflection-title">🌟 Refleksi</div>
+        <div class="reflection-items">
+          <div class="reflection-item">
+            <label>Berikan 2 contoh proses dalam kehidupan sehari-hari yang menunjukkan peningkatan entropi secara spontan!</label>
+            <textarea placeholder="Contoh 1: ... | Contoh 2: ..." id="ref-ct"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="submitChallenge('ct')">✅ Selesai →</button>
+      </div>
+    </div>
+
+    <!-- ST -->
+    <div id="panel-st" class="challenge-card" style="display:none;">
+      <div class="challenge-card-title">🔗 Tantangan 2 — Systemic Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Menganalisis siklus Carnot sebagai sistem termodinamika dan hubungan antar variabel efisiensi termal mesin kalor.</div>
+
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Analisis siklus Carnot: bagaimana hubungan antara Th, Tc, dan efisiensi maksimal?</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Konteks: Pembangkit Listrik Tenaga Uap</div>
+        <div class="scenario-text">Sebuah PLTU beroperasi dengan uap panas pada T_h = 500°C (773 K) dan kondenser pada T_c = 30°C (303 K). Efisiensi termal aktual PLTU tersebut adalah 35%. Sementara mesin Carnot ideal dengan suhu yang sama memiliki efisiensi teoritis maksimum.</div>
+        <div class="scenario-data"><span class="data-chip">T_h = 773 K</span><span class="data-chip">T_c = 303 K</span><span class="data-chip">η_aktual = 35%</span></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Analisis Efisiensi Carnot</div>
+        <div class="question-text">Berapakah efisiensi maksimum teoritis (Carnot) dari PLTU ini? η_Carnot = 1 − (T_c/T_h)</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('st',0,true,this)"><span class="option-key">A</span>η_Carnot = 1 − (303/773) ≈ 0.608 = 60.8%</button>
+          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">B</span>η_Carnot = 1 − (500/30) ≈ −15.7 (negatif, tidak mungkin)</button>
+          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">C</span>η_Carnot = T_h/T_c = 773/303 ≈ 255.1%</button>
+          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">D</span>η_Carnot = 100% karena mesin Carnot adalah mesin ideal sempurna</button>
+        </div>
+        <div class="feedback-box" id="fb-st-0">
+          <div class="feedback-icon" id="fb-st-0-icon"></div><div class="feedback-title" id="fb-st-0-title"></div>
+          <div class="feedback-desc" id="fb-st-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Inferensi Sistemik</div>
+        <div class="question-text">Efisiensi aktual PLTU (35%) jauh di bawah efisiensi Carnot (60.8%). Faktor sistemik apakah yang menyebabkan hal ini?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('st',1,true,this)"><span class="option-key">A</span>Gesekan mekanik, konduksi kalor parasitik, dan proses ireversibel dalam komponen nyata mesin</button>
+          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">B</span>Mesin Carnot tidak mempertimbangkan efek gravitasi pada sistem nyata</button>
+          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">C</span>Hukum II Termodinamika melarang efisiensi di atas 50% untuk semua mesin</button>
+          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">D</span>PLTU nyata menggunakan bahan bakar fosil yang kurang energetik</button>
+        </div>
+        <div class="feedback-box" id="fb-st-1">
+          <div class="feedback-icon" id="fb-st-1-icon"></div><div class="feedback-title" id="fb-st-1-title"></div>
+          <div class="feedback-desc" id="fb-st-1-desc"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="submitChallenge('st')">✅ Selesai →</button>
+      </div>
+    </div>
+
+    <!-- SCI -->
+    <div id="panel-sci" class="challenge-card" style="display:none;">
+      <div class="challenge-card-title">🔬 Tantangan 3 — Scientific Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Mengaplikasikan konsep entropi untuk menganalisis kespontanannya suatu proses dan mengevaluasi perubahan entropi reaksi.</div>
+
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Diskusikan: bagaimana mengukur perubahan entropi (ΔS) secara kuantitatif? Rumus ΔS = Q_rev/T.</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Eksperimen: Pencairan Es</div>
+        <div class="scenario-text">Es (0°C, 100g) meleleh menjadi air pada suhu konstan 0°C (273 K). Kalor yang diperlukan untuk melelehkan es adalah Q = m × L_f = 0.1 kg × 334,000 J/kg = 33,400 J. Hitunglah perubahan entropi es saat meleleh!</div>
+        <div class="scenario-data"><span class="data-chip">m = 100g = 0.1 kg</span><span class="data-chip">L_f = 334,000 J/kg</span><span class="data-chip">T = 273 K</span></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Perhitungan Entropi</div>
+        <div class="question-text">Berapakah perubahan entropi (ΔS) es saat meleleh? (ΔS = Q_rev / T)</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('sci',0,true,this)"><span class="option-key">A</span>ΔS = 33,400 / 273 ≈ +122.3 J/K (positif — entropi meningkat)</button>
+          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">B</span>ΔS = 273 / 33,400 ≈ +0.0082 J/K</button>
+          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">C</span>ΔS = −122.3 J/K (negatif — entropi berkurang saat es jadi air)</button>
+          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">D</span>ΔS = 0 karena suhu konstan selama proses perubahan fase</button>
+        </div>
+        <div class="feedback-box" id="fb-sci-0">
+          <div class="feedback-icon" id="fb-sci-0-icon"></div><div class="feedback-title" id="fb-sci-0-title"></div>
+          <div class="feedback-desc" id="fb-sci-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Interpretasi Ilmiah</div>
+        <div class="question-text">ΔS > 0 pada pencairan es menunjukkan bahwa...</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('sci',1,true,this)"><span class="option-key">A</span>Ketidakteraturan molekular meningkat: dari susunan kristal teratur (es) menjadi cairan dengan molekul lebih bebas bergerak</button>
+          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">B</span>Energi total sistem bertambah karena adanya penyerapan kalor</button>
+          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">C</span>Proses ini berlangsung secara adiabatik dan reversibel</button>
+          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">D</span>Temperatur sistem meningkat selama proses berlangsung</button>
+        </div>
+        <div class="feedback-box" id="fb-sci-1">
+          <div class="feedback-icon" id="fb-sci-1-icon"></div><div class="feedback-title" id="fb-sci-1-title"></div>
+          <div class="feedback-desc" id="fb-sci-1-desc"></div>
+        </div>
+      </div>
+
+      <div class="qr-scan-box" style="margin-top:16px;">
+        <div class="qr-icon">🔬</div>
+        <div class="qr-text"><strong>Laporan Investigasi Entropi — E-LKPD</strong><br>Lengkapi tabel perubahan entropi untuk berbagai proses di platform E-LKPD.</div>
+        <div class="qr-code">AGA-LV3-SCI-003</div>
+      </div>
+
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="submitChallenge('sci')">✅ Selesai →</button>
+      </div>
+    </div>
+
+    <!-- INN -->
+    <div id="panel-inn" class="challenge-card" style="display:none;">
+      <div class="challenge-card-title">💡 Tantangan 4 — Innovative Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Merancang strategi inovatif untuk meningkatkan efisiensi sistem konversi energi berbasis prinsip Hukum II Termodinamika.</div>
+
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Sesi Inovasi Tim — Maks. 5 Menit</h4><p>Tantangan: bagaimana kita bisa mendekati efisiensi Carnot tanpa mencapainya? Strategi apa yang mungkin?</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Tantangan: Kota Masa Depan</div>
+        <div class="scenario-text">Sebagai <strong>Anti-Gravity Agent</strong>, kamu ditugaskan merancang sistem energi kota masa depan yang meminimalkan entropi terbuang (waste heat) dan memaksimalkan efisiensi konversi energi. Prinsip: setiap kJ energi yang "hilang" berarti peningkatan entropi alam semesta yang tidak dapat dikembalikan!</div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">💡 Strategi Inovatif</div>
+        <div class="question-text">Strategi manakah yang PALING efektif untuk mendekati efisiensi Carnot pada sistem pembangkit energi kota?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('inn',0,true,this)"><span class="option-key">A</span>Meningkatkan T_h (suhu sumber panas) dan menurunkan T_c (suhu buang) sekaligus meminimalkan ireversibilitas proses internalnya</button>
+          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">B</span>Menggunakan bahan bakar yang lebih banyak untuk menghasilkan lebih banyak energi</button>
+          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">C</span>Menurunkan T_h sebanyak mungkin agar mesin beroperasi lebih "dingin" dan efisien</button>
+          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">D</span>Membuat siklus yang berputar lebih cepat agar lebih banyak kerja dihasilkan per satuan waktu</button>
+        </div>
+        <div class="feedback-box" id="fb-inn-0">
+          <div class="feedback-icon" id="fb-inn-0-icon"></div><div class="feedback-title" id="fb-inn-0-title"></div>
+          <div class="feedback-desc" id="fb-inn-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block" style="margin-top:20px;">
+        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">✏️ Rancangan Kota Energi</div>
+        <div class="question-text">Rancang sistem energi kota futuristikmu! Gunakan konsep: waste heat recovery, kogenerasi, entropi minimal. Bagaimana Hukum II menjadi panduan desainmu?</div>
+        <textarea class="open-answer" id="inn-open" placeholder="Contoh rancangan: Kota kami menggunakan sistem Kogenerasi (Combined Heat and Power). PLTU menghasilkan listrik (W) dan waste heat yang biasanya terbuang dimanfaatkan untuk pemanas gedung dan air panas industri. Dengan memanfaatkan waste heat, efisiensi total naik dari ~35% menjadi ~80%, karena ΔS_buangan berkurang signifikan. Untuk T_h, kami menggunakan energi geothermal (T_h = 250°C, lebih rendah dari batubara) namun mendinginkan T_c dengan heat sink bawah laut (T_c = 5°C), sehingga η_Carnot = 1 - 278/523 ≈ 46.8%..."></textarea>
+      </div>
+
+      <div class="qr-scan-box" style="margin-top:16px;">
+        <div class="qr-icon">🏙️</div>
+        <div class="qr-text"><strong>Portofolio Kota Energi</strong><br>Presentasikan desain kotamu: diagram sistem, analisis efisiensi Carnot, dan estimasi pengurangan entropi. Upload ke E-LKPD!</div>
+        <div class="qr-code">AGA-LV3-INN-004</div>
+      </div>
+
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="finishLevel()">🏆 Selesaikan Level 3 & Lihat Skor Akhir →</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="result-screen" class="result-screen">
+      <div class="result-content">
+        <div class="result-emoji">🏆</div>
+        <div class="result-title">Selamat! Semua Level Selesai!</div>
+        <div class="result-xp-earned" id="result-xp">+0 XP</div>
+        <div class="result-scores-grid">
+          <div class="score-chip"><div class="score-chip-val" id="sc-ct">-</div><div class="score-chip-label">Critical</div></div>
+          <div class="score-chip"><div class="score-chip-val" id="sc-st">-</div><div class="score-chip-label">Systemic</div></div>
+          <div class="score-chip"><div class="score-chip-val" id="sc-sci">-</div><div class="score-chip-label">Scientific</div></div>
+          <div class="score-chip"><div class="score-chip-val" id="sc-inn">-</div><div class="score-chip-label">Innovative</div></div>
+        </div>
+        <p style="color:#6B7280;margin-bottom:8px;font-size:0.9rem;" id="result-msg"></p>
+        <p style="color:#059669;font-weight:800;font-size:0.95rem;">🌟 Kamu telah menyelesaikan semua misi Anti-Gravity Agent!</p>
+        <div class="result-actions">
+          <a href="map.html" class="btn btn-ghost">🗺️ Peta Misi</a>
+          <a href="dashboard.html" class="btn btn-primary">📊 Lihat Leaderboard →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/game.js"></script>
+<script>
+const ZONE='zone3';
+const scores={ct:null,st:null,sci:null,inn:null};
+const answers={ct:[null,null],st:[null,null],sci:[null,null],inn:[null,null]};
+let timerInterval=null;
+
+function switchTab(key){
+  ['ct','st','sci','inn'].forEach(k=>{
+    document.getElementById('panel-'+k).style.display=k===key?'block':'none';
+    const tb=document.getElementById('tab-'+k);
+    if(tb){tb.classList.remove('active');if(k===key)tb.classList.add('active');}
+  });
+  stopTimer();
+}
+function startTimer(sec){
+  stopTimer();let r=sec;
+  const tv=document.getElementById('timer-val'),tb=document.getElementById('main-timer');
+  const upd=()=>{const m=Math.floor(r/60),s=r%60;if(tv)tv.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(tb)tb.classList.toggle('urgent',r<=60);r--;};
+  upd();timerInterval=setInterval(()=>{if(r<0){stopTimer();return;}upd();},1000);
+}
+function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+
+const fbData={
+  ct:[
+    {c:'Tepat! Setiap proses spontan meningkatkan entropi alam semesta (ΔS_alam semesta > 0). Hukum II Termodinamika menyatakan bahwa entropi alam semesta tidak pernah berkurang dalam proses alami. Mencapai kesetimbangan adalah kondisi entropi maksimum sistem.',w:'Ingat Hukum II: entropi total alam semesta SELALU bertambah atau tetap sama (tidak pernah berkurang) pada setiap proses. Pencampuran kopi dan es adalah proses spontan → ΔS_total > 0.'},
+    {c:'Tepat! Hukum II menyatakan: proses yang mengurangi entropi total tidak dapat terjadi spontan. Aliran kalor dari dingin ke panas akan mengurangi entropi alam semesta (ΔS < 0), karena itu tidak mungkin terjadi secara spontan.',w:'Hukum II Termodinamika melarang proses yang mengurangi entropi alam semesta. Aliran kalor dari dingin ke panas → ΔS_alam semesta < 0 → tidak mungkin secara spontan (bukan karena Hukum I).'}
+  ],
+  st:[
+    {c:'Tepat! η_Carnot = 1 − (T_c/T_h) = 1 − (303/773) = 1 − 0.392 = 0.608 = 60.8%. Ini adalah batas teoritis maksimum efisiensi yang tidak bisa dilampaui oleh mesin apapun yang beroperasi antara suhu T_h dan T_c tersebut.',w:'Gunakan rumus η_Carnot = 1 − (T_c/T_h) dengan suhu dalam Kelvin. η = 1 − (303/773) ≈ 0.608 = 60.8%. Pastikan selalu dalam Kelvin!'},
+    {c:'Benar! Pada mesin nyata, berbagai proses ireversibel (gesekan, konduktivitas termal terbatas, dll.) menghasilkan "entropy generation" internal yang mengurangi efisiensi di bawah batas Carnot. Semakin banyak sumber ireversibilitas → semakin jauh dari efisiensi Carnot.',w:'Sumber utama inefisiensi: gesekan mekanik, konduksi kalor melalui ΔT terbatas (bukan ΔT tak terhingga kecil), dan proses-proses ireversibel lain yang menghasilkan entropi tambahan di dalam mesin.'}
+  ],
+  sci:[
+    {c:'Tepat! ΔS = Q_rev/T = 33400/273 ≈ +122.3 J/K. Tanda positif (+) menunjukkan entropi sistem meningkat — konsisten dengan perpindahan dari keadaan lebih teratur (es kristal) ke keadaan lebih tidak teratur (air cair).',w:'Rumus: ΔS = Q_rev/T = 33400 J / 273 K ≈ +122.3 J/K. Tanda positif karena sistem menyerap kalor (Q > 0) dan entropi meningkat.'},
+    {c:'Tepat! Es (kristal) memiliki struktur teratur dengan molekul air berposisi tetap. Saat meleleh, molekul bebas bergerak → ketidakteraturan meningkat → entropi meningkat. Ini interpretasi mikroskopis dari ΔS > 0.',w:'Entropi secara mikroskopis terkait ketidakteraturan (disorder). Es: kristal teratur (S rendah). Air cair: molekul bergerak bebas (S tinggi). Meleleh → ΔS > 0.'}
+  ],
+  inn:[
+    {c:'Tepat! η_Carnot = 1 − T_c/T_h. Untuk meningkatkan efisiensi: maksimalkan T_h (suhu reservoir panas) dan/atau minimalkan T_c (suhu buang). Selain itu, meminimalkan ireversibilitas internal (gesekan, heat leak) mendekati kondisi Carnot yang reversibel.',w:'Kunci efisiensi Carnot: η = 1 − T_c/T_h. Untuk mendekati η_max: naikkan T_h (uap super-panas, plasma, dll.) dan/atau turunkan T_c (deep sea cooling, evaporative cooling). Plus minimasi ireversibilitas.'}
+  ]
+};
+
+function answerQ(ch,qi,ok,btn){
+  const g=btn.closest('.options-grid');if(!g)return;
+  g.querySelectorAll('.option-btn').forEach(b=>{b.disabled=true;});
+  btn.classList.add(ok?'correct':'wrong');
+  if(!ok){g.querySelectorAll('.option-btn').forEach(b=>{if(b!==btn&&b.onclick&&b.onclick.toString().includes('true,this'))b.classList.add('correct');});}
+  answers[ch][qi]=ok;
+  const fb=document.getElementById('fb-'+ch+'-'+qi);
+  if(fb&&fbData[ch]&&fbData[ch][qi]){
+    const d=fbData[ch][qi];
+    fb.classList.add('show',ok?'correct-fb':'wrong-fb');
+    document.getElementById('fb-'+ch+'-'+qi+'-icon').textContent=ok?'✅':'❌';
+    document.getElementById('fb-'+ch+'-'+qi+'-title').textContent=ok?'Jawaban Benar!':'Belum Tepat';
+    document.getElementById('fb-'+ch+'-'+qi+'-desc').textContent=ok?d.c:d.w;
+  }
+}
+
+function submitChallenge(key){
+  const ans=answers[key];
+  const c=ans.filter(a=>a===true).length;const t=ans.filter(a=>a!==null).length;
+  scores[key]=Math.min(Math.round((c/Math.max(t,2))*70)+30,100);
+  const tb=document.getElementById('tab-'+key);
+  if(tb){tb.classList.remove('active');tb.classList.add('done');}
+  const order=['ct','st','sci','inn'];const idx=order.indexOf(key);
+  if(idx<order.length-1)switchTab(order[idx+1]);
+}
+
+function finishLevel(){
+  ['ct','st','sci','inn'].forEach(k=>{if(scores[k]===null)scores[k]=30;});
+  const avg=Math.round(Object.values(scores).reduce((a,b)=>a+b,0)/4);
+  const xp=avg*3;
+  const state=ThermoGame.loadState();
+  ThermoGame.addXP(state,xp);
+  ThermoGame.saveZoneChallenge(state,ZONE,'all',scores);
+  state.zones[ZONE].score=avg;state.zones[ZONE].completed=true;
+  ThermoGame.saveState(state);
+  ['ct','st','sci','inn'].forEach(k=>{const e=document.getElementById('sc-'+k);if(e)e.textContent=scores[k];});
+  document.getElementById('result-xp').textContent='+'+xp+' XP';
+  document.getElementById('result-msg').textContent=avg>=80?'🌟 Luar biasa! Penguasaan Hukum II Termodinamika sangat mendalam!':avg>=60?'👍 Bagus! Pemahaman kompleks tentang entropi semakin kuat.':'💪 Terus berlatih! Konsep entropi memang menantang.';
+  document.querySelectorAll('.challenge-card').forEach(c=>c.style.display='none');
+  document.getElementById('result-screen').classList.add('show');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{document.getElementById('loading-screen').classList.add('hidden');},1000);
+  const state=ThermoGame.loadState();
+  if(!ThermoGame.isZoneUnlocked(state,'zone3')){window.location.href='map.html';return;}
+  const nxp=document.getElementById('nav-xp-value');if(nxp)nxp.textContent=state.xp+' XP';
+  const cxp=document.getElementById('current-xp');if(cxp)cxp.textContent=state.xp;
+});
+
+document.querySelectorAll('a[href]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    const href=link.getAttribute('href');
+    if(href&&!href.startsWith('#')&&!href.startsWith('http')){
+      e.preventDefault();const o=document.getElementById('page-transition');o.style.opacity=1;
+      setTimeout(()=>{window.location.href=href;},350);
+    }
+  });
+});
+</script>
 </body>
-
 </html>

@@ -1,260 +1,398 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona 2: Laboratorium Inovasi — ThermoVerse</title>
-    <meta name="description"
-        content="Laboratorium Inovasi ThermoVerse — pilih upgrade dan optimalkan turbin sistem termodinamika.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/innovation.css">
-    <style>
-        .innovation-layout {
-            display: grid;
-            grid-template-columns: 1fr 260px;
-            gap: 32px;
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 30px 20px 80px;
-        }
-
-        .turbine-panel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 80px;
-            position: sticky;
-            top: 80px;
-            height: fit-content;
-        }
-
-        #turbine-canvas {
-            border-radius: 12px;
-            border: 1px solid rgba(232, 34, 10, 0.2);
-            box-shadow: 0 0 30px rgba(232, 34, 10, 0.15);
-            display: block;
-        }
-
-        .turbine-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.12rem;
-            margin-top: 12px;
-            text-align: center;
-        }
-
-        .turbine-rpm {
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            color: var(--orange);
-            text-shadow: var(--glow-orange);
-            margin-top: 8px;
-            text-align: center;
-        }
-
-        .turbine-status {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-top: 4px;
-            text-align: center;
-        }
-
-        .energy-flow-row {
-            display: flex;
-            gap: 6px;
-            margin-top: 12px;
-        }
-
-        .energy-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(232, 34, 10, 0.2);
-            border: 1px solid rgba(232, 34, 10, 0.3);
-            transition: all 0.4s;
-        }
-
-        .energy-dot.active {
-            background: var(--red);
-            box-shadow: var(--glow-red);
-            animation: dot-pulse 0.8s ease-in-out infinite alternate;
-        }
-
-        @keyframes dot-pulse {
-            from {
-                transform: scale(1);
-            }
-
-            to {
-                transform: scale(1.4);
-            }
-        }
-
-        @media (max-width:850px) {
-            .innovation-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .turbine-panel {
-                position: static;
-                padding-top: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level 2: Hukum I Termodinamika — Anti-Gravity Agent</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/quiz.css">
 </head>
-
 <body>
-    <div id="loading-screen">
-        <div class="energy-pulse"></div>
-        <div class="loading-text">Memuat Zona 2...</div>
-    </div>
-    <div id="page-transition"></div>
-    <canvas id="particle-canvas"></canvas>
+<div id="loading-screen"><div class="energy-pulse"></div><div class="loading-text">⚡ Memuat Level 2...</div></div>
+<div id="page-transition"></div>
 
-    <div id="badge-popup">
-        <div class="badge-popup-icon">🏆</div>
-        <div class="badge-popup-content">
-            <div class="badge-popup-title">🎖 Lencana Terbuka!</div>
-            <div class="badge-popup-name">Nama Lencana</div>
+<nav class="nav-bar">
+  <a href="map.html" class="nav-logo">Anti<span>Gravity</span></a>
+  <ul class="nav-links">
+    <li><a href="map.html">🗺️ Peta Misi</a></li>
+    <li><a href="dashboard.html">📊 Leaderboard</a></li>
+  </ul>
+  <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
+</nav>
+
+<div class="page-wrapper challenge-page">
+  <div class="challenge-wrapper">
+
+    <div class="level-header">
+      <div class="level-header-left">
+        <div class="level-badge" style="background:#EDE9FE;color:#7C3AED;">⚡ LEVEL 2 · PULAU ENERGI</div>
+        <div class="level-title">Hukum I Termodinamika</div>
+        <div class="level-subtitle">Energi dalam (U), Kalor (Q), dan Kerja (W) pada berbagai proses • 4 Tantangan</div>
+      </div>
+      <div class="level-header-right">
+        <div class="xp-counter">
+          <div class="xp-counter-val" id="current-xp">0</div>
+          <div class="xp-counter-label">⚡ XP</div>
         </div>
-    </div>
-
-    <nav class="nav-bar">
-        <a href="map.html" class="nav-logo">Thermo<span>Verse</span></a>
-        <ul class="nav-links">
-            <li><a href="map.html">← Peta Misi</a></li>
-        </ul>
-        <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
-    </nav>
-
-    <div class="page-wrapper">
-        <div class="innovation-layout">
-            <div>
-                <div class="innovation-header" style="text-align:left">
-                    <div
-                        style="font-family:var(--font-mono);font-size:0.7rem;color:var(--orange);letter-spacing:0.15rem;margin-bottom:10px">
-                        ⚡ ZONA 2 — LABORATORIUM INOVASI</div>
-                    <h1 class="section-title" style="font-size:1.6rem">Tantangan <span>Optimasi</span><br>Sistem Energi
-                    </h1>
-                    <p style="color:var(--text-secondary);font-size:0.95rem;margin-top:8px;line-height:1.7">Rancang
-                        terobosan dengan memilih upgrade terbaik untuk pembangkit listrik termodinamika ini.</p>
-                </div>
-
-                <div class="scenario-card">
-                    <div class="scenario-label">⚙️ Skenario Misi</div>
-                    <div class="scenario-text">
-                        Sebuah pembangkit listrik tenaga batu bara lama beroperasi pada efisiensi termal hanya <strong
-                            style="color:var(--orange)">38%</strong>.
-                        Timmu mengidentifikasi beberapa jalur peningkatan. Anggaran tersedia untuk <strong>3
-                            upgrade</strong> maksimal.
-                        Tujuan: maksimalkan efisiensi sistem di atas <strong style="color:var(--red)">70% peningkatan
-                            relatif</strong>.
-                        Perhatikan turbin 3D berputar lebih cepat saat kamu menambah upgrade →
-                    </div>
-                </div>
-
-                <div class="selection-info">
-                    <div class="upgrades-section-title">⬆️ Upgrade yang Tersedia</div>
-                    <div class="slots-remaining" id="slots-remaining">3 slot tersisa</div>
-                </div>
-
-                <div class="upgrades-grid" id="upgrades-grid"></div>
-
-                <div style="text-align:center;margin-bottom:24px">
-                    <button class="btn btn-primary" id="calc-btn" onclick="Innovation.calculateResult()">
-                        ⚡ Hitung Efisiensi Sistem
-                    </button>
-                </div>
-
-                <div class="efficiency-result" id="efficiency-result">
-                    <div class="efficiency-label">🔋 HASIL EFISIENSI SISTEM</div>
-                    <div class="efficiency-bar-track">
-                        <div class="efficiency-bar-fill" id="efficiency-bar-fill" style="width:0%"></div>
-                    </div>
-                    <div class="efficiency-value" id="efficiency-value">0%</div>
-                    <div class="efficiency-explanation" id="efficiency-explanation"></div>
-                    <div class="efficiency-xp-bonus" id="efficiency-xp-bonus"></div>
-                    <div style="text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-                        <a href="level3.html" class="btn btn-primary" id="innovation-next-btn" style="display:none">Zona
-                            Berikutnya: Sistem Lanjutan →</a>
-                        <a href="map.html" class="btn btn-ghost">← Peta Misi</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="turbine-panel">
-                <canvas id="turbine-canvas" width="240" height="260"></canvas>
-                <div class="turbine-label">TURBIN 3D LANGSUNG</div>
-                <div class="turbine-rpm" id="turbine-rpm">0 RPM</div>
-                <div class="turbine-status" id="turbine-status">Pilih upgrade untuk memutar</div>
-                <div class="energy-flow-row" id="energy-dots">
-                    <div class="energy-dot"></div>
-                    <div class="energy-dot"></div>
-                    <div class="energy-dot"></div>
-                </div>
-            </div>
+        <div class="timer-box" id="main-timer">
+          <div class="timer-value" id="timer-val">05:00</div>
+          <div class="timer-label">⏱ Diskusi</div>
         </div>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/badges.js"></script>
-    <script src="js/three-scene.js"></script>
-    <script src="js/innovation.js"></script>
+    <div class="challenge-tabs">
+      <button class="tab-btn active" id="tab-ct" onclick="switchTab('ct')">🔍 Critical Thinking</button>
+      <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 Systemic Thinking</button>
+      <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 Scientific Thinking</button>
+      <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 Innovative Thinking</button>
+    </div>
 
-    <script>
-        (function () {
-            const canvas = document.getElementById('turbine-canvas');
-            if (!canvas || !window.THREE) return;
-            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setSize(240, 260);
-            renderer.setClearColor(0x000000, 0);
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(55, 240 / 260, 0.1, 100);
-            camera.position.set(0, 1.5, 5);
-            camera.lookAt(0, 0, 0);
-            TV3D.addLights(scene);
-            const extra = new THREE.DirectionalLight(0xff3c00, 0.8);
-            extra.position.set(3, 4, 2);
-            scene.add(extra);
-            const turbine = TV3D.createTurbine(scene, [0, 0, 0]);
-            // Recolor turbine to red/orange
-            turbine.hub.material.color.setHex(0xff3c00);
-            turbine.hub.material.emissive.setHex(0xff3c00);
-            turbine.ring.material.color.setHex(0xff7c00);
-            const pGeos = new THREE.BufferGeometry();
-            const pCount = 40;
-            const pPos = new Float32Array(pCount * 3);
-            for (let i = 0; i < pCount; i++) { pPos[i * 3] = (Math.random() - 0.5) * 4; pPos[i * 3 + 1] = (Math.random() - 0.5) * 3; pPos[i * 3 + 2] = (Math.random() - 0.5) * 4; }
-            pGeos.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-            const pMat = new THREE.PointsMaterial({ color: 0xff7c00, size: 0.05, transparent: true, opacity: 0.5 });
-            const points = new THREE.Points(pGeos, pMat);
-            scene.add(points);
-            window._turbineSpeedRef = { speed: 0.004 };
-            let t = 0;
-            function loopTurbine() { requestAnimationFrame(loopTurbine); t += 0.016; const sp = window._turbineSpeedRef.speed; turbine.group.rotation.y += sp; turbine.ring.rotation.z += sp * 0.5; points.rotation.y += 0.003; renderer.render(scene, camera); }
-            loopTurbine();
-        })();
+    <!-- CT -->
+    <div id="panel-ct" class="challenge-card">
+      <div class="challenge-card-title">🔍 Tantangan 1 — Critical Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Menganalisis penerapan Hukum I Termodinamika (ΔU = Q − W) pada berbagai konteks kehidupan nyata secara kritis dan evaluatif.</div>
 
-        function updateTurbineSpeed(selectedCount) {
-            const speeds = [0.005, 0.025, 0.055, 0.09];
-            const rpms = [0, 450, 1100, 2000];
-            const statuses = ['Pilih upgrade untuk memutar', 'Sistem mulai berjalan...', 'Mode efisiensi tinggi!', '⚡ Kecepatan Maksimum!'];
-            if (window._turbineSpeedRef) gsap.to(window._turbineSpeedRef, { speed: speeds[selectedCount] || 0.005, duration: 0.8, ease: 'power2.inOut' });
-            const rpmEl = document.getElementById('turbine-rpm');
-            const stEl = document.getElementById('turbine-status');
-            const dots = document.querySelectorAll('.energy-dot');
-            if (rpmEl) gsap.to({ val: parseInt(rpmEl.textContent) || 0 }, { val: rpms[selectedCount] || 0, duration: 0.8, onUpdate: function () { rpmEl.textContent = Math.round(this.targets()[0].val) + ' RPM'; } });
-            if (stEl) stEl.textContent = statuses[selectedCount] || '';
-            dots.forEach((d, i) => { d.classList.toggle('active', i < selectedCount); });
-        }
-        window.updateTurbineSpeed = updateTurbineSpeed;
-    </script>
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Diskusikan: Bagaimana energi berpindah dalam skenario berikut? Mana yang Q dan mana yang W?</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Konteks: Mesin Pompa Angin Sepeda</div>
+        <div class="scenario-text">Seorang mekanik menggunakan pompa tangan untuk memompa ban sepeda. Saat dipompa, udara terkompresi dan suhu udara dalam pompa meningkat. Setelah berhenti memompa, bagian bawah pompa terasa hangat. Data: pompa menghasilkan kerja sebesar W = 120 J pada udara; udara melepas kalor ke lingkungan Q = 30 J.</div>
+        <div class="scenario-data"><span class="data-chip">W = 120 J (kerja pada gas)</span><span class="data-chip">Q = −30 J (kalor keluar)</span></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🎯 Soal Evaluasi — Hukum I</div>
+        <div class="question-text">Berapakah perubahan energi dalam (ΔU) udara dalam pompa? (Konvensi: Q positif = masuk sistem; W positif = sistem melakukan kerja)</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('ct',0,true,this)"><span class="option-key">A</span>ΔU = Q + W = −30 + 120 = +90 J (energi dalam bertambah)</button>
+          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">B</span>ΔU = Q − W = −30 − 120 = −150 J (energi dalam berkurang)</button>
+          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">C</span>ΔU = Q × W = −30 × 120 = −3600 J</button>
+          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">D</span>ΔU = 0 karena proses siklik</button>
+        </div>
+        <div class="feedback-box" id="fb-ct-0">
+          <div class="feedback-icon" id="fb-ct-0-icon"></div><div class="feedback-title" id="fb-ct-0-title"></div>
+          <div class="feedback-desc" id="fb-ct-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🎯 Soal Interpretasi</div>
+        <div class="question-text">Kenapa bagian bawah pompa terasa hangat setelah digunakan? Mana penjelasan yang PALING tepat secara termodinamika?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">A</span>Gesekan antara piston dan tabung menghasilkan panas tambahan</button>
+          <button class="option-btn" onclick="answerQ('ct',1,true,this)"><span class="option-key">B</span>Sebagian energi dalam yang bertambah berpindah sebagai kalor ke dinding pompa</button>
+          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">C</span>Udara bertekanan tinggi menghasilkan panas dari pergerakan molekul yang lebih cepat saja</button>
+          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">D</span>Energi kimia dalam logam pompa berubah menjadi panas</button>
+        </div>
+        <div class="feedback-box" id="fb-ct-1">
+          <div class="feedback-icon" id="fb-ct-1-icon"></div><div class="feedback-title" id="fb-ct-1-title"></div>
+          <div class="feedback-desc" id="fb-ct-1-desc"></div>
+        </div>
+      </div>
+
+      <div class="reflection-box">
+        <div class="reflection-title">🌟 Refleksi</div>
+        <div class="reflection-items">
+          <div class="reflection-item">
+            <label>Bagaimana Hukum I Termodinamika berkaitan dengan kekekalan energi? Jelaskan!</label>
+            <textarea placeholder="Tulis refleksimu..." id="ref-ct"></textarea>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="submitChallenge('ct')">✅ Selesai →</button>
+      </div>
+    </div>
+
+    <!-- ST -->
+    <div id="panel-st" class="challenge-card" style="display:none;">
+      <div class="challenge-card-title">🔗 Tantangan 2 — Systemic Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Menganalisis hubungan antar variabel Q, W, dan ΔU dalam berbagai proses termodinamika (isotermal, adiabatik, isobarik, isokhorik).</div>
+
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Buat tabel hubungan: untuk setiap proses, apa nilai Q, W, dan ΔU-nya?</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Konteks: AC Ruangan</div>
+        <div class="scenario-text">Sebuah AC bekerja memindahkan kalor dari ruangan (dingin) ke luar ruangan (panas). Kompresor melakukan kerja W = 500 J pada refrigeran. Refrigeran menyerap kalor dari ruangan Q_in = 1200 J.</div>
+        <div class="scenario-data"><span class="data-chip">W_kompresor = 500 J</span><span class="data-chip">Q_serap = 1200 J</span></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Analisis Sistem</div>
+        <div class="question-text">Berapa total kalor yang dilepaskan refrigeran ke udara luar? (Hukum I: Q_lepas = Q_serap + W)</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('st',0,true,this)"><span class="option-key">A</span>Q_lepas = 1200 + 500 = 1700 J</button>
+          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">B</span>Q_lepas = 1200 − 500 = 700 J</button>
+          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">C</span>Q_lepas = 500 J (hanya kerja kompresor)</button>
+          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">D</span>Q_lepas = 1200 J (sama dengan yang diserap)</button>
+        </div>
+        <div class="feedback-box" id="fb-st-0">
+          <div class="feedback-icon" id="fb-st-0-icon"></div><div class="feedback-title" id="fb-st-0-title"></div>
+          <div class="feedback-desc" id="fb-st-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Proses Adiabatik</div>
+        <div class="question-text">Dalam proses adiabatik, Q = 0. Jika gas melakukan ekspansi adiabatik (W > 0), apa yang terjadi pada energi dalam gas?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('st',1,true,this)"><span class="option-key">A</span>ΔU = −W → energi dalam berkurang, suhu turun</button>
+          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">B</span>ΔU = 0 → tidak ada perubahan energi dalam</button>
+          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">C</span>ΔU = +W → energi dalam bertambah meski gas berekspansi</button>
+          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">D</span>ΔU tidak dapat ditentukan tanpa data tekanan</button>
+        </div>
+        <div class="feedback-box" id="fb-st-1">
+          <div class="feedback-icon" id="fb-st-1-icon"></div><div class="feedback-title" id="fb-st-1-title"></div>
+          <div class="feedback-desc" id="fb-st-1-desc"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="submitChallenge('st')">✅ Selesai →</button>
+      </div>
+    </div>
+
+    <!-- SCI -->
+    <div id="panel-sci" class="challenge-card" style="display:none;">
+      <div class="challenge-card-title">🔬 Tantangan 3 — Scientific Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Merancang investigasi eksperimental untuk memverifikasi Hukum I Termodinamika melalui kalorimetri sederhana.</div>
+
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Rancang prosedur kalorimetri. Bagaimana mengukur Q, W, dan ΔU secara eksperimental?</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Eksperimen Kalorimeter</div>
+        <div class="scenario-text">Tim riset menggunakan kalorimeter untuk mengukur kalor yang diserap oleh 200 gram air. Pemanas listrik (100 W) menyala selama 60 detik. Suhu air naik dari 25°C menjadi 38.8°C. (c_air = 4200 J/kg·°C)</div>
+        <div class="scenario-data"><span class="data-chip">m = 200 g = 0.2 kg</span><span class="data-chip">P = 100 W, t = 60 s</span><span class="data-chip">ΔT = 13.8°C</span></div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Analisis Data</div>
+        <div class="question-text">Hitunglah kalor Q yang diserap air (Q = m·c·ΔT) dan bandingkan dengan energi listrik W (W = P·t). Apa kesimpulannya?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('sci',0,true,this)"><span class="option-key">A</span>Q = 0.2 × 4200 × 13.8 = 1159 J; W = 100 × 60 = 6000 J; selisih (4841 J) hilang sebagai kalor ke lingkungan</button>
+          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">B</span>Q = 6000 J; W = 1159 J; selisih berarti hukum konservasi energi dilanggar</button>
+          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">C</span>Q = W = 6000 J karena kalorimeter sempurna tidak ada energi yang hilang</button>
+          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">D</span>Q dan W tidak bisa dibandingkan karena satuannya berbeda</button>
+        </div>
+        <div class="feedback-box" id="fb-sci-0">
+          <div class="feedback-icon" id="fb-sci-0-icon"></div><div class="feedback-title" id="fb-sci-0-title"></div>
+          <div class="feedback-desc" id="fb-sci-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Inferensi Ilmiah</div>
+        <div class="question-text">Bagaimana cara meningkatkan akurasi eksperimen kalorimetri agar lebih sesuai dengan Hukum I Termodinamika?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('sci',1,true,this)"><span class="option-key">A</span>Menggunakan kalorimeter berinsulasi lebih baik (adiabatik ideal) untuk meminimalkan kebocoran kalor ke lingkungan</button>
+          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">B</span>Menggunakan air lebih banyak agar perubahan suhu lebih kecil dan mudah diukur</button>
+          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">C</span>Meningkatkan daya listrik agar mengurangi waktu eksperimen</button>
+          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">D</span>Mengabaikan kalor yang hilang karena nilainya dianggap kecil</button>
+        </div>
+        <div class="feedback-box" id="fb-sci-1">
+          <div class="feedback-icon" id="fb-sci-1-icon"></div><div class="feedback-title" id="fb-sci-1-title"></div>
+          <div class="feedback-desc" id="fb-sci-1-desc"></div>
+        </div>
+      </div>
+
+      <div class="qr-scan-box" style="margin-top:16px;">
+        <div class="qr-icon">🔬</div>
+        <div class="qr-text"><strong>Laporan Eksperimen E-LKPD</strong><br>Dokumentasikan prosedur, data pengamatan, analisis, dan kesimpulan di platform E-LKPD.</div>
+        <div class="qr-code">AGA-LV2-SCI-003</div>
+      </div>
+
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="submitChallenge('sci')">✅ Selesai →</button>
+      </div>
+    </div>
+
+    <!-- INN -->
+    <div id="panel-inn" class="challenge-card" style="display:none;">
+      <div class="challenge-card-title">💡 Tantangan 4 — Innovative Thinking</div>
+      <div class="challenge-card-desc" style="margin-bottom:20px;">Merancang sistem pemanas air hemat energi berbasis Hukum I Termodinamika untuk skala rumah tangga.</div>
+
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text"><h4>Sesi Inovasi Tim — Maks. 5 Menit</h4><p>Gunakan pengetahuan Hukum I untuk merancang sistem yang mengoptimalkan konversi energi!</p></div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Tantangan Inovasi</div>
+        <div class="scenario-text">Sebuah keluarga ingin mengurangi tagihan listrik pemanas air. Timmu diminta merancang sistem "Solar Water Heater" sederhana berbasis Hukum I Termodinamika. Sumber energi tersedia: sinar matahari, dan bahan-bahan tersedia adalah pipa hitam, kotak kayu berinsulasi, dan kaca.</div>
+      </div>
+
+      <div class="question-block">
+        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">💡 Analisis Inovatif</div>
+        <div class="question-text">Bagaimana Hukum I Termodinamika diterapkan dalam Solar Water Heater tersebut?</div>
+        <div class="options-grid">
+          <button class="option-btn" onclick="answerQ('inn',0,true,this)"><span class="option-key">A</span>Energi radiasi matahari (Q) diserap pipa hitam → diubah menjadi energi dalam (ΔU) air → suhu air meningkat; sistem mendekati adiabatik dengan insulasi kotak</button>
+          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">B</span>Air melakukan kerja (W) pada sinar matahari untuk menghasilkan kalor</button>
+          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">C</span>Energi diciptakan dari nol oleh panel surya tanpa perlu sumber eksternal</button>
+          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">D</span>Proses ini tidak berhubungan dengan Hukum I karena tidak ada kerja yang dilakukan</button>
+        </div>
+        <div class="feedback-box" id="fb-inn-0">
+          <div class="feedback-icon" id="fb-inn-0-icon"></div><div class="feedback-title" id="fb-inn-0-title"></div>
+          <div class="feedback-desc" id="fb-inn-0-desc"></div>
+        </div>
+      </div>
+
+      <div class="question-block" style="margin-top:20px;">
+        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">✏️ Rancangan Inovatif</div>
+        <div class="question-text">Deskripsikan desain Solar Water Heater-mu! Meliputi: komponen, mekanisme kerja, dan estimasi efisiensi energi.</div>
+        <textarea class="open-answer" id="inn-open" placeholder="Contoh: Rancangan kami terdiri dari pipa tembaga berwarna hitam (absorber) yang diletakkan dalam kotak kayu berlapis styrofoam (insulator) dan ditutup kaca (greenhouse effect). Air mengalir melalui pipa, menyerap Q dari matahari → ΔU air meningkat → air panas naik ke tangki penyimpanan (konveksi alami). Aplikasi Hukum I: ΔU = Q − W, dengan W≈0 sehingga ΔU ≈ Q..."></textarea>
+      </div>
+
+      <div class="qr-scan-box" style="margin-top:16px;">
+        <div class="qr-icon">💡</div>
+        <div class="qr-text"><strong>Portofolio Inovasi</strong><br>Upload rancangan, kalkulasi efisiensi, dan presentasi solusimu.</div>
+        <div class="qr-code">AGA-LV2-INN-004</div>
+      </div>
+
+      <div style="margin-top:20px;text-align:right;">
+        <button class="btn btn-primary" onclick="finishLevel()">🏁 Selesaikan Level 2 & Lihat Skor →</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="result-screen" class="result-screen">
+      <div class="result-content">
+        <div class="result-emoji">⚡</div>
+        <div class="result-title">Level 2 Selesai!</div>
+        <div class="result-xp-earned" id="result-xp">+0 XP</div>
+        <div class="result-scores-grid">
+          <div class="score-chip"><div class="score-chip-val" id="sc-ct">-</div><div class="score-chip-label">Critical</div></div>
+          <div class="score-chip"><div class="score-chip-val" id="sc-st">-</div><div class="score-chip-label">Systemic</div></div>
+          <div class="score-chip"><div class="score-chip-val" id="sc-sci">-</div><div class="score-chip-label">Scientific</div></div>
+          <div class="score-chip"><div class="score-chip-val" id="sc-inn">-</div><div class="score-chip-label">Innovative</div></div>
+        </div>
+        <p style="color:#6B7280;margin-bottom:8px;font-size:0.9rem;" id="result-msg"></p>
+        <div class="result-actions">
+          <a href="map.html" class="btn btn-ghost">🗺️ Kembali ke Peta</a>
+          <a href="level3.html" class="btn btn-primary">🌀 Lanjut Level 3 →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/game.js"></script>
+<script>
+const ZONE = 'zone2';
+const scores = { ct:null, st:null, sci:null, inn:null };
+const answers = { ct:[null,null], st:[null,null], sci:[null,null], inn:[null,null] };
+let timerInterval = null;
+
+function switchTab(key) {
+  ['ct','st','sci','inn'].forEach(k => {
+    document.getElementById('panel-'+k).style.display = k===key?'block':'none';
+    const tb = document.getElementById('tab-'+k);
+    if(tb){tb.classList.remove('active');if(k===key)tb.classList.add('active');}
+  });
+  stopTimer();
+}
+function startTimer(sec){
+  stopTimer();let r=sec;
+  const tv=document.getElementById('timer-val'),tb=document.getElementById('main-timer');
+  const upd=()=>{const m=Math.floor(r/60),s=r%60;if(tv)tv.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(tb)tb.classList.toggle('urgent',r<=60);if(r<=0){stopTimer();}r--;};
+  upd();timerInterval=setInterval(()=>{if(r<0){stopTimer();return;}upd();},1000);
+}
+function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+
+const fbData = {
+  ct:[
+    {c:'Tepat! Konvensi standar termodinamika: ΔU = Q + W_on (kerja PADA sistem positif). Sehingga ΔU = −30 + 120 = +90 J. Energi dalam udara bertambah, sesuai Hukum I.',w:'Perhatikan konvensi tanda. Kerja yang dilakukan PADA sistem (W_on) bernilai positif. Q negatif karena kalor keluar. ΔU = Q + W_on = −30 + 120 = +90 J.'},
+    {c:'Tepat! Energi dalam yang bertambah (ΔU = +90J) sebagian dikonduksikan ke dinding logam pompa sebagai kalor, membuat pompa terasa hangat. Ini prinsip Hukum I.',w:'Penjelasan yang benar: energi dalam udara bertambah (ΔU > 0), sebagian energi ini berpindah ke dinding pompa melalui konduksi, menyebabkan pompa hangat.'}
+  ],
+  st:[
+    {c:'Tepat! Dalam siklus refrigerasi: Q_lepas = Q_serap + W = 1200 + 500 = 1700 J. AC mengambil 1200 J dari ruangan dan menambah 500 J kerja listrik, lalu melepas 1700 J ke luar.',w:'Ingat: dalam siklus AC, Q_lepas = Q_serap + W. Ini konsisten dengan Hukum I. Jawaban: 1200 + 500 = 1700 J.'},
+    {c:'Tepat! Pada ekspansi adiabatik (Q=0): ΔU = Q − W = 0 − W = −W. Gas melakukan kerja positif (ekspansi) → energi dalam berkurang → suhu turun. Ini yang terjadi pada gas dalam kulkas!',w:'Pada proses adiabatik Q = 0, sehingga ΔU = −W. Jika gas berekspansi (W > 0, sistem melakukan kerja), maka ΔU < 0, energi dalam dan suhu turun.'}
+  ],
+  sci:[
+    {c:'Tepat! Q_air = 0.2 × 4200 × 13.8 = 1159.2 J. W_listrik = 100 × 60 = 6000 J. Selisih ~4841 J merupakan kalor yang hilang ke lingkungan, menunjukkan kalorimeter tidak sempurna (tidak adiabatik sempurna).',w:'Hitungan: Q = mcΔT = 0.2 × 4200 × 13.8 ≈ 1159 J. W = Pt = 100 × 60 = 6000 J. Selisih besar karena kalor bocor ke lingkungan, bukan karena hukum dilanggar.'},
+    {c:'Benar! Insulasi lebih baik → mendekati sistem adiabatik → Q_bocor berkurang → W_listrik ≈ ΔU_air + Q_bocor minimal → akurasi meningkat.',w:'Masalah utama adalah kebocoran kalor ke lingkungan. Solusinya: insulasi kalorimeter yang lebih baik agar mendekati sistem adiabatik ideal.'}
+  ],
+  inn:[
+    {c:'Tepat! Hukum I: ΔU = Q − W. Pada Solar Water Heater, Q dari matahari masuk, W ≈ 0 (tidak ada kerja mekanik), sehingga ΔU ≈ Q. Pipa hitam memaksimalkan absorpsi radiasi, kaca mencegah kalor keluar (efek rumah kaca), insulasi meminimalkan konduksi ke luar.',w:'Analisis Hukum I yang tepat: Q (matahari) masuk → ΔU air meningkat → suhu air naik. Pipa hitam: absorber radiasi maksimal. Insulasi + kaca: meminimalkan kebocoran kalor ke lingkungan.'}
+  ]
+};
+
+function answerQ(ch,qi,ok,btn){
+  const g=btn.closest('.options-grid');
+  if(!g)return;
+  g.querySelectorAll('.option-btn').forEach(b=>{b.disabled=true;});
+  btn.classList.add(ok?'correct':'wrong');
+  if(!ok){g.querySelectorAll('.option-btn').forEach(b=>{if(b!==btn&&b.onclick&&b.onclick.toString().includes('true,this'))b.classList.add('correct');});}
+  answers[ch][qi]=ok;
+  const fb=document.getElementById('fb-'+ch+'-'+qi);
+  if(fb&&fbData[ch]&&fbData[ch][qi]){
+    const d=fbData[ch][qi];
+    fb.classList.add('show',ok?'correct-fb':'wrong-fb');
+    document.getElementById('fb-'+ch+'-'+qi+'-icon').textContent=ok?'✅':'❌';
+    document.getElementById('fb-'+ch+'-'+qi+'-title').textContent=ok?'Jawaban Benar!':'Belum Tepat';
+    document.getElementById('fb-'+ch+'-'+qi+'-desc').textContent=ok?d.c:d.w;
+  }
+}
+
+function submitChallenge(key){
+  const ans=answers[key];
+  const c=ans.filter(a=>a===true).length;
+  const t=ans.filter(a=>a!==null).length;
+  scores[key]=Math.min(Math.round((c/Math.max(t,2))*70)+30,100);
+  const tb=document.getElementById('tab-'+key);
+  if(tb){tb.classList.remove('active');tb.classList.add('done');}
+  const order=['ct','st','sci','inn'];
+  const idx=order.indexOf(key);
+  if(idx<order.length-1)switchTab(order[idx+1]);
+}
+
+function finishLevel(){
+  ['ct','st','sci','inn'].forEach(k=>{if(scores[k]===null)scores[k]=30;});
+  const avg=Math.round(Object.values(scores).reduce((a,b)=>a+b,0)/4);
+  const xp=avg*2;
+  const state=ThermoGame.loadState();
+  ThermoGame.addXP(state,xp);
+  ThermoGame.saveZoneChallenge(state,ZONE,'all',scores);
+  state.zones[ZONE].score=avg;state.zones[ZONE].completed=true;
+  ThermoGame.saveState(state);
+  ['ct','st','sci','inn'].forEach(k=>{const e=document.getElementById('sc-'+k);if(e)e.textContent=scores[k];});
+  document.getElementById('result-xp').textContent='+'+xp+' XP';
+  document.getElementById('result-msg').textContent=avg>=80?'🌟 Luar biasa! Penguasaan Hukum I Termodinamika sangat baik!':avg>=60?'👍 Bagus! Terus tingkatkan pemahamanmu.':'💪 Tetap semangat!';
+  document.querySelectorAll('.challenge-card').forEach(c=>c.style.display='none');
+  document.getElementById('result-screen').classList.add('show');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{document.getElementById('loading-screen').classList.add('hidden');},1000);
+  const state=ThermoGame.loadState();
+  if(!ThermoGame.isZoneUnlocked(state,'zone2')){window.location.href='map.html';return;}
+  const nxp=document.getElementById('nav-xp-value');if(nxp)nxp.textContent=state.xp+' XP';
+  const cxp=document.getElementById('current-xp');if(cxp)cxp.textContent=state.xp;
+});
+
+document.querySelectorAll('a[href]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    const href=link.getAttribute('href');
+    if(href&&!href.startsWith('#')&&!href.startsWith('http')){
+      e.preventDefault();const o=document.getElementById('page-transition');o.style.opacity=1;
+      setTimeout(()=>{window.location.href=href;},350);
+    }
+  });
+});
+</script>
 </body>
-
 </html>
