@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 3: Hukum 2 Termodinamika — ThermoExplore</title>
+  <title>Level 3: Hukum 2 Termodinamika — ThermoExplorer</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/quiz.css">
   <style>
@@ -159,7 +159,7 @@
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -176,12 +176,9 @@ Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertamba
       <textarea class="open-answer" id="l3_ct_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_ct_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_ct_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Volume air bertambah saat suhu turun di bawah 4°C karena air memiliki sifat anomali. Pada suhu sekitar 4°C, air mempunyai volume minimum atau massa jenis maksimum. Ketika suhu turun lebih rendah dari 4°C, ikatan hidrogen mulai membentuk susunan molekul yang lebih terbuka. Akibatnya, jarak antarmolekul menjadi lebih besar dan volume air meningkat. Saat air membeku menjadi es, struktur kristalnya lebih teratur tetapi juga lebih renggang daripada fase cair. Berdasarkan Hukum I Termodinamika, proses ini terjadi karena kalor keluar dari sistem menuju lingkungan. Energi tidak hilang, tetapi berpindah dari air ke lingkungan selama pendinginan dan pembekuan.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -190,12 +187,9 @@ Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertamba
       <textarea class="open-answer" id="l3_ct_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_ct_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_ct_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Selama pendinginan, volume air mula-mula menurun sampai mendekati 4°C, lalu bertambah saat suhu turun di bawah 4°C, dan akhirnya membeku menjadi es dengan volume lebih besar. Energi dalam air menurun karena air melepaskan kalor ke lingkungan freezer. Saat mencapai titik beku, kalor yang dilepaskan digunakan untuk perubahan fase, bukan lagi untuk menurunkan suhu secara langsung. Jika air berada dalam wadah terbuka, tekanannya cenderung mengikuti tekanan atmosfer. Jika air berada dalam wadah tertutup dan kaku, pembekuan dapat menimbulkan kenaikan tekanan karena volume air cenderung bertambah tetapi ruangnya terbatas. Pemborosan energi dalam sistem pendinginan dapat terjadi jika freezer memiliki isolasi buruk, pintu sering dibuka, evaporator tertutup bunga es, atau kompresor bekerja terlalu lama.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -204,12 +198,9 @@ Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertamba
       <textarea class="open-answer" id="l3_ct_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_ct_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_ct_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Data yang menunjukkan bahwa volume air bertambah di bawah 4°C dan entropi sistem menurun saat pembekuan sesuai dengan teori. Pembekuan air membuat molekul-molekul tersusun lebih teratur dalam kristal es, sehingga entropi sistem menurun. Keandalan data sangat bergantung pada prosedur pengukuran. Prosedur yang baik harus menggunakan alat ukur suhu yang akurat, pendinginan bertahap, pengamatan volume yang teliti, dan kondisi tekanan yang terkendali. Jika pengukuran dilakukan terlalu cepat atau alat tidak akurat, hasil dapat bias. Jadi, secara teori data mendukung prinsip termodinamika, tetapi validitasnya tetap ditentukan oleh kualitas prosedur eksperimen.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -218,12 +209,9 @@ Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertamba
       <textarea class="open-answer" id="l3_ct_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_ct_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_ct_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Proses pembekuan air menyebabkan entropi sistem menurun karena molekul air yang semula bergerak lebih bebas dalam fase cair menjadi tersusun lebih teratur dalam kisi kristal es. Dalam fase cair, molekul memiliki kebebasan gerak yang lebih besar. Ketika air membeku, keteraturan meningkat dan ketidakteraturan menurun. Pada saat yang sama, air melepaskan kalor ke lingkungan. Kalor yang diterima lingkungan meningkatkan entropi lingkungan. Karena itu, meskipun entropi air sebagai sistem menurun, entropi total alam semesta tetap meningkat atau tidak berkurang, sesuai dengan Hukum II Termodinamika.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -232,12 +220,9 @@ Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertamba
       <textarea class="open-answer" id="l3_ct_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_4')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_ct_4')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_ct_4" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan data dan analisis, dapat disimpulkan bahwa selama pembekuan air, entropi sistem menurun karena air berubah dari fase cair yang lebih tidak teratur menjadi fase padat yang lebih teratur. Pada proses ini, air melepaskan kalor ke lingkungan sehingga energi dalam sistem berkurang. Air juga menunjukkan sifat khusus, yaitu volumenya meningkat saat suhu turun di bawah 4°C dan saat membeku. Penurunan entropi sistem tidak bertentangan dengan termodinamika karena diimbangi oleh kenaikan entropi lingkungan.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -246,12 +231,9 @@ Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertamba
       <textarea class="open-answer" id="l3_ct_5" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_5')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_ct_5')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_ct_5" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Setelah menganalisis proses pembekuan air, saya memahami bahwa pembekuan tidak hanya berkaitan dengan perubahan wujud, tetapi juga perubahan struktur molekul, volume, energi, dan entropi. Saya memahami bahwa air memiliki sifat anomali karena volumenya bertambah di bawah 4°C. Saya juga memahami bahwa penurunan entropi sistem tidak melanggar hukum termodinamika karena kalor yang dilepas meningkatkan entropi lingkungan. Jika masih ada yang belum dipahami, saya perlu mempelajari kembali hubungan antara Hukum I dan Hukum II Termodinamika, ikatan hidrogen, dan perubahan fase air.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -272,7 +254,7 @@ Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertamba
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -288,12 +270,9 @@ Tonton video di bawah ini untuk memahami lebih lanjut tentang bagaimana panas be
       <textarea class="open-answer" id="l3_st_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_st_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_st_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Panas berpindah dari makanan ke udara sekitar karena terdapat perbedaan suhu. Makanan memiliki suhu lebih tinggi daripada lingkungan, sehingga energi panas mengalir dari suhu tinggi ke suhu rendah sampai mendekati kesetimbangan termal. Perpindahan panas ini terjadi melalui konduksi, konveksi, dan radiasi. Konduksi terjadi ketika panas berpindah dari bagian dalam makanan ke permukaannya dan ke wadah yang bersentuhan langsung. Konveksi terjadi ketika udara di sekitar permukaan makanan menerima panas, menjadi lebih hangat, lalu bergerak naik dan digantikan oleh udara yang lebih dingin. Radiasi terjadi ketika makanan memancarkan energi panas dalam bentuk gelombang elektromagnetik ke lingkungan. Selama proses pendinginan, entropi makanan sebagai sistem menurun karena energi termalnya berkurang dan keadaan sistem menjadi lebih rendah energinya. Namun, entropi lingkungan meningkat karena udara menerima kalor yang menyebar ke lebih banyak partikel di sekitar. Secara keseluruhan, entropi total sistem dan lingkungan meningkat, sehingga proses pendinginan berlangsung spontan sesuai Hukum II Termodinamika.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -302,12 +281,9 @@ Tonton video di bawah ini untuk memahami lebih lanjut tentang bagaimana panas be
       <textarea class="open-answer" id="l3_st_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_st_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_st_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Massa makanan, suhu awal makanan, dan suhu udara sekitar sangat memengaruhi laju pendinginan dan perubahan entropi. Jika massa makanan lebih besar, maka energi panas yang tersimpan juga lebih besar karena kapasitas kalor totalnya lebih tinggi. Akibatnya, makanan dengan massa besar umumnya mendingin lebih lambat dibanding makanan dengan massa kecil. Suhu awal yang lebih tinggi membuat selisih suhu antara makanan dan lingkungan semakin besar, sehingga laju perpindahan panas pada awal proses menjadi lebih cepat. Namun, karena energi yang harus dilepas juga lebih banyak, waktu total pendinginan bisa lebih lama. Suhu udara sekitar juga sangat menentukan. Jika udara sekitar lebih dingin, beda suhu lebih besar dan pendinginan berlangsung lebih cepat. Sebaliknya, jika udara sekitar hangat, pendinginan lebih lambat. Dari sisi entropi, saat makanan mendingin, entropi makanan menurun karena energi termal berkurang. Besarnya penurunan ini dipengaruhi oleh massa, kalor jenis, dan perubahan suhu. Sementara itu, entropi lingkungan naik karena menerima kalor dari makanan. Jadi, laju pendinginan ditentukan oleh keterkaitan antara massa, beda suhu, luas permukaan, dan kondisi lingkungan, sedangkan perubahan entropi menunjukkan arah alami proses tersebut.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -316,12 +292,9 @@ Tonton video di bawah ini untuk memahami lebih lanjut tentang bagaimana panas be
       <textarea class="open-answer" id="l3_st_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_st_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_st_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Sistem pendinginan yang lebih efisien untuk makanan panas harus dirancang agar perpindahan energi keluar dari makanan berlangsung lebih cepat, tetapi tetap aman dan higienis. Salah satu solusi yang efektif adalah memperbesar luas permukaan makanan, misalnya dengan memindahkan makanan dari wadah dalam ke wadah yang lebih lebar dan dangkal. Dengan begitu, lebih banyak bagian makanan bersentuhan dengan udara, sehingga konveksi dan radiasi meningkat. Selain itu, dapat digunakan wadah logam tipis karena logam memiliki konduktivitas termal tinggi, sehingga panas lebih cepat mengalir dari makanan ke wadah dan ke lingkungan. Sistem juga bisa dilengkapi aliran udara paksa, misalnya kipas, untuk meningkatkan konveksi. Udara hangat di sekitar makanan akan cepat digantikan oleh udara yang lebih dingin. Untuk pendinginan lebih cepat, makanan dapat ditempatkan dalam wadah tertutup rapat lalu direndam sebagian dalam air dingin atau es, sehingga konduksi dan konveksi ke medium pendingin menjadi lebih efektif. Dari sudut pandang entropi, rancangan ini membuat kalor dari makanan tersebar lebih cepat ke lingkungan, sehingga proses menuju kesetimbangan termal berlangsung lebih efisien. Jadi, solusi yang baik menggabungkan luas permukaan besar, bahan penghantar panas yang baik, aliran udara yang cukup, dan medium pendingin yang lebih efektif.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -330,12 +303,9 @@ Tonton video di bawah ini untuk memahami lebih lanjut tentang bagaimana panas be
       <textarea class="open-answer" id="l3_st_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_st_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_st_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Entropi dan perpindahan energi sangat memengaruhi proses pendinginan makanan. Dari sisi perpindahan energi, makanan hanya dapat mendingin jika kalor berhasil keluar ke lingkungan. Semakin efektif perpindahan panas melalui konduksi, konveksi, dan radiasi, semakin cepat proses pendinginan berlangsung. Dari sisi entropi, makanan yang awalnya panas memiliki energi termal yang lebih tinggi. Saat kalor dilepaskan, entropi makanan menurun. Akan tetapi, kalor yang diterima udara atau lingkungan meningkatkan entropi lingkungan dalam jumlah yang lebih besar atau setidaknya cukup untuk membuat entropi total bertambah. Hal ini menunjukkan bahwa pendinginan makanan adalah proses yang alami dan spontan. Jika dievaluasi secara sistemik, pendinginan makanan akan lebih efisien bila selisih suhu cukup besar, luas permukaan makanan besar, sirkulasi udara baik, dan hambatan perpindahan panas kecil. Sebaliknya, pendinginan akan kurang efisien jika makanan diletakkan dalam wadah tebal, tertutup rapat tanpa jalur pelepasan panas, atau berada di lingkungan yang hampir sama panasnya. Jadi, entropi menjelaskan arah alami proses, sedangkan mekanisme perpindahan energi menjelaskan kecepatan proses pendinginan.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -356,7 +326,7 @@ Tonton video di bawah ini untuk memahami lebih lanjut tentang bagaimana panas be
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -373,12 +343,9 @@ Video yang kamu tonton sebelumnya menjelaskan bagaimana proses pendinginan beker
       <textarea class="open-answer" id="l3_sci_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_sci_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_sci_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Hukum Kedua Termodinamika dapat digunakan untuk menjelaskan bahwa proses pendinginan pada AC dan kulkas tidak pernah berlangsung tanpa konsekuensi entropi. Dalam sistem pendinginan, kalor dipindahkan dari tempat bersuhu lebih rendah, misalnya ruang dalam kulkas atau udara di dalam ruangan, ke lingkungan luar yang biasanya lebih hangat. Proses ini tidak dapat berlangsung secara spontan, sehingga diperlukan usaha dari luar, yaitu energi listrik untuk menjalankan kompresor. Selama proses ini, tidak semua energi listrik dapat dimanfaatkan secara sempurna untuk pendinginan karena selalu ada irreversibilitas, seperti gesekan pada kompresor, hambatan aliran refrigeran, perpindahan kalor yang tidak ideal, dan kebocoran panas dari lingkungan. Akibatnya, entropi total sistem dan lingkungan meningkat. Jadi, Hukum Kedua Termodinamika menjelaskan bahwa walaupun AC dan kulkas dapat memindahkan kalor, proses itu selalu disertai pemborosan energi dalam arti kualitas energi menurun dan entropi total bertambah.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -387,12 +354,9 @@ Video yang kamu tonton sebelumnya menjelaskan bagaimana proses pendinginan beker
       <textarea class="open-answer" id="l3_sci_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_sci_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_sci_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Pada AC atau kulkas, perubahan energi dalam sistem pendingin berkaitan erat dengan peningkatan entropi. Refrigeran menyerap kalor dari ruang dingin melalui evaporator, lalu kalor itu dilepas ke lingkungan melalui kondensor. Agar kalor dapat dipindahkan dari suhu rendah ke suhu lebih tinggi, kompresor harus melakukan kerja pada refrigeran. Dari sisi energi, sistem menerima kerja listrik dan memindahkan kalor dari satu tempat ke tempat lain. Namun, proses ini tidak ideal. Sebagian energi listrik berubah menjadi panas pada motor kompresor, sebagian hilang karena gesekan, dan sebagian terbuang akibat perpindahan kalor yang tidak sempurna. Dari sisi entropi, ruang dingin kehilangan kalor sehingga entropinya menurun, tetapi lingkungan menerima kalor yang lebih besar, yaitu kalor dari ruang dingin ditambah kerja kompresor. Karena kalor yang dibuang ke lingkungan lebih besar daripada kalor yang diambil dari ruang dingin, kenaikan entropi lingkungan lebih besar daripada penurunan entropi ruang dingin, sehingga entropi total meningkat. Inilah inti Hukum Kedua Termodinamika dalam sistem pendingin.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -401,12 +365,9 @@ Video yang kamu tonton sebelumnya menjelaskan bagaimana proses pendinginan beker
       <textarea class="open-answer" id="l3_sci_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_sci_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_sci_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan prinsip termodinamika, dapat disimpulkan bahwa efisiensi energi pada sistem AC atau kulkas tidak pernah 100 persen. Sistem memang mampu mendinginkan ruangan atau makanan, tetapi selalu membutuhkan energi listrik tambahan untuk memindahkan kalor. Semakin besar kehilangan energi akibat kebocoran panas, isolasi yang buruk, kondensor yang kotor, kompresor yang tidak efisien, atau pengaturan suhu yang terlalu rendah, semakin rendah efisiensi sistem. Jadi, AC atau kulkas yang baik adalah yang mampu memindahkan kalor sebanyak mungkin dengan penggunaan energi listrik sekecil mungkin. Kesimpulan utamanya adalah bahwa sistem pendingin tetap bermanfaat dan efektif, tetapi selalu disertai peningkatan entropi total dan pemborosan energi dalam bentuk degradasi kualitas energi. Karena itu, efisiensi sistem harus ditingkatkan melalui desain yang baik, perawatan yang benar, dan penggunaan yang bijak.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -415,12 +376,9 @@ Video yang kamu tonton sebelumnya menjelaskan bagaimana proses pendinginan beker
       <textarea class="open-answer" id="l3_sci_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_sci_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_sci_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Temuan bahwa AC dan kulkas memerlukan energi listrik untuk memindahkan kalor dan tetap menghasilkan pemborosan energi sangat sesuai dengan Hukum Kedua Termodinamika. Teori menyatakan bahwa tidak ada proses nyata yang sepenuhnya reversibel, sehingga setiap proses akan menghasilkan entropi. Dalam sistem pendingin, hal ini terlihat dari fakta bahwa untuk mendinginkan ruang atau makanan, sistem harus membuang kalor ke lingkungan dalam jumlah yang lebih besar daripada kalor yang diambil dari ruang dingin, karena ada tambahan kerja dari kompresor. Artinya, energi tidak hilang, tetapi menjadi kurang berguna untuk melakukan kerja lebih lanjut. Inilah bentuk pemborosan energi menurut Hukum Kedua Termodinamika. Jadi, hasil pengamatan terhadap AC dan kulkas mendukung teori bahwa sistem pendingin tidak mungkin bekerja sempurna. Semakin besar irreversibilitas dalam sistem, semakin besar entropi yang dihasilkan dan semakin rendah efisiensinya. Dengan demikian, argumentasi ilmiahnya adalah bahwa pemborosan energi pada AC dan kulkas bukan penyimpangan, tetapi konsekuensi alamiah dari Hukum Kedua Termodinamika.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -441,7 +399,7 @@ Video yang kamu tonton sebelumnya menjelaskan bagaimana proses pendinginan beker
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -458,12 +416,9 @@ Proses energi panas yang diubah menjadi kerja dalam mesin uap tidak pernah 100% 
       <textarea class="open-answer" id="l3_inn_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_inn_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_inn_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Untuk mengurangi pemborosan energi dalam mesin uap, solusi yang diusulkan harus mencakup aspek teknis dan non-teknis. Dari sisi teknis, efisiensi dapat ditingkatkan dengan meningkatkan kualitas boiler, mengurangi kebocoran panas pada pipa dan ruang pembakaran, memperbaiki isolasi termal, dan menggunakan turbin atau piston yang lebih efisien. Selain itu, panas buang dari sistem dapat dimanfaatkan kembali melalui heat recovery atau cogeneration, sehingga energi yang semula terbuang bisa digunakan untuk proses lain. Dari sisi non-teknis, efisiensi juga dipengaruhi oleh perawatan rutin, pengoperasian sesuai beban optimal, pelatihan operator, dan manajemen energi yang baik. Banyak mesin boros bukan karena desainnya sepenuhnya buruk, tetapi karena dioperasikan sembarangan, dibiarkan kotor, atau dijalankan pada kondisi yang tidak efisien. Jadi, pengurangan pemborosan energi tidak cukup hanya dengan mengganti alat, tetapi juga harus dibarengi perubahan cara pengoperasian dan pengelolaan sistem.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -472,12 +427,9 @@ Proses energi panas yang diubah menjadi kerja dalam mesin uap tidak pernah 100% 
       <textarea class="open-answer" id="l3_inn_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_inn_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_inn_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Beberapa ide inovatif yang melibatkan proses termodinamika untuk mengurangi pemborosan energi dalam mesin uap atau pembangkit listrik adalah sebagai berikut. Pertama, mendekatkan proses ekspansi uap ke adiabatik reversibel dengan mengurangi kehilangan panas dan gesekan, sehingga lebih banyak energi panas berubah menjadi kerja mekanik. Kedua, menggunakan superheater agar uap yang masuk ke turbin memiliki temperatur lebih tinggi dan kualitas uap lebih baik, sehingga efisiensi meningkat. Ketiga, menerapkan regenerative feedwater heating, yaitu memanfaatkan sebagian uap untuk memanaskan air umpan sebelum masuk boiler, sehingga kebutuhan energi pembakaran berkurang. Keempat, memakai reheater agar uap yang telah berekspansi dapat dipanaskan kembali sebelum tahap ekspansi berikutnya. Kelima, mengembangkan siklus gabungan yang memanfaatkan panas buangan untuk sistem kedua. Keenam, mengurangi irreversibilitas dengan desain turbin bertingkat, pelumasan lebih baik, dan pengurangan rugi tekanan. Ketujuh, jika membahas proses isotermal, sistem nyata sulit benar-benar isotermal, tetapi prinsip mendekati isotermal dapat diterapkan dengan kontrol perpindahan panas yang lebih baik pada tahap tertentu agar rugi energi lebih kecil.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -486,12 +438,9 @@ Proses energi panas yang diubah menjadi kerja dalam mesin uap tidak pernah 100% 
       <textarea class="open-answer" id="l3_inn_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_inn_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_inn_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan Hukum Kedua Termodinamika, cara paling realistis bukan “mengurangi entropi total”, tetapi mengurangi pembangkitan entropi di dalam sistem. Hal itu dapat dilakukan dengan menekan gesekan, memperkecil perbedaan suhu ekstrem saat perpindahan panas, mengurangi kebocoran panas, dan memanfaatkan kembali energi yang biasanya terbuang. Salah satu gagasan inovatif adalah menggabungkan mesin uap dengan sumber energi terbarukan, misalnya pemanas awal air boiler menggunakan energi surya termal atau biomassa yang lebih efisien. Dengan begitu, sebagian kebutuhan energi panas tidak lagi sepenuhnya bergantung pada pembakaran bahan bakar fosil. Gagasan lain adalah menggunakan sistem penyimpanan panas untuk menampung energi panas berlebih saat beban rendah, lalu menggunakannya kembali saat beban tinggi. Selain itu, sensor cerdas dan kontrol otomatis dapat menjaga mesin bekerja mendekati kondisi optimal, sehingga rugi energi lebih kecil. Keuntungannya adalah efisiensi meningkat, emisi turun, dan pemborosan energi dapat ditekan tanpa melanggar prinsip Hukum Kedua Termodinamika.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -500,12 +449,9 @@ Proses energi panas yang diubah menjadi kerja dalam mesin uap tidak pernah 100% 
       <textarea class="open-answer" id="l3_inn_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_inn_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_inn_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Masalah utama yang menyebabkan pemborosan energi dalam mesin uap adalah kehilangan panas ke lingkungan, gesekan mekanik, proses perpindahan panas yang tidak ideal, dan irreversibilitas dalam ekspansi serta kompresi. Pada boiler, sebagian panas hasil pembakaran tidak sepenuhnya diserap air, tetapi hilang melalui dinding, gas buang, atau kebocoran sistem. Pada turbin atau piston, gesekan menyebabkan sebagian energi berubah menjadi panas yang tidak berguna. Uap yang masuk ke turbin juga bisa tidak berada pada kondisi optimal, misalnya tekanan atau suhu terlalu rendah, sehingga kerja yang dihasilkan tidak maksimum. Selain itu, tekanan turun di pipa, kualitas uap menurun, dan kondensor yang kurang efektif juga memperbesar kerugian energi. Masalah lain yang sering diabaikan adalah operasi mesin di luar kondisi desain, perawatan buruk, dan pemanfaatan panas buang yang tidak optimal. Jadi, titik lemahnya bukan satu, tetapi gabungan kelemahan pada boiler, turbin, kondensor, perpindahan panas, serta manajemen operasi.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -514,12 +460,9 @@ Proses energi panas yang diubah menjadi kerja dalam mesin uap tidak pernah 100% 
       <textarea class="open-answer" id="l3_inn_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_4')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l3_inn_4')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l3_inn_4" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Hipotesis yang dapat dirumuskan adalah: jika panas buang pada mesin uap dimanfaatkan kembali melalui sistem heat recovery atau regenerative feedwater heating, maka efisiensi termal sistem akan meningkat dan konsumsi bahan bakar per satuan kerja akan menurun. Hipotesis lain adalah: jika isolasi termal boiler dan pipa diperbaiki, maka kehilangan panas ke lingkungan berkurang dan daya keluaran bersih meningkat. Hipotesis berikutnya: jika mesin uap dioperasikan dengan kontrol otomatis sehingga tekanan, suhu, dan laju aliran uap tetap mendekati kondisi optimal, maka irreversibilitas sistem menurun dan efisiensi energi meningkat. Hipotesis ini dapat diuji melalui eksperimen atau simulasi dengan membandingkan kondisi awal dan kondisi setelah perlakuan, lalu mengukur variabel seperti suhu, tekanan, laju konsumsi bahan bakar, daya keluaran, dan efisiensi termal. Jika setelah perlakuan energi yang hilang berkurang dan output kerja meningkat, maka hipotesis diterima.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -542,7 +485,7 @@ Proses energi panas yang diubah menjadi kerja dalam mesin uap tidak pernah 100% 
         <p style="color:#6B7280; margin-bottom:8px; font-size:0.9rem;" id="result-msg">Tim kamu telah mendiskusikan seluruh tantangan dengan baik!</p>
         <div class="result-actions">
           <a href="map.html" class="btn btn-ghost">🗺️ Kembali ke Peta</a>
-          <a href="level.html" class="btn btn-primary" id="btn-next-level">⚡ Lanjut →</a>
+          <a href="dashboard.html" class="btn btn-primary" id="btn-next-level">📊 Lihat Leaderboard →</a>
         </div>
       </div>
     </div>
@@ -566,7 +509,15 @@ function switchTab(key) {
   document.scrollingElement.scrollTop = 0;
 }
 
-function startTimer(sec) {
+function startTimer(sec, btnElement) {
+  if (btnElement) {
+    btnElement.disabled = true;
+    btnElement.textContent = '⏳ Timer Berjalan...';
+    btnElement.style.opacity = '0.5';
+    btnElement.style.cursor = 'not-allowed';
+    btnElement.onclick = null; // Menghindari klik berkali-kali
+  }
+  
   stopTimer();
   let remaining = sec;
   const timerVal = document.getElementById('timer-val');
@@ -576,7 +527,24 @@ function startTimer(sec) {
     const s = remaining % 60;
     if (timerVal) timerVal.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
     if (timerBox) timerBox.classList.toggle('urgent', remaining <= 60);
-    if (remaining <= 0) { stopTimer(); if (timerVal) timerVal.textContent = '00:00'; }
+    if (remaining <= 0) {
+      stopTimer(); 
+      if (timerVal) timerVal.textContent = '00:00'; 
+      const activeTab = document.querySelector('.tab-btn.active'); 
+      if (activeTab) { 
+        const key = activeTab.id.replace('tab-', '');
+        const panel = document.getElementById('panel-' + key);
+        if (panel) {
+          panel.querySelectorAll('.open-answer').forEach(ta => {
+            ta.disabled = true;
+            localStorage.setItem('ans_' + ta.id, ta.value.trim()); // auto save
+          });
+          panel.querySelectorAll('.btn-ghost').forEach(btn => btn.style.display = 'none'); // sembunyikan tombol simpan
+        }
+        alert('⏰ Waktu diskusi habis! Tantangan dikunci dan otomatis lanjut ke tahap berikutnya.');
+        submitChallenge(key); 
+      } 
+    }
     remaining--;
   };
   update();
@@ -587,6 +555,7 @@ function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerI
 function evalOpenAnswer(id) {
   const val = document.getElementById(id)?.value?.trim();
   if (val && val.length > 5) {
+    localStorage.setItem('ans_' + id, val);
     alert('✅ Jawaban disimpan!');
   } else {
     alert('⚠️ Mohon isi jawaban terlebih dahulu.');
@@ -607,6 +576,14 @@ function submitQuiz() {
 }
 
 function submitChallenge(key) {
+  const panel = document.getElementById('panel-' + key);
+  if (panel) {
+    panel.querySelectorAll('.open-answer').forEach(ta => {
+      ta.disabled = true;
+      localStorage.setItem('ans_' + ta.id, ta.value.trim());
+    });
+    panel.querySelectorAll('.btn-ghost').forEach(btn => btn.style.display = 'none');
+  }
   const tb = document.getElementById('tab-' + key);
   if (tb) { tb.classList.remove('active'); tb.classList.add('done'); tb.textContent = '✅ ' + tb.textContent.replace(/^.* /,''); }
   const order = ['ct','st','sci','inn'];
@@ -615,20 +592,27 @@ function submitChallenge(key) {
 }
 
 function finishLevel(ln) {
-  let avgScore = 85; 
+  let totalScore = 0;
+  let scores = {};
+  ['ct','st','sci','inn'].forEach(k => {
+    let s = Math.floor(Math.random() * 21) + 75; // Random score 75-95 untuk game
+    scores[k] = s;
+    totalScore += s;
+    const el = document.getElementById('sc-' + k);
+    if (el) el.textContent = s;
+  });
+  let avgScore = Math.round(totalScore / 4);
   const xpEarned = avgScore * 2;
   const state = ThermoGame.loadState();
   if (!state.zones) state.zones = {};
   if (!state.zones[ZONE]) state.zones[ZONE] = {};
   ThermoGame.addXP(state, xpEarned);
   state.zones[ZONE].score = avgScore;
+  state.zones[ZONE].scores = { all: scores };
   state.zones[ZONE].completed = true;
   ThermoGame.saveState(state);
 
-  ['ct','st','sci','inn'].forEach(k => {
-    const el = document.getElementById('sc-' + k);
-    if (el) el.textContent = "Selesai";
-  });
+
   document.getElementById('result-xp').textContent = '+' + xpEarned + ' XP';
   document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
   document.getElementById('result-screen').classList.add('show');
@@ -638,8 +622,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
   const state = ThermoGame.loadState();
   const navXp = document.getElementById('nav-xp-value');
-  if (navXp) navXp.textContent = state.xp + ' XP';
+  if (navXp) navXp.textContent = (state.playerName && state.playerName !== 'Agent' ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
   const cxp = document.getElementById('current-xp');
+  document.querySelectorAll('.open-answer').forEach(ta => { const saved = localStorage.getItem('ans_' + ta.id); if (saved) ta.value = saved; });
   if (cxp) cxp.textContent = state.xp;
 });
 </script>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 2: Hukum 1 Termodinamika — ThermoExplore</title>
+  <title>Level 2: Hukum 1 Termodinamika — ThermoExplorer</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/quiz.css">
   <style>
@@ -159,7 +159,7 @@
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -178,12 +178,9 @@ W adalah usaha yang dilakukan oleh sistem.
       <textarea class="open-answer" id="l2_ct_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_ct_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Daya pemanas air adalah 5.000 watt. Karena 1.000 watt = 1 kilowatt, maka 5.000 watt = 5 kilowatt. Biaya listrik yang dikenakan adalah Rp1.500 per kWh. Jika pemanas air digunakan selama 1 jam, maka energi yang dipakai adalah 5 kWh. Biaya pengoperasian per jam dihitung dengan rumus: biaya = konsumsi energi × tarif listrik. Jadi, biaya per jam = 5 kWh × Rp1.500 = Rp7.500. Dengan demikian, biaya yang harus dikeluarkan untuk menjalankan pemanas air selama 1 jam adalah Rp7.500.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -192,12 +189,9 @@ W adalah usaha yang dilakukan oleh sistem.
       <textarea class="open-answer" id="l2_ct_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_ct_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Jika pemanas air digunakan 1 jam setiap hari, maka biaya operasional hariannya adalah Rp7.500. Untuk menghitung biaya bulanan, dilakukan perkalian Rp7.500 × 30 hari = Rp225.000. Untuk biaya tahunan, dilakukan perkalian Rp7.500 × 365 hari = Rp2.737.500. Jika memakai pendekatan 12 bulan × Rp225.000, hasilnya sekitar Rp2.700.000 per tahun. Perbedaan ini muncul karena jumlah hari dalam setahun tidak tepat 360 hari. Waktu penggunaan harian sangat memengaruhi total biaya energi. Semakin lama pemanas air digunakan setiap hari, semakin besar energi listrik yang dipakai dan semakin tinggi biaya listrik yang harus dibayar. Hubungan ini bersifat berbanding lurus, artinya jika waktu penggunaan naik dua kali lipat, biaya juga naik kira-kira dua kali lipat.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -206,12 +200,9 @@ W adalah usaha yang dilakukan oleh sistem.
       <textarea class="open-answer" id="l2_ct_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_ct_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Untuk mengurangi pemborosan energi, pengguna dapat melakukan beberapa langkah, seperti mengurangi durasi pemakaian, menurunkan suhu setelan, mematikan pemanas saat tidak diperlukan, dan menggunakan pemanas air hanya ketika dibutuhkan. Menurunkan suhu dari 140 derajat menjadi 120 derajat dapat mengurangi konsumsi energi karena kalor yang dibutuhkan untuk memanaskan air bergantung pada selisih suhu, sesuai prinsip Q = m c ΔT. Jika suhu awal air tetap, maka target suhu yang lebih rendah membutuhkan energi yang lebih sedikit. Misalnya, jika suhu awal air 30°C, maka pemanasan ke 140°C membutuhkan kenaikan suhu 110°C, sedangkan ke 120°C hanya 90°C. Pengurangan kebutuhan energi adalah 20/110 = 0,1818 atau sekitar 18,18%. Ini berarti penurunan suhu setelan dapat memberi penghematan yang nyata. Jika kebutuhan air panas tetap terpenuhi, maka perubahan ini sebanding bahkan menguntungkan, karena konsumsi energi turun tanpa menghilangkan fungsi utama pemanas air.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -220,12 +211,9 @@ W adalah usaha yang dilakukan oleh sistem.
       <textarea class="open-answer" id="l2_ct_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_ct_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Dalam pemanas air listrik, energi listrik yang masuk ke alat diubah menjadi energi panas melalui elemen pemanas. Ketika arus listrik mengalir melalui elemen yang memiliki hambatan, terjadi proses pemanasan Joule, yaitu energi listrik berubah menjadi kalor. Kalor ini kemudian berpindah ke air sehingga suhu air meningkat. Dalam kerangka Hukum I Termodinamika, energi yang diterima sistem menambah energi dalam air sehingga air menjadi lebih panas. Namun, tidak semua energi listrik yang masuk benar-benar digunakan untuk memanaskan air. Sebagian energi hilang ke lingkungan dalam bentuk panas yang terbuang, misalnya melalui dinding tangki, pipa, atau udara sekitar. Kehilangan energi ini mengurangi efisiensi sistem karena energi yang dibayar tidak seluruhnya dipakai untuk tujuan utama, yaitu menaikkan suhu air. Semakin besar panas yang terbuang, semakin rendah efisiensi pemanas air.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -234,12 +222,9 @@ W adalah usaha yang dilakukan oleh sistem.
       <textarea class="open-answer" id="l2_ct_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_4')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_4')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_ct_4" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan hasil analisis, dapat disimpulkan bahwa pemanas air listrik mampu bekerja efektif untuk memanaskan air, tetapi tidak selalu efisien jika digunakan terlalu lama atau pada suhu terlalu tinggi. Ada potensi pemborosan energi karena konsumsi dayanya besar, yaitu 5 kW, sehingga biaya operasionalnya juga tinggi. Pemborosan juga dapat terjadi jika panas banyak hilang ke lingkungan atau jika alat tetap menyala saat air panas tidak digunakan. Untuk mengurangi pemborosan energi, pengguna dapat menurunkan suhu setelan, membatasi lama pemakaian, memperbaiki isolasi tangki atau pipa, dan mematikan alat saat tidak diperlukan. Jadi, efisiensi pemanas air sangat dipengaruhi oleh cara penggunaan dan seberapa besar energi yang hilang selama proses pemanasan.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -248,12 +233,9 @@ W adalah usaha yang dilakukan oleh sistem.
       <textarea class="open-answer" id="l2_ct_5" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_5')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_5')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_ct_5" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Setelah melakukan analisis, saya memahami bahwa pemanas air listrik bekerja dengan mengubah energi listrik menjadi energi panas untuk menaikkan suhu air. Saya juga memahami bahwa biaya listrik sangat dipengaruhi oleh daya alat, lama penggunaan, dan suhu yang diatur. Bagian yang penting untuk saya refleksikan adalah bahwa alat yang terlihat sederhana ternyata dapat mengonsumsi energi sangat besar jika digunakan terus-menerus. Saya juga menyadari bahwa efisiensi tidak hanya bergantung pada alat, tetapi juga pada perilaku pengguna. Jika masih ada bagian yang membingungkan, saya akan mempelajari kembali hubungan antara daya, energi, kalor, dan efisiensi, serta mencoba menghitung ulang beberapa contoh lain agar pemahaman saya lebih kuat. Dengan refleksi ini, saya menjadi lebih sadar pentingnya menggunakan energi secara hemat dan rasional.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -274,7 +256,7 @@ W adalah usaha yang dilakukan oleh sistem.
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -290,12 +272,9 @@ Pada video diatas sistem kulkas memiliki elemen-elemen dalam seperti kompresor, 
       <textarea class="open-answer" id="l2_st_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_st_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Pada sistem kulkas, tekanan, volume, dan suhu refrigeran saling berhubungan selama siklus pendinginan. Ketika refrigeran dikompresi oleh kompresor, tekanannya naik dan biasanya suhunya juga naik karena kerja diberikan pada sistem. Pada tahap ini, volume spesifik refrigeran menjadi lebih kecil. Setelah itu, refrigeran mengalir ke kondensor dan melepaskan kalor ke lingkungan sehingga berubah dari gas bertekanan tinggi menjadi cair bertekanan tinggi. Selanjutnya refrigeran melewati katup ekspansi, sehingga tekanannya turun secara drastis, suhunya ikut turun, dan refrigeran masuk ke evaporator dalam kondisi sangat dingin. Di evaporator, refrigeran menyerap kalor dari ruang kulkas, lalu menguap kembali menjadi gas. Hubungan ini menunjukkan bahwa perubahan tekanan dapat memengaruhi suhu dan volume refrigeran, dan semuanya terjadi secara berurutan dalam satu sistem tertutup. Berdasarkan Hukum I Termodinamika, perubahan energi dalam sistem dijelaskan oleh perpindahan kalor dan kerja. Dalam kulkas, energi listrik digunakan untuk menjalankan kompresor agar refrigeran dapat memindahkan kalor dari dalam kulkas ke lingkungan luar. Jadi, energi tidak hilang, tetapi berubah bentuk dari energi listrik menjadi kerja kompresor dan perpindahan kalor.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -304,12 +283,9 @@ Pada video diatas sistem kulkas memiliki elemen-elemen dalam seperti kompresor, 
       <textarea class="open-answer" id="l2_st_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_st_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Selama siklus pendinginan, perubahan tekanan dan volume refrigeran berhubungan langsung dengan perubahan energi dalam sistem. Pada kompresor, refrigeran gas bertekanan rendah dikompresi menjadi gas bertekanan tinggi. Proses ini membutuhkan kerja, sehingga energi refrigeran meningkat dan suhunya naik. Di kondensor, refrigeran melepaskan kalor ke lingkungan luar. Energi dalam refrigeran berkurang karena sebagian kalor keluar, dan refrigeran berubah menjadi cair bertekanan tinggi. Setelah melewati katup ekspansi, tekanan refrigeran turun mendadak. Akibatnya, suhu refrigeran juga turun dan sebagian cairan dapat berubah menjadi campuran cair-gas bersuhu rendah. Di evaporator, refrigeran menyerap kalor dari ruang di dalam kulkas. Proses ini membuat refrigeran menguap dan membawa kalor dari dalam kulkas ke luar sistem. Kompresor berperan menaikkan tekanan agar refrigeran dapat bersirkulasi dan melepas panas di kondensor, sedangkan evaporator berperan sebagai tempat penyerapan kalor dari ruang kulkas. Dengan demikian, semua komponen kulkas bekerja sebagai satu sistem yang saling terkait untuk memindahkan panas dari suhu rendah ke suhu lebih tinggi dengan bantuan kerja dari kompresor.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -318,12 +294,9 @@ Pada video diatas sistem kulkas memiliki elemen-elemen dalam seperti kompresor, 
       <textarea class="open-answer" id="l2_st_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_st_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Untuk meningkatkan efisiensi pemindahan panas pada kulkas, beberapa modifikasi desain dapat dilakukan. Pertama, menggunakan kompresor inverter agar kerja kompresor lebih stabil dan tidak sering hidup-mati, sehingga energi listrik lebih hemat. Kedua, memperbesar atau memperbaiki desain kondensor dan evaporator agar luas permukaan perpindahan kalor lebih besar dan proses pelepasan serta penyerapan panas menjadi lebih efektif. Ketiga, menggunakan bahan pipa dan sirip yang memiliki konduktivitas termal tinggi, seperti aluminium atau tembaga, agar aliran panas lebih cepat. Keempat, meningkatkan isolasi termal pada dinding kulkas supaya kalor dari luar tidak mudah masuk ke dalam. Kelima, memilih refrigeran yang lebih efisien dan ramah lingkungan, sehingga performa pendinginan meningkat dengan energi lebih kecil. Selain itu, desain aliran udara di dalam kulkas juga bisa diperbaiki agar pendinginan lebih merata. Semua perubahan ini bertujuan mengurangi beban kerja kompresor dan meningkatkan efektivitas perpindahan kalor, sehingga sistem kulkas menjadi lebih efisien.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -332,12 +305,9 @@ Pada video diatas sistem kulkas memiliki elemen-elemen dalam seperti kompresor, 
       <textarea class="open-answer" id="l2_st_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_st_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan Hukum I Termodinamika, sistem kulkas tidak mengubah energi panas menjadi kerja mekanik, tetapi justru menggunakan kerja mekanik atau energi listrik untuk memindahkan kalor dari ruang dingin ke lingkungan yang lebih hangat. Jadi, jika ditanya apakah kulkas efisien dalam mengubah panas menjadi kerja, rumusan itu kurang tepat. Yang benar adalah menilai apakah kulkas efisien dalam menggunakan energi listrik untuk memindahkan kalor. Secara umum, kulkas sudah bekerja cukup efisien, karena mampu menjaga suhu ruang penyimpanan tetap rendah dengan bantuan siklus refrigerasi. Namun, sistem ini belum selalu optimal. Kerugian energi masih dapat terjadi karena kebocoran panas dari luar, isolasi yang kurang baik, kerja kompresor yang berlebihan, kondensor yang kotor, atau refrigeran yang tidak bekerja optimal. Efisiensi sistem dapat ditingkatkan dengan memperbaiki isolasi, membersihkan kondensor secara rutin, memakai kompresor inverter, memilih refrigeran yang sesuai, dan memperbaiki desain heat exchanger. Jadi, kulkas modern sudah cukup efektif, tetapi masih dapat ditingkatkan efisiensinya melalui desain dan penggunaan yang lebih baik.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -358,7 +328,7 @@ Pada video diatas sistem kulkas memiliki elemen-elemen dalam seperti kompresor, 
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -373,12 +343,9 @@ Kamu pasti sering menggunakan AC atau lemari es di rumah untuk menjaga suhu teta
       <textarea class="open-answer" id="l2_sci_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_sci_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Masalah utama pemborosan energi pada AC dan lemari es umumnya berasal dari perawatan yang buruk dan perpindahan panas yang tidak efisien. Pada AC, filter, coil, fin, dan saluran refrigeran yang kotor atau tidak terawat menyebabkan kinerja turun dan penggunaan energi naik. Pada lemari es, seal pintu yang bocor, pintu yang terlalu sering dibuka, serta kondensor yang kotor membuat sistem bekerja lebih berat. Secara termodinamika, menurut Hukum I Termodinamika, energi tidak hilang, tetapi berubah bentuk. Energi listrik yang masuk digunakan untuk menjalankan kompresor, lalu sistem memindahkan kalor dari ruang dingin ke lingkungan yang lebih hangat. Jika perpindahan kalor tidak efisien, maka diperlukan kerja listrik lebih besar untuk menghasilkan efek pendinginan yang sama. Jadi, semakin buruk perpindahan kalor dan semakin besar kebocoran beban pendinginan, semakin rendah efisiensi energi sistem.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -387,12 +354,9 @@ Kamu pasti sering menggunakan AC atau lemari es di rumah untuk menjaga suhu teta
       <textarea class="open-answer" id="l2_sci_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_sci_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Dalam sistem AC, kompresor memompa refrigeran dan menaikkan tekanannya sehingga suhu refrigeran ikut naik. Setelah itu refrigeran masuk ke kondensor, melepas kalor ke lingkungan luar, lalu berubah menjadi cair bertekanan tinggi. Refrigeran kemudian melewati alat ekspansi sehingga tekanannya turun tajam. Setelah itu refrigeran masuk ke evaporator dan menyerap kalor dari udara ruangan, sehingga udara menjadi lebih dingin. Interaksi ketiga komponen ini membentuk satu siklus tertutup pemindahan panas. Perubahan tekanan dan volume refrigeran sangat memengaruhi efisiensi. Jika kompresi tidak optimal, tekanan kondensasi terlalu tinggi, atau ekspansi tidak terkendali, kompresor harus bekerja lebih keras. Itu berarti energi listrik yang dipakai meningkat, sementara efek pendinginan tidak bertambah sebanding. Pemborosan energi juga meningkat saat coil kotor, aliran udara buruk, atau refrigeran tidak bersirkulasi pada kondisi yang dirancang.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -401,12 +365,9 @@ Kamu pasti sering menggunakan AC atau lemari es di rumah untuk menjaga suhu teta
       <textarea class="open-answer" id="l2_sci_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_sci_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan prinsip kerja dan data umum efisiensi sistem pendingin, dapat disimpulkan bahwa efisiensi energi AC tidak hanya ditentukan oleh besar daya listrik, tetapi oleh seberapa efektif sistem memindahkan kalor. Sistem yang bersih, tertutup rapat, dan bekerja pada kondisi operasi yang sesuai akan lebih hemat dibanding sistem yang kotor, bocor, atau dioperasikan secara berlebihan. Kesimpulan utamanya adalah: pemborosan energi pada AC atau lemari es terjadi ketika energi listrik yang masuk tidak maksimal menghasilkan efek pendinginan, karena sebagian besar tambahan kerja habis untuk mengatasi hambatan sistem, kebocoran panas, atau kondisi operasi yang tidak ideal. Maka, efisiensi dapat ditingkatkan dengan perawatan rutin, setting suhu yang wajar, pembersihan coil, dan pencegahan kebocoran udara atau dingin.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -415,12 +376,9 @@ Kamu pasti sering menggunakan AC atau lemari es di rumah untuk menjaga suhu teta
       <textarea class="open-answer" id="l2_sci_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_sci_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Hasil temuan tersebut sesuai dengan Hukum I Termodinamika. Energi listrik yang masuk ke AC tidak musnah, tetapi berubah menjadi kerja kompresor dan akhirnya terkait dengan kalor yang dipindahkan dari ruang dingin ke lingkungan luar. Jika sistem bekerja buruk, energi tetap terpakai, tetapi lebih banyak digunakan untuk mengatasi rugi-rugi, bukan untuk pendinginan yang berguna. Itu sebabnya AC yang filter dan coil-nya kotor atau lemari es yang seal pintunya bocor akan mengonsumsi listrik lebih besar. Jadi, teori Hukum I Termodinamika mendukung temuan bahwa efisiensi rendah bukan karena energi hilang, tetapi karena konversi dan pemindahan energinya tidak optimal. Dengan kata lain, pemborosan energi adalah tanda bahwa lebih banyak kerja dibutuhkan untuk hasil pendinginan yang sama.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -441,7 +399,7 @@ Kamu pasti sering menggunakan AC atau lemari es di rumah untuk menjaga suhu teta
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -457,12 +415,9 @@ Kamu pernah merasa kecewa saat pemanas air di rumahmu tidak bekerja seefisien ya
       <textarea class="open-answer" id="l2_inn_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_inn_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Untuk mengurangi pemborosan energi pada sistem pemanas air, solusi yang dapat diusulkan tidak hanya bersifat teknis, tetapi juga non-teknis. Dari sisi teknis, pemanas air perlu dibersihkan secara berkala agar tidak terjadi penumpukan sedimen yang menghambat perpindahan panas. Selain itu, isolasi pada tangki dan pipa air panas perlu diperbaiki agar panas tidak banyak terbuang ke lingkungan. Penggunaan termostat yang akurat juga penting supaya pemanas tidak bekerja melebihi suhu yang dibutuhkan. Dari sisi non-teknis, perilaku pengguna sangat berpengaruh terhadap efisiensi energi. Misalnya, mengatur suhu pada tingkat yang cukup, bukan terlalu tinggi, dapat menurunkan kebutuhan energi. Pengguna juga dapat mematikan pemanas saat tidak dipakai, mengurangi durasi penggunaan air panas, dan menggunakan air panas hanya saat diperlukan. Perubahan perilaku ini dapat mengurangi energi yang dibutuhkan sistem untuk menaikkan suhu air dan mempertahankan suhu tersebut. Jadi, efisiensi energi pada pemanas air dipengaruhi oleh kombinasi antara kondisi alat dan kebiasaan pengguna.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -471,12 +426,9 @@ Kamu pernah merasa kecewa saat pemanas air di rumahmu tidak bekerja seefisien ya
       <textarea class="open-answer" id="l2_inn_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_inn_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Beberapa ide inovatif dapat diterapkan untuk meningkatkan efisiensi energi dalam sistem pemanas air. Pertama, menggunakan pemanas air dengan tangki berisolasi tinggi agar panas dapat bertahan lebih lama. Kedua, merancang sistem dengan sensor suhu otomatis yang mengatur kerja elemen pemanas sesuai kebutuhan nyata. Ketiga, menggunakan timer digital atau kontrol pintar agar pemanas hanya aktif pada jam-jam tertentu. Keempat, memanfaatkan pemanas air tenaga surya untuk mengurangi konsumsi listrik utama. Kelima, menggunakan heat pump water heater, yaitu sistem yang memindahkan kalor dari udara sekitar ke air sehingga jauh lebih efisien dibanding pemanas listrik resistif biasa. Keenam, mendesain ulang aliran air dan elemen pemanas agar perpindahan kalor lebih merata. Ketujuh, menggunakan material dengan konduktivitas termal yang baik pada elemen pemanas dan pipa. Dengan berbagai alternatif ini, sistem pemanas air dapat dibuat lebih hemat energi, lebih responsif, dan lebih sesuai dengan kebutuhan pengguna.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -485,12 +437,9 @@ Kamu pernah merasa kecewa saat pemanas air di rumahmu tidak bekerja seefisien ya
       <textarea class="open-answer" id="l2_inn_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_inn_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan Hukum I Termodinamika, sistem pemanas air yang lebih efisien harus dirancang agar sebanyak mungkin energi yang masuk berubah menjadi kalor yang benar-benar diterima air, dan sesedikit mungkin hilang ke lingkungan. Oleh karena itu, saya akan merancang pemanas air dengan elemen pemanas efisien, tangki berisolasi vakum atau busa termal berkualitas tinggi, serta sensor suhu cerdas yang dapat memutus arus ketika suhu target tercapai. Sistem ini juga dapat dilengkapi dengan mode pemanasan bertahap, sehingga elemen pemanas tidak selalu bekerja pada daya maksimum. Selain itu, panas sisa dari air buangan atau udara sekitar dapat dimanfaatkan kembali melalui sistem pemulihan panas sederhana. Dengan desain seperti ini, energi listrik tidak banyak terbuang, perpindahan panas ke air menjadi optimal, dan kerja sistem menjadi lebih efisien. Prinsip utamanya adalah menekan kehilangan energi dan memaksimalkan perpindahan kalor yang berguna ke air.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -499,12 +448,9 @@ Kamu pernah merasa kecewa saat pemanas air di rumahmu tidak bekerja seefisien ya
       <textarea class="open-answer" id="l2_inn_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_inn_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Titik lemah utama dalam sistem pemanas air yang menyebabkan pemborosan energi biasanya terdapat pada penumpukan sedimen, isolasi yang buruk, pengaturan suhu yang terlalu tinggi, dan kerja pemanas yang terus-menerus meskipun tidak diperlukan. Sedimen yang menumpuk pada elemen pemanas atau dasar tangki dapat menghambat perpindahan kalor ke air, sehingga alat membutuhkan energi lebih besar untuk mencapai suhu yang sama. Isolasi yang buruk menyebabkan panas cepat hilang ke lingkungan. Selain itu, termostat yang tidak akurat dapat membuat suhu air terlalu tinggi atau pemanas hidup lebih lama dari yang diperlukan. Dari sisi proses termodinamika, kelemahan utamanya adalah banyak energi keluar sebagai panas terbuang, bukan seluruhnya dimanfaatkan untuk menaikkan energi dalam air. Jadi, bagian yang perlu diperbaiki adalah elemen pemanas, kualitas isolasi, sistem kontrol suhu, serta perawatan tangki dan pipa.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -513,12 +459,9 @@ Kamu pernah merasa kecewa saat pemanas air di rumahmu tidak bekerja seefisien ya
       <textarea class="open-answer" id="l2_inn_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_4')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_4')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l2_inn_4" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Hipotesis yang dapat dirumuskan adalah: jika sistem pemanas air menggunakan isolasi yang lebih baik, pengaturan suhu yang lebih rendah namun tetap sesuai kebutuhan, serta kontrol otomatis yang akurat, maka konsumsi energi akan menurun dan efisiensi pemanasan air akan meningkat. Hipotesis lain yang juga dapat diajukan adalah: jika penumpukan sedimen dibersihkan secara rutin, maka perpindahan kalor dari elemen pemanas ke air akan menjadi lebih efektif dan waktu pemanasan akan lebih singkat. Hipotesis ini dapat diuji melalui eksperimen dengan membandingkan dua kondisi, misalnya pemanas air sebelum dan sesudah dibersihkan, atau pemanas dengan suhu tinggi dan suhu sedang. Data yang diamati dapat berupa waktu pemanasan, suhu akhir air, dan konsumsi energi listrik. Jika setelah perlakuan konsumsi energi turun dan hasil pemanasan tetap memenuhi kebutuhan, maka hipotesis diterima.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -565,7 +508,15 @@ function switchTab(key) {
   document.scrollingElement.scrollTop = 0;
 }
 
-function startTimer(sec) {
+function startTimer(sec, btnElement) {
+  if (btnElement) {
+    btnElement.disabled = true;
+    btnElement.textContent = '⏳ Timer Berjalan...';
+    btnElement.style.opacity = '0.5';
+    btnElement.style.cursor = 'not-allowed';
+    btnElement.onclick = null; // Menghindari klik berkali-kali
+  }
+  
   stopTimer();
   let remaining = sec;
   const timerVal = document.getElementById('timer-val');
@@ -575,7 +526,24 @@ function startTimer(sec) {
     const s = remaining % 60;
     if (timerVal) timerVal.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
     if (timerBox) timerBox.classList.toggle('urgent', remaining <= 60);
-    if (remaining <= 0) { stopTimer(); if (timerVal) timerVal.textContent = '00:00'; }
+    if (remaining <= 0) {
+      stopTimer(); 
+      if (timerVal) timerVal.textContent = '00:00'; 
+      const activeTab = document.querySelector('.tab-btn.active'); 
+      if (activeTab) { 
+        const key = activeTab.id.replace('tab-', '');
+        const panel = document.getElementById('panel-' + key);
+        if (panel) {
+          panel.querySelectorAll('.open-answer').forEach(ta => {
+            ta.disabled = true;
+            localStorage.setItem('ans_' + ta.id, ta.value.trim()); // auto save
+          });
+          panel.querySelectorAll('.btn-ghost').forEach(btn => btn.style.display = 'none'); // sembunyikan tombol simpan
+        }
+        alert('⏰ Waktu diskusi habis! Tantangan dikunci dan otomatis lanjut ke tahap berikutnya.');
+        submitChallenge(key); 
+      } 
+    }
     remaining--;
   };
   update();
@@ -586,6 +554,7 @@ function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerI
 function evalOpenAnswer(id) {
   const val = document.getElementById(id)?.value?.trim();
   if (val && val.length > 5) {
+    localStorage.setItem('ans_' + id, val);
     alert('✅ Jawaban disimpan!');
   } else {
     alert('⚠️ Mohon isi jawaban terlebih dahulu.');
@@ -606,6 +575,14 @@ function submitQuiz() {
 }
 
 function submitChallenge(key) {
+  const panel = document.getElementById('panel-' + key);
+  if (panel) {
+    panel.querySelectorAll('.open-answer').forEach(ta => {
+      ta.disabled = true;
+      localStorage.setItem('ans_' + ta.id, ta.value.trim());
+    });
+    panel.querySelectorAll('.btn-ghost').forEach(btn => btn.style.display = 'none');
+  }
   const tb = document.getElementById('tab-' + key);
   if (tb) { tb.classList.remove('active'); tb.classList.add('done'); tb.textContent = '✅ ' + tb.textContent.replace(/^.* /,''); }
   const order = ['ct','st','sci','inn'];
@@ -614,20 +591,27 @@ function submitChallenge(key) {
 }
 
 function finishLevel(ln) {
-  let avgScore = 85; 
+  let totalScore = 0;
+  let scores = {};
+  ['ct','st','sci','inn'].forEach(k => {
+    let s = Math.floor(Math.random() * 21) + 75; // Random score 75-95 untuk game
+    scores[k] = s;
+    totalScore += s;
+    const el = document.getElementById('sc-' + k);
+    if (el) el.textContent = s;
+  });
+  let avgScore = Math.round(totalScore / 4);
   const xpEarned = avgScore * 2;
   const state = ThermoGame.loadState();
   if (!state.zones) state.zones = {};
   if (!state.zones[ZONE]) state.zones[ZONE] = {};
   ThermoGame.addXP(state, xpEarned);
   state.zones[ZONE].score = avgScore;
+  state.zones[ZONE].scores = { all: scores };
   state.zones[ZONE].completed = true;
   ThermoGame.saveState(state);
 
-  ['ct','st','sci','inn'].forEach(k => {
-    const el = document.getElementById('sc-' + k);
-    if (el) el.textContent = "Selesai";
-  });
+
   document.getElementById('result-xp').textContent = '+' + xpEarned + ' XP';
   document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
   document.getElementById('result-screen').classList.add('show');
@@ -637,8 +621,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
   const state = ThermoGame.loadState();
   const navXp = document.getElementById('nav-xp-value');
-  if (navXp) navXp.textContent = state.xp + ' XP';
+  if (navXp) navXp.textContent = (state.playerName && state.playerName !== 'Agent' ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
   const cxp = document.getElementById('current-xp');
+  document.querySelectorAll('.open-answer').forEach(ta => { const saved = localStorage.getItem('ans_' + ta.id); if (saved) ta.value = saved; });
   if (cxp) cxp.textContent = state.xp;
 });
 </script>

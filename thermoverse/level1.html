@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 1: Konsep Termodinamika — ThermoExplore</title>
+  <title>Level 1: Konsep Termodinamika — ThermoExplorer</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/quiz.css">
   <style>
@@ -159,7 +159,7 @@
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -180,12 +180,9 @@ Setelah menonton video tentang pemanasan air dalam panci, berdasarkan pengamatan
       <textarea class="open-answer" id="l1_ct_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_ct_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Sistem pada pemanasan air di dalam panci termasuk sistem terbuka, karena terjadi pertukaran energi dan massa dengan lingkungan. Energi panas masuk dari api atau kompor ke air melalui panci. Massa keluar dari sistem dalam bentuk uap air saat air mulai menguap atau mendidih. Selama proses pemanasan, suhu air naik dari suhu awal sampai mendekati titik didih. Tekanan air cair di dalam panci terbuka cenderung mengikuti tekanan atmosfer, sehingga tidak meningkat secara signifikan. Volume air cair dapat sedikit bertambah saat suhu naik, tetapi ketika berubah menjadi uap, volumenya meningkat sangat besar karena gas menempati ruang lebih besar daripada cairan.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -196,12 +193,9 @@ Setelah menafsirkan data, grafik diatas menggambarkan hubungan antara suhu, teka
       <textarea class="open-answer" id="l1_ct_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_ct_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Hubungan suhu, tekanan, dan volume pada pemanasan air tidak selalu sama pada setiap tahap. Saat air masih dalam fase cair dan panci terbuka, kenaikan suhu menyebabkan energi kinetik partikel air meningkat, sehingga partikel bergerak lebih cepat. Akibatnya, suhu naik dan volume air cair sedikit bertambah. Namun tekanan tidak banyak berubah karena sistem terbuka dan tetap dipengaruhi tekanan atmosfer. Ketika air mencapai titik didih, energi panas yang diterima tidak lagi dominan menaikkan suhu, tetapi digunakan untuk memutus gaya tarik antarmolekul agar air berubah fase dari cair menjadi gas. Pada tahap ini, suhu cenderung tetap, tetapi volume meningkat tajam karena terbentuk uap. Jika sistem dibuat tertutup, maka kenaikan suhu dapat menyebabkan tekanan meningkat, karena uap tidak dapat keluar bebas. Jadi, perubahan suhu dapat memengaruhi tekanan dan volume, tetapi pengaruhnya bergantung pada kondisi sistem, fase zat, dan apakah sistem terbuka atau tertutup.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -210,12 +204,9 @@ Setelah menafsirkan data, grafik diatas menggambarkan hubungan antara suhu, teka
       <textarea class="open-answer" id="l1_ct_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_ct_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Sistem pemanasan air dalam panci terbuka cukup efektif untuk memanaskan air hingga mendidih, tetapi tidak sepenuhnya efisien jika dilihat dari konsep termodinamika. Hal ini karena tidak semua energi panas dari kompor berpindah ke air. Sebagian energi hilang ke lingkungan melalui konduksi, konveksi, dan radiasi. Selain itu, saat uap keluar dari panci, sebagian energi juga terbawa bersama uap. Dari sisi pengaturan suhu, sistem ini mampu menaikkan suhu air sampai titik didih. Namun dari sisi pengaturan tekanan, sistem terbuka kurang efektif karena tekanan tidak dapat dikendalikan dan tetap mendekati tekanan atmosfer. Dari sisi perubahan volume, sistem ini juga tidak mengontrol ekspansi uap karena uap langsung lepas ke lingkungan. Jadi, sistem ini efektif untuk tujuan sederhana, yaitu merebus air, tetapi kurang efisien jika tujuan utamanya adalah mengontrol energi, tekanan, dan volume secara presisi.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -224,12 +215,9 @@ Setelah menafsirkan data, grafik diatas menggambarkan hubungan antara suhu, teka
       <textarea class="open-answer" id="l1_ct_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_ct_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Selama pemanasan, air mula-mula berada pada fase cair. Ketika menerima kalor, suhu air naik karena energi kinetik partikel meningkat. Saat suhu mencapai titik didih pada tekanan atmosfer, air mulai mengalami perubahan fase dari cair menjadi gas. Pada tahap ini, kalor yang terus diberikan tidak langsung menaikkan suhu, tetapi digunakan sebagai kalor laten penguapan untuk mengatasi gaya tarik antarmolekul. Itulah sebabnya saat air mendidih, suhu cenderung tetap meskipun pemanasan masih berlangsung. Perubahan fase ini penting karena menunjukkan bahwa energi panas tidak selalu mengubah suhu, tetapi juga dapat mengubah wujud zat. Hubungan suhu dan tekanan sangat penting dalam proses ini. Jika tekanan naik, titik didih air juga naik. Jika tekanan turun, titik didih air turun. Jadi, perubahan fase cair ke gas ditentukan oleh besarnya kalor yang diberikan dan kondisi tekanan sistem.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -238,12 +226,9 @@ Setelah menafsirkan data, grafik diatas menggambarkan hubungan antara suhu, teka
       <textarea class="open-answer" id="l1_ct_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_4')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_4')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_ct_4" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Jika sistem pemanasan air diubah menjadi sistem tertutup, maka perilaku air akan berubah. Karena uap tidak dapat keluar bebas, tekanan di dalam sistem akan meningkat. Kenaikan tekanan ini menyebabkan titik didih air menjadi lebih tinggi. Akibatnya, air dapat mencapai suhu lebih dari 100°C sebelum mendidih, tergantung seberapa rapat sistem tertutup tersebut. Dalam sistem tertutup, hubungan suhu dan tekanan menjadi lebih kuat dibandingkan sistem terbuka. Volume juga bergantung pada jenis wadah. Jika wadahnya kaku, volume total sistem hampir tetap sehingga tekanan akan naik lebih cepat. Jika wadahnya dapat mengembang, volume bisa bertambah sebagian. Jadi, perubahan dari sistem terbuka ke tertutup membuat proses pemanasan lebih terkontrol terhadap massa, tetapi juga meningkatkan tekanan sehingga perlu perhatian terhadap keselamatan.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -252,12 +237,9 @@ Setelah menafsirkan data, grafik diatas menggambarkan hubungan antara suhu, teka
       <textarea class="open-answer" id="l1_ct_5" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_5')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_5')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_ct_5" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Setelah mempelajari proses pemanasan air, saya memahami bahwa sistem terbuka memungkinkan pertukaran massa dan energi, sistem tertutup hanya memungkinkan pertukaran energi tanpa pertukaran massa, sedangkan sistem terisolasi idealnya tidak memungkinkan pertukaran massa maupun energi. Bagian yang masih dapat membingungkan adalah hubungan antara suhu dan tekanan saat air mendidih, karena banyak orang mengira suhu selalu naik terus selama pemanasan. Padahal saat perubahan fase, kalor yang diberikan dipakai untuk mengubah wujud, bukan menaikkan suhu. Untuk memperbaiki pemahaman, saya akan mempelajari kembali grafik pemanasan, membandingkan contoh sistem terbuka dan tertutup, serta mengaitkannya dengan percobaan nyata seperti merebus air di panci biasa dan di panci presto. Dengan cara itu, saya dapat memahami konsep termodinamika secara lebih tepat.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -278,7 +260,7 @@ Setelah menafsirkan data, grafik diatas menggambarkan hubungan antara suhu, teka
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -298,12 +280,9 @@ Dari video yang telah kamu amati, jelaskan bagaimana suhu air dalam termos berhu
       <textarea class="open-answer" id="l1_st_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_st_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Suhu air panas di dalam termos berhubungan langsung dengan suhu lingkungan di sekitarnya. Karena suhu air di dalam termos lebih tinggi daripada suhu lingkungan, maka kalor secara alami akan berpindah dari air ke lingkungan yang suhunya lebih rendah. Akibatnya, air di dalam termos akan mengalami pendinginan secara bertahap. Namun, termos dirancang untuk memperlambat perpindahan kalor tersebut sehingga suhu air dapat bertahan lebih lama. Dalam termos, perpindahan kalor diperkecil melalui penghambatan konduksi, konveksi, dan radiasi. Jika ditinjau dari konsep sistem, termos idealnya dianggap sebagai sistem terisolasi, karena dirancang agar tidak terjadi pertukaran massa dan seminimal mungkin terjadi pertukaran energi dengan lingkungan. Akan tetapi, dalam kondisi nyata, termos tidak benar-benar terisolasi sempurna karena kalor tetap dapat keluar sedikit demi sedikit. Oleh sebab itu, secara praktis termos dapat dipahami sebagai sistem tertutup yang mendekati terisolasi, karena massa air tetap berada di dalam, sedangkan energi panas masih dapat berpindah walaupun sangat kecil.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -314,12 +293,9 @@ Setelah memahami hubungan antar elemen dalam sistem termos, Analisislah komponen
       <textarea class="open-answer" id="l1_st_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_st_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Sistem termos terdiri atas beberapa komponen yang saling berhubungan dan bekerja bersama untuk menjaga suhu air tetap tinggi lebih lama. Komponen utama termos meliputi dinding dalam, dinding luar, ruang hampa udara, lapisan pemantul, dan tutup termos. Ruang hampa udara berfungsi mengurangi perpindahan kalor secara konduksi dan konveksi karena hampir tidak ada partikel yang dapat menghantarkan panas. Lapisan pemantul membantu mengurangi perpindahan kalor secara radiasi dengan memantulkan panas kembali ke dalam. Tutup termos yang rapat mengurangi pertukaran udara dan keluarnya kalor dari bagian atas termos. Hubungan suhu air di dalam termos dengan suhu lingkungan tetap ada. Jika suhu lingkungan lebih rendah, maka panas tetap cenderung mengalir keluar, tetapi lebih lambat dibandingkan pada wadah biasa. Kecepatan pendinginan dipengaruhi oleh beberapa faktor lain, seperti besar perbedaan suhu antara air dan lingkungan, kualitas bahan isolasi, kualitas ruang hampa, kerapatan tutup, frekuensi termos dibuka, volume air, dan lama penyimpanan. Semakin baik komponen termos bekerja, semakin lambat suhu air turun.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -328,12 +304,9 @@ Setelah memahami hubungan antar elemen dalam sistem termos, Analisislah komponen
       <textarea class="open-answer" id="l1_st_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_st_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan analisis sistem termos, kemampuan termos dalam menjaga suhu dapat ditingkatkan dengan memperbaiki desain dan bahan penyusunnya. Salah satu cara yang dapat dilakukan adalah menggunakan bahan isolasi yang memiliki konduktivitas termal lebih rendah sehingga perpindahan kalor semakin kecil. Selain itu, kualitas ruang hampa dapat ditingkatkan agar perpindahan panas secara konduksi dan konveksi semakin berkurang. Lapisan pemantul juga dapat dibuat lebih efektif agar radiasi panas yang keluar bisa dipantulkan kembali ke dalam. Dari sisi desain, tutup termos perlu dibuat lebih rapat agar tidak terjadi kebocoran panas melalui celah udara. Bukaan mulut termos juga dapat diperkecil agar panas tidak mudah keluar saat termos dibuka. Solusi inovatif lainnya adalah menggunakan desain dinding ganda yang lebih optimal, menambahkan indikator suhu digital, atau memanfaatkan material isolasi modern seperti aerogel. Semua perubahan ini bertujuan memperbaiki keterkaitan antar elemen sistem agar fungsi utama termos, yaitu menjaga suhu air, dapat berlangsung lebih lama dan lebih efisien.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -342,12 +315,9 @@ Setelah memahami hubungan antar elemen dalam sistem termos, Analisislah komponen
       <textarea class="open-answer" id="l1_st_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_st_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Sistem termos yang ada saat ini dapat dinilai cukup efisien dalam menjaga suhu air panas dibandingkan wadah biasa, karena mampu menghambat perpindahan kalor melalui konduksi, konveksi, dan radiasi. Hal ini membuat suhu air di dalam termos bertahan lebih lama. Namun, sistem ini belum sepenuhnya sempurna, sebab tetap terjadi kehilangan kalor sedikit demi sedikit ke lingkungan. Oleh karena itu, suhu air dalam termos pada akhirnya tetap menurun jika disimpan dalam waktu lama. Dari hasil evaluasi, kelebihan termos terletak pada adanya ruang hampa, lapisan pemantul, dan tutup rapat yang bekerja bersama sebagai satu sistem. Kekurangannya adalah kualitas isolasi dapat menurun, vakum dapat berkurang efektivitasnya, dan panas masih bisa keluar melalui bagian tutup atau sambungan tertentu. Untuk meningkatkan efisiensinya, bagian yang perlu diperbaiki adalah kualitas bahan isolasi, kualitas vakum, desain tutup, dan sambungan antarbagian termos. Dengan perbaikan tersebut, sistem termos akan menjadi lebih efektif dalam menjaga suhu air dalam jangka waktu yang lebih lama.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -368,7 +338,7 @@ Setelah memahami hubungan antar elemen dalam sistem termos, Analisislah komponen
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -387,12 +357,9 @@ untuk menguji hipotesis tentang hal tersebut.
       <textarea class="open-answer" id="l1_sci_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_sci_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Permasalahan utama dalam sistem tertutup yang suhunya menurun adalah mengapa suhu zat di dalam wadah tertutup dapat turun meskipun tidak ada massa yang keluar atau masuk. Penyebab utamanya adalah perpindahan kalor dari sistem ke lingkungan karena suhu sistem lebih tinggi daripada suhu lingkungan. Dalam sistem tertutup, massa tetap, tetapi energi masih dapat berpindah. Berdasarkan prinsip termodinamika, ketika wadah diletakkan di lingkungan yang lebih dingin, kalor keluar dari sistem sehingga energi dalam berkurang dan suhu zat menurun.<br>Hipotesis yang dapat dirumuskan adalah: jika sistem tertutup yang mula-mula bersuhu lebih tinggi ditempatkan pada lingkungan yang lebih dingin, maka suhu sistem akan turun secara bertahap hingga mendekati suhu lingkungan karena kalor berpindah ke luar sistem. Eksperimen dapat direncanakan dengan menyiapkan wadah tertutup berisi air atau gas, mengukur suhu awal sistem, lalu menempatkannya pada lingkungan yang lebih dingin dan mencatat perubahan suhu terhadap waktu.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -401,12 +368,9 @@ untuk menguji hipotesis tentang hal tersebut.
       <textarea class="open-answer" id="l1_sci_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_sci_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Metode penelitian yang tepat adalah eksperimen kuantitatif, karena penurunan suhu dapat diukur secara langsung dan dinyatakan dalam angka. Eksperimen dapat dirancang dengan menggunakan wadah tertutup, termometer atau sensor suhu, stopwatch, dan lingkungan pendingin seperti ruang dingin atau wadah berisi es. Langkah eksperimen dilakukan dengan mengukur suhu awal zat di dalam wadah, lalu menempatkan wadah dalam lingkungan yang lebih dingin, kemudian mencatat suhu setiap selang waktu tertentu, misalnya tiap 1 menit selama 20 sampai 30 menit. Variabel bebasnya adalah waktu atau suhu lingkungan, variabel terikatnya adalah suhu sistem, dan variabel kontrolnya adalah jenis wadah, volume zat, bahan wadah, serta kondisi awal sistem. Data dikumpulkan dalam bentuk tabel suhu terhadap waktu, lalu diolah menjadi grafik untuk melihat pola penurunan suhu. Dari grafik tersebut, dapat dianalisis laju pendinginan dan kecenderungan suhu menuju kesetimbangan termal.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -415,12 +379,9 @@ untuk menguji hipotesis tentang hal tersebut.
       <textarea class="open-answer" id="l1_sci_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_sci_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berdasarkan data eksperimen, kesimpulan yang dapat ditarik adalah bahwa suhu dalam sistem tertutup menurun karena kalor berpindah dari sistem ke lingkungan yang lebih dingin. Penurunan suhu biasanya berlangsung cepat pada awal proses ketika perbedaan suhu masih besar, lalu melambat saat suhu sistem mulai mendekati suhu lingkungan. Jika hasil eksperimen menunjukkan pola tersebut, maka hasilnya sesuai dengan hipotesis. Hubungan data dengan teori termodinamika terlihat pada kenyataan bahwa berkurangnya kalor dari sistem menyebabkan energi dalam sistem menurun, sehingga suhu zat ikut turun. Dalam kerangka Hukum I Termodinamika, jika kerja yang dilakukan dapat diabaikan, maka kalor yang keluar dari sistem menyebabkan perubahan energi dalam bernilai negatif. Hal ini menjelaskan mengapa suhu sistem terus menurun sampai mendekati kondisi setimbang dengan lingkungan.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -429,12 +390,9 @@ untuk menguji hipotesis tentang hal tersebut.
       <textarea class="open-answer" id="l1_sci_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_sci_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Hasil penelitian mendukung konsep Hukum I Termodinamika, yaitu bahwa perubahan energi dalam sistem dipengaruhi oleh kalor yang masuk atau keluar dari sistem dan kerja yang dilakukan sistem. Dalam eksperimen ini, sistem tertutup tidak bertukar massa dengan lingkungan, tetapi tetap bertukar energi dalam bentuk kalor. Ketika kalor keluar ke lingkungan yang lebih dingin, energi dalam sistem menurun dan suhu sistem ikut turun. Temuan ini sejalan dengan teori perpindahan kalor dan pendinginan yang menyatakan bahwa panas mengalir dari benda bersuhu tinggi ke benda bersuhu lebih rendah sampai tercapai kesetimbangan termal. Jika dibandingkan dengan penelitian atau teori sebelumnya, hasil ini konsisten dengan prinsip dasar termodinamika dan hukum pendinginan Newton, yaitu laju pendinginan dipengaruhi oleh perbedaan suhu antara sistem dan lingkungan. Dengan demikian, argumen ilmiahnya adalah bahwa penurunan suhu dalam sistem tertutup bukan disebabkan keluarnya massa, melainkan karena kalor keluar dari sistem, yang menurunkan energi dalam dan akhirnya menurunkan suhu zat di dalam wadah.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -455,7 +413,7 @@ untuk menguji hipotesis tentang hal tersebut.
           <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
           <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+        <button class="btn btn-secondary" onclick="startTimer(300, this)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
       <div class="scenario-box">
           <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
@@ -474,12 +432,9 @@ lingkungan yang signifikan.
       <textarea class="open-answer" id="l1_inn_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_0')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_0')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_inn_0" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Perilaku pengguna sangat menentukan konsumsi energi AC dan kulkas karena beban pendinginan naik saat pengguna membuat selisih suhu terlalu besar atau pemakaian terlalu lama. Pada AC, menaikkan setpoint (misal dari sangat dingin ke lebih moderat), memakai mode eco, memakai timer, dan membatasi durasi operasi mengurangi kerja kompresor sehingga konsumsi listrik turun. Menutup pintu dan jendela rapat, menutup celah udara, memakai tirai saat siang, serta memakai kipas untuk membantu sirkulasi membuat ruang lebih cepat nyaman tanpa menurunkan setpoint terlalu rendah. Perawatan juga termasuk perilaku. Membersihkan filter dan memastikan kondensor tidak tertutup debu menjaga perpindahan kalor tetap baik sehingga COP naik. Untuk kulkas, membuka pintu lebih jarang dan lebih cepat, tidak memasukkan makanan panas, menjaga karet pintu rapat, mengatur suhu sesuai kebutuhan, serta tidak menumpuk barang menutup ventilasi memperkecil beban kompresor. Kebiasaan sederhana ini mengurangi energi tanpa mengubah alat.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -488,12 +443,9 @@ lingkungan yang signifikan.
       <textarea class="open-answer" id="l1_inn_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_1')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_1')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_inn_1" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Berikut beberapa alternatif solusi desain dan proses termodinamika untuk menaikkan efisiensi: (1) kompresor inverter (kecepatan variabel) supaya kompresor tidak sering on-off dan bekerja dekat titik optimal, (2) heat exchanger lebih efektif seperti microchannel, sirip lebih rapat yang mudah dibersihkan, dan peningkatan luas permukaan, (3) kontrol pintar berbasis sensor suhu-kelembapan dan okupansi untuk menyesuaikan kapasitas pendinginan sesuai kebutuhan nyata, (4) dehumidifikasi terpisah (misal sistem desiccant) agar AC tidak “dipaksa” overcooling hanya untuk mengurangi lembap, (5) peningkatan isolasi termal ruang dan ducting agar panas dari luar tidak masuk, (6) thermal storage atau material perubahan fase (PCM) untuk menyimpan dingin saat beban rendah lalu dipakai saat beban puncak, (7) refrigeran yang lebih tepat dan charge yang akurat untuk menghindari kerja kompresor berlebih, (8) pemanfaatan panas buangan kondensor untuk pemanas air ringan (heat recovery) sehingga total energi rumah lebih efisien. Bahan dan teknologi baru bisa diterapkan, terutama pada isolasi, heat exchanger, kontrol, dan penyimpanan termal.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -502,12 +454,9 @@ lingkungan yang signifikan.
       <textarea class="open-answer" id="l1_inn_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_2')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_2')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_inn_2" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Gagasan orisinal yang relevan dengan proses adiabatik dan isotermal: ganti katup ekspansi (throttling) dengan expander kecil. Pada AC biasa, throttling membuang potensi kerja. Dengan expander, refrigeran melakukan ekspansi lebih mendekati adiabatik dan menghasilkan kerja yang bisa membantu motor kompresor atau menghasilkan listrik kecil untuk kipas dan kontrol. Dampaknya, kebutuhan listrik kompresor turun. Untuk proses isotermal, buat kompresi “mendekati isotermal” dengan intercooling bertahap atau kompresor dengan pendingin internal sehingga temperatur saat kompresi tidak melonjak. Temperatur kompresi yang lebih rendah menurunkan kerja kompresor. Ide lain: buat kondensor water-assisted untuk menjaga pelepasan panas lebih stabil mendekati isotermal pada sisi panas saat cuaca ekstrem, sehingga tekanan kondensasi tidak naik tajam. Keuntungan penerapan prinsip ini: kerja kompresor turun, COP naik, dan sistem lebih stabil pada beban berubah.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -516,12 +465,9 @@ lingkungan yang signifikan.
       <textarea class="open-answer" id="l1_inn_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_3')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_3')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_inn_3" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Titik lemah utama ketidakefisienan AC dan kulkas biasanya muncul pada: (1) kompresor dan kontrol: on-off sering membuat kerja tidak stabil dan boros saat start, (2) kerugian throttling pada katup ekspansi yang membuang potensi energi, (3) heat exchanger kotor atau kecil: evaporator/kondensor kotor menurunkan perpindahan kalor sehingga tekanan kerja naik dan kompresor makin berat, (4) kebocoran udara dan isolasi buruk pada ruang atau kabinet kulkas: beban panas masuk terus, (5) pengaturan kelembapan buruk: AC sering overcooling untuk mengejar dehumidifikasi, (6) refrigeran dan charge tidak sesuai: tekanan kerja jadi tidak optimal. Bagian desain yang perlu diperbaiki: efisiensi kompresor, strategi kontrol kapasitas, kualitas heat exchanger, manajemen kelembapan, isolasi, dan komponen ekspansi.
-      </div>
+      
     </div>
     
     <div class="question-block" style="margin-top:24px;">
@@ -530,12 +476,9 @@ lingkungan yang signifikan.
       <textarea class="open-answer" id="l1_inn_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
       <div style="margin-top:10px; text-align:right;">
         <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_4')">✅ Simpan Jawaban</button>
-        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_4')">👁️ Buka Indikator Jawaban</button>
+        
       </div>
-      <div id="ans_l1_inn_4" class="indicator-answer">
-        <strong>Indikator Jawaban Lengkap:</strong><br><br>
-        Contoh hipotesis yang teruji: Jika pengguna menaikkan setpoint dan memakai timer serta menjaga ruang rapat, maka konsumsi energi harian AC turun tanpa mengorbankan kenyamanan secara signifikan. Hipotesis desain: Jika AC memakai kompresor inverter dan heat exchanger yang lebih efektif, maka COP naik dan energi per jam turun pada kondisi beban yang sama. Hipotesis proses: Jika sistem mengganti throttling dengan expander untuk pemulihan kerja, maka daya listrik kompresor turun pada kapasitas pendinginan yang sama. Cara uji: gunakan meter listrik (kWh meter) untuk membandingkan baseline vs perlakuan. Jaga variabel kontrol: ukuran ruang, jumlah penghuni, suhu dan kelembapan awal, durasi operasi, dan kondisi cuaca. Catat suhu ruang, kelembapan, dan kWh per interval waktu. Untuk desain expander atau intercooling, lakukan simulasi siklus refrigerasi (misal dengan perangkat lunak termodinamika) lalu validasi dengan uji prototipe skala kecil.
-      </div>
+      
     </div>
     
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
@@ -582,7 +525,15 @@ function switchTab(key) {
   document.scrollingElement.scrollTop = 0;
 }
 
-function startTimer(sec) {
+function startTimer(sec, btnElement) {
+  if (btnElement) {
+    btnElement.disabled = true;
+    btnElement.textContent = '⏳ Timer Berjalan...';
+    btnElement.style.opacity = '0.5';
+    btnElement.style.cursor = 'not-allowed';
+    btnElement.onclick = null; // Menghindari klik berkali-kali
+  }
+  
   stopTimer();
   let remaining = sec;
   const timerVal = document.getElementById('timer-val');
@@ -592,7 +543,24 @@ function startTimer(sec) {
     const s = remaining % 60;
     if (timerVal) timerVal.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
     if (timerBox) timerBox.classList.toggle('urgent', remaining <= 60);
-    if (remaining <= 0) { stopTimer(); if (timerVal) timerVal.textContent = '00:00'; }
+    if (remaining <= 0) {
+      stopTimer(); 
+      if (timerVal) timerVal.textContent = '00:00'; 
+      const activeTab = document.querySelector('.tab-btn.active'); 
+      if (activeTab) { 
+        const key = activeTab.id.replace('tab-', '');
+        const panel = document.getElementById('panel-' + key);
+        if (panel) {
+          panel.querySelectorAll('.open-answer').forEach(ta => {
+            ta.disabled = true;
+            localStorage.setItem('ans_' + ta.id, ta.value.trim()); // auto save
+          });
+          panel.querySelectorAll('.btn-ghost').forEach(btn => btn.style.display = 'none'); // sembunyikan tombol simpan
+        }
+        alert('⏰ Waktu diskusi habis! Tantangan dikunci dan otomatis lanjut ke tahap berikutnya.');
+        submitChallenge(key); 
+      } 
+    }
     remaining--;
   };
   update();
@@ -603,6 +571,7 @@ function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerI
 function evalOpenAnswer(id) {
   const val = document.getElementById(id)?.value?.trim();
   if (val && val.length > 5) {
+    localStorage.setItem('ans_' + id, val);
     alert('✅ Jawaban disimpan!');
   } else {
     alert('⚠️ Mohon isi jawaban terlebih dahulu.');
@@ -623,6 +592,14 @@ function submitQuiz() {
 }
 
 function submitChallenge(key) {
+  const panel = document.getElementById('panel-' + key);
+  if (panel) {
+    panel.querySelectorAll('.open-answer').forEach(ta => {
+      ta.disabled = true;
+      localStorage.setItem('ans_' + ta.id, ta.value.trim());
+    });
+    panel.querySelectorAll('.btn-ghost').forEach(btn => btn.style.display = 'none');
+  }
   const tb = document.getElementById('tab-' + key);
   if (tb) { tb.classList.remove('active'); tb.classList.add('done'); tb.textContent = '✅ ' + tb.textContent.replace(/^.* /,''); }
   const order = ['ct','st','sci','inn'];
@@ -631,20 +608,27 @@ function submitChallenge(key) {
 }
 
 function finishLevel(ln) {
-  let avgScore = 85; 
+  let totalScore = 0;
+  let scores = {};
+  ['ct','st','sci','inn'].forEach(k => {
+    let s = Math.floor(Math.random() * 21) + 75; // Random score 75-95 untuk game
+    scores[k] = s;
+    totalScore += s;
+    const el = document.getElementById('sc-' + k);
+    if (el) el.textContent = s;
+  });
+  let avgScore = Math.round(totalScore / 4);
   const xpEarned = avgScore * 2;
   const state = ThermoGame.loadState();
   if (!state.zones) state.zones = {};
   if (!state.zones[ZONE]) state.zones[ZONE] = {};
   ThermoGame.addXP(state, xpEarned);
   state.zones[ZONE].score = avgScore;
+  state.zones[ZONE].scores = { all: scores };
   state.zones[ZONE].completed = true;
   ThermoGame.saveState(state);
 
-  ['ct','st','sci','inn'].forEach(k => {
-    const el = document.getElementById('sc-' + k);
-    if (el) el.textContent = "Selesai";
-  });
+
   document.getElementById('result-xp').textContent = '+' + xpEarned + ' XP';
   document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
   document.getElementById('result-screen').classList.add('show');
@@ -654,8 +638,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
   const state = ThermoGame.loadState();
   const navXp = document.getElementById('nav-xp-value');
-  if (navXp) navXp.textContent = state.xp + ' XP';
+  if (navXp) navXp.textContent = (state.playerName && state.playerName !== 'Agent' ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
   const cxp = document.getElementById('current-xp');
+  document.querySelectorAll('.open-answer').forEach(ta => { const saved = localStorage.getItem('ans_' + ta.id); if (saved) ta.value = saved; });
   if (cxp) cxp.textContent = state.xp;
 });
 </script>

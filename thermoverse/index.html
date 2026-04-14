@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ThermoExplore — Media GBL Termodinamika</title>
-  <meta name="description" content="Media pembelajaran berbasis Game Based Learning untuk materi Termodinamika SMA. Jadilah ThermoExplore dan kuasai tiga hukum termodinamika!">
+  <title>ThermoExplorer — Media GBL Termodinamika</title>
+  <meta name="description" content="Media pembelajaran berbasis Game Based Learning untuk materi Termodinamika SMA. Jadilah ThermoExplorer dan kuasai tiga hukum termodinamika!">
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* ---- Hero ---- */
@@ -237,7 +237,7 @@
 
 <div id="loading-screen">
   <div class="energy-pulse"></div>
-  <div class="loading-text">🚀 Memuat ThermoExplore...</div>
+  <div class="loading-text">🚀 Memuat ThermoExplorer...</div>
 </div>
 <div id="page-transition"></div>
 <div id="badge-popup">
@@ -271,10 +271,10 @@
       </div>
       <h1 class="hero-title" id="hero-title">
         <span class="line1">SELAMAT DATANG DI</span>
-        <span class="line2">ThermoExplore</span>
+        <span class="line2">ThermoExplorer</span>
       </h1>
       <p class="hero-sub" id="hero-sub">
-        ThermoExplore merupakan sebuah permainan edukatif berbasis Game Based Learning (GBL) yang bertujuan untuk melatih keterampilan berpikir kompleks peserta didik dalam memahami materi termodinamika. Dalam game ini, peserta didik akan memasuki peta petualangan yang dibagi menjadi tiga zona tantangan yang mewakili level permainan.
+        ThermoExplorer merupakan sebuah permainan edukatif berbasis Game Based Learning (GBL) yang bertujuan untuk melatih keterampilan berpikir kompleks peserta didik dalam memahami materi termodinamika. Dalam game ini, peserta didik akan memasuki peta petualangan yang dibagi menjadi tiga zona tantangan yang mewakili level permainan.
       </p>
       <div class="hero-cta" id="hero-cta">
         <a class="btn-launch" href="map.html" id="btn-mulai">Mulai Misi Sekarang</a>
@@ -311,7 +311,7 @@
   <section class="features-section" id="tentang">
     <div class="text-center">
       <div class="section-tag">🎮 CARA BERMAIN</div>
-      <h2 class="section-title">Aturan <span>ThermoExplore</span></h2>
+      <h2 class="section-title">Aturan <span>ThermoExplorer</span></h2>
       <p class="section-subtitle">6 langkah mudah untuk memulai petualangan termodinamikamu!</p>
     </div>
     
@@ -588,8 +588,9 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="cta-card">
-      <h2>🚀 Siap Jadi<br>ThermoExplore?</h2>
+      <h2>🚀 Siap Jadi<br>ThermoExplorer?</h2>
       <p>Bergabunglah bersama timmu, pilih pulaumu, dan mulai petualangan termodinamika yang seru dan bermakna!</p>
+      
       <a href="map.html" class="btn-cta" id="btn-start-mission">
         🏝️ Mulai Ekspedisi Sekarang
       </a>
@@ -600,7 +601,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <h3>ThermoExplore</h3>
+        <h3>ThermoExplorer</h3>
         <p>Media Pembelajaran Berbasis Game Based Learning untuk Materi Termodinamika. Kembangkan kemampuan berpikir kompleks melalui petualangan seru.</p>
       </div>
       <div class="footer-links">
@@ -620,7 +621,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copyright">&copy; 2026 ThermoExplore. All rights reserved.</div>
+      <div class="footer-copyright">&copy; 2026 ThermoExplorer. All rights reserved.</div>
       <div class="footer-socials">
         <a href="#">🌐</a>
         <a href="#">✉️</a>
@@ -654,7 +655,7 @@
     const el = document.getElementById('player-xp');
     if (el) el.textContent = state.xp;
     const navXp = document.getElementById('nav-xp-value');
-    if (navXp) navXp.textContent = state.xp + ' XP';
+    if (navXp) navXp.textContent = (state.playerName && state.playerName !== 'Agent' ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
   });
 
   // Three.js floating particles hero
@@ -760,6 +761,7 @@
       }
     });
   });
+
 </script>
 </body>
 </html>

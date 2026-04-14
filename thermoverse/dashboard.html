@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leaderboard & Analitik — ThermoExplore</title>
+  <title>Leaderboard & Analitik — ThermoExplorer</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
     .dash-page { background: linear-gradient(135deg,#EDE9FE 0%,#FCE7F3 50%,#FFFBEB 100%); min-height:100vh; }
@@ -94,7 +94,7 @@
     <div class="text-center" style="margin-bottom:28px;">
       <div class="section-tag">📊 ANALITIK & LEADERBOARD</div>
       <h1 class="section-title">Pantau <span>Perkembangan Berpikir</span></h1>
-      <p class="section-subtitle">Profil kemampuan berpikir kompleks dan posisi tim dalam ThermoExplore</p>
+      <p class="section-subtitle">Profil kemampuan berpikir kompleks dan posisi tim dalam ThermoExplorer</p>
     </div>
 
     <!-- Top Stats -->
@@ -342,7 +342,7 @@ function renderDashboard() {
 
   // Leaderboard
   const lbData = [
-    { team: 'Tim Kamu 🎯', ct: thinkScores.ct, st: thinkScores.st, sci: thinkScores.sci, inn: thinkScores.inn, xp: state.xp, done },
+    { team: (state.playerName && state.playerName !== 'Agent' ? state.playerName + ' 🎯' : 'Tim Kamu 🎯'), ct: thinkScores.ct, st: thinkScores.st, sci: thinkScores.sci, inn: thinkScores.inn, xp: state.xp, done },
     { team: 'Tim Alpha ⚡', ct:82, st:75, sci:88, inn:70, xp:320, done:2 },
     { team: 'Tim Beta 🔥', ct:70, st:80, sci:72, inn:85, xp:290, done:2 },
     { team: 'Tim Gamma 🌀', ct:65, st:60, sci:68, inn:72, xp:220, done:1 },

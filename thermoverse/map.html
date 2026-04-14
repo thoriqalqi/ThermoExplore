@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peta Misi — ThermoExplore</title>
-  <meta name="description" content="Peta misi ThermoExplore: pilih pulaumu dan mulai ekspedisi termodinamika!">
+  <title>Peta Misi — ThermoExplorer</title>
+  <meta name="description" content="Peta misi ThermoExplorer: pilih pulaumu dan mulai ekspedisi termodinamika!">
   <link rel="stylesheet" href="css/style.css">
   <style>
     body {
@@ -304,6 +304,18 @@
     </div>
   </div>
 
+  
+  <!-- Team Modal -->
+  <div id="team-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+    <div style="background:white; padding:30px; border-radius:12px; max-width:400px; width:90%; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+      <h3 style="font-family: var(--font-heading); font-size:1.5rem; margin-bottom:10px; color:black;">Masukan Nama Tim</h3>
+      <p style="color:#64748B; font-size:0.9rem; margin-bottom:20px;">Sebelum memulai misi di pulau ini, beritahu kami identitas timmu!</p>
+      <input type="text" id="map-team-name" placeholder="Nama Tim..." style="width:100%; padding:12px; border:1px solid #CBD5E1; color:black; border-radius:8px; margin-bottom:20px; font-size:1rem; text-align:center;">
+      <button class="btn btn-primary" style="width:100%; padding:12px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="submitTeamAndGo()">Simpan & Masuk Misi</button>
+      <button class="btn btn-ghost" style="width:100%; padding:12px; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-top: 10px;" onclick="document.getElementById('team-modal').style.display='none'">Batal</button>
+    </div>
+  </div>
+
   <canvas id="map-canvas"></canvas>
 
   <nav class="nav-bar">
@@ -323,7 +335,7 @@
 
   <div class="map-ui">
     <div class="map-header">
-      <div class="map-header-badge">🗺️ PETA MISI ANTI-GRAVITY AGENT</div>
+      <div class="map-header-badge">🗺️ PETA MISI THERMOEXPLORER</div>
       <div class="map-header-title">Pilih <span>Pulau Misimu</span></div>
     </div>
 
@@ -431,7 +443,7 @@
     });
 
     // ====================================================
-    //  ANTI-GRAVITY AGENT — 3D Island Map (madbox.io style)
+    //  THERMOEXPLORER — 3D Island Map (madbox.io style)
     //  Three.js hand-crafted 3 islands
     // ====================================================
 
@@ -845,7 +857,7 @@
           if (z3Unlocked) { btn3.classList.remove('locked'); if (lock3) lock3.style.display = 'none'; }
         }
         const navXp = document.getElementById('nav-xp-value');
-        if (navXp) navXp.textContent = state.xp + ' XP';
+        if (navXp) navXp.textContent = (state.playerName && state.playerName !== 'Agent' ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
       }
 
       // ---- Main Animation Loop ----
@@ -938,7 +950,53 @@
 
       animate();
     })();
-  </script>
+  
+    let pendingLevelUrl = '';
+    function promptTeamName(url) {
+      pendingLevelUrl = url;
+      document.getElementById('team-modal').style.display = 'flex';
+      const state = ThermoGame.loadState();
+      if (state.playerName && state.playerName !== 'Agent') {
+          document.getElementById('map-team-name').value = state.playerName;
+      }
+      document.getElementById('map-team-name').focus();
+    }
+    
+    function submitTeamAndGo() {
+      const tname = document.getElementById('map-team-name').value.trim();
+      if (!tname) {
+        alert('⚠️ Nama Tim tidak boleh kosong!');
+        return;
+      }
+      const state = ThermoGame.loadState();
+      state.playerName = tname;
+      ThermoGame.saveState(state);
+      
+      const navXp = document.getElementById('nav-xp-value');
+      if (navXp) navXp.textContent = (state.playerName && state.playerName !== 'Agent' ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
+      
+      const overlay = document.getElementById('page-transition');
+      if (overlay) overlay.style.opacity = 1;
+      setTimeout(() => { window.location.href = pendingLevelUrl; }, 350);
+    }
+    
+    // Attach click listeners to island buttons
+    document.addEventListener('DOMContentLoaded', () => {
+      ['btn-z1', 'btn-z2', 'btn-z3'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn && !btn.classList.contains('locked')) {
+          const href = btn.getAttribute('href');
+          btn.removeAttribute('href'); // override direct link
+          btn.style.cursor = 'pointer';
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            promptTeamName(href);
+          });
+        }
+      });
+    });
+
+</script>
 </body>
 
 </html>
