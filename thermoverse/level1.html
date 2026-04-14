@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 1: Konsep Termodinamika — Anti-Gravity Agent</title>
+  <title>Level 1: Konsep Termodinamika — ThermoExplore</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/quiz.css">
   <style>
-    .l1-accent { color: #F97316; }
-    .l1-bg { background: linear-gradient(135deg,#FFF7ED,#FFFBEB); border-color: #FDE68A; }
-    .l1-badge { background: #FEF3C7; color: #D97706; }
-    .l1-header { background: linear-gradient(135deg,#F97316,#EF4444); }
+    .l-accent { color: #F97316; }
+    .l-bg { background: linear-gradient(135deg,#FFF7ED,#FFFBEB); border-color: #F97316; }
+    .l-badge { background: color: #D97706; background: #FEF3C7;; }
+    .l-header { background: linear-gradient(135deg,#F97316,#EF4444); }
     .tab-btn.active { background: linear-gradient(135deg,#F97316,#EF4444); }
+    .open-answer { width: 100%; min-height: 120px; padding: 12px; border: 1px solid #CBD5E1; border-radius: 8px; font-family: inherit; font-size: 0.95rem; resize: vertical; margin-top: 10px; }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin-bottom: 20px; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
+    .indicator-answer { display:none; margin-top: 15px; padding: 15px; background: #ECFDF5; border: 1px solid #10B981; border-radius: 8px; color: #065F46; font-size: 0.9rem; }
   </style>
 </head>
 <body>
@@ -19,7 +23,7 @@
 <div id="page-transition"></div>
 
 <nav class="nav-bar">
-  <a href="map.html" class="nav-logo">Anti<span>Gravity</span></a>
+  <a href="map.html" class="nav-logo">Thermo<span>Explore</span></a>
   <ul class="nav-links">
     <li><a href="map.html">🗺️ Peta Misi</a></li>
     <li><a href="dashboard.html">📊 Leaderboard</a></li>
@@ -33,9 +37,9 @@
     <!-- Header -->
     <div class="level-header">
       <div class="level-header-left">
-        <div class="level-badge l1-badge">🌋 LEVEL 1 · PULAU KONSEP</div>
-        <div class="level-title">Konsep Termodinamika & Sistem</div>
-        <div class="level-subtitle">Sistem terbuka, tertutup, terisolasi • 4 Tantangan Berpikir Kompleks</div>
+        <div class="level-badge l-badge">LEVEL 1</div>
+        <div class="level-title">Konsep Termodinamika</div>
+        <div class="level-subtitle">Sistem terbuka, tertutup, terisolasi • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
       </div>
       <div class="level-header-right">
         <div class="xp-counter">
@@ -51,127 +55,213 @@
 
     <!-- Tabs -->
     <div class="challenge-tabs">
-      <button class="tab-btn active" id="tab-ct" onclick="switchTab('ct')">🔍 Critical Thinking</button>
-      <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 Systemic Thinking</button>
-      <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 Scientific Thinking</button>
-      <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 Innovative Thinking</button>
+      <button class="tab-btn active" id="tab-quiz" onclick="switchTab('quiz')">📝 Kegiatan Awal (Quiz)</button>
+      <button class="tab-btn" id="tab-ct" onclick="switchTab('ct')">🔍 1. Critical Thinking</button>
+      <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 2. Systemic Thinking</button>
+      <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 3. Scientific Thinking</button>
+      <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 4. Innovative Thinking</button>
+    </div>
+
+    <!-- ======= QUIZ AWAL ======= -->
+    <div id="panel-quiz" class="challenge-card">
+      <div class="challenge-card-header">
+        <div>
+          <div class="challenge-card-title">📝 Kegiatan Awal</div>
+          <div class="challenge-card-desc">10 soal quiz pilihan ganda</div>
+        </div>
+      </div>
+      
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">1. Apa yang dimaksud dengan "sistem" dalam kajian termodinamika?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q1" value="False"> A) Semua benda di sekitar kita</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q1" value="True"> B) Bagian dari alam semesta yang menjadi fokus pengamatan</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q1" value="False"> C) Hanya gas yang terperangkap dalam wadah</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q1" value="False"> D) Semua yang tidak termasuk dalam lingkungan</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">2. Apa peran "batas sistem" dalam diagram sistem termodinamika?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q2" value="True"> A) Membedakan sistem dengan lingkungan</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q2" value="False"> B) Menentukan suhu sistem</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q2" value="False"> C) Menentukan volume sistem</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q2" value="False"> D) Menyimpan energi sistem</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">3. Sistem mana yang memungkinkan pertukaran massa dan energi dengan lingkungan sekitarnya?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q3" value="False"> A) Sistem tertutup</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q3" value="False"> B) Sistem terisolasi</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q3" value="True"> C) Sistem terbuka</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q3" value="False"> D) Sistem termodinamika</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">4. Pada sistem tertutup, apa yang tetap konstan?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q4" value="True"> A) Massa</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q4" value="False"> B) Energi</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q4" value="False"> C) Suhu</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q4" value="False"> D) Volume</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">5. Sistem mana yang tidak memungkinkan pertukaran energi maupun massa dengan lingkungan?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q5" value="False"> A) Sistem tertutup</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q5" value="True"> B) Sistem terisolasi</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q5" value="False"> C) Sistem terbuka</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q5" value="False"> D) Sistem termodinamika</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">6. Dalam proses isobarik, apa yang tetap konstan selama perubahan?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q6" value="False"> A) Volume</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q6" value="False"> B) Suhu</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q6" value="True"> C) Tekanan</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q6" value="False"> D) Energi</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">7. Dalam proses isokhorik, perubahan apa yang tidak terjadi pada gas?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q7" value="False"> A) Tekanan</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q7" value="True"> B) Volume</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q7" value="False"> C) Suhu</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q7" value="False"> D) Energi dalam</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">8. Apa yang dimaksud dengan proses isotermal?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q8" value="False"> A) Proses di mana tekanan gas tetap</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q8" value="True"> B) Proses di mana suhu tetap</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q8" value="False"> C) Proses di mana volume tetap</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q8" value="False"> D) Proses di mana tidak ada perubahan energi dalam</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">9. Pada proses adiabatik, apa yang terjadi pada gas ketika volume meningkat?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q9" value="False"> A) Suhu gas meningkat</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q9" value="True"> B) Energi dalam gas berkurang</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q9" value="False"> C) Massa gas bertambah</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q9" value="False"> D) Tekanan gas tetap</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">10. Apa yang menjadi karakteristik utama dari proses adiabatik?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q10" value="False"> A) Tidak ada pertukaran massa</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q10" value="False"> B) Tidak ada pertukaran energi</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q10" value="False"> C) Perubahan suhu disertai dengan pertukaran kalor</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l1_q10" value="True"> D) Tidak ada perubahan volume</label></div>
+          </div>
+        </div>
+        
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="submitQuiz()">✅ Selesai – Lanjut ke Tantangan 1 →</button>
+      </div>
     </div>
 
     <!-- ======= CHALLENGE 1: CRITICAL THINKING ======= -->
-    <div id="panel-ct" class="challenge-card">
+    <div id="panel-ct" class="challenge-card" style="display:none;">
       <div class="challenge-card-header">
         <div>
-          <div class="challenge-card-title">🔍 Tantangan 1 — Critical Thinking</div>
-          <div class="challenge-card-desc">Menganalisis dan mengevaluasi jenis-jenis sistem termodinamika berdasarkan fenomena kehidupan sehari-hari secara kritis.</div>
+          <div class="challenge-card-title">🔍 1. Berpikir Kritis (Critical Thinking)</div>
         </div>
       </div>
-
-      <!-- Discussion Banner -->
       <div class="discussion-banner">
         <div class="disc-icon">👥</div>
         <div class="disc-text">
-          <h4>Diskusi Kelompok (5–6 orang) — Maks. 5 Menit</h4>
-          <p>Diskusikan skenario berikut bersama timmu sebelum menjawab. Setiap anggota harus berkontribusi!</p>
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
         <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
-
-      <!-- Scenario -->
       <div class="scenario-box">
-        <div class="scenario-label">📍 Konteks Masalah</div>
-        <div class="scenario-text">
-          Sebuah keluarga memiliki tiga perangkat dapur: <strong>panci biasa terbuka</strong> di atas kompor, 
-          <strong>panci presto (pressure cooker)</strong> tertutup rapat, dan <strong>termos vakum</strong> yang menyimpan kopi panas.
-          Ketiga perangkat ini menunjukkan karakteristik sistem termodinamika yang berbeda-beda.
-        </div>
-        <div class="scenario-data">
-          <span class="data-chip">🍳 Panci Terbuka</span>
-          <span class="data-chip">🔒 Panci Presto</span>
-          <span class="data-chip">☕ Termos Vakum</span>
-        </div>
-      </div>
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Kritis (Critical Thinking)
+Pada  tantangan  kali  ini,  kamu  akan menganalisis  fenomena  yang  sering  terjadi  di  kehidupan  sehari-hari,  yaitu
+pemanasan air dalam panci. Bayangkan air yang awalnya dingin, kemudian dipanaskan. Apa yang sebenarnya terjadi
+pada  air  tersebut  selama  proses  pemanasan?  Bagaimana  hubungan  antara  suhu,  tekanan,  dan  volume  air?  Apa
+yang terjadi pada energi yang diterima dan dilepaskan selama pemanasan?
 
-      <!-- Activities -->
-      <div class="activity-steps">
-        <div class="activity-step">
-          <div class="step-header">
-            <div class="step-num" style="background:var(--primary)">1</div>
-            <div class="step-title">Observasi Fenomena</div>
-          </div>
-          <div class="step-content">
-            <p>Amati ketiga perangkat. Diskusikan: apa yang berpindah (materi? energi?) antara masing-masing perangkat dengan lingkungan sekitarnya?</p>
-          </div>
+<div class="video-container" style="margin-top: 15px;"><iframe src="https://www.youtube.com/embed/hJW4SFYTgGU" allowfullscreen></iframe></div>
+</div>
         </div>
-        <div class="activity-step">
-          <div class="step-header">
-            <div class="step-num" style="background:var(--pink)">2</div>
-            <div class="step-title">Analisis & Klasifikasi</div>
-          </div>
-          <div class="step-content">
-            <p>Berdasarkan definisi sistem termodinamika, klasifikasikan masing-masing perangkat ke dalam kategori yang tepat disertai alasan ilmiah.</p>
-          </div>
-        </div>
-      </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Interpretasi (Menafsirkan Makna)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Tontonlah video berikut ini!
 
-      <!-- Soal 1 -->
-      <div class="question-block" id="q1-ct">
-        <div class="question-label" style="background:#FEF3C7;color:#D97706;">🎯 Soal Interpretasi</div>
-        <div class="question-text">Berdasarkan skenario, manakah pernyataan yang BENAR mengenai klasifikasi sistem pada panci presto?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('ct',0,false,this)" id="ct-q1-opt0"><span class="option-key">A</span>Sistem terbuka karena uap bisa keluar melalui katup pengaman</button>
-          <button class="option-btn" onclick="answerQ('ct',0,true,this)" id="ct-q1-opt1"><span class="option-key">B</span>Sistem tertutup karena materi tidak berpindah tetapi kalor dapat berpindah melalui dinding logam</button>
-          <button class="option-btn" onclick="answerQ('ct',0,false,this)" id="ct-q1-opt2"><span class="option-key">C</span>Sistem terisolasi karena tekanannya tetap konstan selama pemanasan</button>
-          <button class="option-btn" onclick="answerQ('ct',0,false,this)" id="ct-q1-opt3"><span class="option-key">D</span>Sistem adiabatik karena tidak terjadi perubahan suhu</button>
-        </div>
-        <div class="feedback-box" id="fb-ct-0">
-          <div class="feedback-icon" id="fb-ct-0-icon"></div>
-          <div class="feedback-title" id="fb-ct-0-title"></div>
-          <div class="feedback-desc" id="fb-ct-0-desc"></div>
-        </div>
+Setelah menonton video tentang pemanasan air dalam panci, berdasarkan pengamatanmu, tentukan jenis sistem yang terlibat dalam pemanasan air tersebut, apakah sistem terbuka, tertutup, atau terisolasi. Selain itu, jelaskan juga apa yang terjadi pada suhu, tekanan, dan volume air selama proses pemanasan.</div>
+      <textarea class="open-answer" id="l1_ct_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_0')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <!-- Soal 2 -->
-      <div class="question-block" id="q2-ct">
-        <div class="question-label" style="background:#FEF3C7;color:#D97706;">🎯 Soal Evaluasi</div>
-        <div class="question-text">Termos vakum yang ideal mendekati sistem terisolasi karena...</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">A</span>Terbuat dari bahan logam yang kuat sehingga tidak dapat ditembus</button>
-          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">B</span>Menggunakan bahan kimia untuk mempertahankan suhu</button>
-          <button class="option-btn" onclick="answerQ('ct',1,true,this)"><span class="option-key">C</span>Lapisan vakum di dinding mencegah konduksi dan konveksi; dinding perak memantulkan radiasi</button>
-          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">D</span>Volume di dalamnya selalu konstan sehingga tidak ada kerja yang dilakukan</button>
-        </div>
-        <div class="feedback-box" id="fb-ct-1">
-          <div class="feedback-icon" id="fb-ct-1-icon"></div>
-          <div class="feedback-title" id="fb-ct-1-title"></div>
-          <div class="feedback-desc" id="fb-ct-1-desc"></div>
-        </div>
+      <div id="ans_l1_ct_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Sistem pada pemanasan air di dalam panci termasuk sistem terbuka, karena terjadi pertukaran energi dan massa dengan lingkungan. Energi panas masuk dari api atau kompor ke air melalui panci. Massa keluar dari sistem dalam bentuk uap air saat air mulai menguap atau mendidih. Selama proses pemanasan, suhu air naik dari suhu awal sampai mendekati titik didih. Tekanan air cair di dalam panci terbuka cenderung mengikuti tekanan atmosfer, sehingga tidak meningkat secara signifikan. Volume air cair dapat sedikit bertambah saat suhu naik, tetapi ketika berubah menjadi uap, volumenya meningkat sangat besar karena gas menempati ruang lebih besar daripada cairan.
       </div>
-
-      <!-- Refleksi -->
-      <div class="reflection-box">
-        <div class="reflection-title">🌟 Refleksi Diri (Self-Regulation)</div>
-        <div class="reflection-items">
-          <div class="reflection-item">
-            <label>Apa yang sudah kamu pahami tentang jenis-jenis sistem termodinamika?</label>
-            <textarea placeholder="Tuliskan pemahamanmu di sini..." id="ref-ct-1"></textarea>
-          </div>
-          <div class="reflection-item">
-            <label>Konsep apa yang masih membingungkan dari tantangan ini?</label>
-            <textarea placeholder="Tuliskan pertanyaanmu..." id="ref-ct-2"></textarea>
-          </div>
-        </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analisis (Mengidentifikasi Hubungan dan Struktur)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Gambar grafik hubungan antara suhu, tekanan, dan volume dalam proses pemanasan air
+(Sumber: https://youtu.be/hJW4SFYTgGU?si=7NcCv9tsMR-GfVs_ )
+Setelah menafsirkan data, grafik diatas menggambarkan hubungan antara suhu, tekanan, dan volume dalam proses pemanasan air. Tugasmu adalah menganalisis hubungan antara ketiga variabel ini. Jelaskan bagaimana perubahan salah satu variabel tersebut, seperti suhu, dapat mempengaruhi yang lainnya.</div>
+      <textarea class="open-answer" id="l1_ct_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_1')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <!-- QR Code E-LKPD -->
-      <div class="qr-scan-box" style="margin-top:20px;">
-        <div class="qr-icon">📱</div>
-        <div class="qr-text"><strong>E-LKPD Scan Code</strong><br>Scan kode berikut untuk mengisi Lembar Kerja Digital tantangan ini dan kirimkan hasilnya ke guru.</div>
-        <div class="qr-code">AGA-LV1-CT-001</div>
-        <div class="qr-text" style="margin-top:8px; font-size:0.78rem;">Atau masukkan kode di atas ke platform E-LKPD institusimu</div>
+      <div id="ans_l1_ct_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Hubungan suhu, tekanan, dan volume pada pemanasan air tidak selalu sama pada setiap tahap. Saat air masih dalam fase cair dan panci terbuka, kenaikan suhu menyebabkan energi kinetik partikel air meningkat, sehingga partikel bergerak lebih cepat. Akibatnya, suhu naik dan volume air cair sedikit bertambah. Namun tekanan tidak banyak berubah karena sistem terbuka dan tetap dipengaruhi tekanan atmosfer. Ketika air mencapai titik didih, energi panas yang diterima tidak lagi dominan menaikkan suhu, tetapi digunakan untuk memutus gaya tarik antarmolekul agar air berubah fase dari cair menjadi gas. Pada tahap ini, suhu cenderung tetap, tetapi volume meningkat tajam karena terbentuk uap. Jika sistem dibuat tertutup, maka kenaikan suhu dapat menyebabkan tekanan meningkat, karena uap tidak dapat keluar bebas. Jadi, perubahan suhu dapat memengaruhi tekanan dan volume, tetapi pengaruhnya bergantung pada kondisi sistem, fase zat, dan apakah sistem terbuka atau tertutup.
       </div>
-
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Evaluasi (Menilai Kredibilitas dan Prosedur)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan pemahamanmu tentang hukum termodinamika, bagaimana efektivitas sistem pemanasan air yang ada dalam video. Apakah sistem ini efisien dalam mengatur suhu dan tekanan serta perubahan volume air? Jelaskan seberapa efektif sistem ini dalam memanipulasi energi berdasarkan konsep-konsep termodinamika yang telah kamu pelajari.</div>
+      <textarea class="open-answer" id="l1_ct_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_2')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_ct_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Sistem pemanasan air dalam panci terbuka cukup efektif untuk memanaskan air hingga mendidih, tetapi tidak sepenuhnya efisien jika dilihat dari konsep termodinamika. Hal ini karena tidak semua energi panas dari kompor berpindah ke air. Sebagian energi hilang ke lingkungan melalui konduksi, konveksi, dan radiasi. Selain itu, saat uap keluar dari panci, sebagian energi juga terbawa bersama uap. Dari sisi pengaturan suhu, sistem ini mampu menaikkan suhu air sampai titik didih. Namun dari sisi pengaturan tekanan, sistem terbuka kurang efektif karena tekanan tidak dapat dikendalikan dan tetap mendekati tekanan atmosfer. Dari sisi perubahan volume, sistem ini juga tidak mengontrol ekspansi uap karena uap langsung lepas ke lingkungan. Jadi, sistem ini efektif untuk tujuan sederhana, yaitu merebus air, tetapi kurang efisien jika tujuan utamanya adalah mengontrol energi, tekanan, dan volume secara presisi.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Penjelasan (Menyusun Justifikasi)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah mempelajari pemanasan air, berikan penjelasan sistematis tentang perubahan fase yang terjadi, dari cair ke gas. Jelaskan mengapa perubahan fase ini penting dalam pemanasan air dan bagaimana perubahan suhu dan tekanan berhubungan dengan proses ini.</div>
+      <textarea class="open-answer" id="l1_ct_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_ct_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Selama pemanasan, air mula-mula berada pada fase cair. Ketika menerima kalor, suhu air naik karena energi kinetik partikel meningkat. Saat suhu mencapai titik didih pada tekanan atmosfer, air mulai mengalami perubahan fase dari cair menjadi gas. Pada tahap ini, kalor yang terus diberikan tidak langsung menaikkan suhu, tetapi digunakan sebagai kalor laten penguapan untuk mengatasi gaya tarik antarmolekul. Itulah sebabnya saat air mendidih, suhu cenderung tetap meskipun pemanasan masih berlangsung. Perubahan fase ini penting karena menunjukkan bahwa energi panas tidak selalu mengubah suhu, tetapi juga dapat mengubah wujud zat. Hubungan suhu dan tekanan sangat penting dalam proses ini. Jika tekanan naik, titik didih air juga naik. Jika tekanan turun, titik didih air turun. Jadi, perubahan fase cair ke gas ditentukan oleh besarnya kalor yang diberikan dan kondisi tekanan sistem.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inferensi (Menarik Kesimpulan)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan hasil analisis yang telah dilakukan, tariklah kesimpulan mengenai apa yang akan terjadi pada suhu dan tekanan air jika sistem pemanasan ini berubah menjadi sistem tertutup. Jelaskan juga bagaimana perubahan sistem dapat mempengaruhi proses pemanasan air tersebut.</div>
+      <textarea class="open-answer" id="l1_ct_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_4')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_4')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_ct_4" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Jika sistem pemanasan air diubah menjadi sistem tertutup, maka perilaku air akan berubah. Karena uap tidak dapat keluar bebas, tekanan di dalam sistem akan meningkat. Kenaikan tekanan ini menyebabkan titik didih air menjadi lebih tinggi. Akibatnya, air dapat mencapai suhu lebih dari 100°C sebelum mendidih, tergantung seberapa rapat sistem tertutup tersebut. Dalam sistem tertutup, hubungan suhu dan tekanan menjadi lebih kuat dibandingkan sistem terbuka. Volume juga bergantung pada jenis wadah. Jika wadahnya kaku, volume total sistem hampir tetap sehingga tekanan akan naik lebih cepat. Jika wadahnya dapat mengembang, volume bisa bertambah sebagian. Jadi, perubahan dari sistem terbuka ke tertutup membuat proses pemanasan lebih terkontrol terhadap massa, tetapi juga meningkatkan tekanan sehingga perlu perhatian terhadap keselamatan.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Regulasi Diri (Refleksi Proses Berpikir)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah seluruh kegiatan ini, lakukan refleksi terhadap pemahamanmu mengenai sistem terbuka, tertutup, dan terisolasi. Apakah ada bagian dalam proses pemanasan air yang masih membingungkan? Jika ada, jelaskan apa yang akan kamu lakukan untuk memperbaiki pemahamanmu tentang konsep-konsep tersebut.</div>
+      <textarea class="open-answer" id="l1_ct_5" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_ct_5')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_ct_5')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_ct_5" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Setelah mempelajari proses pemanasan air, saya memahami bahwa sistem terbuka memungkinkan pertukaran massa dan energi, sistem tertutup hanya memungkinkan pertukaran energi tanpa pertukaran massa, sedangkan sistem terisolasi idealnya tidak memungkinkan pertukaran massa maupun energi. Bagian yang masih dapat membingungkan adalah hubungan antara suhu dan tekanan saat air mendidih, karena banyak orang mengira suhu selalu naik terus selama pemanasan. Padahal saat perubahan fase, kalor yang diberikan dipakai untuk mengubah wujud, bukan menaikkan suhu. Untuk memperbaiki pemahaman, saya akan mempelajari kembali grafik pemanasan, membandingkan contoh sistem terbuka dan tertutup, serta mengaitkannya dengan percobaan nyata seperti merebus air di panci biasa dan di panci presto. Dengan cara itu, saya dapat memahami konsep termodinamika secara lebih tepat.
+      </div>
+    </div>
+    
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-        <button class="btn btn-primary" onclick="submitChallenge('ct')" id="submit-ct">✅ Selesai – Lanjut ke Systemic Thinking →</button>
+        <button class="btn btn-primary" onclick="submitChallenge('ct')">✅ Selesai – Lanjut ke Tantangan 2 →</button>
       </div>
     </div>
 
@@ -179,95 +269,89 @@
     <div id="panel-st" class="challenge-card" style="display:none;">
       <div class="challenge-card-header">
         <div>
-          <div class="challenge-card-title">🔗 Tantangan 2 — Systemic Thinking</div>
-          <div class="challenge-card-desc">Memahami hubungan antar komponen sistem termodinamika dan dampak perubahan variabel terhadap keseluruhan sistem.</div>
+          <div class="challenge-card-title">🔗 2. Berpikir Sistemik (Systemic Thinking)</div>
         </div>
       </div>
-
       <div class="discussion-banner">
         <div class="disc-icon">👥</div>
         <div class="disc-text">
-          <h4>Diskusi Kelompok — Maks. 5 Menit</h4>
-          <p>Analisis diagram sistem. Bagaimana perubahan satu variabel mempengaruhi variabel lain?</p>
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
         <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
-
-      <!-- Simulasi Sederhana -->
-      <div class="sim-panel">
-        <div class="sim-title">⚙️ Simulasi: Sistem Piston-Gas Ideal</div>
-        <div class="sim-controls">
-          <div class="sim-slider-group">
-            <label>Suhu (T): </label>
-            <input type="range" class="sim-slider" id="sl-T" min="200" max="600" value="300" oninput="updateSim()">
-            <span class="sim-slider-val" id="val-T">300 K</span>
-          </div>
-          <div class="sim-slider-group">
-            <label>Volume (V): </label>
-            <input type="range" class="sim-slider" id="sl-V" min="1" max="10" value="5" step="0.5" oninput="updateSim()">
-            <span class="sim-slider-val" id="val-V">5 L</span>
-          </div>
-          <div class="sim-result-box" id="sim-result">
-            P = nRT/V → <strong id="sim-p-val">4.99 × 10⁻¹ atm</strong>
-            <span style="color:#6B7280; margin-left:16px; font-size:0.8rem;">(n = 1 mol, R = 0.082 L·atm/mol·K)</span>
-          </div>
-        </div>
-      </div>
-
       <div class="scenario-box">
-        <div class="scenario-label">📍 Konteks Masalah</div>
-        <div class="scenario-text">Sebuah balon yang diisi udara diletakkan dalam mobil yang terparkir di bawah terik matahari. Suhu di dalam mobil meningkat dari 30°C menjadi 65°C. Analisislah perubahan yang terjadi pada sistem balon (anggap elastisitas balon ideal).</div>
-        <div class="scenario-data">
-          <span class="data-chip">T₁ = 303 K</span>
-          <span class="data-chip">T₂ = 338 K</span>
-          <span class="data-chip">P konstan</span>
-        </div>
-      </div>
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Sistemik
+Ketika air panas diletakkan dalam termos, proses pendinginan terjadi secara alami. Kamu diminta untuk memahami
+bagaimana sistem termos berinteraksi dengan lingkungan dan bagaimana hubungan antara suhu air dalam termos
+dan kondisi lingkungan di sekitarnya.
 
-      <div class="question-block">
-        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Soal Analisis Sistemik</div>
-        <div class="question-text">Jika tekanan dalam balon diasumsikan konstan (proses isobarik), bagaimana hubungan antara perubahan volume dan perubahan suhu?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">A</span>Volume berkurang karena suhu yang tinggi memadatkan molekul udara</button>
-          <button class="option-btn" onclick="answerQ('st',0,true,this)"><span class="option-key">B</span>Volume bertambah secara proporsional terhadap suhu (V₁/T₁ = V₂/T₂ — Hukum Charles)</button>
-          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">C</span>Volume tetap konstan karena elastisitas balon tidak berubah</button>
-          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">D</span>Tidak ada hubungan antara volume dan suhu dalam sistem tertutup</button>
+<div class="video-container" style="margin-top: 15px;"><iframe src="https://www.youtube.com/embed/Me60Ti0E_rY" allowfullscreen></iframe></div>
+</div>
         </div>
-        <div class="feedback-box" id="fb-st-0">
-          <div class="feedback-icon" id="fb-st-0-icon"></div>
-          <div class="feedback-title" id="fb-st-0-title"></div>
-          <div class="feedback-desc" id="fb-st-0-desc"></div>
-        </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Pemahaman Hubungan Dalam Sistem (Realize the Relationships Between the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Amati Video berikut ini!
+[Video: https://youtu.be/Me60Ti0E_rY]
+Dari video yang telah kamu amati, jelaskan bagaimana suhu air dalam termos berhubungan dengan lingkungan sekitar dan bagaimana proses pendinginan terjadi. Apakah sistem ini termasuk terbuka, tertutup, atau terisolasi?</div>
+      <textarea class="open-answer" id="l1_st_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_0')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Soal Inferensi</div>
-        <div class="question-text">Berapa perbandingan V₂/V₁ untuk balon tersebut? (T₁ = 303 K, T₂ = 338 K)</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">A</span>V₂/V₁ = 0.90 (balon menyusut)</button>
-          <button class="option-btn" onclick="answerQ('st',1,true,this)"><span class="option-key">B</span>V₂/V₁ ≈ 1.12 (balon mengembang ~12%)</button>
-          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">C</span>V₂/V₁ = 2.0 (volume dua kali lipat)</button>
-          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">D</span>V₂/V₁ = 1.0 (tidak ada perubahan)</button>
-        </div>
-        <div class="feedback-box" id="fb-st-1">
-          <div class="feedback-icon" id="fb-st-1-icon"></div>
-          <div class="feedback-title" id="fb-st-1-title"></div>
-          <div class="feedback-desc" id="fb-st-1-desc"></div>
-        </div>
+      <div id="ans_l1_st_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Suhu air panas di dalam termos berhubungan langsung dengan suhu lingkungan di sekitarnya. Karena suhu air di dalam termos lebih tinggi daripada suhu lingkungan, maka kalor secara alami akan berpindah dari air ke lingkungan yang suhunya lebih rendah. Akibatnya, air di dalam termos akan mengalami pendinginan secara bertahap. Namun, termos dirancang untuk memperlambat perpindahan kalor tersebut sehingga suhu air dapat bertahan lebih lama. Dalam termos, perpindahan kalor diperkecil melalui penghambatan konduksi, konveksi, dan radiasi. Jika ditinjau dari konsep sistem, termos idealnya dianggap sebagai sistem terisolasi, karena dirancang agar tidak terjadi pertukaran massa dan seminimal mungkin terjadi pertukaran energi dengan lingkungan. Akan tetapi, dalam kondisi nyata, termos tidak benar-benar terisolasi sempurna karena kalor tetap dapat keluar sedikit demi sedikit. Oleh sebab itu, secara praktis termos dapat dipahami sebagai sistem tertutup yang mendekati terisolasi, karena massa air tetap berada di dalam, sedangkan energi panas masih dapat berpindah walaupun sangat kecil.
       </div>
-
-      <div class="reflection-box">
-        <div class="reflection-title">🌟 Refleksi — Systemic Thinking</div>
-        <div class="reflection-items">
-          <div class="reflection-item">
-            <label>Variabel apa saja yang saling berhubungan dalam sistem termodinamika? Gambarkan polanya!</label>
-            <textarea placeholder="Jelaskan hubungan antar variabel P, V, T..." id="ref-st-1"></textarea>
-          </div>
-        </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analisis Sistem (Analysis of the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Gambar ilustrasi sistem termos
+(Sumber : https://roboguru.ruangguru.com/forum/bagian-termos-dan-fungsi-nya_FRM-N0JB1WEY)
+Setelah memahami hubungan antar elemen dalam sistem termos, Analisislah komponen-komponen sistem termos yang diberikan. Bagaimana suhu air di dalam termos berhubungan dengan suhu lingkungan? Apakah ada faktor lain yang mempengaruhi kecepatan pendinginan dalam sistem termos ini?</div>
+      <textarea class="open-answer" id="l1_st_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_1')">👁️ Buka Indikator Jawaban</button>
       </div>
-
+      <div id="ans_l1_st_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Sistem termos terdiri atas beberapa komponen yang saling berhubungan dan bekerja bersama untuk menjaga suhu air tetap tinggi lebih lama. Komponen utama termos meliputi dinding dalam, dinding luar, ruang hampa udara, lapisan pemantul, dan tutup termos. Ruang hampa udara berfungsi mengurangi perpindahan kalor secara konduksi dan konveksi karena hampir tidak ada partikel yang dapat menghantarkan panas. Lapisan pemantul membantu mengurangi perpindahan kalor secara radiasi dengan memantulkan panas kembali ke dalam. Tutup termos yang rapat mengurangi pertukaran udara dan keluarnya kalor dari bagian atas termos. Hubungan suhu air di dalam termos dengan suhu lingkungan tetap ada. Jika suhu lingkungan lebih rendah, maka panas tetap cenderung mengalir keluar, tetapi lebih lambat dibandingkan pada wadah biasa. Kecepatan pendinginan dipengaruhi oleh beberapa faktor lain, seperti besar perbedaan suhu antara air dan lingkungan, kualitas bahan isolasi, kualitas ruang hampa, kerapatan tutup, frekuensi termos dibuka, volume air, dan lama penyimpanan. Semakin baik komponen termos bekerja, semakin lambat suhu air turun.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Sintesis Sistem (Synthesis of the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan analisis sistem termos yang sudah kamu lakukan, Apa yang bisa kamu ubah dalam desain atau bahan termos untuk meningkatkan kemampuan termos dalam menjaga suhu lebih lama? Misalnya, apakah penggunaan bahan isolasi yang lebih baik atau desain yang berbeda bisa membantu? Jelaskan solusi inovatif yang kamu tawarkan.</div>
+      <textarea class="open-answer" id="l1_st_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_2')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_st_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Berdasarkan analisis sistem termos, kemampuan termos dalam menjaga suhu dapat ditingkatkan dengan memperbaiki desain dan bahan penyusunnya. Salah satu cara yang dapat dilakukan adalah menggunakan bahan isolasi yang memiliki konduktivitas termal lebih rendah sehingga perpindahan kalor semakin kecil. Selain itu, kualitas ruang hampa dapat ditingkatkan agar perpindahan panas secara konduksi dan konveksi semakin berkurang. Lapisan pemantul juga dapat dibuat lebih efektif agar radiasi panas yang keluar bisa dipantulkan kembali ke dalam. Dari sisi desain, tutup termos perlu dibuat lebih rapat agar tidak terjadi kebocoran panas melalui celah udara. Bukaan mulut termos juga dapat diperkecil agar panas tidak mudah keluar saat termos dibuka. Solusi inovatif lainnya adalah menggunakan desain dinding ganda yang lebih optimal, menambahkan indikator suhu digital, atau memanfaatkan material isolasi modern seperti aerogel. Semua perubahan ini bertujuan memperbaiki keterkaitan antar elemen sistem agar fungsi utama termos, yaitu menjaga suhu air, dapat berlangsung lebih lama dan lebih efisien.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Evaluasi Sistem (Evaluation of the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Sekarang, setelah merancang solusi, Evaluasilah sistem termos yang ada. Berdasarkan analisis dan solusi yang kamu usulkan, apakah sistem ini sudah cukup efisien dalam menjaga suhu air? Apa yang perlu diperbaiki dalam desain atau bahan termos untuk meningkatkan efisiensinya?</div>
+      <textarea class="open-answer" id="l1_st_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_st_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_st_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_st_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Sistem termos yang ada saat ini dapat dinilai cukup efisien dalam menjaga suhu air panas dibandingkan wadah biasa, karena mampu menghambat perpindahan kalor melalui konduksi, konveksi, dan radiasi. Hal ini membuat suhu air di dalam termos bertahan lebih lama. Namun, sistem ini belum sepenuhnya sempurna, sebab tetap terjadi kehilangan kalor sedikit demi sedikit ke lingkungan. Oleh karena itu, suhu air dalam termos pada akhirnya tetap menurun jika disimpan dalam waktu lama. Dari hasil evaluasi, kelebihan termos terletak pada adanya ruang hampa, lapisan pemantul, dan tutup rapat yang bekerja bersama sebagai satu sistem. Kekurangannya adalah kualitas isolasi dapat menurun, vakum dapat berkurang efektivitasnya, dan panas masih bisa keluar melalui bagian tutup atau sambungan tertentu. Untuk meningkatkan efisiensinya, bagian yang perlu diperbaiki adalah kualitas bahan isolasi, kualitas vakum, desain tutup, dan sambungan antarbagian termos. Dengan perbaikan tersebut, sistem termos akan menjadi lebih efektif dalam menjaga suhu air dalam jangka waktu yang lebih lama.
+      </div>
+    </div>
+    
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-        <button class="btn btn-primary" onclick="submitChallenge('st')">✅ Selesai – Lanjut ke Scientific Thinking →</button>
+        <button class="btn btn-primary" onclick="submitChallenge('st')">✅ Selesai – Lanjut ke Tantangan 3 →</button>
       </div>
     </div>
 
@@ -275,96 +359,86 @@
     <div id="panel-sci" class="challenge-card" style="display:none;">
       <div class="challenge-card-header">
         <div>
-          <div class="challenge-card-title">🔬 Tantangan 3 — Scientific Thinking</div>
-          <div class="challenge-card-desc">Merancang investigasi ilmiah, menarik inferensi dari data, dan mengkomunikasikan temuan tentang proses termodinamika secara sistematis.</div>
+          <div class="challenge-card-title">🔬 3. Berpikir Ilmiah (Scientific Thinking)</div>
         </div>
       </div>
-
       <div class="discussion-banner">
         <div class="disc-icon">👥</div>
         <div class="disc-text">
-          <h4>Diskusi Kelompok — Maks. 5 Menit</h4>
-          <p>Rancang prosedur investigasi bersama tim. Tentukan variabel bebas, terikat, dan kontrolnya!</p>
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
         <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
-
       <div class="scenario-box">
-        <div class="scenario-label">📍 Konteks Investigasi</div>
-        <div class="scenario-text">
-          Kamu dan timmu ingin membuktikan hubungan antara tekanan dan suhu gas dalam wadah tertutup (Hukum Gay-Lussac). 
-          Data pengamatan menunjukkan: pada T = 300 K → P = 1.0 atm; pada T = 450 K → P = 1.5 atm.
-          Rancanglah penjelasan ilmiah dan analisis data ini!
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Ilmiah
+Sistem pendinginan sering kali melibatkan proses penurunan suhu dalam sistem tertutup. Dalam tantangan kali ini,
+kamu akan menganalisis penurunan suhu dalam sistem tertutup. Misalnya, sebuah wadah berisi gas atau cairan yang
+dibiarkan  pada  suhu  dingin  di  luar  ruangannya.  Proses  ini  dapat  dipengaruhi  oleh  prinsip-prinsip  termodinamika,
+seperti  Hukum  I  Termodinamika  yang  menjelaskan  bagaimana  energi  berpindah  dalam  sistem  tersebut.  Dalam
+tantangan  ini,  kamu  akan  diminta  untuk  mengidentifikasi  penyebab  penurunan  suhu  dan  merancang  eksperimen
+untuk menguji hipotesis tentang hal tersebut.
+</div>
         </div>
-        <div class="scenario-data">
-          <span class="data-chip">T₁=300K, P₁=1.0atm</span>
-          <span class="data-chip">T₂=450K, P₂=1.5atm</span>
-          <span class="data-chip">V = konstan</span>
-        </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inquiry (Inkuiri)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Kamu diminta untuk mengidentifikasi permasalahan yang terjadi ketika suhu dalam sistem tertutup menurun. Carilah sumber-sumber rujukan yang relevan, seperti jurnal ilmiah atau buku teks, untuk mempelajari lebih lanjut tentang prinsip-prinsip termodinamika yang dapat mempengaruhi sistem ini. Berdasarkan informasi yang kamu peroleh, apa penyebab utama penurunan suhu dalam sistem tertutup? Setelah itu, rumuskan hipotesis mengenai proses ini, dan rencanakan eksperimen yang akan menguji hipotesis tersebut.</div>
+      <textarea class="open-answer" id="l1_sci_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_0')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="activity-steps">
-        <div class="activity-step">
-          <div class="step-header">
-            <div class="step-num" style="background:#059669">1</div>
-            <div class="step-title">Identifikasi Variabel</div>
-          </div>
-          <div class="step-content">
-            <p>Variabel Bebas: Suhu (T) | Variabel Terikat: Tekanan (P) | Variabel Kontrol: Volume (V) dan jumlah mol gas (n).</p>
-          </div>
-        </div>
-        <div class="activity-step">
-          <div class="step-header">
-            <div class="step-num" style="background:#0EA5E9">2</div>
-            <div class="step-title">Analisis Data</div>
-          </div>
-          <div class="step-content">
-            <p>Hitung rasio P₁/T₁ dan P₂/T₂. Apakah nilainya sama? Apa yang dapat disimpulkan dari data tersebut?</p>
-          </div>
-        </div>
+      <div id="ans_l1_sci_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Permasalahan utama dalam sistem tertutup yang suhunya menurun adalah mengapa suhu zat di dalam wadah tertutup dapat turun meskipun tidak ada massa yang keluar atau masuk. Penyebab utamanya adalah perpindahan kalor dari sistem ke lingkungan karena suhu sistem lebih tinggi daripada suhu lingkungan. Dalam sistem tertutup, massa tetap, tetapi energi masih dapat berpindah. Berdasarkan prinsip termodinamika, ketika wadah diletakkan di lingkungan yang lebih dingin, kalor keluar dari sistem sehingga energi dalam berkurang dan suhu zat menurun.<br>Hipotesis yang dapat dirumuskan adalah: jika sistem tertutup yang mula-mula bersuhu lebih tinggi ditempatkan pada lingkungan yang lebih dingin, maka suhu sistem akan turun secara bertahap hingga mendekati suhu lingkungan karena kalor berpindah ke luar sistem. Eksperimen dapat direncanakan dengan menyiapkan wadah tertutup berisi air atau gas, mengukur suhu awal sistem, lalu menempatkannya pada lingkungan yang lebih dingin dan mencatat perubahan suhu terhadap waktu.
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Soal Penjelasan Ilmiah</div>
-        <div class="question-text">Verifikasi data dengan menghitung dan tentukan: apakah data konsisten dengan Hukum Gay-Lussac?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('sci',0,true,this)"><span class="option-key">A</span>Ya — P₁/T₁ = 1/300 = 0.00333 dan P₂/T₂ = 1.5/450 = 0.00333, keduanya sama ✓</button>
-          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">B</span>Tidak — Hukum Gay-Lussac hanya berlaku untuk gas ideal sempurna, bukan gas nyata</button>
-          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">C</span>Ya — tetapi hanya karena kebetulan, bukan karena ada hubungan proporsional</button>
-          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">D</span>Tidak — P₂ seharusnya 2.0 atm jika suhu naik 50%</button>
-        </div>
-        <div class="feedback-box" id="fb-sci-0">
-          <div class="feedback-icon" id="fb-sci-0-icon"></div>
-          <div class="feedback-title" id="fb-sci-0-title"></div>
-          <div class="feedback-desc" id="fb-sci-0-desc"></div>
-        </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analysis (Analisis)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah merumuskan hipotesis, kamu diminta untuk memilih metode penelitian yang tepat untuk menyelidiki penurunan suhu dalam sistem tertutup. Apa metode penelitian yang tepat untuk mengukur penurunan suhu dalam sistem tertutup? Bagaimana kamu akan merancang eksperimen untuk menguji hipotesis yang telah kamu buat? Jelaskan bagaimana kamu akan mengumpulkan dan mengolah data dalam eksperimen ini.</div>
+      <textarea class="open-answer" id="l1_sci_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_1')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Soal Inferensi</div>
-        <div class="question-text">Manakah hipotesis yang PALING tepat untuk menjelaskan fenomena kenaikan tekanan saat suhu meningkat pada volume konstan?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">A</span>Molekul gas mengecil saat dipanaskan sehingga bisa bergerak lebih bebas</button>
-          <button class="option-btn" onclick="answerQ('sci',1,true,this)"><span class="option-key">B</span>Peningkatan suhu meningkatkan energi kinetik molekul, frekuensi dan impuls tumbukan ke dinding meningkat</button>
-          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">C</span>Massa gas bertambah saat dipanaskan karena penyerapan kalor</button>
-          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">D</span>Volume sebenarnya mengecil sedikit, sehingga tekanan naik</button>
-        </div>
-        <div class="feedback-box" id="fb-sci-1">
-          <div class="feedback-icon" id="fb-sci-1-icon"></div>
-          <div class="feedback-title" id="fb-sci-1-title"></div>
-          <div class="feedback-desc" id="fb-sci-1-desc"></div>
-        </div>
+      <div id="ans_l1_sci_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Metode penelitian yang tepat adalah eksperimen kuantitatif, karena penurunan suhu dapat diukur secara langsung dan dinyatakan dalam angka. Eksperimen dapat dirancang dengan menggunakan wadah tertutup, termometer atau sensor suhu, stopwatch, dan lingkungan pendingin seperti ruang dingin atau wadah berisi es. Langkah eksperimen dilakukan dengan mengukur suhu awal zat di dalam wadah, lalu menempatkan wadah dalam lingkungan yang lebih dingin, kemudian mencatat suhu setiap selang waktu tertentu, misalnya tiap 1 menit selama 20 sampai 30 menit. Variabel bebasnya adalah waktu atau suhu lingkungan, variabel terikatnya adalah suhu sistem, dan variabel kontrolnya adalah jenis wadah, volume zat, bahan wadah, serta kondisi awal sistem. Data dikumpulkan dalam bentuk tabel suhu terhadap waktu, lalu diolah menjadi grafik untuk melihat pola penurunan suhu. Dari grafik tersebut, dapat dianalisis laju pendinginan dan kecenderungan suhu menuju kesetimbangan termal.
       </div>
-
-      <!-- E-LKPD area -->
-      <div class="qr-scan-box" style="margin-top:16px;">
-        <div class="qr-icon">🔬</div>
-        <div class="qr-text"><strong>Laporan Investigasi E-LKPD</strong><br>Tuliskan prosedur, data, analisis, dan kesimpulan investigasimu di E-LKPD. Gunakan kode di bawah untuk sinkronisasi data.</div>
-        <div class="qr-code">AGA-LV1-SCI-003</div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inference (Inferensi)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah eksperimen dilakukan, berdasarkan data eksperimen, apa kesimpulan yang dapat kamu tarik mengenai penurunan suhu dalam sistem tertutup? Apakah hasil eksperimen sesuai dengan hipotesis yang telah kamu buat? Jelaskan hubungan antara data yang diperoleh dan teori termodinamika yang ada.</div>
+      <textarea class="open-answer" id="l1_sci_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_2')">👁️ Buka Indikator Jawaban</button>
       </div>
-
+      <div id="ans_l1_sci_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Berdasarkan data eksperimen, kesimpulan yang dapat ditarik adalah bahwa suhu dalam sistem tertutup menurun karena kalor berpindah dari sistem ke lingkungan yang lebih dingin. Penurunan suhu biasanya berlangsung cepat pada awal proses ketika perbedaan suhu masih besar, lalu melambat saat suhu sistem mulai mendekati suhu lingkungan. Jika hasil eksperimen menunjukkan pola tersebut, maka hasilnya sesuai dengan hipotesis. Hubungan data dengan teori termodinamika terlihat pada kenyataan bahwa berkurangnya kalor dari sistem menyebabkan energi dalam sistem menurun, sehingga suhu zat ikut turun. Dalam kerangka Hukum I Termodinamika, jika kerja yang dilakukan dapat diabaikan, maka kalor yang keluar dari sistem menyebabkan perubahan energi dalam bernilai negatif. Hal ini menjelaskan mengapa suhu sistem terus menurun sampai mendekati kondisi setimbang dengan lingkungan.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Argumentation (Argumentasi)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Kamu diminta untuk mengaitkan hasil penelitian yang kamu lakukan dengan konsep teoretis yang relevan, seperti Hukum I Termodinamika. Bandingkan temuan penelitian yang kamu peroleh dengan hasil penelitian sebelumnya, jika ada. Sampaikan argumen ilmiah untuk mendukung kesimpulan yang kamu buat.</div>
+      <textarea class="open-answer" id="l1_sci_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_sci_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_sci_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_sci_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Hasil penelitian mendukung konsep Hukum I Termodinamika, yaitu bahwa perubahan energi dalam sistem dipengaruhi oleh kalor yang masuk atau keluar dari sistem dan kerja yang dilakukan sistem. Dalam eksperimen ini, sistem tertutup tidak bertukar massa dengan lingkungan, tetapi tetap bertukar energi dalam bentuk kalor. Ketika kalor keluar ke lingkungan yang lebih dingin, energi dalam sistem menurun dan suhu sistem ikut turun. Temuan ini sejalan dengan teori perpindahan kalor dan pendinginan yang menyatakan bahwa panas mengalir dari benda bersuhu tinggi ke benda bersuhu lebih rendah sampai tercapai kesetimbangan termal. Jika dibandingkan dengan penelitian atau teori sebelumnya, hasil ini konsisten dengan prinsip dasar termodinamika dan hukum pendinginan Newton, yaitu laju pendinginan dipengaruhi oleh perbedaan suhu antara sistem dan lingkungan. Dengan demikian, argumen ilmiahnya adalah bahwa penurunan suhu dalam sistem tertutup bukan disebabkan keluarnya massa, melainkan karena kalor keluar dari sistem, yang menurunkan energi dalam dan akhirnya menurunkan suhu zat di dalam wadah.
+      </div>
+    </div>
+    
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-        <button class="btn btn-primary" onclick="submitChallenge('sci')">✅ Selesai – Lanjut ke Innovative Thinking →</button>
+        <button class="btn btn-primary" onclick="submitChallenge('sci')">✅ Selesai – Lanjut ke Tantangan 4 →</button>
       </div>
     </div>
 
@@ -372,62 +446,100 @@
     <div id="panel-inn" class="challenge-card" style="display:none;">
       <div class="challenge-card-header">
         <div>
-          <div class="challenge-card-title">💡 Tantangan 4 — Innovative Thinking</div>
-          <div class="challenge-card-desc">Merancang solusi kreatif berbasis konsep sistem termodinamika untuk memecahkan masalah kontekstual kehidupan nyata.</div>
+          <div class="challenge-card-title">💡 4. Berpikir Inovatif (Innovative Thinking)</div>
         </div>
       </div>
-
       <div class="discussion-banner">
         <div class="disc-icon">👥</div>
         <div class="disc-text">
-          <h4>Brainstorming Tim — Maks. 5 Menit</h4>
-          <p>Eksplorasi ide-ide kreatif bersama! Tidak ada jawaban salah dalam brainstorming awal.</p>
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
         </div>
         <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
-
       <div class="scenario-box">
-        <div class="scenario-label">📍 Tantangan Desain</div>
-        <div class="scenario-text">
-          Sebuah desa terpencil membutuhkan sistem penyimpanan makanan yang dapat menjaga kesegaran tanpa menggunakan listrik. 
-          Sebagai <strong>Anti-Gravity Agent</strong>, timmu diminta merancang prototipe "kulkas alami" berbasis prinsip sistem termodinamika yang telah dipelajari.
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Inovatif
+Gambar berita pemborosan AC
+(Sumber: https://www.channelnewsasia.com/)
+Sebuah laporan terbaru dari Channel News Asia mengungkapkan bahwa Asia Tenggara telah menjadi tempat
+pembuangan AC yang boros listrik, yang merugikan konsumen dan merusak iklim. Jutaan unit AC yang boros listrik
+dijual di negara-negara Asia Tenggara. Hal ini menyebabkan pemborosan energi yang besar serta dampak
+lingkungan yang signifikan.
+</div>
         </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Flexibility (Fleksibilitas)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Dalam menghadapi permasalahan konsumsi energi tinggi pada AC, ada banyak pendekatan yang bisa diambil. Selain mengubah desain perangkat atau menggunakan teknologi yang lebih efisien, kita juga bisa melihat perilaku pengguna dan bagaimana hal itu memengaruhi konsumsi energi. Jelaskan bagaimana perubahan perilaku pengguna, seperti pengaturan suhu atau durasi penggunaan, dapat mempengaruhi efisiensi energi dalam sistem pendinginan. Apakah ada hal lain yang dapat diubah dalam cara kita menggunakan AC atau lemari es untuk mengurangi konsumsi energi?</div>
+      <textarea class="open-answer" id="l1_inn_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_0')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">💡 Soal Desain Inovatif</div>
-        <div class="question-text">Prinsip sistem termodinamika manakah yang paling relevan diaplikasikan pada "kulkas alami" tanpa listrik?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">A</span>Sistem terbuka — biarkan udara dingin masuk dan udara panas keluar secara bebas</button>
-          <button class="option-btn" onclick="answerQ('inn',0,true,this)"><span class="option-key">B</span>Sistem semi-terisolasi — meminimalkan pertukaran kalor dengan lingkungan menggunakan insulator alami (tanah, bambu, wol)</button>
-          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">C</span>Sistem terisolasi sempurna — tidak ada pertukaran apapun dengan lingkungan</button>
-          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">D</span>Proses isotermal — menjaga suhu tetap konstan dengan menambah air secara berkala</button>
-        </div>
-        <div class="feedback-box" id="fb-inn-0">
-          <div class="feedback-icon" id="fb-inn-0-icon"></div>
-          <div class="feedback-title" id="fb-inn-0-title"></div>
-          <div class="feedback-desc" id="fb-inn-0-desc"></div>
-        </div>
+      <div id="ans_l1_inn_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Perilaku pengguna sangat menentukan konsumsi energi AC dan kulkas karena beban pendinginan naik saat pengguna membuat selisih suhu terlalu besar atau pemakaian terlalu lama. Pada AC, menaikkan setpoint (misal dari sangat dingin ke lebih moderat), memakai mode eco, memakai timer, dan membatasi durasi operasi mengurangi kerja kompresor sehingga konsumsi listrik turun. Menutup pintu dan jendela rapat, menutup celah udara, memakai tirai saat siang, serta memakai kipas untuk membantu sirkulasi membuat ruang lebih cepat nyaman tanpa menurunkan setpoint terlalu rendah. Perawatan juga termasuk perilaku. Membersihkan filter dan memastikan kondensor tidak tertutup debu menjaga perpindahan kalor tetap baik sehingga COP naik. Untuk kulkas, membuka pintu lebih jarang dan lebih cepat, tidak memasukkan makanan panas, menjaga karet pintu rapat, mengatur suhu sesuai kebutuhan, serta tidak menumpuk barang menutup ventilasi memperkecil beban kompresor. Kebiasaan sederhana ini mengurangi energi tanpa mengubah alat.
       </div>
-
-      <!-- Open-ended design question -->
-      <div class="question-block" style="margin-top:24px;">
-        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">✏️ Rancangan Inovatif (Open-Ended)</div>
-        <div class="question-text">Deskripsikan rancangan "kulkas alami" timmu! Sebutkan: bahan yang digunakan, prinsip termodinamika yang diterapkan, dan perkiraan efektivitasnya.</div>
-        <textarea class="open-answer" id="inn-open" placeholder="Contoh: Kami merancang sistem pot-in-pot (pot ganda) menggunakan tanah liat. Pot bagian dalam berisi makanan, celah antar pot diisi pasir basah. Prinsip yang digunakan adalah evaporasi — penguapan air dari pasir menyerap kalor dari lingkungan dalam pot, menurunkan suhunya. Sistem ini menyerupai sistem semi-terisolasi yang meminimalkan konduksi kalor dari luar..."></textarea>
-        <div style="margin-top:10px; text-align:right;">
-          <button class="btn btn-ghost" onclick="evalOpenAnswer()">✅ Simpan Jawaban</button>
-        </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Fluency (Kelancaran)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setiap permasalahan membutuhkan berbagai alternatif solusi. Berikan beberapa ide inovatif yang melibatkan perubahan desain atau penggunaan proses termodinamika. Berikan beberapa ide inovatif yang melibatkan perubahan desain atau penggunaan proses termodinamika untuk meningkatkan efisiensi energi dalam AC atau lemari es. Apakah teknologi baru atau bahan yang lebih efisien bisa diterapkan di sini?</div>
+      <textarea class="open-answer" id="l1_inn_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_1')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="qr-scan-box" style="margin-top:16px;">
-        <div class="qr-icon">💡</div>
-        <div class="qr-text"><strong>Portofolio Inovasi E-LKPD</strong><br>Upload sketsa desain, deskripsi, dan presentasi prototipemu melalui platform E-LKPD.</div>
-        <div class="qr-code">AGA-LV1-INN-004</div>
+      <div id="ans_l1_inn_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Berikut beberapa alternatif solusi desain dan proses termodinamika untuk menaikkan efisiensi: (1) kompresor inverter (kecepatan variabel) supaya kompresor tidak sering on-off dan bekerja dekat titik optimal, (2) heat exchanger lebih efektif seperti microchannel, sirip lebih rapat yang mudah dibersihkan, dan peningkatan luas permukaan, (3) kontrol pintar berbasis sensor suhu-kelembapan dan okupansi untuk menyesuaikan kapasitas pendinginan sesuai kebutuhan nyata, (4) dehumidifikasi terpisah (misal sistem desiccant) agar AC tidak “dipaksa” overcooling hanya untuk mengurangi lembap, (5) peningkatan isolasi termal ruang dan ducting agar panas dari luar tidak masuk, (6) thermal storage atau material perubahan fase (PCM) untuk menyimpan dingin saat beban rendah lalu dipakai saat beban puncak, (7) refrigeran yang lebih tepat dan charge yang akurat untuk menghindari kerja kompresor berlebih, (8) pemanfaatan panas buangan kondensor untuk pemanas air ringan (heat recovery) sehingga total energi rumah lebih efisien. Bahan dan teknologi baru bisa diterapkan, terutama pada isolasi, heat exchanger, kontrol, dan penyimpanan termal.
       </div>
-
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Creative Thinking (Berpikir Kreatif)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Salah satu cara untuk meningkatkan efisiensi energi adalah dengan menggunakan prinsip termodinamika yang mungkin belum diterapkan sebelumnya dalam sistem pendinginan rumah tangga. Misalnya, penggunaan proses adiabatik atau isotermal yang bisa menjadi solusi inovatif. Berikan gagasan orisinal tentang bagaimana proses adiabatik atau isotermal dapat digunakan dalam sistem pendinginan rumah tangga. Apa keuntungan dari penerapan prinsip-prinsip ini dalam meningkatkan efisiensi energi?</div>
+      <textarea class="open-answer" id="l1_inn_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_2')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_inn_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Gagasan orisinal yang relevan dengan proses adiabatik dan isotermal: ganti katup ekspansi (throttling) dengan expander kecil. Pada AC biasa, throttling membuang potensi kerja. Dengan expander, refrigeran melakukan ekspansi lebih mendekati adiabatik dan menghasilkan kerja yang bisa membantu motor kompresor atau menghasilkan listrik kecil untuk kipas dan kontrol. Dampaknya, kebutuhan listrik kompresor turun. Untuk proses isotermal, buat kompresi “mendekati isotermal” dengan intercooling bertahap atau kompresor dengan pendingin internal sehingga temperatur saat kompresi tidak melonjak. Temperatur kompresi yang lebih rendah menurunkan kerja kompresor. Ide lain: buat kondensor water-assisted untuk menjaga pelepasan panas lebih stabil mendekati isotermal pada sisi panas saat cuaca ekstrem, sehingga tekanan kondensasi tidak naik tajam. Keuntungan penerapan prinsip ini: kerja kompresor turun, COP naik, dan sistem lebih stabil pada beban berubah.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 The Capacity to Identify Issues (Mengidentifikasi Permasalahan)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Sebelum merancang solusi, kita harus memahami dengan jelas apa yang menjadi masalah utama dalam sistem pendinginan. Tanpa pemahaman yang mendalam tentang titik lemah yang ada, solusi yang diterapkan mungkin tidak efektif. Apa titik lemah utama dalam desain atau proses termodinamika yang menyebabkan ketidakefisienan energi dalam sistem pendinginan? Jelaskan proses termodinamika yang ada atau bagian mana dari desain yang perlu diperbaiki.</div>
+      <textarea class="open-answer" id="l1_inn_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_inn_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Titik lemah utama ketidakefisienan AC dan kulkas biasanya muncul pada: (1) kompresor dan kontrol: on-off sering membuat kerja tidak stabil dan boros saat start, (2) kerugian throttling pada katup ekspansi yang membuang potensi energi, (3) heat exchanger kotor atau kecil: evaporator/kondensor kotor menurunkan perpindahan kalor sehingga tekanan kerja naik dan kompresor makin berat, (4) kebocoran udara dan isolasi buruk pada ruang atau kabinet kulkas: beban panas masuk terus, (5) pengaturan kelembapan buruk: AC sering overcooling untuk mengejar dehumidifikasi, (6) refrigeran dan charge tidak sesuai: tekanan kerja jadi tidak optimal. Bagian desain yang perlu diperbaiki: efisiensi kompresor, strategi kontrol kapasitas, kualitas heat exchanger, manajemen kelembapan, isolasi, dan komponen ekspansi.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 The Ability to Formulate Hypotheses (Merumuskan Hipotesis)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah menemukan solusi, kita harus dapat menguji hipotesis tersebut untuk memastikan efektivitasnya. Dalam hal ini, peserta didik diminta untuk merumuskan hipotesis tentang pengaruh perubahan desain atau penerapan solusi inovatif terhadap pengurangan konsumsi energi dalam sistem pendinginan rumah tangga. Hipotesis apa yang bisa kamu rumuskan mengenai penerapan solusi inovatif dalam mengurangi konsumsi energi pada AC atau lemari es? Bagaimana kamu akan menguji hipotesis tersebut melalui eksperimen atau simulasi?</div>
+      <textarea class="open-answer" id="l1_inn_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l1_inn_4')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l1_inn_4')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l1_inn_4" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Contoh hipotesis yang teruji: Jika pengguna menaikkan setpoint dan memakai timer serta menjaga ruang rapat, maka konsumsi energi harian AC turun tanpa mengorbankan kenyamanan secara signifikan. Hipotesis desain: Jika AC memakai kompresor inverter dan heat exchanger yang lebih efektif, maka COP naik dan energi per jam turun pada kondisi beban yang sama. Hipotesis proses: Jika sistem mengganti throttling dengan expander untuk pemulihan kerja, maka daya listrik kompresor turun pada kapasitas pendinginan yang sama. Cara uji: gunakan meter listrik (kWh meter) untuk membandingkan baseline vs perlakuan. Jaga variabel kontrol: ukuran ruang, jumlah penghuni, suhu dan kelembapan awal, durasi operasi, dan kondisi cuaca. Catat suhu ruang, kelembapan, dan kWh per interval waktu. Untuk desain expander atau intercooling, lakukan simulasi siklus refrigerasi (misal dengan perangkat lunak termodinamika) lalu validasi dengan uji prototipe skala kecil.
+      </div>
+    </div>
+    
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-        <button class="btn btn-primary" onclick="finishLevel()">🏁 Selesaikan Level 1 & Lihat Skor →</button>
+         <button class="btn btn-primary" onclick="finishLevel(1)">🏁 Selesaikan Level 1</button>
       </div>
     </div>
 
@@ -443,10 +555,10 @@
           <div class="score-chip"><div class="score-chip-val" id="sc-sci">-</div><div class="score-chip-label">Scientific</div></div>
           <div class="score-chip"><div class="score-chip-val" id="sc-inn">-</div><div class="score-chip-label">Innovative</div></div>
         </div>
-        <p style="color:#6B7280; margin-bottom:8px; font-size:0.9rem;" id="result-msg"></p>
+        <p style="color:#6B7280; margin-bottom:8px; font-size:0.9rem;" id="result-msg">Tim kamu telah mendiskusikan seluruh tantangan dengan baik!</p>
         <div class="result-actions">
           <a href="map.html" class="btn btn-ghost">🗺️ Kembali ke Peta</a>
-          <a href="level2.html" class="btn btn-primary" id="btn-next-level">⚡ Lanjut Level 2 →</a>
+          <a href="level2.html" class="btn btn-primary" id="btn-next-level">⚡ Lanjut →</a>
         </div>
       </div>
     </div>
@@ -457,23 +569,19 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="js/game.js"></script>
 <script>
-// ---- State ----
 const ZONE = 'zone1';
-const scores = { ct: null, st: null, sci: null, inn: null };
-const answers = { ct: [null,null], st: [null,null], sci: [null,null], inn: [null,null] };
 let timerInterval = null;
 
-// ---- Tab Switch ----
 function switchTab(key) {
-  ['ct','st','sci','inn'].forEach(k => {
+  ['quiz','ct','st','sci','inn'].forEach(k => {
     document.getElementById('panel-' + k).style.display = k === key ? 'block' : 'none';
     const tb = document.getElementById('tab-' + k);
     if (tb) { tb.classList.remove('active'); if (k === key) tb.classList.add('active'); }
   });
   stopTimer();
+  document.scrollingElement.scrollTop = 0;
 }
 
-// ---- Timer ----
 function startTimer(sec) {
   stopTimer();
   let remaining = sec;
@@ -492,118 +600,56 @@ function startTimer(sec) {
 }
 function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
 
-// ---- Answer Handler ----
-const feedbacks = {
-  ct: [
-    { correct: 'Tepat! Panci presto bersifat sistem tertutup karena materi (uap) tidak bisa keluar saat katup tertutup, namun kalor dapat berpindah melalui dinding logam ke lingkungan.', wrong: 'Belum tepat. Sistem tertutup memungkinkan pertukaran energi kalor tetapi tidak memungkinkan pertukaran materi dengan lingkungan. Panci presto memenuhi ini saat katup pengaman tertutup.' },
-    { correct: 'Benar! Termos vakum memiliki lapisan udara yang dihilangkan (vakum) sehingga mencegah konduksi dan konveksi. Lapisan cermin perak memantulkan radiasi inframerah, meminimalkan semua mekanisme perpindahan kalor.', wrong: 'Kurang tepat. Mekanisme isolasi termos adalah: vakum → mencegah konduksi & konveksi; lapisan perak → memantulkan radiasi. Ini yang membuat termos mendekati sistem terisolasi.' }
-  ],
-  st: [
-    { correct: 'Tepat! Hukum Charles menyatakan V/T = konstan (pada P konstan). Peningkatan suhu menyebabkan peningkatan volume secara proporsional sesuai V₁/T₁ = V₂/T₂.', wrong: 'Belum tepat. Pada proses isobarik (tekanan konstan), berlaku Hukum Charles: V berbanding lurus dengan T. Kenaikan T menyebabkan kenaikan V.' },
-    { correct: 'Benar sekali! V₂/V₁ = T₂/T₁ = 338/303 ≈ 1.115. Jadi balon mengembang sekitar 11.5%. Pemaparan ini konsisten dengan Hukum Charles.', wrong: 'Kurang tepat. Gunakan V₁/T₁ = V₂/T₂. Sehingga V₂/V₁ = T₂/T₁ = 338/303 ≈ 1.12. Balon mengembang sekitar 12%.' }
-  ],
-  sci: [
-    { correct: 'Tepat! P₁/T₁ = 1.0/300 = 0.00333 atm/K dan P₂/T₂ = 1.5/450 = 0.00333 atm/K. Keduanya sama, memverifikasi Hukum Gay-Lussac: P/T = konstan pada volume tetap.', wrong: 'Belum tepat. Hitung: P₁/T₁ = 1.0/300 ≈ 0.00333 dan P₂/T₂ = 1.5/450 ≈ 0.00333. Nilainya sama! Data ini memverifikasi Hukum Gay-Lussac.' },
-    { correct: 'Benar! Berdasarkan teori kinetik gas, peningkatan suhu meningkatkan energi kinetik rata-rata molekul. Molekul bergerak lebih cepat → lebih sering menumbuk dinding → dengan impuls lebih besar → tekanan meningkat.', wrong: 'Kurang tepat. Penjelasan yang benar berdasar teori kinetik: suhu naik → energi kinetik molekul meningkat → frekuensi dan kekuatan tumbukan ke dinding meningkat → tekanan naik.' }
-  ],
-  inn: [
-    { correct: 'Tepat! Kulkas alami paling efektif menggunakan prinsip sistem semi-terisolasi: meminimalkan pertukaran kalor dengan insulator/bahan alami. Contoh: pot tanah liat ganda (pot-in-pot), wadah dikubur dalam tanah.', wrong: 'Belum tepat. Sistem terbuka justru akan mempercepat pertukaran kalor. Yang paling efektif adalah sistem semi-terisolasi yang menggunakan insulator alami untuk memperlambat pertukaran kalor.' }
-  ]
-};
-
-function answerQ(challenge, qIdx, isCorrect, btn) {
-  const prefix = challenge + '-q' + (qIdx + 1);
-  const group = btn.closest('.options-grid');
-  if (!group) return;
-  const btnsCurrent = group.querySelectorAll('.option-btn');
-  btnsCurrent.forEach(b => { b.disabled = true; });
-  btn.classList.add(isCorrect ? 'correct' : 'wrong');
-  if (!isCorrect) {
-    btnsCurrent.forEach(b => { if (b !== btn && b.onclick && b.onclick.toString().includes('true')) b.classList.add('correct'); });
-  }
-  answers[challenge][qIdx] = isCorrect;
-  // Show feedback
-  const fbEl = document.getElementById('fb-' + challenge + '-' + qIdx);
-  const fbIcon = document.getElementById('fb-' + challenge + '-' + qIdx + '-icon');
-  const fbTitle = document.getElementById('fb-' + challenge + '-' + qIdx + '-title');
-  const fbDesc = document.getElementById('fb-' + challenge + '-' + qIdx + '-desc');
-  if (fbEl && feedbacks[challenge] && feedbacks[challenge][qIdx]) {
-    const fb = feedbacks[challenge][qIdx];
-    fbEl.classList.add('show', isCorrect ? 'correct-fb' : 'wrong-fb');
-    if (fbIcon) fbIcon.textContent = isCorrect ? '✅' : '❌';
-    if (fbTitle) fbTitle.textContent = isCorrect ? 'Jawaban Benar!' : 'Belum Tepat';
-    if (fbDesc) fbDesc.textContent = isCorrect ? fb.correct : fb.wrong;
+function evalOpenAnswer(id) {
+  const val = document.getElementById(id)?.value?.trim();
+  if (val && val.length > 5) {
+    alert('✅ Jawaban disimpan!');
+  } else {
+    alert('⚠️ Mohon isi jawaban terlebih dahulu.');
   }
 }
 
-// ---- Submit Challenge ----
-function submitChallenge(key) {
-  const ans = answers[key];
-  const correct = ans.filter(a => a === true).length;
-  const total = ans.filter(a => a !== null).length;
-  const baseScore = total > 0 ? Math.round((correct / Math.max(total, 2)) * 70) + 30 : 30;
-  scores[key] = Math.min(baseScore, 100);
+function toggleAnswer(id) {
+  const el = document.getElementById('ans_' + id);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
 
-  // Mark tab done
+function submitQuiz() {
+  switchTab('ct');
+}
+
+function submitChallenge(key) {
   const tb = document.getElementById('tab-' + key);
   if (tb) { tb.classList.remove('active'); tb.classList.add('done'); tb.textContent = '✅ ' + tb.textContent.replace(/^.* /,''); }
-
-  // Move to next
   const order = ['ct','st','sci','inn'];
   const idx = order.indexOf(key);
   if (idx < order.length - 1) switchTab(order[idx + 1]);
 }
 
-// ---- Finish Level ----
-function finishLevel() {
-  // Give default score if not answered
-  ['ct','st','sci','inn'].forEach(k => { if (scores[k] === null) scores[k] = 30; });
-  const avgScore = Math.round(Object.values(scores).reduce((a,b) => a+b,0) / 4);
+function finishLevel(ln) {
+  let avgScore = 85; 
   const xpEarned = avgScore * 2;
-
   const state = ThermoGame.loadState();
+  if (!state.zones) state.zones = {};
+  if (!state.zones[ZONE]) state.zones[ZONE] = {};
   ThermoGame.addXP(state, xpEarned);
-  ThermoGame.saveZoneChallenge(state, ZONE, 'all', scores);
   state.zones[ZONE].score = avgScore;
   state.zones[ZONE].completed = true;
   ThermoGame.saveState(state);
 
-  // Show result
   ['ct','st','sci','inn'].forEach(k => {
     const el = document.getElementById('sc-' + k);
-    if (el) el.textContent = scores[k];
+    if (el) el.textContent = "Selesai";
   });
-  const rxp = document.getElementById('result-xp');
-  if (rxp) rxp.textContent = '+' + xpEarned + ' XP';
-  const rmsg = document.getElementById('result-msg');
-  if (rmsg) rmsg.textContent = avgScore >= 80 ? '🌟 Luar biasa! Kamu menguasai konsep termodinamika dengan sangat baik!' : avgScore >= 60 ? '👍 Bagus! Terus tingkatkan pemahamanmu di level berikutnya.' : '💪 Terus semangat! Ulangi tantangan untuk pemahaman lebih dalam.';
+  document.getElementById('result-xp').textContent = '+' + xpEarned + ' XP';
   document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
   document.getElementById('result-screen').classList.add('show');
 }
 
-// ---- Simulation ----
-function updateSim() {
-  const T = parseFloat(document.getElementById('sl-T').value);
-  const V = parseFloat(document.getElementById('sl-V').value);
-  document.getElementById('val-T').textContent = T + ' K';
-  document.getElementById('val-V').textContent = V + ' L';
-  const n = 1, R = 0.082;
-  const P = (n * R * T) / V;
-  const pEl = document.getElementById('sim-p-val');
-  if (pEl) pEl.textContent = P.toFixed(3) + ' atm';
-}
-
-function evalOpenAnswer() {
-  const val = document.getElementById('inn-open')?.value?.trim();
-  if (val && val.length > 50) {
-    scores['inn'] = 75;
-    alert('✅ Jawaban inovatif disimpan! Skor dasar: 75/100. Guru akan mengevaluasi lebih lanjut.');
-  } else {
-    alert('⚠️ Tambahkan deskripsi lebih detail (min. 50 karakter) untuk mendapatkan skor penuh.');
-  }
-}
-
-// ---- Init ----
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
   const state = ThermoGame.loadState();
@@ -611,20 +657,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (navXp) navXp.textContent = state.xp + ' XP';
   const cxp = document.getElementById('current-xp');
   if (cxp) cxp.textContent = state.xp;
-  updateSim();
-});
-
-// Page transition
-document.querySelectorAll('a[href]').forEach(link => {
-  link.addEventListener('click', e => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('#') && !href.startsWith('http')) {
-      e.preventDefault();
-      const overlay = document.getElementById('page-transition');
-      overlay.style.opacity = 1;
-      setTimeout(() => { window.location.href = href; }, 350);
-    }
-  });
 });
 </script>
 </body>

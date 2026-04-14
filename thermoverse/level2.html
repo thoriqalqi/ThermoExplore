@@ -3,16 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 2: Hukum I Termodinamika — Anti-Gravity Agent</title>
+  <title>Level 2: Hukum 1 Termodinamika — ThermoExplore</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/quiz.css">
+  <style>
+    .l-accent { color: #6366F1; }
+    .l-bg { background: linear-gradient(135deg,#EEF2FF,#E0E7FF); border-color: #6366F1; }
+    .l-badge { background: color: #4F46E5; background: #E0E7FF;; }
+    .l-header { background: linear-gradient(135deg,#6366F1,#4F46E5); }
+    .tab-btn.active { background: linear-gradient(135deg,#6366F1,#4F46E5); }
+    .open-answer { width: 100%; min-height: 120px; padding: 12px; border: 1px solid #CBD5E1; border-radius: 8px; font-family: inherit; font-size: 0.95rem; resize: vertical; margin-top: 10px; }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin-bottom: 20px; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
+    .indicator-answer { display:none; margin-top: 15px; padding: 15px; background: #ECFDF5; border: 1px solid #10B981; border-radius: 8px; color: #065F46; font-size: 0.9rem; }
+  </style>
 </head>
 <body>
-<div id="loading-screen"><div class="energy-pulse"></div><div class="loading-text">⚡ Memuat Level 2...</div></div>
+<div id="loading-screen"><div class="energy-pulse"></div><div class="loading-text">🌋 Memuat Level 2...</div></div>
 <div id="page-transition"></div>
 
 <nav class="nav-bar">
-  <a href="map.html" class="nav-logo">Anti<span>Gravity</span></a>
+  <a href="map.html" class="nav-logo">Thermo<span>Explore</span></a>
   <ul class="nav-links">
     <li><a href="map.html">🗺️ Peta Misi</a></li>
     <li><a href="dashboard.html">📊 Leaderboard</a></li>
@@ -23,11 +34,12 @@
 <div class="page-wrapper challenge-page">
   <div class="challenge-wrapper">
 
+    <!-- Header -->
     <div class="level-header">
       <div class="level-header-left">
-        <div class="level-badge" style="background:#EDE9FE;color:#7C3AED;">⚡ LEVEL 2 · PULAU ENERGI</div>
-        <div class="level-title">Hukum I Termodinamika</div>
-        <div class="level-subtitle">Energi dalam (U), Kalor (Q), dan Kerja (W) pada berbagai proses • 4 Tantangan</div>
+        <div class="level-badge l-badge">LEVEL 2</div>
+        <div class="level-title">Hukum 1 Termodinamika</div>
+        <div class="level-subtitle">Energi dan Aplikasinya • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
       </div>
       <div class="level-header-right">
         <div class="xp-counter">
@@ -41,236 +53,483 @@
       </div>
     </div>
 
+    <!-- Tabs -->
     <div class="challenge-tabs">
-      <button class="tab-btn active" id="tab-ct" onclick="switchTab('ct')">🔍 Critical Thinking</button>
-      <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 Systemic Thinking</button>
-      <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 Scientific Thinking</button>
-      <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 Innovative Thinking</button>
+      <button class="tab-btn active" id="tab-quiz" onclick="switchTab('quiz')">📝 Kegiatan Awal (Quiz)</button>
+      <button class="tab-btn" id="tab-ct" onclick="switchTab('ct')">🔍 1. Critical Thinking</button>
+      <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 2. Systemic Thinking</button>
+      <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 3. Scientific Thinking</button>
+      <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 4. Innovative Thinking</button>
     </div>
 
-    <!-- CT -->
-    <div id="panel-ct" class="challenge-card">
-      <div class="challenge-card-title">🔍 Tantangan 1 — Critical Thinking</div>
-      <div class="challenge-card-desc" style="margin-bottom:20px;">Menganalisis penerapan Hukum I Termodinamika (ΔU = Q − W) pada berbagai konteks kehidupan nyata secara kritis dan evaluatif.</div>
-
-      <div class="discussion-banner">
-        <div class="disc-icon">👥</div>
-        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Diskusikan: Bagaimana energi berpindah dalam skenario berikut? Mana yang Q dan mana yang W?</p></div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
-      </div>
-
-      <div class="scenario-box">
-        <div class="scenario-label">📍 Konteks: Mesin Pompa Angin Sepeda</div>
-        <div class="scenario-text">Seorang mekanik menggunakan pompa tangan untuk memompa ban sepeda. Saat dipompa, udara terkompresi dan suhu udara dalam pompa meningkat. Setelah berhenti memompa, bagian bawah pompa terasa hangat. Data: pompa menghasilkan kerja sebesar W = 120 J pada udara; udara melepas kalor ke lingkungan Q = 30 J.</div>
-        <div class="scenario-data"><span class="data-chip">W = 120 J (kerja pada gas)</span><span class="data-chip">Q = −30 J (kalor keluar)</span></div>
-      </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🎯 Soal Evaluasi — Hukum I</div>
-        <div class="question-text">Berapakah perubahan energi dalam (ΔU) udara dalam pompa? (Konvensi: Q positif = masuk sistem; W positif = sistem melakukan kerja)</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('ct',0,true,this)"><span class="option-key">A</span>ΔU = Q + W = −30 + 120 = +90 J (energi dalam bertambah)</button>
-          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">B</span>ΔU = Q − W = −30 − 120 = −150 J (energi dalam berkurang)</button>
-          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">C</span>ΔU = Q × W = −30 × 120 = −3600 J</button>
-          <button class="option-btn" onclick="answerQ('ct',0,false,this)"><span class="option-key">D</span>ΔU = 0 karena proses siklik</button>
-        </div>
-        <div class="feedback-box" id="fb-ct-0">
-          <div class="feedback-icon" id="fb-ct-0-icon"></div><div class="feedback-title" id="fb-ct-0-title"></div>
-          <div class="feedback-desc" id="fb-ct-0-desc"></div>
+    <!-- ======= QUIZ AWAL ======= -->
+    <div id="panel-quiz" class="challenge-card">
+      <div class="challenge-card-header">
+        <div>
+          <div class="challenge-card-title">📝 Kegiatan Awal</div>
+          <div class="challenge-card-desc">10 soal quiz pilihan ganda</div>
         </div>
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🎯 Soal Interpretasi</div>
-        <div class="question-text">Kenapa bagian bawah pompa terasa hangat setelah digunakan? Mana penjelasan yang PALING tepat secara termodinamika?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">A</span>Gesekan antara piston dan tabung menghasilkan panas tambahan</button>
-          <button class="option-btn" onclick="answerQ('ct',1,true,this)"><span class="option-key">B</span>Sebagian energi dalam yang bertambah berpindah sebagai kalor ke dinding pompa</button>
-          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">C</span>Udara bertekanan tinggi menghasilkan panas dari pergerakan molekul yang lebih cepat saja</button>
-          <button class="option-btn" onclick="answerQ('ct',1,false,this)"><span class="option-key">D</span>Energi kimia dalam logam pompa berubah menjadi panas</button>
-        </div>
-        <div class="feedback-box" id="fb-ct-1">
-          <div class="feedback-icon" id="fb-ct-1-icon"></div><div class="feedback-title" id="fb-ct-1-title"></div>
-          <div class="feedback-desc" id="fb-ct-1-desc"></div>
-        </div>
-      </div>
-
-      <div class="reflection-box">
-        <div class="reflection-title">🌟 Refleksi</div>
-        <div class="reflection-items">
-          <div class="reflection-item">
-            <label>Bagaimana Hukum I Termodinamika berkaitan dengan kekekalan energi? Jelaskan!</label>
-            <textarea placeholder="Tulis refleksimu..." id="ref-ct"></textarea>
+      
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">1. Apa yang dijelaskan oleh Hukum I Termodinamika?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q1" value="False"> A) Energi dapat diciptakan dan dimusnahkan</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q1" value="True"> B) Energi hanya dapat berubah bentuk, tidak dapat diciptakan atau dimusnahkan</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q1" value="False"> C) Energi hanya dapat bertambah</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q1" value="False"> D) Energi tidak dapat digunakan dalam sistem termodinamika</label></div>
           </div>
         </div>
-      </div>
-      <div style="margin-top:20px;text-align:right;">
-        <button class="btn btn-primary" onclick="submitChallenge('ct')">✅ Selesai →</button>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">2. Jika sistem menerima kalor Q dan melakukan usaha W, bagaimana perubahan energi dalam sistem dihitung menurut Hukum I Termodinamika?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q2" value="False"> A) ∆U = Q + W</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q2" value="True"> B) ∆U = Q - W</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q2" value="False"> C) ∆U = Q</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q2" value="False"> D) ∆U = -W</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">3. Pada proses isotermik, perubahan energi dalam sistem (∆U) adalah:</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q3" value="False"> A) ∆U > 0</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q3" value="False"> B) ∆U < 0</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q3" value="True"> C) ∆U = 0</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q3" value="False"> D) ∆U = Q</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">4. Dalam proses isotermik, usaha yang dilakukan oleh sistem dapat dihitung dengan rumus:</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q4" value="True"> A) W = nRT ln(V_2/V_1)</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q4" value="False"> B) W = P∆V</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q4" value="False"> C) W = ∆U</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q4" value="False"> D) W = Q</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">5. Pada proses isobarik, usaha yang dilakukan oleh sistem dapat dihitung dengan rumus:</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q5" value="False"> A) W = nRT ln(V_2/V_1)</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q5" value="True"> B) W = P(V_2 - V_1)</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q5" value="False"> C) W = ∆U</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q5" value="False"> D) W = 0</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">6. Proses isokhorik adalah proses perubahan keadaan gas yang terjadi pada:</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q6" value="False"> A) Tekanan tetap</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q6" value="True"> B) Volume tetap</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q6" value="False"> C) Suhu tetap</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q6" value="False"> D) Kalor tetap</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">7. Dalam proses isokhorik, usaha yang dilakukan oleh sistem adalah:</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q7" value="False"> A) W = P∆V</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q7" value="True"> B) W = 0</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q7" value="False"> C) W = Q</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q7" value="False"> D) W = nRT ln(V_2/V_1)</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">8. Contoh penerapan Hukum I Termodinamika dalam kehidupan sehari-hari adalah:</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q8" value="True"> A) Pembangkit listrik yang mengubah energi panas menjadi energi listrik</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q8" value="False"> B) Sistem ventilasi yang mengubah energi kimia menjadi energi mekanik</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q8" value="False"> C) Penggunaan energi dalam baterai</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q8" value="False"> D) Semua pilihan benar</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">9. Pada proses isobarik, hubungan antara kalor (Q), usaha (W), dan perubahan energi dalam (∆U) adalah:</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q9" value="False"> A) ∆U = Q + W</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q9" value="False"> B) ∆U = Q - W</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q9" value="True"> C) ∆U = Q - P(V_2 - V_1)</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q9" value="False"> D) ∆U = 0</label></div>
+          </div>
+        </div>
+        
+        <div class="question-block" style="margin-bottom: 20px;">
+          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">10. Apa yang terjadi pada Hukum I Termodinamika ketika sistem tidak menerima kalor namun diberikan usaha dari luar?</div>
+          <div class="options-grid" style="display: block; padding-left: 20px;">
+            <div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q10" value="False"> A) Energi dalam berkurang</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q10" value="True"> B) Energi dalam bertambah sesuai dengan usaha yang diberikan</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q10" value="False"> C) Energi dalam tetap</label></div><div style="margin-bottom: 8px;"><label><input type="radio" name="l2_q10" value="False"> D) Energi dalam berkurang sesuai dengan usaha yang diberikan</label></div>
+          </div>
+        </div>
+        
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="submitQuiz()">✅ Selesai – Lanjut ke Tantangan 1 →</button>
       </div>
     </div>
 
-    <!-- ST -->
+    <!-- ======= CHALLENGE 1: CRITICAL THINKING ======= -->
+    <div id="panel-ct" class="challenge-card" style="display:none;">
+      <div class="challenge-card-header">
+        <div>
+          <div class="challenge-card-title">🔍 1. Berpikir Kritis (Critical Thinking)</div>
+        </div>
+      </div>
+      <div class="discussion-banner">
+        <div class="disc-icon">👥</div>
+        <div class="disc-text">
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
+      </div>
+      <div class="scenario-box">
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Kritis
+Pemanas air listrik yang kamu gunakan di rumah mengkonsumsi sekitar 5.000 watt listrik. Dalam hal ini, energi listrik yang diterima oleh pemanas air diubah menjadi energi panas untuk memanaskan air. Sesuai dengan Hukum I Termodinamika, perubahan energi dalam sistem dapat dihitung dengan rumus:
+∆U = Q − W
+Di mana:
+∆U adalah perubahan energi dalam sistem,
+Q adalah kalor yang diterima oleh sistem (energi panas),
+W adalah usaha yang dilakukan oleh sistem.
+</div>
+        </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Interpretasi (Interpretation)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Pemanas air yang kamu gunakan mengkonsumsi 5.000 watt listrik, dan biaya listrik yang dikenakan adalah Rp1.500 per kilowatt jam. Berdasarkan informasi yang diberikan, jelaskan berapa biaya yang harus dikeluarkan setiap jam untuk menjalankan pemanas air. Menggunakan rumus biaya energi = (konsumsi daya x biaya per kilowatt jam), hitung biaya pengoperasian pemanas air tersebut dalam Rupiah.</div>
+      <textarea class="open-answer" id="l2_ct_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_0')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_ct_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Daya pemanas air adalah 5.000 watt. Karena 1.000 watt = 1 kilowatt, maka 5.000 watt = 5 kilowatt. Biaya listrik yang dikenakan adalah Rp1.500 per kWh. Jika pemanas air digunakan selama 1 jam, maka energi yang dipakai adalah 5 kWh. Biaya pengoperasian per jam dihitung dengan rumus: biaya = konsumsi energi × tarif listrik. Jadi, biaya per jam = 5 kWh × Rp1.500 = Rp7.500. Dengan demikian, biaya yang harus dikeluarkan untuk menjalankan pemanas air selama 1 jam adalah Rp7.500.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analisis (Analysis)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan konsumsi energi yang sudah kamu hitung, jika kamu menggunakan pemanas air selama 1 jam setiap hari, berapa biaya operasional yang harus kamu bayar dalam 1 bulan dan 1 tahun? Jelaskan bagaimana waktu penggunaan harian memengaruhi total biaya energi.</div>
+      <textarea class="open-answer" id="l2_ct_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_1')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_ct_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Jika pemanas air digunakan 1 jam setiap hari, maka biaya operasional hariannya adalah Rp7.500. Untuk menghitung biaya bulanan, dilakukan perkalian Rp7.500 × 30 hari = Rp225.000. Untuk biaya tahunan, dilakukan perkalian Rp7.500 × 365 hari = Rp2.737.500. Jika memakai pendekatan 12 bulan × Rp225.000, hasilnya sekitar Rp2.700.000 per tahun. Perbedaan ini muncul karena jumlah hari dalam setahun tidak tepat 360 hari. Waktu penggunaan harian sangat memengaruhi total biaya energi. Semakin lama pemanas air digunakan setiap hari, semakin besar energi listrik yang dipakai dan semakin tinggi biaya listrik yang harus dibayar. Hubungan ini bersifat berbanding lurus, artinya jika waktu penggunaan naik dua kali lipat, biaya juga naik kira-kira dua kali lipat.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Evaluasi (Evaluation)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan data yang diberikan, Apa yang bisa dilakukan untuk mengurangi pemborosan energi dalam penggunaan pemanas air? Bagaimana perubahan suhu (misalnya, menurunkan suhu dari 140 derajat menjadi 120 derajat) dapat mengurangi konsumsi energi dan tagihan listrik? Apakah perubahan ini sebanding dengan penghematan yang dihasilkan?</div>
+      <textarea class="open-answer" id="l2_ct_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_2')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_ct_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Untuk mengurangi pemborosan energi, pengguna dapat melakukan beberapa langkah, seperti mengurangi durasi pemakaian, menurunkan suhu setelan, mematikan pemanas saat tidak diperlukan, dan menggunakan pemanas air hanya ketika dibutuhkan. Menurunkan suhu dari 140 derajat menjadi 120 derajat dapat mengurangi konsumsi energi karena kalor yang dibutuhkan untuk memanaskan air bergantung pada selisih suhu, sesuai prinsip Q = m c ΔT. Jika suhu awal air tetap, maka target suhu yang lebih rendah membutuhkan energi yang lebih sedikit. Misalnya, jika suhu awal air 30°C, maka pemanasan ke 140°C membutuhkan kenaikan suhu 110°C, sedangkan ke 120°C hanya 90°C. Pengurangan kebutuhan energi adalah 20/110 = 0,1818 atau sekitar 18,18%. Ini berarti penurunan suhu setelan dapat memberi penghematan yang nyata. Jika kebutuhan air panas tetap terpenuhi, maka perubahan ini sebanding bahkan menguntungkan, karena konsumsi energi turun tanpa menghilangkan fungsi utama pemanas air.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Penjelasan (Explanation)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan prinsip termodinamika, Jelaskan proses konversi energi dalam pemanas air, dari penerimaan energi listrik hingga perubahan menjadi energi panas yang digunakan untuk memanaskan air. Mengapa energi yang hilang dalam bentuk panas yang terbuang dapat mengurangi efisiensi sistem?</div>
+      <textarea class="open-answer" id="l2_ct_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_ct_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Dalam pemanas air listrik, energi listrik yang masuk ke alat diubah menjadi energi panas melalui elemen pemanas. Ketika arus listrik mengalir melalui elemen yang memiliki hambatan, terjadi proses pemanasan Joule, yaitu energi listrik berubah menjadi kalor. Kalor ini kemudian berpindah ke air sehingga suhu air meningkat. Dalam kerangka Hukum I Termodinamika, energi yang diterima sistem menambah energi dalam air sehingga air menjadi lebih panas. Namun, tidak semua energi listrik yang masuk benar-benar digunakan untuk memanaskan air. Sebagian energi hilang ke lingkungan dalam bentuk panas yang terbuang, misalnya melalui dinding tangki, pipa, atau udara sekitar. Kehilangan energi ini mengurangi efisiensi sistem karena energi yang dibayar tidak seluruhnya dipakai untuk tujuan utama, yaitu menaikkan suhu air. Semakin besar panas yang terbuang, semakin rendah efisiensi pemanas air.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inferensi (Inference)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan hasil analisis yang telah kamu lakukan, apa kesimpulan yang dapat kamu tarik mengenai efisiensi pemanas air? Apakah ada pemborosan energi dalam proses ini? Bagaimana cara untuk mengurangi pemborosan energi tersebut?</div>
+      <textarea class="open-answer" id="l2_ct_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_4')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_4')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_ct_4" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Berdasarkan hasil analisis, dapat disimpulkan bahwa pemanas air listrik mampu bekerja efektif untuk memanaskan air, tetapi tidak selalu efisien jika digunakan terlalu lama atau pada suhu terlalu tinggi. Ada potensi pemborosan energi karena konsumsi dayanya besar, yaitu 5 kW, sehingga biaya operasionalnya juga tinggi. Pemborosan juga dapat terjadi jika panas banyak hilang ke lingkungan atau jika alat tetap menyala saat air panas tidak digunakan. Untuk mengurangi pemborosan energi, pengguna dapat menurunkan suhu setelan, membatasi lama pemakaian, memperbaiki isolasi tangki atau pipa, dan mematikan alat saat tidak diperlukan. Jadi, efisiensi pemanas air sangat dipengaruhi oleh cara penggunaan dan seberapa besar energi yang hilang selama proses pemanasan.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Regulasi Diri (Self-Regulation)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah kamu selesai melakukan analisis dan penarikan kesimpulan, presentasikan hasil refleksi kamu mengenai pemahamanmu tentang konversi energi dalam sistem pemanas air.</div>
+      <textarea class="open-answer" id="l2_ct_5" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_ct_5')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_ct_5')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_ct_5" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Setelah melakukan analisis, saya memahami bahwa pemanas air listrik bekerja dengan mengubah energi listrik menjadi energi panas untuk menaikkan suhu air. Saya juga memahami bahwa biaya listrik sangat dipengaruhi oleh daya alat, lama penggunaan, dan suhu yang diatur. Bagian yang penting untuk saya refleksikan adalah bahwa alat yang terlihat sederhana ternyata dapat mengonsumsi energi sangat besar jika digunakan terus-menerus. Saya juga menyadari bahwa efisiensi tidak hanya bergantung pada alat, tetapi juga pada perilaku pengguna. Jika masih ada bagian yang membingungkan, saya akan mempelajari kembali hubungan antara daya, energi, kalor, dan efisiensi, serta mencoba menghitung ulang beberapa contoh lain agar pemahaman saya lebih kuat. Dengan refleksi ini, saya menjadi lebih sadar pentingnya menggunakan energi secara hemat dan rasional.
+      </div>
+    </div>
+    
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="submitChallenge('ct')">✅ Selesai – Lanjut ke Tantangan 2 →</button>
+      </div>
+    </div>
+
+    <!-- ======= CHALLENGE 2: SYSTEMIC THINKING ======= -->
     <div id="panel-st" class="challenge-card" style="display:none;">
-      <div class="challenge-card-title">🔗 Tantangan 2 — Systemic Thinking</div>
-      <div class="challenge-card-desc" style="margin-bottom:20px;">Menganalisis hubungan antar variabel Q, W, dan ΔU dalam berbagai proses termodinamika (isotermal, adiabatik, isobarik, isokhorik).</div>
-
+      <div class="challenge-card-header">
+        <div>
+          <div class="challenge-card-title">🔗 2. Berpikir Sistemik (Systemic Thinking)</div>
+        </div>
+      </div>
       <div class="discussion-banner">
         <div class="disc-icon">👥</div>
-        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Buat tabel hubungan: untuk setiap proses, apa nilai Q, W, dan ΔU-nya?</p></div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+        <div class="disc-text">
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
-
       <div class="scenario-box">
-        <div class="scenario-label">📍 Konteks: AC Ruangan</div>
-        <div class="scenario-text">Sebuah AC bekerja memindahkan kalor dari ruangan (dingin) ke luar ruangan (panas). Kompresor melakukan kerja W = 500 J pada refrigeran. Refrigeran menyerap kalor dari ruangan Q_in = 1200 J.</div>
-        <div class="scenario-data"><span class="data-chip">W_kompresor = 500 J</span><span class="data-chip">Q_serap = 1200 J</span></div>
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Sistemik
+Perhatikanlah ilustrasi sistem kulkas pada video dibawah ini!
+<div class="video-container" style="margin-top: 15px;"><iframe src="https://www.youtube.com/embed/EIP3pSio7-M" allowfullscreen></iframe></div>
+Pada video diatas sistem kulkas memiliki elemen-elemen dalam seperti kompresor, kondensor, evaporator, dan refrigeran, saling berinteraksi untuk menghasilkan efek pendinginan.
+</div>
+        </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Pemahaman Hubungan Dalam Sistem (Realize the Relationships Between the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan diagram yang diberikan, jelaskan bagaimana tekanan, volume, dan suhu berhubungan satu sama lain dalam proses pendinginan pada kulkas. Bagaimana Hukum I Termodinamika menjelaskan perubahan energi dalam sistem ini?</div>
+      <textarea class="open-answer" id="l2_st_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_0')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Analisis Sistem</div>
-        <div class="question-text">Berapa total kalor yang dilepaskan refrigeran ke udara luar? (Hukum I: Q_lepas = Q_serap + W)</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('st',0,true,this)"><span class="option-key">A</span>Q_lepas = 1200 + 500 = 1700 J</button>
-          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">B</span>Q_lepas = 1200 − 500 = 700 J</button>
-          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">C</span>Q_lepas = 500 J (hanya kerja kompresor)</button>
-          <button class="option-btn" onclick="answerQ('st',0,false,this)"><span class="option-key">D</span>Q_lepas = 1200 J (sama dengan yang diserap)</button>
-        </div>
-        <div class="feedback-box" id="fb-st-0">
-          <div class="feedback-icon" id="fb-st-0-icon"></div><div class="feedback-title" id="fb-st-0-title"></div>
-          <div class="feedback-desc" id="fb-st-0-desc"></div>
-        </div>
+      <div id="ans_l2_st_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Pada sistem kulkas, tekanan, volume, dan suhu refrigeran saling berhubungan selama siklus pendinginan. Ketika refrigeran dikompresi oleh kompresor, tekanannya naik dan biasanya suhunya juga naik karena kerja diberikan pada sistem. Pada tahap ini, volume spesifik refrigeran menjadi lebih kecil. Setelah itu, refrigeran mengalir ke kondensor dan melepaskan kalor ke lingkungan sehingga berubah dari gas bertekanan tinggi menjadi cair bertekanan tinggi. Selanjutnya refrigeran melewati katup ekspansi, sehingga tekanannya turun secara drastis, suhunya ikut turun, dan refrigeran masuk ke evaporator dalam kondisi sangat dingin. Di evaporator, refrigeran menyerap kalor dari ruang kulkas, lalu menguap kembali menjadi gas. Hubungan ini menunjukkan bahwa perubahan tekanan dapat memengaruhi suhu dan volume refrigeran, dan semuanya terjadi secara berurutan dalam satu sistem tertutup. Berdasarkan Hukum I Termodinamika, perubahan energi dalam sistem dijelaskan oleh perpindahan kalor dan kerja. Dalam kulkas, energi listrik digunakan untuk menjalankan kompresor agar refrigeran dapat memindahkan kalor dari dalam kulkas ke lingkungan luar. Jadi, energi tidak hilang, tetapi berubah bentuk dari energi listrik menjadi kerja kompresor dan perpindahan kalor.
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#EDE9FE;color:#7C3AED;">🔗 Proses Adiabatik</div>
-        <div class="question-text">Dalam proses adiabatik, Q = 0. Jika gas melakukan ekspansi adiabatik (W > 0), apa yang terjadi pada energi dalam gas?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('st',1,true,this)"><span class="option-key">A</span>ΔU = −W → energi dalam berkurang, suhu turun</button>
-          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">B</span>ΔU = 0 → tidak ada perubahan energi dalam</button>
-          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">C</span>ΔU = +W → energi dalam bertambah meski gas berekspansi</button>
-          <button class="option-btn" onclick="answerQ('st',1,false,this)"><span class="option-key">D</span>ΔU tidak dapat ditentukan tanpa data tekanan</button>
-        </div>
-        <div class="feedback-box" id="fb-st-1">
-          <div class="feedback-icon" id="fb-st-1-icon"></div><div class="feedback-title" id="fb-st-1-title"></div>
-          <div class="feedback-desc" id="fb-st-1-desc"></div>
-        </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analisis Sistem (Analysis of the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Jelaskan bagaimana perubahan tekanan dan volume refrigeran selama siklus pendinginan berhubungan dengan perubahan energi dalam sistem kulkas. Bagaimana komponen-komponen kulkas seperti kompresor dan evaporator berperan dalam proses pemindahan panas?</div>
+      <textarea class="open-answer" id="l2_st_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_1')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div style="margin-top:20px;text-align:right;">
-        <button class="btn btn-primary" onclick="submitChallenge('st')">✅ Selesai →</button>
+      <div id="ans_l2_st_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Selama siklus pendinginan, perubahan tekanan dan volume refrigeran berhubungan langsung dengan perubahan energi dalam sistem. Pada kompresor, refrigeran gas bertekanan rendah dikompresi menjadi gas bertekanan tinggi. Proses ini membutuhkan kerja, sehingga energi refrigeran meningkat dan suhunya naik. Di kondensor, refrigeran melepaskan kalor ke lingkungan luar. Energi dalam refrigeran berkurang karena sebagian kalor keluar, dan refrigeran berubah menjadi cair bertekanan tinggi. Setelah melewati katup ekspansi, tekanan refrigeran turun mendadak. Akibatnya, suhu refrigeran juga turun dan sebagian cairan dapat berubah menjadi campuran cair-gas bersuhu rendah. Di evaporator, refrigeran menyerap kalor dari ruang di dalam kulkas. Proses ini membuat refrigeran menguap dan membawa kalor dari dalam kulkas ke luar sistem. Kompresor berperan menaikkan tekanan agar refrigeran dapat bersirkulasi dan melepas panas di kondensor, sedangkan evaporator berperan sebagai tempat penyerapan kalor dari ruang kulkas. Dengan demikian, semua komponen kulkas bekerja sebagai satu sistem yang saling terkait untuk memindahkan panas dari suhu rendah ke suhu lebih tinggi dengan bantuan kerja dari kompresor.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Sintesis Sistem (Synthesis of the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan analisis sistem kulkas, apa modifikasi atau perubahan desain yang bisa diterapkan untuk meningkatkan efisiensi pemindahan panas? Misalnya, apakah perubahan pada desain kompresor atau penggunaan bahan baru bisa mengoptimalkan penggunaan energi dalam sistem kulkas?</div>
+      <textarea class="open-answer" id="l2_st_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_2')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_st_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Untuk meningkatkan efisiensi pemindahan panas pada kulkas, beberapa modifikasi desain dapat dilakukan. Pertama, menggunakan kompresor inverter agar kerja kompresor lebih stabil dan tidak sering hidup-mati, sehingga energi listrik lebih hemat. Kedua, memperbesar atau memperbaiki desain kondensor dan evaporator agar luas permukaan perpindahan kalor lebih besar dan proses pelepasan serta penyerapan panas menjadi lebih efektif. Ketiga, menggunakan bahan pipa dan sirip yang memiliki konduktivitas termal tinggi, seperti aluminium atau tembaga, agar aliran panas lebih cepat. Keempat, meningkatkan isolasi termal pada dinding kulkas supaya kalor dari luar tidak mudah masuk ke dalam. Kelima, memilih refrigeran yang lebih efisien dan ramah lingkungan, sehingga performa pendinginan meningkat dengan energi lebih kecil. Selain itu, desain aliran udara di dalam kulkas juga bisa diperbaiki agar pendinginan lebih merata. Semua perubahan ini bertujuan mengurangi beban kerja kompresor dan meningkatkan efektivitas perpindahan kalor, sehingga sistem kulkas menjadi lebih efisien.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Evaluasi Sistem (Evaluation of the Systems)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Evaluasilah sistem kulkas berdasarkan prinsip Hukum I Termodinamika. Apakah sistem kulkas yang ada sudah berfungsi secara efisien dalam mengubah energi panas menjadi kerja mekanik dan mendinginkan udara? Jika tidak, apa yang perlu diperbaiki dalam desain atau penggunaan sistem untuk meningkatkan efisiensinya?</div>
+      <textarea class="open-answer" id="l2_st_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_st_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_st_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_st_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Berdasarkan Hukum I Termodinamika, sistem kulkas tidak mengubah energi panas menjadi kerja mekanik, tetapi justru menggunakan kerja mekanik atau energi listrik untuk memindahkan kalor dari ruang dingin ke lingkungan yang lebih hangat. Jadi, jika ditanya apakah kulkas efisien dalam mengubah panas menjadi kerja, rumusan itu kurang tepat. Yang benar adalah menilai apakah kulkas efisien dalam menggunakan energi listrik untuk memindahkan kalor. Secara umum, kulkas sudah bekerja cukup efisien, karena mampu menjaga suhu ruang penyimpanan tetap rendah dengan bantuan siklus refrigerasi. Namun, sistem ini belum selalu optimal. Kerugian energi masih dapat terjadi karena kebocoran panas dari luar, isolasi yang kurang baik, kerja kompresor yang berlebihan, kondensor yang kotor, atau refrigeran yang tidak bekerja optimal. Efisiensi sistem dapat ditingkatkan dengan memperbaiki isolasi, membersihkan kondensor secara rutin, memakai kompresor inverter, memilih refrigeran yang sesuai, dan memperbaiki desain heat exchanger. Jadi, kulkas modern sudah cukup efektif, tetapi masih dapat ditingkatkan efisiensinya melalui desain dan penggunaan yang lebih baik.
+      </div>
+    </div>
+    
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="submitChallenge('st')">✅ Selesai – Lanjut ke Tantangan 3 →</button>
       </div>
     </div>
 
-    <!-- SCI -->
+    <!-- ======= CHALLENGE 3: SCIENTIFIC THINKING ======= -->
     <div id="panel-sci" class="challenge-card" style="display:none;">
-      <div class="challenge-card-title">🔬 Tantangan 3 — Scientific Thinking</div>
-      <div class="challenge-card-desc" style="margin-bottom:20px;">Merancang investigasi eksperimental untuk memverifikasi Hukum I Termodinamika melalui kalorimetri sederhana.</div>
-
+      <div class="challenge-card-header">
+        <div>
+          <div class="challenge-card-title">🔬 3. Berpikir Ilmiah (Scientific Thinking)</div>
+        </div>
+      </div>
       <div class="discussion-banner">
         <div class="disc-icon">👥</div>
-        <div class="disc-text"><h4>Diskusi Kelompok — Maks. 5 Menit</h4><p>Rancang prosedur kalorimetri. Bagaimana mengukur Q, W, dan ΔU secara eksperimental?</p></div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+        <div class="disc-text">
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
-
       <div class="scenario-box">
-        <div class="scenario-label">📍 Eksperimen Kalorimeter</div>
-        <div class="scenario-text">Tim riset menggunakan kalorimeter untuk mengukur kalor yang diserap oleh 200 gram air. Pemanas listrik (100 W) menyala selama 60 detik. Suhu air naik dari 25°C menjadi 38.8°C. (c_air = 4200 J/kg·°C)</div>
-        <div class="scenario-data"><span class="data-chip">m = 200 g = 0.2 kg</span><span class="data-chip">P = 100 W, t = 60 s</span><span class="data-chip">ΔT = 13.8°C</span></div>
-      </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Analisis Data</div>
-        <div class="question-text">Hitunglah kalor Q yang diserap air (Q = m·c·ΔT) dan bandingkan dengan energi listrik W (W = P·t). Apa kesimpulannya?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('sci',0,true,this)"><span class="option-key">A</span>Q = 0.2 × 4200 × 13.8 = 1159 J; W = 100 × 60 = 6000 J; selisih (4841 J) hilang sebagai kalor ke lingkungan</button>
-          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">B</span>Q = 6000 J; W = 1159 J; selisih berarti hukum konservasi energi dilanggar</button>
-          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">C</span>Q = W = 6000 J karena kalorimeter sempurna tidak ada energi yang hilang</button>
-          <button class="option-btn" onclick="answerQ('sci',0,false,this)"><span class="option-key">D</span>Q dan W tidak bisa dibandingkan karena satuannya berbeda</button>
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Ilmiah
+Kamu pasti sering menggunakan AC atau lemari es di rumah untuk menjaga suhu tetap nyaman atau mendinginkan makanan dan minuman. Namun, tahukah kamu bahwa AC dan lemari es ini sering kali mengonsumsi energi dalam jumlah besar? Bahkan, mesin pendingin ini bisa menjadi salah satu penyebab utama pemborosan energi di rumah. Untuk itu, kita perlu mencari tahu bagaimana sistem ini bekerja dan bagaimana energi yang digunakan dapat dioptimalkan agar lebih efisien.
+<div class="video-container" style="margin-top: 15px;"><iframe src="https://www.youtube.com/embed/2wktQVWASzU" allowfullscreen></iframe></div>
+</div>
         </div>
-        <div class="feedback-box" id="fb-sci-0">
-          <div class="feedback-icon" id="fb-sci-0-icon"></div><div class="feedback-title" id="fb-sci-0-title"></div>
-          <div class="feedback-desc" id="fb-sci-0-desc"></div>
-        </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inquiry (Inkuiri)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Identifikasilah masalah utama dalam sistem pendingin ruangan (AC) yang menyebabkan pemborosan energi melalui sumber-sumber rujukan yang relevan, seperti artikel ilmiah atau buku teks, untuk memahami prinsip efisiensi energi dalam sistem pendingin. Berdasarkan penelusuran yang kamu lakukan, apa penyebab utama pemborosan energi dalam sistem AC atau lemari es? Jelaskan hubungan antara efisiensi energi dan konversi energi dalam sistem pendinginan ini menggunakan Hukum I Termodinamika.</div>
+      <textarea class="open-answer" id="l2_sci_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_0')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="question-block">
-        <div class="question-label" style="background:#D1FAE5;color:#059669;">🔬 Inferensi Ilmiah</div>
-        <div class="question-text">Bagaimana cara meningkatkan akurasi eksperimen kalorimetri agar lebih sesuai dengan Hukum I Termodinamika?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('sci',1,true,this)"><span class="option-key">A</span>Menggunakan kalorimeter berinsulasi lebih baik (adiabatik ideal) untuk meminimalkan kebocoran kalor ke lingkungan</button>
-          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">B</span>Menggunakan air lebih banyak agar perubahan suhu lebih kecil dan mudah diukur</button>
-          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">C</span>Meningkatkan daya listrik agar mengurangi waktu eksperimen</button>
-          <button class="option-btn" onclick="answerQ('sci',1,false,this)"><span class="option-key">D</span>Mengabaikan kalor yang hilang karena nilainya dianggap kecil</button>
-        </div>
-        <div class="feedback-box" id="fb-sci-1">
-          <div class="feedback-icon" id="fb-sci-1-icon"></div><div class="feedback-title" id="fb-sci-1-title"></div>
-          <div class="feedback-desc" id="fb-sci-1-desc"></div>
-        </div>
+      <div id="ans_l2_sci_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Masalah utama pemborosan energi pada AC dan lemari es umumnya berasal dari perawatan yang buruk dan perpindahan panas yang tidak efisien. Pada AC, filter, coil, fin, dan saluran refrigeran yang kotor atau tidak terawat menyebabkan kinerja turun dan penggunaan energi naik. Pada lemari es, seal pintu yang bocor, pintu yang terlalu sering dibuka, serta kondensor yang kotor membuat sistem bekerja lebih berat. Secara termodinamika, menurut Hukum I Termodinamika, energi tidak hilang, tetapi berubah bentuk. Energi listrik yang masuk digunakan untuk menjalankan kompresor, lalu sistem memindahkan kalor dari ruang dingin ke lingkungan yang lebih hangat. Jika perpindahan kalor tidak efisien, maka diperlukan kerja listrik lebih besar untuk menghasilkan efek pendinginan yang sama. Jadi, semakin buruk perpindahan kalor dan semakin besar kebocoran beban pendinginan, semakin rendah efisiensi energi sistem.
       </div>
-
-      <div class="qr-scan-box" style="margin-top:16px;">
-        <div class="qr-icon">🔬</div>
-        <div class="qr-text"><strong>Laporan Eksperimen E-LKPD</strong><br>Dokumentasikan prosedur, data pengamatan, analisis, dan kesimpulan di platform E-LKPD.</div>
-        <div class="qr-code">AGA-LV2-SCI-003</div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analysis (Analisis)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan video yang telah kamu tonton, jelaskan bagaimana komponen-komponen AC seperti kompresor, kondensor, dan evaporator berinteraksi untuk memindahkan panas dan mengubah energi listrik menjadi energi kinetik dan panas. Sejauh mana perubahan tekanan dan volume refrigeran mempengaruhi pemborosan energi dalam sistem AC?</div>
+      <textarea class="open-answer" id="l2_sci_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_1')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div style="margin-top:20px;text-align:right;">
-        <button class="btn btn-primary" onclick="submitChallenge('sci')">✅ Selesai →</button>
+      <div id="ans_l2_sci_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Dalam sistem AC, kompresor memompa refrigeran dan menaikkan tekanannya sehingga suhu refrigeran ikut naik. Setelah itu refrigeran masuk ke kondensor, melepas kalor ke lingkungan luar, lalu berubah menjadi cair bertekanan tinggi. Refrigeran kemudian melewati alat ekspansi sehingga tekanannya turun tajam. Setelah itu refrigeran masuk ke evaporator dan menyerap kalor dari udara ruangan, sehingga udara menjadi lebih dingin. Interaksi ketiga komponen ini membentuk satu siklus tertutup pemindahan panas. Perubahan tekanan dan volume refrigeran sangat memengaruhi efisiensi. Jika kompresi tidak optimal, tekanan kondensasi terlalu tinggi, atau ekspansi tidak terkendali, kompresor harus bekerja lebih keras. Itu berarti energi listrik yang dipakai meningkat, sementara efek pendinginan tidak bertambah sebanding. Pemborosan energi juga meningkat saat coil kotor, aliran udara buruk, atau refrigeran tidak bersirkulasi pada kondisi yang dirancang.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inference (Inferensi)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan data yang kamu peroleh atau informasi yang diberikan, apa kesimpulan yang dapat kamu tarik mengenai efisiensi energi dalam sistem AC?</div>
+      <textarea class="open-answer" id="l2_sci_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_2')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_sci_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Berdasarkan prinsip kerja dan data umum efisiensi sistem pendingin, dapat disimpulkan bahwa efisiensi energi AC tidak hanya ditentukan oleh besar daya listrik, tetapi oleh seberapa efektif sistem memindahkan kalor. Sistem yang bersih, tertutup rapat, dan bekerja pada kondisi operasi yang sesuai akan lebih hemat dibanding sistem yang kotor, bocor, atau dioperasikan secara berlebihan. Kesimpulan utamanya adalah: pemborosan energi pada AC atau lemari es terjadi ketika energi listrik yang masuk tidak maksimal menghasilkan efek pendinginan, karena sebagian besar tambahan kerja habis untuk mengatasi hambatan sistem, kebocoran panas, atau kondisi operasi yang tidak ideal. Maka, efisiensi dapat ditingkatkan dengan perawatan rutin, setting suhu yang wajar, pembersihan coil, dan pencegahan kebocoran udara atau dingin.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Argumentation (Argumentasi)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Selanjutnya kaitkan bagaimana hasil temuanmu dengan teori Hukum I Termodinamika?</div>
+      <textarea class="open-answer" id="l2_sci_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_sci_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_sci_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_sci_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Hasil temuan tersebut sesuai dengan Hukum I Termodinamika. Energi listrik yang masuk ke AC tidak musnah, tetapi berubah menjadi kerja kompresor dan akhirnya terkait dengan kalor yang dipindahkan dari ruang dingin ke lingkungan luar. Jika sistem bekerja buruk, energi tetap terpakai, tetapi lebih banyak digunakan untuk mengatasi rugi-rugi, bukan untuk pendinginan yang berguna. Itu sebabnya AC yang filter dan coil-nya kotor atau lemari es yang seal pintunya bocor akan mengonsumsi listrik lebih besar. Jadi, teori Hukum I Termodinamika mendukung temuan bahwa efisiensi rendah bukan karena energi hilang, tetapi karena konversi dan pemindahan energinya tidak optimal. Dengan kata lain, pemborosan energi adalah tanda bahwa lebih banyak kerja dibutuhkan untuk hasil pendinginan yang sama.
+      </div>
+    </div>
+    
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="submitChallenge('sci')">✅ Selesai – Lanjut ke Tantangan 4 →</button>
       </div>
     </div>
 
-    <!-- INN -->
+    <!-- ======= CHALLENGE 4: INNOVATIVE THINKING ======= -->
     <div id="panel-inn" class="challenge-card" style="display:none;">
-      <div class="challenge-card-title">💡 Tantangan 4 — Innovative Thinking</div>
-      <div class="challenge-card-desc" style="margin-bottom:20px;">Merancang sistem pemanas air hemat energi berbasis Hukum I Termodinamika untuk skala rumah tangga.</div>
-
+      <div class="challenge-card-header">
+        <div>
+          <div class="challenge-card-title">💡 4. Berpikir Inovatif (Innovative Thinking)</div>
+        </div>
+      </div>
       <div class="discussion-banner">
         <div class="disc-icon">👥</div>
-        <div class="disc-text"><h4>Sesi Inovasi Tim — Maks. 5 Menit</h4><p>Gunakan pengetahuan Hukum I untuk merancang sistem yang mengoptimalkan konversi energi!</p></div>
-        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all;font-size:0.8rem;padding:10px 16px;">▶️ Mulai Timer</button>
+        <div class="disc-text">
+          <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
+          <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="startTimer(300)" style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
       </div>
-
       <div class="scenario-box">
-        <div class="scenario-label">📍 Tantangan Inovasi</div>
-        <div class="scenario-text">Sebuah keluarga ingin mengurangi tagihan listrik pemanas air. Timmu diminta merancang sistem "Solar Water Heater" sederhana berbasis Hukum I Termodinamika. Sumber energi tersedia: sinar matahari, dan bahan-bahan tersedia adalah pipa hitam, kotak kayu berinsulasi, dan kaca.</div>
-      </div>
+          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Inovatif
+Gambar diatas menunjukan sering terjadinya permasalahan pemanas air dalam rumah tangga. Di rumahmu, kamu pasti sering menggunakan pemanas air untuk keperluan mandi atau memasak. Namun, pemanas air yang ada di rumah bisa saja boros energi dan tidak efisien. Seringkali, sistem pemanas air yang lama atau tidak terawat bisa menghabiskan lebih banyak energi daripada yang seharusnya.
 
-      <div class="question-block">
-        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">💡 Analisis Inovatif</div>
-        <div class="question-text">Bagaimana Hukum I Termodinamika diterapkan dalam Solar Water Heater tersebut?</div>
-        <div class="options-grid">
-          <button class="option-btn" onclick="answerQ('inn',0,true,this)"><span class="option-key">A</span>Energi radiasi matahari (Q) diserap pipa hitam → diubah menjadi energi dalam (ΔU) air → suhu air meningkat; sistem mendekati adiabatik dengan insulasi kotak</button>
-          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">B</span>Air melakukan kerja (W) pada sinar matahari untuk menghasilkan kalor</button>
-          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">C</span>Energi diciptakan dari nol oleh panel surya tanpa perlu sumber eksternal</button>
-          <button class="option-btn" onclick="answerQ('inn',0,false,this)"><span class="option-key">D</span>Proses ini tidak berhubungan dengan Hukum I karena tidak ada kerja yang dilakukan</button>
+Kamu pernah merasa kecewa saat pemanas air di rumahmu tidak bekerja seefisien yang diinginkan? Mungkin ada masalah seperti penumpukan sedimen, kesalahan desain, atau pengaturan suhu yang tidak tepat. Hal-hal ini dapat menyebabkan pemborosan energi yang cukup besar.
+</div>
         </div>
-        <div class="feedback-box" id="fb-inn-0">
-          <div class="feedback-icon" id="fb-inn-0-icon"></div><div class="feedback-title" id="fb-inn-0-title"></div>
-          <div class="feedback-desc" id="fb-inn-0-desc"></div>
-        </div>
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Flexibility (Fleksibilitas)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan pengalaman pribadi atau kasus yang pernah terjadi, apa solusi teknis dan non-teknis yang bisa kamu usulkan untuk mengurangi pemborosan energi pada sistem pemanas air? Jelaskan bagaimana perubahan perilaku pengguna atau pengaturan suhu dapat mempengaruhi efisiensi energi pada pemanas air.</div>
+      <textarea class="open-answer" id="l2_inn_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_0')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_0')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div class="question-block" style="margin-top:20px;">
-        <div class="question-label" style="background:#FCE7F3;color:#DB2777;">✏️ Rancangan Inovatif</div>
-        <div class="question-text">Deskripsikan desain Solar Water Heater-mu! Meliputi: komponen, mekanisme kerja, dan estimasi efisiensi energi.</div>
-        <textarea class="open-answer" id="inn-open" placeholder="Contoh: Rancangan kami terdiri dari pipa tembaga berwarna hitam (absorber) yang diletakkan dalam kotak kayu berlapis styrofoam (insulator) dan ditutup kaca (greenhouse effect). Air mengalir melalui pipa, menyerap Q dari matahari → ΔU air meningkat → air panas naik ke tangki penyimpanan (konveksi alami). Aplikasi Hukum I: ΔU = Q − W, dengan W≈0 sehingga ΔU ≈ Q..."></textarea>
+      <div id="ans_l2_inn_0" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Untuk mengurangi pemborosan energi pada sistem pemanas air, solusi yang dapat diusulkan tidak hanya bersifat teknis, tetapi juga non-teknis. Dari sisi teknis, pemanas air perlu dibersihkan secara berkala agar tidak terjadi penumpukan sedimen yang menghambat perpindahan panas. Selain itu, isolasi pada tangki dan pipa air panas perlu diperbaiki agar panas tidak banyak terbuang ke lingkungan. Penggunaan termostat yang akurat juga penting supaya pemanas tidak bekerja melebihi suhu yang dibutuhkan. Dari sisi non-teknis, perilaku pengguna sangat berpengaruh terhadap efisiensi energi. Misalnya, mengatur suhu pada tingkat yang cukup, bukan terlalu tinggi, dapat menurunkan kebutuhan energi. Pengguna juga dapat mematikan pemanas saat tidak dipakai, mengurangi durasi penggunaan air panas, dan menggunakan air panas hanya saat diperlukan. Perubahan perilaku ini dapat mengurangi energi yang dibutuhkan sistem untuk menaikkan suhu air dan mempertahankan suhu tersebut. Jadi, efisiensi energi pada pemanas air dipengaruhi oleh kombinasi antara kondisi alat dan kebiasaan pengguna.
       </div>
-
-      <div class="qr-scan-box" style="margin-top:16px;">
-        <div class="qr-icon">💡</div>
-        <div class="qr-text"><strong>Portofolio Inovasi</strong><br>Upload rancangan, kalkulasi efisiensi, dan presentasi solusimu.</div>
-        <div class="qr-code">AGA-LV2-INN-004</div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Fluency (Kelancaran)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berikan beberapa ide inovatif untuk meningkatkan efisiensi energi dalam sistem pemanas air. Misalnya, bagaimana kamu bisa merancang ulang sistem atau menggunakan teknologi baru untuk membuatnya lebih efisien?</div>
+      <textarea class="open-answer" id="l2_inn_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_1')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_1')">👁️ Buka Indikator Jawaban</button>
       </div>
-
-      <div style="margin-top:20px;text-align:right;">
-        <button class="btn btn-primary" onclick="finishLevel()">🏁 Selesaikan Level 2 & Lihat Skor →</button>
+      <div id="ans_l2_inn_1" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Beberapa ide inovatif dapat diterapkan untuk meningkatkan efisiensi energi dalam sistem pemanas air. Pertama, menggunakan pemanas air dengan tangki berisolasi tinggi agar panas dapat bertahan lebih lama. Kedua, merancang sistem dengan sensor suhu otomatis yang mengatur kerja elemen pemanas sesuai kebutuhan nyata. Ketiga, menggunakan timer digital atau kontrol pintar agar pemanas hanya aktif pada jam-jam tertentu. Keempat, memanfaatkan pemanas air tenaga surya untuk mengurangi konsumsi listrik utama. Kelima, menggunakan heat pump water heater, yaitu sistem yang memindahkan kalor dari udara sekitar ke air sehingga jauh lebih efisien dibanding pemanas listrik resistif biasa. Keenam, mendesain ulang aliran air dan elemen pemanas agar perpindahan kalor lebih merata. Ketujuh, menggunakan material dengan konduktivitas termal yang baik pada elemen pemanas dan pipa. Dengan berbagai alternatif ini, sistem pemanas air dapat dibuat lebih hemat energi, lebih responsif, dan lebih sesuai dengan kebutuhan pengguna.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Creative Thinking (Berpikir Kreatif)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Dengan memanfaatkan prinsip Hukum I Termodinamika, Bagaimana kamu akan merancang sistem pemanas air yang lebih efisien?</div>
+      <textarea class="open-answer" id="l2_inn_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_2')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_2')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_inn_2" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Berdasarkan Hukum I Termodinamika, sistem pemanas air yang lebih efisien harus dirancang agar sebanyak mungkin energi yang masuk berubah menjadi kalor yang benar-benar diterima air, dan sesedikit mungkin hilang ke lingkungan. Oleh karena itu, saya akan merancang pemanas air dengan elemen pemanas efisien, tangki berisolasi vakum atau busa termal berkualitas tinggi, serta sensor suhu cerdas yang dapat memutus arus ketika suhu target tercapai. Sistem ini juga dapat dilengkapi dengan mode pemanasan bertahap, sehingga elemen pemanas tidak selalu bekerja pada daya maksimum. Selain itu, panas sisa dari air buangan atau udara sekitar dapat dimanfaatkan kembali melalui sistem pemulihan panas sederhana. Dengan desain seperti ini, energi listrik tidak banyak terbuang, perpindahan panas ke air menjadi optimal, dan kerja sistem menjadi lebih efisien. Prinsip utamanya adalah menekan kehilangan energi dan memaksimalkan perpindahan kalor yang berguna ke air.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 The Capacity to Identify Issues (Mengidentifikasi Permasalahan)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berdasarkan pengalaman dan penelitian yang kamu lakukan, Identifikasi titik lemah dalam desain atau proses termodinamika yang perlu diperbaiki untuk meningkatkan efisiensi energi.</div>
+      <textarea class="open-answer" id="l2_inn_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_3')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_3')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_inn_3" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Titik lemah utama dalam sistem pemanas air yang menyebabkan pemborosan energi biasanya terdapat pada penumpukan sedimen, isolasi yang buruk, pengaturan suhu yang terlalu tinggi, dan kerja pemanas yang terus-menerus meskipun tidak diperlukan. Sedimen yang menumpuk pada elemen pemanas atau dasar tangki dapat menghambat perpindahan kalor ke air, sehingga alat membutuhkan energi lebih besar untuk mencapai suhu yang sama. Isolasi yang buruk menyebabkan panas cepat hilang ke lingkungan. Selain itu, termostat yang tidak akurat dapat membuat suhu air terlalu tinggi atau pemanas hidup lebih lama dari yang diperlukan. Dari sisi proses termodinamika, kelemahan utamanya adalah banyak energi keluar sebagai panas terbuang, bukan seluruhnya dimanfaatkan untuk menaikkan energi dalam air. Jadi, bagian yang perlu diperbaiki adalah elemen pemanas, kualitas isolasi, sistem kontrol suhu, serta perawatan tangki dan pipa.
+      </div>
+    </div>
+    
+    <div class="question-block" style="margin-top:24px;">
+      <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 The Ability to Formulate Hypotheses (Merumuskan Hipotesis)</div>
+      <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah mengidentifikasi masalah, rumuskanlah hipotesis mengenai cara-cara yang dapat meningkatkan efisiensi energi dalam pemanas air.</div>
+      <textarea class="open-answer" id="l2_inn_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
+      <div style="margin-top:10px; text-align:right;">
+        <button class="btn btn-ghost" onclick="evalOpenAnswer('l2_inn_4')">✅ Simpan Jawaban</button>
+        <button class="btn btn-secondary" onclick="toggleAnswer('l2_inn_4')">👁️ Buka Indikator Jawaban</button>
+      </div>
+      <div id="ans_l2_inn_4" class="indicator-answer">
+        <strong>Indikator Jawaban Lengkap:</strong><br><br>
+        Hipotesis yang dapat dirumuskan adalah: jika sistem pemanas air menggunakan isolasi yang lebih baik, pengaturan suhu yang lebih rendah namun tetap sesuai kebutuhan, serta kontrol otomatis yang akurat, maka konsumsi energi akan menurun dan efisiensi pemanasan air akan meningkat. Hipotesis lain yang juga dapat diajukan adalah: jika penumpukan sedimen dibersihkan secara rutin, maka perpindahan kalor dari elemen pemanas ke air akan menjadi lebih efektif dan waktu pemanasan akan lebih singkat. Hipotesis ini dapat diuji melalui eksperimen dengan membandingkan dua kondisi, misalnya pemanas air sebelum dan sesudah dibersihkan, atau pemanas dengan suhu tinggi dan suhu sedang. Data yang diamati dapat berupa waktu pemanasan, suhu akhir air, dan konsumsi energi listrik. Jika setelah perlakuan konsumsi energi turun dan hasil pemanasan tetap memenuhi kebutuhan, maka hipotesis diterima.
+      </div>
+    </div>
+    
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+         <button class="btn btn-primary" onclick="finishLevel(2)">🏁 Selesaikan Level 2</button>
       </div>
     </div>
 
-    <!-- Result -->
+    <!-- Result Screen -->
     <div id="result-screen" class="result-screen">
       <div class="result-content">
-        <div class="result-emoji">⚡</div>
+        <div class="result-emoji">🎉</div>
         <div class="result-title">Level 2 Selesai!</div>
         <div class="result-xp-earned" id="result-xp">+0 XP</div>
         <div class="result-scores-grid">
@@ -279,119 +538,108 @@
           <div class="score-chip"><div class="score-chip-val" id="sc-sci">-</div><div class="score-chip-label">Scientific</div></div>
           <div class="score-chip"><div class="score-chip-val" id="sc-inn">-</div><div class="score-chip-label">Innovative</div></div>
         </div>
-        <p style="color:#6B7280;margin-bottom:8px;font-size:0.9rem;" id="result-msg"></p>
+        <p style="color:#6B7280; margin-bottom:8px; font-size:0.9rem;" id="result-msg">Tim kamu telah mendiskusikan seluruh tantangan dengan baik!</p>
         <div class="result-actions">
           <a href="map.html" class="btn btn-ghost">🗺️ Kembali ke Peta</a>
-          <a href="level3.html" class="btn btn-primary">🌀 Lanjut Level 3 →</a>
+          <a href="level3.html" class="btn btn-primary" id="btn-next-level">⚡ Lanjut →</a>
         </div>
       </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- end wrapper -->
+</div><!-- end page -->
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="js/game.js"></script>
 <script>
 const ZONE = 'zone2';
-const scores = { ct:null, st:null, sci:null, inn:null };
-const answers = { ct:[null,null], st:[null,null], sci:[null,null], inn:[null,null] };
 let timerInterval = null;
 
 function switchTab(key) {
-  ['ct','st','sci','inn'].forEach(k => {
-    document.getElementById('panel-'+k).style.display = k===key?'block':'none';
-    const tb = document.getElementById('tab-'+k);
-    if(tb){tb.classList.remove('active');if(k===key)tb.classList.add('active');}
+  ['quiz','ct','st','sci','inn'].forEach(k => {
+    document.getElementById('panel-' + k).style.display = k === key ? 'block' : 'none';
+    const tb = document.getElementById('tab-' + k);
+    if (tb) { tb.classList.remove('active'); if (k === key) tb.classList.add('active'); }
   });
   stopTimer();
+  document.scrollingElement.scrollTop = 0;
 }
-function startTimer(sec){
-  stopTimer();let r=sec;
-  const tv=document.getElementById('timer-val'),tb=document.getElementById('main-timer');
-  const upd=()=>{const m=Math.floor(r/60),s=r%60;if(tv)tv.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(tb)tb.classList.toggle('urgent',r<=60);if(r<=0){stopTimer();}r--;};
-  upd();timerInterval=setInterval(()=>{if(r<0){stopTimer();return;}upd();},1000);
+
+function startTimer(sec) {
+  stopTimer();
+  let remaining = sec;
+  const timerVal = document.getElementById('timer-val');
+  const timerBox = document.getElementById('main-timer');
+  const update = () => {
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    if (timerVal) timerVal.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (timerBox) timerBox.classList.toggle('urgent', remaining <= 60);
+    if (remaining <= 0) { stopTimer(); if (timerVal) timerVal.textContent = '00:00'; }
+    remaining--;
+  };
+  update();
+  timerInterval = setInterval(() => { if (remaining < 0) { stopTimer(); return; } update(); }, 1000);
 }
-function stopTimer(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
 
-const fbData = {
-  ct:[
-    {c:'Tepat! Konvensi standar termodinamika: ΔU = Q + W_on (kerja PADA sistem positif). Sehingga ΔU = −30 + 120 = +90 J. Energi dalam udara bertambah, sesuai Hukum I.',w:'Perhatikan konvensi tanda. Kerja yang dilakukan PADA sistem (W_on) bernilai positif. Q negatif karena kalor keluar. ΔU = Q + W_on = −30 + 120 = +90 J.'},
-    {c:'Tepat! Energi dalam yang bertambah (ΔU = +90J) sebagian dikonduksikan ke dinding logam pompa sebagai kalor, membuat pompa terasa hangat. Ini prinsip Hukum I.',w:'Penjelasan yang benar: energi dalam udara bertambah (ΔU > 0), sebagian energi ini berpindah ke dinding pompa melalui konduksi, menyebabkan pompa hangat.'}
-  ],
-  st:[
-    {c:'Tepat! Dalam siklus refrigerasi: Q_lepas = Q_serap + W = 1200 + 500 = 1700 J. AC mengambil 1200 J dari ruangan dan menambah 500 J kerja listrik, lalu melepas 1700 J ke luar.',w:'Ingat: dalam siklus AC, Q_lepas = Q_serap + W. Ini konsisten dengan Hukum I. Jawaban: 1200 + 500 = 1700 J.'},
-    {c:'Tepat! Pada ekspansi adiabatik (Q=0): ΔU = Q − W = 0 − W = −W. Gas melakukan kerja positif (ekspansi) → energi dalam berkurang → suhu turun. Ini yang terjadi pada gas dalam kulkas!',w:'Pada proses adiabatik Q = 0, sehingga ΔU = −W. Jika gas berekspansi (W > 0, sistem melakukan kerja), maka ΔU < 0, energi dalam dan suhu turun.'}
-  ],
-  sci:[
-    {c:'Tepat! Q_air = 0.2 × 4200 × 13.8 = 1159.2 J. W_listrik = 100 × 60 = 6000 J. Selisih ~4841 J merupakan kalor yang hilang ke lingkungan, menunjukkan kalorimeter tidak sempurna (tidak adiabatik sempurna).',w:'Hitungan: Q = mcΔT = 0.2 × 4200 × 13.8 ≈ 1159 J. W = Pt = 100 × 60 = 6000 J. Selisih besar karena kalor bocor ke lingkungan, bukan karena hukum dilanggar.'},
-    {c:'Benar! Insulasi lebih baik → mendekati sistem adiabatik → Q_bocor berkurang → W_listrik ≈ ΔU_air + Q_bocor minimal → akurasi meningkat.',w:'Masalah utama adalah kebocoran kalor ke lingkungan. Solusinya: insulasi kalorimeter yang lebih baik agar mendekati sistem adiabatik ideal.'}
-  ],
-  inn:[
-    {c:'Tepat! Hukum I: ΔU = Q − W. Pada Solar Water Heater, Q dari matahari masuk, W ≈ 0 (tidak ada kerja mekanik), sehingga ΔU ≈ Q. Pipa hitam memaksimalkan absorpsi radiasi, kaca mencegah kalor keluar (efek rumah kaca), insulasi meminimalkan konduksi ke luar.',w:'Analisis Hukum I yang tepat: Q (matahari) masuk → ΔU air meningkat → suhu air naik. Pipa hitam: absorber radiasi maksimal. Insulasi + kaca: meminimalkan kebocoran kalor ke lingkungan.'}
-  ]
-};
-
-function answerQ(ch,qi,ok,btn){
-  const g=btn.closest('.options-grid');
-  if(!g)return;
-  g.querySelectorAll('.option-btn').forEach(b=>{b.disabled=true;});
-  btn.classList.add(ok?'correct':'wrong');
-  if(!ok){g.querySelectorAll('.option-btn').forEach(b=>{if(b!==btn&&b.onclick&&b.onclick.toString().includes('true,this'))b.classList.add('correct');});}
-  answers[ch][qi]=ok;
-  const fb=document.getElementById('fb-'+ch+'-'+qi);
-  if(fb&&fbData[ch]&&fbData[ch][qi]){
-    const d=fbData[ch][qi];
-    fb.classList.add('show',ok?'correct-fb':'wrong-fb');
-    document.getElementById('fb-'+ch+'-'+qi+'-icon').textContent=ok?'✅':'❌';
-    document.getElementById('fb-'+ch+'-'+qi+'-title').textContent=ok?'Jawaban Benar!':'Belum Tepat';
-    document.getElementById('fb-'+ch+'-'+qi+'-desc').textContent=ok?d.c:d.w;
+function evalOpenAnswer(id) {
+  const val = document.getElementById(id)?.value?.trim();
+  if (val && val.length > 5) {
+    alert('✅ Jawaban disimpan!');
+  } else {
+    alert('⚠️ Mohon isi jawaban terlebih dahulu.');
   }
 }
 
-function submitChallenge(key){
-  const ans=answers[key];
-  const c=ans.filter(a=>a===true).length;
-  const t=ans.filter(a=>a!==null).length;
-  scores[key]=Math.min(Math.round((c/Math.max(t,2))*70)+30,100);
-  const tb=document.getElementById('tab-'+key);
-  if(tb){tb.classList.remove('active');tb.classList.add('done');}
-  const order=['ct','st','sci','inn'];
-  const idx=order.indexOf(key);
-  if(idx<order.length-1)switchTab(order[idx+1]);
+function toggleAnswer(id) {
+  const el = document.getElementById('ans_' + id);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
 }
 
-function finishLevel(){
-  ['ct','st','sci','inn'].forEach(k=>{if(scores[k]===null)scores[k]=30;});
-  const avg=Math.round(Object.values(scores).reduce((a,b)=>a+b,0)/4);
-  const xp=avg*2;
-  const state=ThermoGame.loadState();
-  ThermoGame.addXP(state,xp);
-  ThermoGame.saveZoneChallenge(state,ZONE,'all',scores);
-  state.zones[ZONE].score=avg;state.zones[ZONE].completed=true;
+function submitQuiz() {
+  switchTab('ct');
+}
+
+function submitChallenge(key) {
+  const tb = document.getElementById('tab-' + key);
+  if (tb) { tb.classList.remove('active'); tb.classList.add('done'); tb.textContent = '✅ ' + tb.textContent.replace(/^.* /,''); }
+  const order = ['ct','st','sci','inn'];
+  const idx = order.indexOf(key);
+  if (idx < order.length - 1) switchTab(order[idx + 1]);
+}
+
+function finishLevel(ln) {
+  let avgScore = 85; 
+  const xpEarned = avgScore * 2;
+  const state = ThermoGame.loadState();
+  if (!state.zones) state.zones = {};
+  if (!state.zones[ZONE]) state.zones[ZONE] = {};
+  ThermoGame.addXP(state, xpEarned);
+  state.zones[ZONE].score = avgScore;
+  state.zones[ZONE].completed = true;
   ThermoGame.saveState(state);
-  ['ct','st','sci','inn'].forEach(k=>{const e=document.getElementById('sc-'+k);if(e)e.textContent=scores[k];});
-  document.getElementById('result-xp').textContent='+'+xp+' XP';
-  document.getElementById('result-msg').textContent=avg>=80?'🌟 Luar biasa! Penguasaan Hukum I Termodinamika sangat baik!':avg>=60?'👍 Bagus! Terus tingkatkan pemahamanmu.':'💪 Tetap semangat!';
-  document.querySelectorAll('.challenge-card').forEach(c=>c.style.display='none');
+
+  ['ct','st','sci','inn'].forEach(k => {
+    const el = document.getElementById('sc-' + k);
+    if (el) el.textContent = "Selesai";
+  });
+  document.getElementById('result-xp').textContent = '+' + xpEarned + ' XP';
+  document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
   document.getElementById('result-screen').classList.add('show');
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(()=>{document.getElementById('loading-screen').classList.add('hidden');},1000);
-  const state=ThermoGame.loadState();
-  if(!ThermoGame.isZoneUnlocked(state,'zone2')){window.location.href='map.html';return;}
-  const nxp=document.getElementById('nav-xp-value');if(nxp)nxp.textContent=state.xp+' XP';
-  const cxp=document.getElementById('current-xp');if(cxp)cxp.textContent=state.xp;
-});
-
-document.querySelectorAll('a[href]').forEach(link=>{
-  link.addEventListener('click',e=>{
-    const href=link.getAttribute('href');
-    if(href&&!href.startsWith('#')&&!href.startsWith('http')){
-      e.preventDefault();const o=document.getElementById('page-transition');o.style.opacity=1;
-      setTimeout(()=>{window.location.href=href;},350);
-    }
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
+  const state = ThermoGame.loadState();
+  const navXp = document.getElementById('nav-xp-value');
+  if (navXp) navXp.textContent = state.xp + ' XP';
+  const cxp = document.getElementById('current-xp');
+  if (cxp) cxp.textContent = state.xp;
 });
 </script>
 </body>
