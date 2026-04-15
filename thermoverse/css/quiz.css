@@ -172,7 +172,7 @@
   margin-bottom: 16px; line-height: 1.6;
 }
 .options-grid {
-  display: flex; flex-direction: column; gap: 10px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
 }
 .option-btn {
   display: flex; align-items: center; gap: 14px;
@@ -182,11 +182,17 @@
   transition: all 0.22s; text-align: left; font-family: var(--font-body);
   font-weight: 600;
 }
-.option-btn:hover { border-color: var(--primary); background: #EDE9FE; color: var(--primary); }
-.option-btn.selected { border-color: var(--primary); background: #EDE9FE; color: var(--primary); }
-.option-btn.correct { border-color: #10B981; background: #D1FAE5; color: #065F46; }
-.option-btn.wrong { border-color: #EF4444; background: #FEE2E2; color: #991B1B; }
-.option-btn:disabled { cursor: default; }
+.option-btn:hover { border-color: var(--primary); background: #EDE9FE; color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(124,58,237,0.1); }
+.option-btn.selected, .option-btn:has(input:checked) { 
+  border-color: #10B981; background: #D1FAE5; color: #065F46; 
+  font-weight: 700; box-shadow: 0 4px 15px rgba(16,185,129,0.15);
+}
+.option-btn:has(input:checked) .option-key { 
+  background: #10B981; color: white; border-color: transparent; 
+}
+.option-btn.correct { border-color: #10B981 !important; background: #D1FAE5 !important; color: #065F46 !important; }
+.option-btn.wrong { border-color: #EF4444 !important; background: #FEE2E2 !important; color: #991B1B !important; }
+.option-btn:disabled { cursor: default; pointer-events: none; }
 .option-key {
   width: 30px; height: 30px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -194,8 +200,8 @@
   color: var(--primary); min-width: 30px;
   transition: all 0.22s;
 }
-.option-btn.correct .option-key { background: #10B981; color: white; }
-.option-btn.wrong .option-key { background: #EF4444; color: white; }
+.option-btn.correct .option-key { background: #10B981 !important; color: white !important; }
+.option-btn.wrong .option-key { background: #EF4444 !important; color: white !important; }
 
 /* ---- Open Answer ---- */
 .open-answer {

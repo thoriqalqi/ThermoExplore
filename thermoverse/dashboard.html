@@ -81,7 +81,7 @@
 <div id="page-transition"></div>
 
 <nav class="nav-bar">
-  <a href="index.html" class="nav-logo">Thermo<span>Explore</span></a>
+  <a href="index.html" class="nav-logo">Thermo<span>Explorer</span></a>
   <ul class="nav-links">
     <li><a href="index.html">🏠 Beranda</a></li>
     <li><a href="map.html">🗺️ Peta Misi</a></li>
@@ -446,6 +446,10 @@ function drawRadar(scores) {
 function resetGame() {
   if (confirm('🔄 Reset semua progress? Data XP dan skor akan dihapus.')) {
     ThermoGame.resetState();
+    // Clear all saved answers
+    Object.keys(localStorage).forEach(k => {
+      if(k.startsWith('ans_')) localStorage.removeItem(k);
+    });
     renderDashboard();
     alert('✅ Progress direset. Selamat memulai petualangan baru!');
   }
