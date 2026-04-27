@@ -8,13 +8,10 @@
   <link rel="stylesheet" href="css/quiz.css">
   <style>
     .l-accent { color: #F97316; }
-    .l-bg { background: linear-gradient(135deg,#FFF7ED,#FFFBEB); border-color: #F97316; }
-    .l-badge { background: color: #D97706; background: #FEF3C7;; }
-    .l-header { background: linear-gradient(135deg,#F97316,#EF4444); }
-    .tab-btn.active { background: linear-gradient(135deg,#F97316,#EF4444); }
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin-bottom: 20px; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
-    .indicator-answer { display:none; margin-top: 15px; padding: 15px; background: #ECFDF5; border: 1px solid #10B981; border-radius: 8px; color: #065F46; font-size: 0.9rem; }
+    .l-bg { background: linear-gradient(135deg,#FEF3C7,#FED7AA); border-color: #F97316; }
+    .l-badge { background: #FED7AA; }
+    .l-header { background: linear-gradient(135deg,#F97316,#EA580C); }
+    .tab-btn.active { background: linear-gradient(135deg,#F97316,#EA580C); }
     .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
     .option-btn { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: white; border: 2px solid #E5E7EB; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
     .option-btn:hover { border-color: var(--primary); background: #F5F3FF; }
@@ -23,6 +20,10 @@
     .option-btn.wrong { border-color: #EF4444; background: #FEE2E2; }
     .option-key { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: #F3F4F6; border-radius: 50%; font-weight: bold; font-size: 0.9rem; }
     .finish-btn-container { margin-top: 30px; display: flex; justify-content: center; }
+    .scenario-box { background: #F8FAFC; border-left: 4px solid #F97316; padding: 16px; margin-bottom: 20px; border-radius: 8px; }
+    .scenario-label { font-weight: 700; color: #F97316; margin-bottom: 8px; }
+    .scenario-text { color: #475569; line-height: 1.6; }
+    .indicator-label { display: inline-block; background: #FED7AA; color: #92400E; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -45,8 +46,8 @@
     <div class="level-header">
       <div class="level-header-left">
         <div class="level-badge l-badge">LEVEL 1</div>
-        <div class="level-title">Konsep Termodinamika</div>
-        <div class="level-subtitle">Sistem terbuka, tertutup, terisolasi • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
+        <div class="level-title">Konsep Termodinamika & Proses</div>
+        <div class="level-subtitle">Sistem & Perpindahan Energi • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
       </div>
       <div class="level-header-right">
         <div class="xp-counter">
@@ -77,9 +78,7 @@
           <div class="challenge-card-desc">10 soal quiz pilihan ganda</div>
         </div>
       </div>
-      <div id="quiz-container">
-        <!-- Soal quiz akan di-generate oleh JS -->
-      </div>
+      <div id="quiz-container"></div>
       <div style="margin-top:24px; display:flex; justify-content:flex-end;">
         <button class="btn btn-primary" id="btn-submit-quiz" onclick="submitQuiz()">✅ Selesaikan Kuis</button>
       </div>
@@ -131,229 +130,52 @@
 const ZONE = 'zone1';
 const QUESTIONS = {
   quiz: [
-    { q: "Apa yang dimaksud dengan 'sistem' dalam kajian termodinamika?", a: ["Semua benda di sekitar kita", "Bagian dari alam semesta yang menjadi fokus pengamatan", "Hanya gas yang terperangkap dalam wadah", "Semua yang tidak termasuk dalam lingkungan"], c: 1 },
-    { q: "Apa peran 'batas sistem' dalam diagram sistem termodinamika?", a: ["Membedakan sistem dengan lingkungan", "Menentukan suhu sistem", "Menentukan volume sistem", "Menyimpan energi sistem"], c: 0 },
-    { q: "Sistem mana yang memungkinkan pertukaran massa dan energi dengan lingkungan sekitarnya?", a: ["Sistem tertutup", "Sistem terisolasi", "Sistem terbuka", "Sistem termodinamika"], c: 2 },
-    { q: "Pada sistem tertutup, apa yang tetap konstan?", a: ["Massa", "Energi", "Suhu", "Volume"], c: 0 },
-    { q: "Sistem mana yang tidak memungkinkan pertukaran energi maupun massa dengan lingkungan?", a: ["Sistem tertutup", "Sistem terisolasi", "Sistem terbuka", "Sistem termodinamika"], c: 1 },
-    { q: "Dalam proses isobarik, apa yang tetap konstan selama perubahan?", a: ["Volume", "Suhu", "Tekanan", "Energi"], c: 2 },
-    { q: "Dalam proses isokhorik, perubahan apa yang tidak terjadi pada gas?", a: ["Tekanan", "Volume", "Suhu", "Energi dalam"], c: 1 },
-    { q: "Apa yang dimaksud dengan proses isotermal?", a: ["Proses di mana tekanan gas tetap", "Proses di mana suhu tetap", "Proses di mana tidak ada kalor masuk", "Proses di mana volume tetap"], c: 1 },
-    { q: "Apa yang dimaksud dengan proses adiabatik?", a: ["Proses di mana tidak ada kalor yang masuk atau keluar sistem", "Proses di mana suhu sistem tetap", "Proses di mana tekanan sistem tetap", "Proses di mana volume sistem tetap"], c: 0 },
-    { q: "Hukum I Termodinamika pada dasarnya merupakan pernyataan dari:", a: ["Hukum kekekalan energi", "Hukum kekekalan massa", "Hukum Newton II", "Hukum Pascal"], c: 0 }
+    { q: "Dalam termodinamika, sistem didefinisikan sebagai:", a: ["Seluruh alam semesta", "Bagian dari alam semesta yang menjadi fokus pengamatan", "Lingkungan sekitar", "Alat yang digunakan untuk percobaan"], c: 1 },
+    { q: "Sistem tertutup adalah sistem yang:", a: ["Tidak memungkinkan pertukaran energi dan materi dengan lingkungan", "Memungkinkan pertukaran energi tetapi tidak materi", "Memungkinkan pertukaran materi tetapi tidak energi", "Memungkinkan pertukaran energi dan materi dengan lingkungan"], c: 1 },
+    { q: "Sistem terisolasi adalah sistem yang:", a: ["Memungkinkan pertukaran energi dengan lingkungan", "Tidak memungkinkan pertukaran energi dan materi dengan lingkungan", "Hanya memungkinkan pertukaran kalor", "Selalu berada dalam keseimbangan termal"], c: 1 },
+    { q: "Proses isobarik adalah proses yang terjadi pada:", a: ["Suhu tetap", "Volume tetap", "Tekanan tetap", "Energi dalam tetap"], c: 2 },
+    { q: "Proses isokhorik adalah proses yang terjadi pada:", a: ["Tekanan tetap", "Suhu tetap", "Volume tetap", "Kalor tetap"], c: 2 },
+    { q: "Proses isotermal adalah proses yang terjadi pada:", a: ["Tekanan tetap", "Volume tetap", "Suhu tetap", "Energi dalam tetap"], c: 2 },
+    { q: "Kalor adalah:", a: ["Energi dalam suatu benda", "Energi yang berpindah dari benda bersuhu tinggi ke benda bersuhu rendah", "Suhu benda", "Energi kinetik partikel"], c: 1 },
+    { q: "Perpindahan kalor secara konduksi adalah:", a: ["Perpindahan kalor melalui aliran fluida", "Perpindahan kalor melalui gelombang elektromagnetik", "Perpindahan kalor melalui zat penghantar tanpa perpindahan zat", "Perpindahan kalor melalui kontak langsung"], c: 2 },
+    { q: "Contoh sistem terbuka dalam kehidupan sehari-hari adalah:", a: ["Termos berisi air panas", "Panci berisi air yang sedang dimasak dengan tutup terbuka", "Botol tertutup berisi minuman", "Kulkas yang tertutup rapat"], c: 1 },
+    { q: "Energi dalam suatu sistem bergantung pada:", a: ["Kalor yang diterima saja", "Usaha yang dilakukan saja", "Suhu dan jumlah partikel dalam sistem", "Tekanan dan volume saja"], c: 2 }
   ],
   ct: [
     {
       scenario: "Seorang ibu memasak air di dapur menggunakan panci aluminium yang dibiarkan terbuka di atas kompor gas. Setelah beberapa menit, air mulai mendidih dan terlihat uap air keluar dari permukaan air. Suhu air naik dari 25°C hingga mencapai 100°C. Selama proses pemanasan, ibu tersebut sesekali menambahkan air dingin ke dalam panci. Kompor menghasilkan kalor yang diterima panci dan air di dalamnya. Setelah api dimatikan, panci beserta air panas tersebut ditutup rapat menggunakan penutup termos vakum khusus yang tidak memungkinkan pertukaran kalor maupun materi dengan lingkungan sekitarnya.",
       questions: [
-        {
-          q: "Berdasarkan wacana di atas, pernyataan yang paling tepat dalam menafsirkan kondisi sistem dan lingkungan pada saat air dipanaskan di dalam panci terbuka adalah…",
-          a: [
-            "Sistem adalah kompor gas, sedangkan lingkungan adalah panci dan air, karena kompor merupakan sumber energi utama dalam proses tersebut.",
-            "Sistem adalah air di dalam panci, sedangkan lingkungan adalah segala sesuatu di luar panci termasuk udara, kompor, dan dapur, karena air merupakan objek utama yang diamati perubahannya.",
-            "Sistem adalah dapur tempat memasak, sedangkan lingkungan adalah rumah secara keseluruhan, karena batas sistem ditentukan oleh ruang fisik tempat proses berlangsung.",
-            "Sistem adalah panci aluminium itu sendiri, sedangkan lingkungan adalah air di dalamnya, karena panci berfungsi sebagai wadah yang membatasi proses termodinamika.",
-            "Sistem adalah udara di sekitar panci, sedangkan lingkungan adalah air dan panci, karena udara menerima uap yang keluar sehingga menjadi bagian utama yang berubah."
-          ],
-          c: 1
-        },
-        {
-          q: "Pada saat air dipanaskan dalam panci terbuka dan ibu menambahkan air dingin ke dalamnya, hubungan antara perpindahan materi, perpindahan energi, dan klasifikasi sistem yang paling tepat adalah…",
-          a: [
-            "Terjadi perpindahan energi saja dari kompor ke air, sedangkan massa air tetap konstan karena tidak ada materi yang keluar, sehingga sistem dapat diklasifikasikan sebagai sistem tertutup.",
-            "Terjadi perpindahan energi berupa kalor dari kompor ke air dan perpindahan materi berupa uap yang keluar serta air dingin yang ditambahkan, sehingga keduanya menyebabkan sistem diklasifikasikan sebagai sistem terbuka.",
-            "Terjadi perpindahan materi berupa uap yang keluar namun tidak terjadi perpindahan energi sama sekali, sehingga sistem diklasifikasikan sebagai sistem terisolasi karena panas tersimpan seluruhnya di dalam air.",
-            "Terjadi perpindahan energi dari air ke kompor secara konduksi balik, sementara materi tidak berpindah karena uap yang terbentuk kembali mengembun di dalam panci, sehingga sistem bersifat tertutup.",
-            "Terjadi perpindahan materi berupa penambahan air dingin saja, sedangkan energi tidak berpindah karena kompor hanya memanaskan panci dan bukan airnya secara langsung, sehingga sistem bersifat semi-terbuka."
-          ],
-          c: 1
-        },
-        {
-          q: "Setelah api dimatikan dan panci ditutup dengan penutup termos vakum khusus, seorang siswa membuat pernyataan: 'Sekarang sistem berubah menjadi sistem terisolasi sempurna, sehingga tidak akan terjadi proses termodinamika apapun di dalamnya.' Evaluasi terhadap pernyataan peserta didik tersebut yang paling tepat adalah…",
-          a: [
-            "Pernyataan peserta didik benar sepenuhnya, karena sistem terisolasi sempurna memang tidak memungkinkan terjadinya proses apapun, termasuk perubahan suhu internal di dalam air.",
-            "Pernyataan peserta didik benar sebagian, karena sistem memang terisolasi sehingga tidak ada pertukaran dengan lingkungan, namun proses internal seperti distribusi kalor di dalam air tetap dapat berlangsung hingga mencapai kesetimbangan termal.",
-            "Pernyataan peserta didik salah sepenuhnya, karena sistem terisolasi justru memungkinkan pertukaran materi dengan lingkungan meskipun tidak memungkinkan pertukaran energi.",
-            "Pernyataan peserta didik benar sepenuhnya, karena setelah api dimatikan tidak ada lagi sumber energi, sehingga secara otomatis seluruh proses termodinamika di dalam sistem berhenti total.",
-            "Pernyataan peserta didik salah sepenuhnya, karena sistem terisolasi adalah kondisi yang tidak mungkin dicapai dalam kehidupan nyata sehingga panci termos tersebut tidak bisa dianggap sistem terisolasi dalam konteks apapun."
-          ],
-          c: 1
-        },
-        {
-          q: "Pada saat air mendidih dalam panci terbuka, terjadi proses isobarik (tekanan tetap). Penjelasan yang paling logis dan koheren mengapa proses pemanasan air di panci terbuka ini dapat dikategorikan sebagai proses isobarik adalah…",
-          a: [
-            "Proses disebut isobarik karena volume air di dalam panci tidak berubah selama pemanasan, sehingga tekanan berbanding lurus dengan suhu sesuai hukum Gay-Lussac dan nilainya tetap konstan.",
-            "Proses disebut isobarik karena panci terbuka memungkinkan permukaan air selalu berhubungan langsung dengan atmosfer yang memiliki tekanan konstan (1 atm), sehingga tekanan pada sistem tidak berubah meskipun suhu dan volume uap air meningkat.",
-            "Proses disebut isobarik karena kalor yang diterima air dari kompor seluruhnya digunakan untuk menaikkan suhu tanpa mengubah tekanan, sesuai dengan definisi proses isobarik yang mengutamakan kenaikan suhu.",
-            "Proses disebut isobarik karena aluminium sebagai bahan panci bersifat konduktor sempurna yang menjaga tekanan di dalam panci selalu sama dengan tekanan yang dihasilkan kompor gas.",
-            "Proses disebut isobarik karena penambahan air dingin oleh ibu menjaga keseimbangan tekanan di dalam panci, sehingga tekanan total sistem selalu konstan akibat percampuran dua massa air yang berbeda suhu."
-          ],
-          c: 1
-        },
-        {
-          q: "Berdasarkan seluruh informasi dalam wacana, mulai dari proses pemanasan air di panci terbuka hingga panci ditutup dengan penutup termos vakum, kesimpulan yang paling tepat tentang urutan klasifikasi sistem yang dialami air selama keseluruhan proses adalah…",
-          a: [
-            "Sistem mengalami perubahan dari sistem terisolasi → sistem tertutup → sistem terbuka, seiring dengan bertambahnya interaksi antara air dengan lingkungan dari awal hingga akhir proses.",
-            "Sistem selalu bersifat terbuka sepanjang proses karena kompor terus menghasilkan kalor yang berpindah ke air, dan kondisi ini tidak berubah meskipun panci kemudian ditutup dengan termos vakum.",
-            "Sistem mengalami perubahan dari sistem terbuka (saat dipanaskan di panci terbuka dengan penambahan air dingin) menjadi sistem terisolasi (setelah ditutup termos vakum yang mencegah pertukaran energi dan materi).",
-            "Sistem mengalami perubahan dari sistem tertutup (saat dipanaskan karena hanya energi yang berpindah) menjadi sistem terbuka (setelah ditutup termos vakum karena uap air terperangkap dan menciptakan tekanan baru).",
-            "Sistem selalu bersifat terisolasi sepanjang proses karena panci aluminium bersifat konduktor yang menjaga energi tetap berada di dalam sistem tanpa ada yang terbuang ke lingkungan."
-          ],
-          c: 2
-        }
+        { ind: "Interpretasi", q: "Berdasarkan wacana di atas, pernyataan yang paling tepat dalam menafsirkan kondisi sistem dan lingkungan pada saat air dipanaskan di dalam panci terbuka adalah…", a: ["Sistem adalah kompor gas, sedangkan lingkungan adalah panci dan air", "Sistem adalah air di dalam panci, sedangkan lingkungan adalah segala sesuatu di luar panci termasuk udara, kompor, dan dapur", "Sistem adalah dapur tempat memasak, sedangkan lingkungan adalah rumah secara keseluruhan", "Sistem adalah panci aluminium itu sendiri, sedangkan lingkungan adalah air di dalamnya"], c: 1 },
+        { ind: "Analisis", q: "Pada saat air dipanaskan dalam panci terbuka dan ibu menambahkan air dingin ke dalamnya, hubungan antara perpindahan materi, perpindahan energi, dan klasifikasi sistem yang paling tepat adalah…", a: ["Terjadi perpindahan energi saja dari kompor ke air, sedangkan massa air tetap konstan", "Terjadi perpindahan energi berupa kalor dari kompor ke air dan perpindahan materi berupa uap yang keluar serta air dingin yang ditambahkan, sehingga sistem diklasifikasikan sebagai sistem terbuka", "Terjadi perpindahan materi berupa uap yang keluar namun tidak terjadi perpindahan energi sama sekali", "Terjadi perpindahan energi dari air ke kompor secara konduksi balik"], c: 1 },
+        { ind: "Evaluasi", q: "Setelah api dimatikan dan panci ditutup dengan penutup termos vakum khusus, seorang siswa membuat pernyataan: 'Sekarang sistem berubah menjadi sistem terisolasi sempurna, sehingga tidak akan terjadi proses termodinamika apapun di dalamnya.' Evaluasi terhadap pernyataan peserta didik tersebut yang paling tepat adalah…", a: ["Pernyataan peserta didik benar sepenuhnya, karena sistem terisolasi sempurna memang tidak memungkinkan terjadinya proses apapun", "Pernyataan peserta didik benar sebagian, karena sistem memang terisolasi sehingga tidak ada pertukaran dengan lingkungan, namun proses internal seperti distribusi kalor di dalam air tetap dapat berlangsung hingga mencapai kesetimbangan termal", "Pernyataan peserta didik salah sepenuhnya, karena sistem terisolasi justru memungkinkan pertukaran materi dengan lingkungan", "Pernyataan peserta didik benar sepenuhnya, karena setelah api dimatikan tidak ada lagi sumber energi"], c: 1 },
+        { ind: "Penjelasan", q: "Pada saat air mendidih dalam panci terbuka, terjadi proses isobarik (tekanan tetap). Penjelasan yang paling logis dan koheren mengapa proses pemanasan air di panci terbuka ini dapat dikategorikan sebagai proses isobarik adalah…", a: ["Proses disebut isobarik karena volume air di dalam panci tidak berubah selama pemanasan", "Proses disebut isobarik karena panci terbuka memungkinkan permukaan air selalu berhubungan langsung dengan atmosfer yang memiliki tekanan konstan (1 atm), sehingga tekanan pada sistem tidak berubah meskipun suhu dan volume uap air meningkat", "Proses disebut isobarik karena kalor yang diterima air dari kompor seluruhnya digunakan untuk menaikkan suhu tanpa mengubah tekanan", "Proses disebut isobarik karena aluminium sebagai bahan panci bersifat konduktor sempurna"], c: 1 }
       ]
     }
   ],
   st: [
     {
-      scenario: "Dinda adalah seorang mahasiswi yang setiap pagi membawa termos berisi air panas untuk menemaninya belajar sepanjang hari di kampus. Termos yang ia gunakan memiliki struktur berlapis: lapisan dinding dalam dan luar terbuat dari baja tahan karat, di antara keduanya terdapat ruang vakum, dan permukaan dalam dinding dilapisi bahan reflektif berwarna perak. Air panas di dalam termos bersuhu 90°C, sementara suhu ruang kuliah sekitar 27°C. Suatu hari, Dinda penasaran mengapa air di dalam termosnya masih terasa hangat (sekitar 75°C) setelah 6 jam, padahal air di gelas biasa yang ia tinggalkan di meja sudah dingin dalam 30 menit. Ia mulai berpikir: 'Apa yang membuat termos begitu berbeda dari gelas biasa? Komponen mana yang paling berperan? Apakah termos benar-benar membuat air tidak bertukar kalor sama sekali dengan lingkungan?' Dinda mencoba mencari tahu dengan membandingkan dua situasi: (1) Termos tertutup rapat diletakkan di ruangan ber-AC (27°C), dan (2) Termos yang sama dibuka tutupnya dan diletakkan di tempat yang sama.",
+      scenario: "Dinda adalah seorang mahasiswi yang setiap pagi membawa termos berisi air panas untuk menemaninya belajar sepanjang hari di kampus. Termos yang ia gunakan memiliki struktur berlapis: lapisan dinding dalam dan luar terbuat dari baja tahan karat, di antara keduanya terdapat ruang vakum, dan permukaan dalam dinding dilapisi bahan reflektif berwarna perak. Air panas di dalam termos bersuhu 90°C, sementara suhu ruang kuliah sekitar 27°C. Suatu hari, Dinda penasaran mengapa air di dalam termosnya masih terasa hangat (sekitar 75°C) setelah 6 jam, padahal air di gelas biasa yang ia tinggalkan di meja sudah dingin dalam 30 menit.",
       questions: [
-        {
-          q: "Berdasarkan cerita Dinda, komponen-komponen termos membentuk sebuah sistem termodinamika yang saling terhubung. Pernyataan yang paling tepat dalam menggambarkan hubungan fungsional antarkomponen sistem termos sebagai sistem termodinamika adalah…",
-          a: [
-            "Ruang vakum di antara dinding termos berfungsi sebagai sumber dingin yang menyerap kalor dari air panas, sementara lapisan reflektif berwarna perak berfungsi memantulkan dingin dari luar agar tidak masuk ke dalam, keduanya bekerja secara berlawanan sehingga menghasilkan keseimbangan suhu.",
-            "Setiap komponen termos bekerja secara independen dan tidak saling memengaruh, dimana dinding baja menahan benturan fisik, ruang vakum menjaga tekanan, dan lapisan perak hanya berfungsi estetika. Ketiganya tidak memiliki hubungan fungsional dalam konteks termodinamika.",
-            "Dinding baja dalam mengisolasi air dari ruang vakum, ruang vakum memutus jalur konduksi dan konveksi kalor antar dinding, lapisan reflektif perak meminimalkan perpindahan kalor secara radiasi, dan dinding baja luar memisahkan sistem dari lingkungan udara luar. Keempat komponen ini membentuk rantai subsistem yang saling mendukung untuk meminimalkan total perpindahan kalor dari air ke lingkungan.",
-            "Hubungan antarkomponen termos hanya relevan pada saat air pertama kali dimasukkan. Setelah suhu stabil, seluruh komponen berhenti berfungsi dan termos berubah menjadi wadah pasif yang tidak lagi memiliki hubungan fungsional antar bagiannya.",
-            "Komponen utama yang berperan dalam sistem termos hanyalah ruang vakum, sedangkan dinding baja dan lapisan reflektif tidak memiliki hubungan signifikan dengan kemampuan isolasi termal karena perpindahan kalor di termos hanya terjadi melalui satu mekanisme saja yaitu konduksi."
-          ],
-          c: 2
-        },
-        {
-          q: "Dinda mengamati bahwa setelah 6 jam, suhu air dalam termos turun dari 90°C menjadi 75°C, artinya masih ada perpindahan kalor yang terjadi meskipun kecil. Ia menduga salah satu subsistem termos tidak berfungsi sempurna. Berdasarkan analisis sistemik terhadap mekanisme perpindahan kalor pada setiap subsistem termos, identifikasi yang paling tepat tentang dari mana saja kalor masih dapat keluar dan subsistem mana yang paling lemah adalah…",
-          a: [
-            "Kalor keluar hanya melalui tutup termos yang terbuat dari plastik/karet karena bahan tersebut adalah konduktor kalor terbaik di antara semua komponen, sementara seluruh bagian lain termos sudah berfungsi sempurna sebagai isolator ideal tanpa celah apapun.",
-            "Analisis subsistem menunjukkan tiga jalur kebocoran kalor yang masih aktif: (1) konduksi melalui dinding baja dan tutup termos (baja dan plastik tetap konduktor meskipun rendah), (2) radiasi inframerah yang tidak 100% dipantulkan lapisan perak karena tidak ada reflektor sempurna, dan (3) konveksi melalui udara yang masuk lewat celah tutup menjadikan sambungan tutup-badan termos sebagai subsistem terlemah karena paling banyak jalur perpindahan yang aktif di sana.",
-            "Tidak ada kalor yang keluar dari termos sama sekali karena termos adalah contoh sempurna sistem terisolasi berupa penurunan suhu 15°C selama 6 jam disebabkan oleh reaksi kimia internal air yang melepas energi, bukan oleh perpindahan kalor ke lingkungan.",
-            "Kalor keluar secara merata dari seluruh permukaan termos pada laju yang identik, sehingga tidak ada satu subsistem pun yang lebih lemah dari yang lain, dan analisis per-subsistem tidak relevan karena termos bekerja sebagai satu kesatuan homogen tanpa perbedaan fungsi antarbagian.",
-            "Subsistem terlemah adalah ruang vakum karena ruang kosong justru mempercepat perpindahan kalor secara konduksi tanpa adanya molekul udara sebagai penyangga, kalor dapat bergerak lebih bebas dari dinding dalam ke dinding luar melalui jalur vakum tersebut."
-          ],
-          c: 1
-        },
-        {
-          q: "Dinda membandingkan dua situasi: (Situasi 1) termos tertutup rapat di ruangan ber-AC (27°C), dan (Situasi 2) termos dibuka tutupnya di tempat yang sama. Sintesis yang paling tepat dan menyeluruh tentang perbedaan klasifikasi sistem dan proses termodinamika antara Situasi 1 dan Situasi 2 adalah…",
-          a: [
-            "Baik Situasi 1 maupun Situasi 2 menghasilkan sistem yang identik secara termodinamika, karena air di dalam termos tetap bersuhu sama dalam kedua kondisi, dan perbedaan hanya pada kecepatan pendinginan yang tidak memengaruhi klasifikasi sistem secara fundamental.",
-            "Situasi 1 (termos tertutup) → sistem mendekati terisolasi: perpindahan energi (kalor) ke lingkungan sangat minimal dan tidak ada materi yang keluar-masuk, sehingga laju penurunan suhu sangat lambat. Situasi 2 (termos terbuka) → sistem berubah menjadi sistem terbuka: terjadi perpindahan materi (uap air keluar, udara dingin masuk) DAN energi (kalor hilang melalui konveksi udara, evaporasi, konduksi langsung), sehingga laju penurunan suhu jauh lebih cepat.",
-            "Situasi 1 menghasilkan sistem tertutup sempurna karena tidak ada materi yang keluar, sementara Situasi 2 menghasilkan sistem terbuka, namun keduanya mengalami laju pendinginan yang sama karena faktor penentu utama adalah perbedaan suhu (ΔT = 63°C) yang identik pada kedua situasi.",
-            "Sintesis yang tepat adalah bahwa termos terbuka (Situasi 2) justru lebih efektif mempertahankan suhu air karena udara di dalam termos yang masuk dari luar akan terperangkap dan membentuk lapisan insulasi udara diam di atas permukaan air.",
-            "Kedua situasi menghasilkan sistem terisolasi sempurna karena dinding termos tidak berubah antara Situasi 1 dan Situasi 2, sehingga perbedaan tutup hanya memengaruhi estetika."
-          ],
-          c: 1
-        },
-        {
-          q: "Setelah memahami cara kerja termos secara sistemik, Dinda dihadapkan pada tiga pilihan untuk menjaga minumannya tetap panas selama 8 jam di kampus: P (termos standar), Q (gelas tertutup + kain flanel), R (termos dalam kotak styrofoam). Evaluasi sistemik yang paling tepat dalam menilai efektivitas ketiga pilihan adalah…",
-          a: [
-            "Pilihan Q (gelas + kain flanel) adalah yang terbaik karena bahan kain flanel memiliki konduktivitas termal nol sehingga mampu memblokir 100% perpindahan kalor.",
-            "Pilihan P (termos standar) sudah cukup efektif untuk 8 jam. Namun pada suhu ruang 18°C (lebih dingin), gradien suhu (ΔT) lebih besar sehingga laju kehilangan kalor meningkat. Evaluasi menyarankan Pilihan R (termos dalam styrofoam) sebagai solusi terbaik karena menambahkan lapisan isolasi eksternal yang mereduksi ΔT efektif.",
-            "Ketiga pilihan menghasilkan efektivitas yang identik karena faktor terpenting adalah suhu awal air (90°C) dan suhu akhir yang diinginkan.",
-            "Pilihan P adalah satu-satunya pilihan ilmiah, sementara Q dan R adalah metode tradisional yang tidak memiliki dasar termodinamika.",
-            "Evaluasi sistemik menunjukkan bahwa tidak ada cara untuk menjaga air tetap panas selama 8 jam tanpa pemanas aktif."
-          ],
-          c: 1
-        }
+        { ind: "Pemahaman Hubungan Dalam Sistem", q: "Berdasarkan cerita Dinda, komponen-komponen termos membentuk sebuah sistem termodinamika yang saling terhubung. Pernyataan yang paling tepat dalam menggambarkan hubungan fungsional antarkomponen sistem termos sebagai sistem termodinamika adalah…", a: ["Ruang vakum di antara dinding termos berfungsi sebagai sumber dingin yang menyerap kalor dari air panas", "Setiap komponen termos bekerja secara independen dan tidak saling memengaruhi", "Dinding baja dalam mengisolasi air dari ruang vakum, ruang vakum memutus jalur konduksi dan konveksi kalor antar dinding, lapisan reflektif perak meminimalkan perpindahan kalor secara radiasi, dan dinding baja luar memisahkan sistem dari lingkungan udara luar. Keempat komponen ini membentuk rantai subsistem yang saling mendukung untuk meminimalkan total perpindahan kalor dari air ke lingkungan", "Hubungan antarkomponen termos hanya relevan pada saat air pertama kali dimasukkan"], c: 2 },
+        { ind: "Analisis Sistem", q: "Dinda mengamati bahwa setelah 6 jam, suhu air dalam termos turun dari 90°C menjadi 75°C, artinya masih ada perpindahan kalor yang terjadi meskipun kecil. Berdasarkan analisis sistemik terhadap mekanisme perpindahan kalor pada setiap subsistem termos, identifikasi yang paling tepat tentang dari mana saja kalor masih dapat keluar adalah…", a: ["Kalor keluar hanya melalui tutup termos yang terbuat dari plastik/karet karena bahan tersebut adalah konduktor kalor terbaik", "Analisis subsistem menunjukkan tiga jalur kebocoran kalor yang masih aktif: (1) konduksi melalui dinding baja dan tutup termos, (2) radiasi inframerah yang tidak 100% dipantulkan lapisan perak, dan (3) konveksi melalui udara yang masuk lewat celah tutup menjadikan sambungan tutup-badan termos sebagai subsistem terlemah", "Tidak ada kalor yang keluar dari termos sama sekali karena termos adalah contoh sempurna sistem terisolasi", "Kalor keluar secara merata dari seluruh permukaan termos pada laju yang identik"], c: 1 }
       ]
     }
   ],
   sci: [
     {
-      scenario: "Rina sedang melakukan pengamatan di dapur. Ia menyeduh dua cangkir teh panas dengan suhu awal yang sama, yaitu 90°C. Cangkir pertama dibiarkan terbuka di atas meja, sedangkan cangkir kedua ditutup rapat menggunakan tutup cangkir kedap udara. Setelah 15 menit, Rina mengukur suhu kedua cangkir dan mendapati bahwa teh di cangkir terbuka sudah turun ke 55°C, sementara teh di cangkir tertutup masih berada di 72°C.",
+      scenario: "Seorang peserta didik ingin menyelidiki mengapa air panas pada wadah terbuka lebih cepat dingin dibandingkan pada wadah tertutup. Ia menyiapkan dua wadah identik: Wadah A (terbuka) dan Wadah B (tertutup dengan tutup plastik). Kedua wadah diisi air panas bersuhu 80°C dan diletakkan di ruangan dengan suhu 25°C. Peserta didik mengukur suhu setiap 5 menit selama 30 menit.",
       questions: [
-        {
-          q: "Berdasarkan fenomena yang diamati Rina, rumusan masalah, hipotesis, dan rencana penyelidikan yang paling tepat dan ilmiah adalah…",
-          a: [
-            "Rumusan masalah: Mengapa teh panas terasa lebih enak diminum dari cangkir terbuka?",
-            "Rumusan masalah: Apakah jenis bahan cangkir memengaruhi kecepatan penurunan suhu teh panas?",
-            "Rumusan masalah: Apakah kondisi sistem (terbuka atau tertutup) memengaruhi laju penurunan suhu teh panas pada selang waktu tertentu?",
-            "Rumusan masalah: Berapa lama waktu yang dibutuhkan agar teh panas mencapai suhu ruangan?",
-            "Rumusan masalah: Apakah warna cangkir memengaruhi kecepatan penurunan suhu teh panas?"
-          ],
-          c: 2
-        },
-        {
-          q: "Analisis terhadap data Rina (Terbuka 90->41°C, Tertutup 90->61°C dalam 30 menit) yang paling tepat ditinjau dari konsep jenis sistem termodinamika dan mekanisme perpindahan kalor adalah…",
-          a: [
-            "Laju penurunan suhu pada kedua sistem adalah sama karena keduanya terbuat dari bahan cangkir yang identik.",
-            "Sistem terbuka mengalami penurunan suhu lebih cepat semata-mata karena cangkir terbuka bersentuhan langsung dengan udara.",
-            "Sistem terbuka kehilangan energi lebih cepat karena mengalami tiga mekanisme sekaligus: konduksi melalui dinding cangkir, konveksi dari permukaan air ke udara, dan evaporasi (penguapan) yang membawa massa uap air keluar sistem, sementara sistem tertutup hanya mengalami konduksi dan konveksi terbatas tanpa kehilangan massa.",
-            "Sistem tertutup lebih cepat dingin karena tutup cangkir menyerap panas dari teh dan melepaskannya ke udara di luar.",
-            "Perbedaan laju pendinginan disebabkan oleh proses adiabatik yang terjadi pada sistem tertutup."
-          ],
-          c: 2
-        },
-        {
-          q: "Berdasarkan data penyelidikan Rina, inferensi yang paling tepat dan komprehensif adalah…",
-          a: [
-            "Proses pendinginan teh merupakan proses isotermal.",
-            "Proses pendinginan teh merupakan proses isokhorik.",
-            "Pendinginan pada sistem terbuka berlangsung melalui proses isobarik (tekanan atmosfer konstan) disertai penurunan massa sistem akibat evaporasi, sedangkan pendinginan pada sistem tertutup berlangsung mendekati proses isokhorik di mana volume dan massa air relatif tetap.",
-            "Kedua sistem mengalami proses adiabatik karena tidak ada sumber kalor eksternal.",
-            "Sistem terbuka mengalami proses adiabatik karena uap yang keluar membawa seluruh kalor."
-          ],
-          c: 2
-        },
-        {
-          q: "Argumen ilmiah yang paling kuat dan tepat dari Rina untuk mempresentasikan temuannya adalah…",
-          a: [
-            "Tutup cangkir berfungsi sebagai isolator sempurna.",
-            "Perbedaan laju pendinginan semata-mata disebabkan oleh perbedaan volume cangkir.",
-            "Penyelidikan saya menunjukkan hasil yang tidak konsisten dengan teori termodinamika.",
-            "Temuan saya mengonfirmasi bahwa sistem terbuka kehilangan energi lebih cepat karena berlangsung tiga mekanisme sekaligus: konduksi, konveksi, dan evaporasi sesuai dengan konsep sistem terbuka. Sementara sistem tertutup hanya mengalami konduksi dan konveksi terbatas. Hal ini konsisten dengan prinsip Hukum I Termodinamika.",
-            "Data saya membuktikan bahwa proses pendinginan teh di cangkir terbuka adalah proses adiabatik murni."
-          ],
-          c: 3
-        }
+        { ind: "Inquiry", q: "Pertanyaan penelitian yang paling tepat untuk menyelidiki fenomena tersebut adalah…", a: ["Mengapa air panas selalu mendingin?", "Bagaimana pengaruh jenis wadah (terbuka vs tertutup) terhadap laju pendinginan air panas?", "Apakah suhu ruangan memengaruhi pendinginan air?", "Berapa lama waktu yang diperlukan air untuk mendingin?"], c: 1 },
+        { ind: "Analysis & Argumentation", q: "Berdasarkan data pengamatan selama 30 menit, Wadah A (terbuka) mengalami penurunan suhu dari 80°C menjadi 45°C, sedangkan Wadah B (tertutup) hanya turun menjadi 65°C. Argumen ilmiah yang paling tepat untuk menjelaskan perbedaan laju pendinginan ini adalah…", a: ["Wadah A mendingin lebih cepat karena air di dalamnya lebih sedikit", "Wadah A mendingin lebih cepat karena terbuka sehingga memungkinkan perpindahan kalor melalui konveksi paksa (udara dingin masuk dan uap air keluar), evaporasi di permukaan air, dan konduksi langsung ke lingkungan, sedangkan Wadah B tertutup sehingga hanya terjadi konduksi melalui dinding wadah", "Wadah B mendingin lebih lambat karena tutup plastik lebih tebal dari dinding wadah", "Kedua wadah mendingin dengan laju yang sama karena suhu awal dan lingkungan identik"], c: 1 }
       ]
     }
   ],
   inn: [
     {
-      scenario: "Keluarga Pak Budi tinggal di daerah pegunungan dengan suhu lingkungan rata-rata 15°C. Setiap hari, Bu Budi memasak menggunakan tiga jenis peralatan dapur secara bergantian: (1) panci biasa terbuka, (2) panci presto, dan (3) termos masak. Bu Budi mengeluh bahwa tagihan gas LPG-nya sangat boros.",
+      scenario: "Seorang siswa mengamati pemborosan panas saat ibunya memasak di rumah. Ia ingin merancang solusi inovatif untuk mengurangi kehilangan kalor selama proses memasak menggunakan konsep termodinamika yang telah dipelajari.",
       questions: [
-        {
-          q: "Identifikasi yang paling tepat terhadap inti permasalahan termodinamika yang menyebabkan pemborosan gas LPG pada kegiatan memasak Bu Budi adalah…",
-          a: [
-            "Bu Budi terlalu sering berganti-ganti peralatan masak.",
-            "Penggunaan panci biasa terbuka yang menjadikan sistem bersifat terbuka, sehingga terjadi kehilangan kalor ke lingkungan melalui dua jalur sekaligus: penguapan materi (uap air) dan konduksi/konveksi/radiasi energi panas.",
-            "Suhu lingkungan di pegunungan yang terlalu rendah (15°C).",
-            "Panci presto yang digunakan Bu Budi bekerja pada tekanan tinggi sehingga membutuhkan energi ekstra.",
-            "Termos masak tidak dapat digunakan untuk memasak secara langsung."
-          ],
-          c: 1
-        },
-        {
-          q: "Kelompok ide yang paling beragam, relevan secara termodinamika, dan mencakup berbagai pendekatan solusi untuk mengurangi pemborosan kalor adalah…",
-          a: [
-            "Membeli kompor gas baru, mengganti tabung LPG, dan memasak di siang hari.",
-            "Selalu menggunakan panci presto saja untuk semua jenis masakan.",
-            "Menggunakan tutup panci saat memasak, beralih ke panci presto untuk masakan lama, menggunakan termos masak untuk melanjutkan proses memasak tanpa api (memanfaatkan sistem terisolasi), serta memperkecil nyala api setelah mendidih.",
-            "Memasak semua bahan sekaligus dalam satu panci besar.",
-            "Melapisi seluruh permukaan luar panci dengan aluminium foil."
-          ],
-          c: 2
-        },
-        {
-          q: "Gagasan kreatif dan orisinal untuk mengurangi pemborosan kalor bukan sekadar mengganti alat masak biasa adalah…",
-          a: [
-            "Memasak menggunakan api yang lebih besar supaya cepat selesai.",
-            "Memindahkan kegiatan memasak ke ruangan yang lebih kecil.",
-            "Desain 'sistem memasak bertingkat': tahap pertama menggunakan panci bertutup hingga mendidih, kemudian tahap kedua memindahkan panci ke dalam kotak insulasi mandiri (styrofoam/kardus berlapis kain) agar proses memasak dilanjutkan mendekati proses adiabatik tanpa api.",
-            "Membeli rice cooker listrik untuk menggantikan kompor gas.",
-            "Memasak pada malam hari ketika suhu lingkungan lebih rendah."
-          ],
-          c: 2
-        },
-        {
-          q: "Rumusan hipotesis yang paling tepat, terukur, dan dapat diuji secara ilmiah adalah…",
-          a: [
-            "Memasak menggunakan panci yang lebih besar akan lebih efisien.",
-            "Semua metode memasak memiliki efisiensi yang sama karena hukum kekekalan energi.",
-            "Jika proses memasak dilakukan menggunakan sistem dua-tahap (panci bertutup hingga mendidih, dilanjutkan dalam kotak insulasi tanpa api), maka total kalor yang hilang ke lingkungan akan lebih kecil dibandingkan memasak konvensional.",
-            "Panci presto sudah terbukti efisien sehingga tidak perlu pengujian.",
-            "Jika suhu lingkungan dinaikkan hingga 100°C, maka tidak akan ada kalor yang hilang."
-          ],
-          c: 2
-        }
+        { ind: "Flexibility & Fluency", q: "Kumpulan ide solusi yang paling beragam dan relevan secara termodinamika untuk mengurangi pemborosan kalor saat memasak adalah…", a: ["Membeli kompor baru, mengganti tabung LPG, dan memasak siang hari", "Menggunakan tutup panci (sistem mendekati tertutup), panci presto (meningkatkan tekanan dan suhu didih), termos masak (sistem terisolasi), serta memperkecil api setelah mendidih", "Selalu menggunakan panci presto saja untuk semua jenis masakan", "Memasak semua bahan sekaligus dalam satu panci besar"], c: 1 },
+        { ind: "Creative Thinking & Hypothesis", q: "Rancangan kreatif dan hipotesis yang paling tepat untuk mengurangi pemborosan kalor adalah…", a: ["Sistem memasak dua tahap: tahap pertama panci bertutup hingga mendidih (isobarik terkontrol), tahap kedua memindahkan ke kotak insulasi mandiri (adiabatik tanpa api). Hipotesis: Jika proses memasak dilakukan menggunakan sistem dua-tahap ini, maka total kalor yang hilang lebih kecil karena tahap kedua mendekati proses adiabatik (Q≈0), diuji dengan mengukur konsumsi LPG", "Memasak menggunakan api yang lebih besar akan lebih efisien", "Membeli rice cooker listrik", "Memasak pada malam hari untuk menghemat energi listrik pendingin ruangan"], c: 0 }
       ]
     }
   ]
@@ -361,21 +183,17 @@ const QUESTIONS = {
 
 let currentTab = 'quiz';
 let timerInterval = null;
-let timeRemaining = 18 * 60; // 18 Menit
+let timeRemaining = 18 * 60;
 let completedChallenges = [];
-let challengeScores = { ct: 0, st: 0, sci: 0, inn: 0 };
+let challengeScores = { quiz: 0, ct: 0, st: 0, sci: 0, inn: 0 };
 
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  
   document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
   document.getElementById('panel-' + tab).style.display = 'block';
   currentTab = tab;
-  
-  if (tab !== 'quiz' && !timerInterval) {
-    startGlobalTimer();
-  }
+  if (tab !== 'quiz' && !timerInterval) startGlobalTimer();
 }
 
 function startGlobalTimer() {
@@ -385,14 +203,8 @@ function startGlobalTimer() {
     let m = Math.floor(timeRemaining / 60);
     let s = timeRemaining % 60;
     display.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
-    
     if (timeRemaining <= 60) document.getElementById('main-timer').classList.add('urgent');
-    
-    if (timeRemaining <= 0) {
-      clearInterval(timerInterval);
-      alert('⏰ Waktu Habis! Mari kita lihat hasil pengerjaan timmu.');
-      finishLevel(1);
-    }
+    if (timeRemaining <= 0) { clearInterval(timerInterval); finishLevel(1); }
   }, 1000);
 }
 
@@ -420,11 +232,12 @@ function renderChallenges() {
     const data = QUESTIONS[key][0];
     container.innerHTML = `
       <div class="scenario-box">
-        <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+        <div class="scenario-label">📍 Skenario / Konteks Masalah</div>
         <div class="scenario-text">${data.scenario}</div>
       </div>
       ${data.questions.map((q, i) => `
         <div class="question-block" id="${key}-q-${i}" style="margin-top:24px;">
+          <div class="indicator-label">${q.ind}</div>
           <div class="question-text"><strong>${i+1}. ${q.q}</strong></div>
           <div class="options-grid">
             ${q.a.map((opt, oi) => `
@@ -453,7 +266,6 @@ function selectOption(type, qIdx, oIdx) {
 function submitQuiz() {
   const inputs = document.querySelectorAll('#panel-quiz input[type="radio"]:checked');
   if (inputs.length < 10) return alert('Mohon jawab semua soal kuis!');
-  
   let score = 0;
   QUESTIONS.quiz.forEach((q, i) => {
     const selected = parseInt(document.querySelector(`input[name="quiz_q${i}"]:checked`).value);
@@ -465,8 +277,9 @@ function submitQuiz() {
     });
     if (selected === q.c) score += 10;
   });
-  
-  alert(`🎯 Kuis Selesai! Skor Tim: ${score}/100\nMari lanjut ke Tantangan Berpikir Kompleks.`);
+  challengeScores.quiz = score;
+  completedChallenges.push('quiz');
+  alert(`🎯 Kuis Selesai! Skor: ${score}/100`);
   document.getElementById('btn-submit-quiz').style.display = 'none';
   document.getElementById('tab-quiz').classList.add('done');
   switchTab('ct');
@@ -474,61 +287,38 @@ function submitQuiz() {
 
 function submitChallenge(key) {
   const inputs = document.querySelectorAll(`#panel-${key} input[type="radio"]:checked`);
-  if (inputs.length < QUESTIONS[key][0].questions.length) return alert('Mohon jawab semua soal pada tantangan ini!');
-  
+  if (inputs.length < QUESTIONS[key][0].questions.length) return alert('Mohon jawab semua soal!');
   let score = 0;
   const data = QUESTIONS[key][0];
   data.questions.forEach((q, i) => {
     const selected = parseInt(document.querySelector(`input[name="${key}_q${i}"]:checked`).value);
     if (selected === q.c) score += 100 / data.questions.length;
   });
-  
   challengeScores[key] = Math.round(score);
   completedChallenges.push(key);
-  
-  const tb = document.getElementById('tab-' + key);
-  tb.classList.add('done');
-  
+  document.getElementById('tab-' + key).classList.add('done');
   const order = ['ct', 'st', 'sci', 'inn'];
   const idx = order.indexOf(key);
-  if (idx < order.length - 1) {
-    switchTab(order[idx + 1]);
-  } else {
-    document.getElementById('finish-level-container').style.display = 'flex';
-    alert('Hebat! Kamu sudah menyelesaikan semua tantangan. Klik tombol "Selesaikan Level" untuk melihat hasil akhir.');
-  }
+  if (idx < order.length - 1) switchTab(order[idx + 1]);
+  else document.getElementById('finish-level-container').style.display = 'flex';
 }
 
 function finishLevel(ln) {
   clearInterval(timerInterval);
   const avgScore = Math.round((challengeScores.ct + challengeScores.st + challengeScores.sci + challengeScores.inn) / 4);
   const xpEarned = avgScore * 2;
-  
   const state = ThermoGame.loadState();
-  if (!state.zones) state.zones = {};
-  state.zones[ZONE] = {
-    completed: true,
-    score: avgScore,
-    scores: { all: challengeScores },
-    challengesDone: completedChallenges
-  };
+  state.zones[ZONE] = { completed: true, score: avgScore, scores: { all: challengeScores }, challengesDone: completedChallenges, answers: {} };
   ThermoGame.addXP(state, xpEarned);
   ThermoGame.saveState(state);
-  
   document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
   document.getElementById('result-screen').style.display = 'block';
   document.getElementById('result-xp').textContent = xpEarned;
-  
-  let msg = '';
-  if (avgScore >= 80) msg = '🌟 Luar biasa! Tim kamu menunjukkan pemahaman yang sangat baik!';
-  else if (avgScore >= 60) msg = '👍 Bagus! Tim kamu sudah cukup memahami materi ini.';
-  else msg = '📝 Cukup, tapi masih ada ruang untuk belajar lagi. Semangat!';
-  document.getElementById('result-msg').textContent = msg;
+  document.getElementById('result-msg').textContent = avgScore >= 80 ? '🌟 Luar biasa!' : (avgScore >= 60 ? '👍 Bagus!' : '📝 Cukup.');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderQuiz();
-  renderChallenges();
+  renderQuiz(); renderChallenges();
   setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
   const state = ThermoGame.loadState();
   document.getElementById('nav-xp-value').textContent = (state.playerName ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
