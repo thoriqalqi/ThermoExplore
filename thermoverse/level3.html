@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,1086 +7,502 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/quiz.css">
   <style>
-    .l-accent {
-      color: #10B981;
-    }
-
-    .l-bg {
-      background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
-      border-color: #10B981;
-    }
-
-    .l-badge {
-      background: color: #059669;
-      background: #D1FAE5;
-      ;
-    }
-
-    .l-header {
-      background: linear-gradient(135deg, #10B981, #059669);
-    }
-
-    .tab-btn.active {
-      background: linear-gradient(135deg, #10B981, #059669);
-    }
-
-    .open-answer {
-      width: 100%;
-      min-height: 120px;
-      padding: 12px;
-      border: 1px solid #CBD5E1;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      resize: vertical;
-      margin-top: 10px;
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .indicator-answer {
-      display: none;
-      margin-top: 15px;
-      padding: 15px;
-      background: #ECFDF5;
-      border: 1px solid #10B981;
-      border-radius: 8px;
-      color: #065F46;
-      font-size: 0.9rem;
-    }
+    .l-accent { color: #10B981; }
+    .l-bg { background: linear-gradient(135deg,#ECFDF5,#D1FAE5); border-color: #10B981; }
+    .l-badge { background: color: #059669; background: #D1FAE5;; }
+    .l-header { background: linear-gradient(135deg,#10B981,#059669); }
+    .tab-btn.active { background: linear-gradient(135deg,#10B981,#059669); }
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin-bottom: 20px; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
+    .option-btn { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: white; border: 2px solid #E5E7EB; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+    .option-btn:hover { border-color: var(--primary); background: #F5F3FF; }
+    .option-btn.selected { border-color: var(--primary); background: #EDE9FE; }
+    .option-btn.correct { border-color: #10B981; background: #DCFCE7; }
+    .option-btn.wrong { border-color: #EF4444; background: #FEE2E2; }
+    .option-key { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: #F3F4F6; border-radius: 50%; font-weight: bold; font-size: 0.9rem; }
+    .finish-btn-container { margin-top: 30px; display: flex; justify-content: center; }
+    .lab-box { background: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 16px; padding: 20px; margin-bottom: 24px; }
+    .lab-title { font-weight: 800; color: #475569; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
   </style>
 </head>
-
 <body>
-  <div id="loading-screen">
-    <div class="energy-pulse"></div>
-    <div class="loading-text">🌋 Memuat Level 3...</div>
+<div id="loading-screen"><div class="energy-pulse"></div><div class="loading-text">🌿 Memuat Level 3...</div></div>
+<div id="page-transition"></div>
+
+<nav class="nav-bar">
+  <a href="map.html" class="nav-logo">Thermo<span>Explorer</span></a>
+  <ul class="nav-links">
+    <li><a href="map.html">🗺️ Peta Misi</a></li>
+    <li><a href="dashboard.html">📊 Leaderboard</a></li>
+  </ul>
+  <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
+</nav>
+
+<div class="page-wrapper challenge-page">
+  <div class="challenge-wrapper">
+
+    <!-- Header -->
+    <div class="level-header">
+      <div class="level-header-left">
+        <div class="level-badge l-badge">LEVEL 3</div>
+        <div class="level-title">Hukum 2 Termodinamika</div>
+        <div class="level-subtitle">Entropi dan Efisiensi • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
+      </div>
+      <div class="level-header-right">
+        <div class="xp-counter">
+          <div class="xp-counter-val" id="current-xp">0</div>
+          <div class="xp-counter-label">⚡ XP</div>
+        </div>
+        <div class="timer-box" id="main-timer">
+          <div class="timer-value" id="timer-val">18:00</div>
+          <div class="timer-label">⏱ Sisa Waktu</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="challenge-tabs">
+      <button class="tab-btn active" id="tab-quiz" onclick="switchTab('quiz')">📝 Kegiatan Awal (Quiz)</button>
+      <button class="tab-btn" id="tab-ct" onclick="switchTab('ct')">🔍 1. Critical Thinking</button>
+      <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 2. Systemic Thinking</button>
+      <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 3. Scientific Thinking</button>
+      <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 4. Innovative Thinking</button>
+    </div>
+
+    <!-- ======= QUIZ AWAL ======= -->
+    <div id="panel-quiz" class="challenge-card">
+      <div class="challenge-card-header">
+        <div>
+          <div class="challenge-card-title">📝 Kegiatan Awal</div>
+          <div class="challenge-card-desc">10 soal quiz pilihan ganda</div>
+        </div>
+      </div>
+      <div id="quiz-container"></div>
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" id="btn-submit-quiz" onclick="submitQuiz()">✅ Selesaikan Kuis</button>
+      </div>
+    </div>
+
+    <!-- ======= CHALLENGE PANELS ======= -->
+    <div id="panel-ct" class="challenge-card" style="display:none;">
+      <div class="challenge-card-header"><div><div class="challenge-card-title">🔍 1. Berpikir Kritis (Critical Thinking)</div></div></div>
+      <div class="lab-box">
+        <div class="lab-title">🔬 Virtual Lab: Sifat Gas</div>
+        <div class="video-container">
+          <iframe src="https://phet.colorado.edu/sims/html/gas-properties/latest/gas-properties_en.html" allowfullscreen></iframe>
+        </div>
+        <p style="font-size:0.85rem; color:#64748B;">Gunakan simulasi di atas untuk mengamati hubungan suhu dan tekanan sebelum menjawab soal di bawah.</p>
+      </div>
+      <div class="challenge-content" id="content-ct"></div>
+    </div>
+
+    <div id="panel-st" class="challenge-card" style="display:none;">
+      <div class="challenge-card-header"><div><div class="challenge-card-title">🔗 2. Berpikir Sistemik (Systemic Thinking)</div></div></div>
+      <div class="lab-box">
+        <div class="lab-title">🔬 Virtual Lab: Bentuk & Perubahan Energi</div>
+        <div class="video-container">
+          <iframe src="https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="challenge-content" id="content-st"></div>
+    </div>
+
+    <div id="panel-sci" class="challenge-card" style="display:none;">
+      <div class="challenge-card-header"><div><div class="challenge-card-title">🔬 3. Berpikir Ilmiah (Scientific Thinking)</div></div></div>
+      <div class="challenge-content" id="content-sci"></div>
+    </div>
+
+    <div id="panel-inn" class="challenge-card" style="display:none;">
+      <div class="challenge-card-header"><div><div class="challenge-card-title">💡 4. Berpikir Inovatif (Innovative Thinking)</div></div></div>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/S2pEa4_WvK0" allowfullscreen></iframe>
+      </div>
+      <div class="challenge-content" id="content-inn"></div>
+      <div class="finish-btn-container" id="finish-level-container" style="display:none;">
+        <button class="btn btn-primary" style="font-size:1.2rem; padding:16px 40px;" onclick="finishLevel(3)">🏆 Selesaikan Level 3</button>
+      </div>
+    </div>
+
+    <!-- ======= RESULT SCREEN ======= -->
+    <div id="result-screen" class="challenge-card" style="display:none; text-align:center; padding:60px 20px;">
+      <div style="font-size:5rem; margin-bottom:20px;">🎉</div>
+      <h2 style="font-family: var(--font-heading); font-size:2.2rem; margin-bottom:10px;">Misi Selesai!</h2>
+      <p id="result-msg" style="color:#6B7280; font-size:1.1rem; margin-bottom:30px;"></p>
+      <div style="display:flex; justify-content:center; gap:20px; margin-bottom:40px;">
+        <div class="xp-counter" style="background:#F5F3FF; padding:20px 40px; border-radius:20px;">
+          <div class="xp-counter-val" id="result-xp" style="font-size:2.5rem;">0</div>
+          <div class="xp-counter-label">TOTAL XP</div>
+        </div>
+      </div>
+      <a href="map.html" class="btn btn-primary" style="padding:14px 40px;">Kembali ke Peta</a>
+    </div>
+
   </div>
-  <div id="page-transition"></div>
-
-  <nav class="nav-bar">
-    <a href="map.html" class="nav-logo">Thermo<span>Explorer</span></a>
-    <ul class="nav-links">
-      <li><a href="map.html">🗺️ Peta Misi</a></li>
-      <li><a href="dashboard.html">📊 Leaderboard</a></li>
-    </ul>
-    <div class="nav-xp"><span class="xp-icon">⚡</span><span class="xp-value" id="nav-xp-value">0 XP</span></div>
-  </nav>
-
-  <div class="page-wrapper challenge-page">
-    <div class="challenge-wrapper">
-
-      <!-- Header -->
-      <div class="level-header">
-        <div class="level-header-left">
-          <div class="level-badge l-badge">LEVEL 3</div>
-          <div class="level-title">Hukum 2 Termodinamika</div>
-          <div class="level-subtitle">Entropi dan Aplikasinya • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
-        </div>
-        <div class="level-header-right">
-          <div class="xp-counter">
-            <div class="xp-counter-val" id="current-xp">0</div>
-            <div class="xp-counter-label">⚡ XP</div>
-          </div>
-          <div class="timer-box" id="main-timer">
-            <div class="timer-value" id="timer-val">05:00</div>
-            <div class="timer-label">⏱ Diskusi</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tabs -->
-      <div class="challenge-tabs">
-        <button class="tab-btn active" id="tab-quiz" onclick="switchTab('quiz')">📝 Kegiatan Awal (Quiz)</button>
-        <button class="tab-btn" id="tab-ct" onclick="switchTab('ct')">🔍 1. Critical Thinking</button>
-        <button class="tab-btn" id="tab-st" onclick="switchTab('st')">🔗 2. Systemic Thinking</button>
-        <button class="tab-btn" id="tab-sci" onclick="switchTab('sci')">🔬 3. Scientific Thinking</button>
-        <button class="tab-btn" id="tab-inn" onclick="switchTab('inn')">💡 4. Innovative Thinking</button>
-      </div>
-
-      <!-- ======= QUIZ AWAL ======= -->
-      <div id="panel-quiz" class="challenge-card">
-        <div class="challenge-card-header">
-          <div>
-            <div class="challenge-card-title">📝 Kegiatan Awal</div>
-            <div class="challenge-card-desc">10 soal quiz pilihan ganda</div>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">1. Apa yang dijelaskan oleh Rumusan
-            Clausius dalam Hukum II Termodinamika?</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q1" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Kalor mengalir secara spontan dari benda bersuhu rendah ke benda bersuhu tinggi</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q1" value="True" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Kalor mengalir secara spontan dari benda bersuhu tinggi ke benda bersuhu rendah</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q1" value="False" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Kalor dapat mengalir tanpa batas dalam kedua arah</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q1" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Kalor mengalir dari benda yang memiliki entropi tinggi ke yang rendah</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">2. Dalam Hukum II Termodinamika,
-            entropi suatu sistem akan:</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q2" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Tetap konstan</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q2" value="False" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Berkurang seiring waktu</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q2" value="True" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Meningkat pada proses irreversibel</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q2" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Tidak berhubungan dengan suhu sistem</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">3. Apa yang disampaikan oleh Hukum
-            Kelvin-Planck mengenai mesin kalor?</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q3" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Mesin kalor dapat mengubah semua energi panas menjadi kerja</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q3" value="False" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Mesin kalor selalu efisien 100%</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q3" value="True" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Mesin kalor selalu membuang sebagian energi panas ke reservoir suhu rendah</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q3" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Mesin kalor tidak perlu menerima energi panas dari reservoir</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">4. Apa yang dimaksud dengan proses
-            reversibel menurut Hawkins?</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q4" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Proses yang dapat kembali ke keadaan semula tanpa mengubah lingkungan</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q4" value="False" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Proses yang tidak dapat kembali ke keadaan semula</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q4" value="False" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Proses yang mengubah energi dengan cepat</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q4" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Proses yang mengubah entropi dalam jumlah besar</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">5. Pada proses irreversible, apa
-            yang terjadi pada sistem?</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q5" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Sistem kembali ke keadaan semula tanpa mengubah lingkungan</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q5" value="True" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Sistem tidak dapat kembali ke keadaan semula tanpa mengubah keadaan sistem lain</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q5" value="False" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Proses tersebut selalu terjadi pada suhu rendah</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q5" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Proses ini hanya terjadi pada sistem yang tertutup</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">6. Contoh ideal dari proses
-            reversibel adalah:</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q6" value="True" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Mesin Carnot</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q6" value="False" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Mesin kendaraan bermotor</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q6" value="False" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Proses pengembunan pada gelas es</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q6" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Termos</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">7. Dalam konteks Hukum II
-            Termodinamika, entropi menggambarkan:</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q7" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Jumlah energi yang tersedia dalam sistem</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q7" value="True" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Tingkat keteraturan atau ketidakteraturan dalam sistem</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q7" value="False" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Tekanan gas dalam sistem</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q7" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Volume gas dalam sistem</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">8. Pada contoh pengembunan pada
-            gelas es, peningkatan entropi dapat dijelaskan dengan:</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q8" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Energi berpindah dari gelas ke udara</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q8" value="True" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Energi berpindah dari udara ke gelas yang dingin</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q8" value="False" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Tidak ada perubahan entropi dalam proses ini</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q8" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Proses ini tidak melibatkan perpindahan energi</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">9. Prinsip Hukum II Termodinamika
-            berlaku pada proses:</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q9" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Reversibel saja</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q9" value="False" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Irreversibel saja</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q9" value="True" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Keduanya, reversibel dan irreversibel</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q9" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Hanya pada proses yang terjadi pada suhu konstan</div>
-            </label>
-          </div>
-        </div>
-
-        <div class="question-block" style="margin-bottom: 20px;">
-          <div class="question-text" style="font-weight: bold; margin-bottom: 10px;">10. Pada mesin kendaraan bermotor,
-            sebagian energi panas tidak dapat diubah menjadi kerja, hal ini mengilustrasikan:</div>
-          <div class="options-grid" style="margin-top: 12px; border:none; padding:0;">
-            <label class="option-btn"><input type="radio" name="l3_q10" value="False" style="display:none;">
-              <div class="option-key">A</div>
-              <div>Hukum I Termodinamika</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q10" value="True" style="display:none;">
-              <div class="option-key">B</div>
-              <div>Hukum II Termodinamika</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q10" value="False" style="display:none;">
-              <div class="option-key">C</div>
-              <div>Proses isotermal</div>
-            </label><label class="option-btn"><input type="radio" name="l3_q10" value="False" style="display:none;">
-              <div class="option-key">D</div>
-              <div>Proses isokhorik</div>
-            </label>
-          </div>
-        </div>
-
-        <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-          <button class="btn btn-primary" onclick="submitQuiz()">✅ Selesai – Lanjut ke Tantangan 1 →</button>
-        </div>
-      </div>
-
-      <!-- ======= CHALLENGE 1: CRITICAL THINKING ======= -->
-      <div id="panel-ct" class="challenge-card" style="display:none;">
-        <div class="challenge-card-header">
-          <div>
-            <div class="challenge-card-title">🔍 1. Berpikir Kritis (Critical Thinking)</div>
-          </div>
-        </div>
-        <div class="discussion-banner">
-          <div class="disc-icon">👥</div>
-          <div class="disc-text">
-            <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
-            <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
-          </div>
-          <button class="btn btn-secondary" onclick="startTimer(300, this)"
-            style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
-        </div>
-        <div class="scenario-box">
-          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
-          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Kritis
-            Saat kamu mendinginkan air dalam freezer, air mengalami perubahan fase dari cair menjadi padat. Uniknya, air
-            mengembang saat suhu turun di bawah 4°C, yang bertentangan dengan sebagian besar substansi lain yang
-            mengecil saat membeku. Hal ini disebabkan oleh perubahan struktur molekul air, yang menyebabkan peningkatan
-            volume sebelum membeku menjadi es.
-            Sistem ini mempengaruhi entropi, yang mengukur ketidakteraturan atau distribusi energi dalam suatu sistem.
-            Ketika air membeku, energi (kalor) dilepaskan ke lingkungan, dan entropi sistem menurun, meskipun entropi
-            total alam semesta tetap meningkat. Ini berhubungan langsung dengan Hukum I Termodinamika, yang menyatakan
-            bahwa energi tidak dapat diciptakan atau dimusnahkan, hanya diubah bentuknya.
-            Gambar grafik volume air (Sumber:
-            https://www.scienceabc.com/pure-sciences/why-does-water-expand-when-it-freezes.html)
-          </div>
-        </div>
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Interpretasi
-            (Menafsirkan Makna)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Perhatikan
-            bahwa volume air mulai meningkat ketika suhu turun di bawah 4°C, sebelum akhirnya membeku.
-            Berdasarkan data dan grafik yang diberikan, jelaskan mengapa volume air bertambah saat suhu turun di bawah
-            4°C dan bagaimana Hukum I Termodinamika dapat digunakan untuk menjelaskan proses ini, mengingat perubahan
-            fase air dari cair ke padat?</div>
-          <textarea class="open-answer" id="l3_ct_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_0')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analisis
-            (Mengidentifikasi Hubungan dan Struktur)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Bagaimana
-            perubahan suhu, volume, dan energi dalam air selama proses pendinginan dan pembekuan berhubungan satu sama
-            lain? Sejauh mana pemborosan energi terjadi pada sistem pendinginan freezer?</div>
-          <textarea class="open-answer" id="l3_ct_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_1')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Evaluasi (Menilai
-            Kredibilitas dan Prosedur)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan data yang diberikan tentang perubahan entropi dalam proses pembekuan air, Apakah data sesuai
-            dengan teori entropi dalam proses pembekuan air? Jelaskan apakah prosedur pengukuran yang digunakan sudah
-            tepat, dan apakah data yang diperoleh mendukung prinsip termodinamika dalam pembekuan air.</div>
-          <textarea class="open-answer" id="l3_ct_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_2')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Penjelasan
-            (Menyusun Justifikasi)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Berikan
-            justifikasi ilmiah mengenai bagaimana proses pembekuan air melibatkan penurunan entropi pada sistem, dan
-            bagaimana energi yang dilepaskan mempengaruhi entropi.</div>
-          <textarea class="open-answer" id="l3_ct_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_3')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inferensi (Menarik
-            Kesimpulan)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan data dan analisis yang telah kamu lakukan, apa yang dapat disimpulkan mengenai perubahan entropi
-            selama pembekuan air?</div>
-          <textarea class="open-answer" id="l3_ct_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_4')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Regulasi Diri
-            (Refleksi Proses Berpikir)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah
-            menganalisis proses pembekuan air dan perubahan entropi, presentasikan hasil analisi mu didepan kelas.</div>
-          <textarea class="open-answer" id="l3_ct_5" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_ct_5')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-          <button class="btn btn-primary" onclick="submitChallenge('ct')">✅ Selesai – Lanjut ke Tantangan 2 →</button>
-        </div>
-      </div>
-
-      <!-- ======= CHALLENGE 2: SYSTEMIC THINKING ======= -->
-      <div id="panel-st" class="challenge-card" style="display:none;">
-        <div class="challenge-card-header">
-          <div>
-            <div class="challenge-card-title">🔗 2. Berpikir Sistemik (Systemic Thinking)</div>
-          </div>
-        </div>
-        <div class="discussion-banner">
-          <div class="disc-icon">👥</div>
-          <div class="disc-text">
-            <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
-            <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
-          </div>
-          <button class="btn btn-secondary" onclick="startTimer(300, this)"
-            style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
-        </div>
-        <div class="scenario-box">
-          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
-          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Sistemik
-            Pernahkah kamu meletakkan makanan panas di udara terbuka dan memperhatikan bagaimana makanan tersebut
-            menjadi dingin seiring berjalannya waktu? Proses ini terjadi karena adanya perpindahan energi dari makanan
-            ke udara sekitar. Dalam video yang akan kamu tonton, akan dijelaskan bagaimana energi panas berpindah dari
-            makanan panas ke lingkungan sekitar, serta bagaimana proses ini mempengaruhi entropi sistem.
-            Tonton video di bawah ini untuk memahami lebih lanjut tentang bagaimana panas berpindah dan bagaimana proses
-            pendinginan terjadi melalui konduksi, konveksi, dan radiasi.
-            <div class="video-container" style="margin-top: 15px;"><iframe
-                src="https://www.youtube.com/embed/EIP3pSio7-M" allowfullscreen></iframe></div>
-            <div style="text-align:center; margin-bottom:20px;"><img
-                src="file:///Users/macair4/.gemini/antigravity/brain/e3c8fbe9-9320-4f8a-bb77-0cc849ceab7d/carnot_cycle_engine_illustration_1776278278360.png"
-                alt="Siklus Carnot" style="max-width:100%; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-            </div>
-
-          </div>
-        </div>
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Pemahaman Hubungan
-            Dalam Sistem (Realize the Relationships Between the Systems)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan video yang kamu tonton, jelaskan bagaimana panas berpindah dari makanan ke udara sekitar dan
-            bagaimana hal ini mempengaruhi perubahan entropi sistem selama proses pendinginan.</div>
-          <textarea class="open-answer" id="l3_st_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_0')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analisis Sistem
-            (Analysis of the Systems)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah
-            memahami proses perpindahan energi dalam video, Bagaimana massa makanan, suhu awal, dan suhu udara sekitar
-            mempengaruhi laju pendinginan dan perubahan entropi yang terjadi selama proses tersebut?</div>
-          <textarea class="open-answer" id="l3_st_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_1')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Sintesis Sistem
-            (Synthesis of the Systems)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan informasi dari video, Bagaimana kamu akan merancang sistem pendinginan yang lebih efisien untuk
-            makanan panas? Gabungkan konsep-konsep yang dipelajari, seperti entropi dan perpindahan energi, untuk
-            menciptakan solusi yang lebih efektif.</div>
-          <textarea class="open-answer" id="l3_st_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_2')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Evaluasi Sistem
-            (Evaluation of the Systems)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Evaluasilah bagaimana entropi dan perpindahan energi mempengaruhi proses pendinginan makanan?</div>
-          <textarea class="open-answer" id="l3_st_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_st_3')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-          <button class="btn btn-primary" onclick="submitChallenge('st')">✅ Selesai – Lanjut ke Tantangan 3 →</button>
-        </div>
-      </div>
-
-      <!-- ======= CHALLENGE 3: SCIENTIFIC THINKING ======= -->
-      <div id="panel-sci" class="challenge-card" style="display:none;">
-        <div class="challenge-card-header">
-          <div>
-            <div class="challenge-card-title">🔬 3. Berpikir Ilmiah (Scientific Thinking)</div>
-          </div>
-        </div>
-        <div class="discussion-banner">
-          <div class="disc-icon">👥</div>
-          <div class="disc-text">
-            <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
-            <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
-          </div>
-          <button class="btn btn-secondary" onclick="startTimer(300, this)"
-            style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
-        </div>
-        <div class="scenario-box">
-          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
-          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Ilmiah
-            Ketika kita menggunakan AC (Air Conditioner) atau kulkas di rumah, kita sering tidak menyadari bahwa sistem
-            pendingin ini bisa menjadi penyebab utama pemborosan energi. Dalam Hukum Kedua Termodinamika, dijelaskan
-            bahwa entropi total dalam sistem selalu meningkat, yang berarti energi tidak dapat berpindah secara sempurna
-            tanpa ada pemborosan.
-            Tontonlah video dibawah ini!
-            <div class="video-container" style="margin-top: 15px;"><iframe
-                src="https://www.youtube.com/embed/yWYdu_kxKZI" allowfullscreen></iframe></div>
-            Video yang kamu tonton sebelumnya menjelaskan bagaimana proses pendinginan bekerja dalam AC dan kulkas.
-            Dalam sistem pendinginan, energi berpindah dari ruangan ke lingkungan (pada AC) atau dari makanan ke udara
-            di dalam kulkas. Namun, tidak semua energi yang digunakan untuk mendinginkan ruangan atau makanan tersebut
-            terpakai dengan efisien. Sebagian besar energi hilang sebagai entropi dalam proses tersebut.
-          </div>
-        </div>
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inquiry (Inkuiri)
-          </div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Dari video
-            yang kamu tonton Bagaimana Hukum Kedua Termodinamika dapat digunakan untuk menjelaskan kenapa entropi
-            meningkat dalam sistem pendinginan ini?</div>
-          <textarea class="open-answer" id="l3_sci_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_0')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Analysis
-            (Analisis)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Jelaskan
-            bagaimana perubahan energi dalam sistem pendingin ruangan atau kulkas berhubungan dengan peningkatan
-            entropi, sesuai dengan Hukum Kedua Termodinamika yang mengatakan bahwa entropi total selalu meningkat.</div>
-          <textarea class="open-answer" id="l3_sci_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_1')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Inference
-            (Inferensi)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan data yang diperoleh, apa kesimpulan yang dapat kamu tarik mengenai efisiensi energi dalam sistem
-            AC atau kulkas?</div>
-          <textarea class="open-answer" id="l3_sci_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_2')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Argumentation
-            (Argumentasi)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Bandingkan
-            temuan kamu dengan teori Hukum Kedua Termodinamika mengenai pemborosan energi dalam sistem pendinginan.
-          </div>
-          <textarea class="open-answer" id="l3_sci_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_sci_3')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-          <button class="btn btn-primary" onclick="submitChallenge('sci')">✅ Selesai – Lanjut ke Tantangan 4 →</button>
-        </div>
-      </div>
-
-      <!-- ======= CHALLENGE 4: INNOVATIVE THINKING ======= -->
-      <div id="panel-inn" class="challenge-card" style="display:none;">
-        <div class="challenge-card-header">
-          <div>
-            <div class="challenge-card-title">💡 4. Berpikir Inovatif (Innovative Thinking)</div>
-          </div>
-        </div>
-        <div class="discussion-banner">
-          <div class="disc-icon">👥</div>
-          <div class="disc-text">
-            <h4>Waktu Diskusi (Maks. 5 Menit)</h4>
-            <p>Setiap tantangan memiliki timer diskusi maksimal 5 menit untuk setiap tim.</p>
-          </div>
-          <button class="btn btn-secondary" onclick="startTimer(300, this)"
-            style="pointer-events:all; font-size:0.8rem; padding:10px 16px;">▶️ Mulai Timer</button>
-        </div>
-        <div class="scenario-box">
-          <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
-          <div class="scenario-text" style="white-space: pre-wrap;">Deskripsi Soal – Kemampuan Berpikir Inovatif
-            Perhatikan video dibawah ini!
-            <div class="video-container" style="margin-top: 15px;"><iframe
-                src="https://www.youtube.com/embed/F-A3hG72pco" allowfullscreen></iframe></div>
-            Dalam video ini, kamu akan melihat penjelasan tentang efisiensi mesin uap dan bagaimana prinsip Hukum Kedua
-            Termodinamika diterapkan dalam mesin yang berfungsi untuk mengubah energi panas menjadi energi mekanik.
-            Mesin uap, seperti yang kamu lihat dalam video, sering digunakan dalam pembangkit listrik dan sistem yang
-            membutuhkan konversi energi.
-            Proses energi panas yang diubah menjadi kerja dalam mesin uap tidak pernah 100% efisien, karena ada
-            pemborosan energi yang menyebabkan peningkatan entropi dalam sistem. Ini adalah contoh nyata dari Hukum
-            Kedua Termodinamika, yang menyatakan bahwa entropi total dalam alam semesta selalu meningkat.
-          </div>
-        </div>
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Flexibility
-            (Fleksiblitas)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan video yang kamu tonton, apa solusi teknis dan non-teknis yang bisa kamu usulkan untuk mengurangi
-            pemborosan energi dalam sistem mesin uap?</div>
-          <textarea class="open-answer" id="l3_inn_0" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_0')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Fluency
-            (Kelancaran)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan penjelasan di video, Berikan beberapa ide inovatif yang melibatkan proses termodinamika, seperti
-            penggunaan proses adiabatik atau proses isotermal, yang dapat mengurangi pemborosan energi dalam mesin uap
-            atau pembangkit listrik.</div>
-          <textarea class="open-answer" id="l3_inn_1" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_1')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 Creative Thinking
-            (Berpikir Kreatif)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan Hukum Kedua Termodinamika, bagaimana pengurangan entropi atau penerapan energi terbarukan bisa
-            membantu mengurangi pemborosan energi dalam sistem termodinamika ini?</div>
-          <textarea class="open-answer" id="l3_inn_2" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_2')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 The Capacity to
-            Identify Issues (Mengidentifikasi Permasalahan)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">
-            Berdasarkan video dan pengetahuan kamu, apa masalah utama yang menyebabkan pemborosan energi dalam mesin
-            uap?</div>
-          <textarea class="open-answer" id="l3_inn_3" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_3')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div class="question-block" style="margin-top:24px;">
-          <div class="question-label" style="background:#FCE7F3;color:#DB2777; font-weight: bold;">📝 The Ability to
-            Formulate Hypotheses (Merumuskan Hipotesis)</div>
-          <div class="question-text" style="white-space: pre-wrap; font-weight: normal; margin-bottom: 10px;">Setelah
-            mengidentifikasi masalah, Hipotesis apa yang bisa kamu rumuskan mengenai penerapan solusi inovatif untuk
-            meningkatkan efisiensi energi dalam mesin uap?</div>
-          <textarea class="open-answer" id="l3_inn_4" placeholder="Tuliskan jawaban diskusi timmu disini..."></textarea>
-          <div style="margin-top:10px; text-align:right;">
-            <button class="btn btn-ghost" onclick="evalOpenAnswer('l3_inn_4')">✅ Simpan Jawaban</button>
-
-          </div>
-
-        </div>
-
-        <div style="margin-top:24px; display:flex; justify-content:flex-end;">
-          <button class="btn btn-primary" onclick="finishLevel(3)">🏁 Selesaikan Level 3</button>
-        </div>
-      </div>
-
-      <!-- Result Screen -->
-      <div id="result-screen" class="result-screen">
-        <div class="result-content">
-          <div class="result-emoji">🎉</div>
-          <div class="result-title">Level 3 Selesai!</div>
-          <div class="result-xp-earned" id="result-xp">+0 XP</div>
-          <div class="result-scores-grid">
-            <div class="score-chip">
-              <div class="score-chip-val" id="sc-ct">-</div>
-              <div class="score-chip-label">Critical</div>
-            </div>
-            <div class="score-chip">
-              <div class="score-chip-val" id="sc-st">-</div>
-              <div class="score-chip-label">Systemic</div>
-            </div>
-            <div class="score-chip">
-              <div class="score-chip-val" id="sc-sci">-</div>
-              <div class="score-chip-label">Scientific</div>
-            </div>
-            <div class="score-chip">
-              <div class="score-chip-val" id="sc-inn">-</div>
-              <div class="score-chip-label">Innovative</div>
-            </div>
-          </div>
-          <p style="color:#6B7280; margin-bottom:8px; font-size:0.9rem;" id="result-msg">Tim kamu telah mendiskusikan
-            seluruh tantangan dengan baik!</p>
-          <div class="result-actions">
-            <a href="map.html" class="btn btn-ghost">🗺️ Kembali ke Peta</a>
-            <a href="dashboard.html" class="btn btn-primary" id="btn-next-level">📊 Lihat Leaderboard →</a>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end wrapper -->
-  </div><!-- end page -->
-
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-  <script src="js/game.js"></script>
-  <script>
-    const ZONE = 'zone3';
-    let timerInterval = null;
-
-    function switchTab(key) {
-      ['quiz', 'ct', 'st', 'sci', 'inn'].forEach(k => {
-        document.getElementById('panel-' + k).style.display = k === key ? 'block' : 'none';
-        const tb = document.getElementById('tab-' + k);
-        if (tb) { tb.classList.remove('active'); if (k === key) tb.classList.add('active'); }
-      });
-      stopTimer();
-      document.scrollingElement.scrollTop = 0;
-    }
-
-    function startTimer(sec, btnElement) {
-      if (btnElement) {
-        btnElement.disabled = true;
-        btnElement.textContent = '⏳ Timer Berjalan...';
-        btnElement.style.opacity = '0.5';
-        btnElement.style.cursor = 'not-allowed';
-        btnElement.onclick = null; // Menghindari klik berkali-kali
-      }
-
-      stopTimer();
-      let remaining = sec;
-      const timerVal = document.getElementById('timer-val');
-      const timerBox = document.getElementById('main-timer');
-      const update = () => {
-        const m = Math.floor(remaining / 60);
-        const s = remaining % 60;
-        if (timerVal) timerVal.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
-        if (timerBox) timerBox.classList.toggle('urgent', remaining <= 60);
-        if (remaining <= 0) {
-          stopTimer();
-          if (timerVal) timerVal.textContent = '00:00';
-          const activeTab = document.querySelector('.tab-btn.active');
-          if (activeTab) {
-            const key = activeTab.id.replace('tab-', '');
-            const panel = document.getElementById('panel-' + key);
-            if (panel) {
-              panel.querySelectorAll('.open-answer').forEach(ta => {
-                ta.disabled = true;
-                localStorage.setItem('ans_' + ta.id, ta.value.trim()); // auto save
-              });
-              panel.querySelectorAll('.btn-ghost').forEach(btn => btn.style.display = 'none'); // sembunyikan tombol simpan
-            }
-            alert('⏰ Waktu diskusi habis! Tantangan dikunci dan otomatis lanjut ke tahap berikutnya.');
-            if (!window._completedChallenges) window._completedChallenges = [];
-            if (!window._completedChallenges.includes(key)) window._completedChallenges.push(key);
-            const tb = document.getElementById('tab-' + key);
-            if (tb) { tb.classList.remove('active'); tb.classList.add('done'); tb.textContent = '✅ ' + tb.textContent.replace(/^[\u2705\s]*/, ''); }
-            const order = ['ct', 'st', 'sci', 'inn'];
-            const idx = order.indexOf(key);
-            if (idx < order.length - 1) switchTab(order[idx + 1]);
-          }
+</div>
+
+<script src="js/game.js"></script>
+<script>
+const ZONE = 'zone3';
+const QUESTIONS = {
+  quiz: [
+    { q: "Apa yang dinyatakan oleh Hukum II Termodinamika?", a: ["Kalor mengalir secara alami dari benda dingin ke benda panas", "Kalor tidak dapat diubah seluruhnya menjadi usaha mekanik", "Energi dalam sistem selalu tetap", "Entropi alam semesta selalu berkurang"], c: 1 },
+    { q: "Apa yang dimaksud dengan entropi?", a: ["Ukuran keteraturan suatu sistem", "Ukuran ketidakteraturan atau keacakan suatu sistem", "Jumlah energi total dalam sistem", "Usaha yang dilakukan oleh sistem"], c: 1 },
+    { q: "Menurut Hukum II Termodinamika, dalam setiap proses alami, entropi total alam semesta akan:", a: ["Tetap", "Berkurang", "Selalu meningkat", "Menjadi nol"], c: 2 },
+    { q: "Mesin kalor adalah alat yang berfungsi untuk:", a: ["Mengubah usaha menjadi kalor", "Mengubah kalor menjadi usaha mekanik", "Mendinginkan ruangan", "Menyimpan energi panas"], c: 1 },
+    { q: "Efisiensi mesin kalor tidak pernah mencapai 100% karena:", a: ["Ada kalor yang terbuang ke reservoir dingin", "Gesekan antar komponen mesin", "Suhu reservoir panas terlalu rendah", "Hukum kekekalan energi melarangnya"], c: 0 },
+    { q: "Siklus Carnot terdiri dari proses:", a: ["2 Isokhorik dan 2 Isobarik", "2 Isotermik dan 2 Adiabatik", "2 Isotermik dan 2 Isokhorik", "2 Adiabatik dan 2 Isobarik"], c: 1 },
+    { q: "Sebuah mesin kalor bekerja pada suhu reservoir tinggi 600 K dan reservoir rendah 300 K. Efisiensi maksimum mesin tersebut adalah:", a: ["25%", "50%", "75%", "100%"], c: 1 },
+    { q: "Prinsip kerja mesin pendingin (kulkas) adalah:", a: ["Mengalirkan kalor dari benda panas ke benda dingin secara alami", "Memindahkan kalor dari benda dingin ke benda panas dengan bantuan usaha luar", "Mengubah seluruh usaha menjadi dingin", "Menghilangkan entropi dari dalam kulkas"], c: 1 },
+    { q: "Koefisien performansi (COP) pada mesin pendingin dihitung dengan rumus:", a: ["COP = W / QL", "COP = QL / W", "COP = QH / W", "COP = W / QH"], c: 1 },
+    { q: "Apa dampak dari peningkatan entropi pada energi yang tersedia untuk melakukan usaha?", a: ["Energi yang tersedia meningkat", "Energi yang tersedia berkurang", "Energi tetap konstan", "Energi menjadi tidak terbatas"], c: 1 }
+  ],
+  ct: [
+    {
+      scenario: "Gunakan simulasi PhET Gas Properties. Masukkan sejumlah partikel gas, pertahankan volume tetap, kemudian naikkan suhu gas secara bertahap.",
+      questions: [
+        {
+          q: "Pada simulasi Gas Properties, saat suhu gas dinaikkan dalam wadah bervolume tetap, partikel gas terlihat bergerak lebih cepat dan tekanan meningkat. Makna paling tepat adalah…",
+          a: [
+            "Kenaikan suhu menyebabkan energi kinetik partikel gas meningkat sehingga tumbukan partikel dengan dinding wadah menjadi lebih sering dan kuat.",
+            "Kenaikan suhu menyebabkan partikel gas kehilangan energi sehingga tekanan meningkat.",
+            "Tekanan meningkat karena volume wadah bertambah besar saat suhu dinaikkan.",
+            "Partikel gas bergerak lebih cepat karena tekanan menurun.",
+            "Suhu tidak berhubungan dengan tekanan."
+          ],
+          c: 0
+        },
+        {
+          q: "Seorang peserta didik menaikkan suhu gas dalam wadah tertutup dengan volume tetap. Tekanan gas meningkat. Analisis hubungan konsep yang paling tepat adalah…",
+          a: [
+            "Suhu, energi kinetik, dan tekanan saling berhubungan; ketika suhu meningkat, energi kinetik partikel meningkat dan tekanan naik karena volume tetap.",
+            "Suhu hanya memengaruhi warna partikel.",
+            "Tekanan meningkat karena jumlah partikel gas berkurang.",
+            "Volume tetap menyebabkan energi kinetik partikel menjadi nol.",
+            "Suhu meningkat karena tekanan terlebih dahulu meningkat."
+          ],
+          c: 0
+        },
+        {
+          q: "Seorang peserta didik ingin menyelidiki pengaruh suhu terhadap tekanan gas. Ia mengubah suhu gas, tetapi pada saat yang sama juga mengubah volume wadah dan menambah jumlah partikel. Evaluasi paling tepat adalah…",
+          a: [
+            "Prosedur sudah tepat karena semakin banyak variabel diubah, semakin lengkap data.",
+            "Prosedur kurang tepat karena untuk mengetahui pengaruh suhu terhadap tekanan, variabel lain seperti volume dan jumlah partikel sebaiknya dibuat tetap.",
+            "Prosedur sudah tepat karena tekanan hanya dipengaruhi suhu.",
+            "Prosedur kurang tepat karena suhu tidak boleh diubah.",
+            "Prosedur benar karena Hukum II Termodinamika tidak membutuhkan pengendalian variabel."
+          ],
+          c: 1
+        },
+        {
+          q: "Pada simulasi, ketika gas dipanaskan, partikel bergerak semakin cepat dan tekanan meningkat. Penjelasan ilmiah paling sistematis yang sesuai dengan Hukum II Termodinamika adalah…",
+          a: [
+            "Pemanasan menyebabkan energi panas berpindah ke gas, energi kinetik partikel meningkat, tumbukan menjadi lebih kuat, dan sistem cenderung menyebarkan energi ke bentuk gerak partikel.",
+            "Pemanasan menyebabkan energi hilang sehingga partikel mencari energi baru.",
+            "Tekanan meningkat karena partikel berhenti bergerak.",
+            "Gas menjadi panas karena tekanan meningkat terlebih dahulu.",
+            "Kalor selalu berubah seluruhnya menjadi usaha."
+          ],
+          c: 0
         }
-        remaining--;
-      };
-      update();
-      timerInterval = setInterval(() => { if (remaining < 0) { stopTimer(); return; } update(); }, 1000);
+      ]
     }
-    function stopTimer() { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } }
-
-    function evalOpenAnswer(id) {
-      const val = document.getElementById(id)?.value?.trim();
-      if (val && val.length > 5) {
-        localStorage.setItem('ans_' + id, val);
-        alert('✅ Jawaban disimpan!');
-      } else {
-        alert('⚠️ Mohon isi jawaban terlebih dahulu.');
-      }
-    }
-
-    function toggleAnswer(id) {
-      const el = document.getElementById('ans_' + id);
-      if (el.style.display === 'none') {
-        el.style.display = 'block';
-      } else {
-        el.style.display = 'none';
-      }
-    }
-
-    function submitQuiz() {
-      const panel = document.getElementById('panel-quiz');
-      if (!panel) return switchTab('ct');
-
-      if (panel.dataset.evaluated === 'true') {
-        switchTab('ct');
-        return;
-      }
-
-      const questions = panel.querySelectorAll('input[type="radio"]:checked');
-      if (questions.length < 10) {
-        alert('⚠️ Mohon jawab SEMUA soal kuis terlebih dahulu!');
-        return;
-      }
-
-      let score = 0;
-      // Disable all inputs
-      panel.querySelectorAll('input[type="radio"]').forEach(inp => inp.closest('.option-btn').style.pointerEvents = 'none');
-
-      questions.forEach(q => {
-        const parentLabel = q.closest('.option-btn');
-        if (q.value === "True") {
-          score += 10;
-          parentLabel.classList.add('correct');
-        } else {
-          parentLabel.classList.add('wrong');
-          // Highlight the correct one
-          const correctInp = panel.querySelector(`input[name="${q.name}"][value="True"]`);
-          if (correctInp) {
-            correctInp.closest('.option-btn').classList.add('correct');
-          }
+  ],
+  st: [
+    {
+      scenario: "Gunakan simulasi PhET Energy Forms and Changes. Atur sumber energi ke Burner dan hubungkan dengan ketel/turbin/generator.",
+      questions: [
+        {
+          q: "Hubungan sistemik yang paling tepat antara komponen tersebut adalah…",
+          a: [
+            "Burner, ketel, dan turbin bekerja terpisah.",
+            "Burner berperan sebagai sumber kalor, ketel sebagai penerima dan penyalur energi, turbin/generator sebagai pengubah energi menjadi usaha mekanik, sedangkan lingkungan menerima energi yang terbuang.",
+            "Turbin menghasilkan kalor untuk memanaskan ketel.",
+            "Lingkungan tidak berhubungan dengan sistem.",
+            "Burner hanya menghasilkan energi mekanik."
+          ],
+          c: 1
+        },
+        {
+          q: "Dalam percobaan 120s, energi diserap 80 paket, terbuang 30 paket. Berapa efisiensi sistem? (η = (1 - Qlepas/Qserap) * 100%)",
+          a: [
+            "Efisiensi sistem 37,5%, artinya sebagian besar energi berubah menjadi usaha.",
+            "Efisiensi sistem 62,5%, artinya 62,5% energi yang diserap berubah menjadi usaha berguna dan 37,5% terbuang.",
+            "Efisiensi sistem 30%.",
+            "Efisiensi sistem 80%.",
+            "Efisiensi sistem 100%."
+          ],
+          c: 1
+        },
+        {
+          q: "Kesimpulan sistemik paling tepat dari pengamatan durasi 60s, 120s, dan 180s adalah…",
+          a: [
+            "Semakin lama pemanasan, semua energi pasti berubah menjadi usaha.",
+            "Pemanasan hanya memengaruhi burner.",
+            "Sistem menunjukkan bahwa energi dari burner mengalami perubahan bentuk dan distribusi: sebagian menjadi energi mekanik, sebagian tersimpan, dan sebagian terbuang ke lingkungan.",
+            "Energi yang terbuang menunjukkan hukum kekekalan energi tidak berlaku.",
+            "Turbin hanya dapat bekerja jika tidak ada energi yang terbuang."
+          ],
+          c: 2
+        },
+        {
+          q: "Evaluasi terhadap pernyataan: 'Jika waktu pemanasan diperpanjang, maka efisiensi mesin pasti selalu meningkat karena energi masuk semakin banyak.'",
+          a: [
+            "Benar, karena semakin banyak energi masuk.",
+            "Benar, karena efisiensi hanya bergantung waktu.",
+            "Kurang tepat, karena bertambahnya energi masuk belum tentu menaikkan efisiensi jika energi yang terbuang ke lingkungan juga bertambah.",
+            "Salah, karena energi dalam sistem pasti menjadi nol.",
+            "Salah, karena energi dari burner tidak dapat berpindah."
+          ],
+          c: 2
         }
-      });
-
-      alert(`🎯 Kuis Selesai!\nSkor Awal Tim Kamu: ${score} / 100\n\nPerhatikan blok merah (jawaban salah) dan blok hijau (jawaban benar) sebelum lanjut.`);
-      panel.dataset.evaluated = 'true';
-
-      const btn = panel.querySelector('button[onclick="submitQuiz()"]');
-      if (btn) btn.innerHTML = '➡️ Lanjut ke Mode Tantangan Berwaktu';
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      ]
     }
-
-    function submitChallenge(key) {
-      const panel = document.getElementById('panel-' + key);
-      if (!panel) return;
-
-      const textareas = panel.querySelectorAll('.open-answer');
-      let allAnswered = true;
-      textareas.forEach(ta => {
-        if (ta.value.trim().length <= 10) allAnswered = false;
-      });
-
-      if (!allAnswered) {
-        alert('⚠️ Mohon jawab SEMUA soal pada tantangan ini dengan cukup lengkap sebelum lanjut!');
-        return;
-      }
-
-      textareas.forEach(ta => {
-        localStorage.setItem('ans_' + ta.id, ta.value.trim());
-      });
-
-      const tb = document.getElementById('tab-' + key);
-      if (tb) { tb.classList.remove('active'); tb.classList.add('done'); tb.textContent = '✅ ' + tb.textContent.replace(/^[\u2705\s]*/, ''); }
-
-      if (!window._completedChallenges) window._completedChallenges = [];
-      if (!window._completedChallenges.includes(key)) window._completedChallenges.push(key);
-
-      const order = ['ct', 'st', 'sci', 'inn'];
-      const idx = order.indexOf(key);
-      if (idx < order.length - 1) switchTab(order[idx + 1]);
-    }
-
-    function finishLevel(ln) {
-      const required = ['ct', 'st', 'sci', 'inn'];
-      const done = window._completedChallenges || [];
-      const missing = required.filter(k => !done.includes(k));
-
-      if (missing.length > 0) {
-        const names = { ct: 'Critical Thinking', st: 'Systemic Thinking', sci: 'Scientific Thinking', inn: 'Innovative Thinking' };
-        const missingNames = missing.map(k => names[k]).join(', ');
-        alert('⚠️ Kamu belum menyelesaikan tantangan berikut:\n\n' + missingNames + '\n\nSelesaikan semua 4 tantangan terlebih dahulu sebelum menyelesaikan level!');
-        return;
-      }
-
-      const answers = document.querySelectorAll('.open-answer');
-      let totalScore = 0;
-      let scores = {};
-
-      required.forEach(k => {
-        const ansKey = `l${ln}_${k}_`;
-        let totalChars = 0;
-        let filledFields = 0;
-        let totalFields = 0;
-
-        answers.forEach(a => {
-          if (a.id.startsWith(ansKey)) {
-            totalFields++;
-            const len = a.value.trim().length;
-            if (len > 20) {
-              filledFields++;
-              totalChars += len;
-            }
-          }
-        });
-
-        let s = 0;
-        if (filledFields > 0 && totalFields > 0) {
-          const fillRatio = filledFields / totalFields;
-          const avgLen = totalChars / filledFields;
-          const depthScore = Math.min(1, avgLen / 300);
-          s = Math.round((fillRatio * 0.6 + depthScore * 0.4) * 100);
-          s = Math.max(10, Math.min(100, s));
+  ],
+  sci: [
+    {
+      scenario: "Simulasi Virtual Hukum Termodinamika II (Generator). Amati aliran energi masuk (panas), berguna (mekanik), dan terbuang (lingkungan).",
+      questions: [
+        {
+          q: "Setelah mengamati simulasi, pertanyaan penelitian paling tepat adalah…",
+          a: [
+            "Berapa banyak energi yang dihasilkan?",
+            "Mengapa tidak semua energi panas dapat diubah menjadi usaha pada mesin?",
+            "Apakah energi bisa hilang?",
+            "Bagaimana cara membuat mesin bekerja tanpa energi?",
+            "Apakah suhu selalu tetap?"
+          ],
+          c: 1
+        },
+        {
+          q: "Pendekatan eksperimen paling valid adalah…",
+          a: [
+            "Mengubah semua variabel sekaligus",
+            "Mengubah suhu saja, lalu menghitung rasio W/Q_in",
+            "Mengamati tanpa mencatat data",
+            "Menggunakan satu percobaan saja",
+            "Mengabaikan energi terbuang"
+          ],
+          c: 1
+        },
+        {
+          q: "Jika suhu sumber panas dinaikkan, tetapi energi terbuang juga meningkat, maka inferensi paling tepat adalah…",
+          a: [
+            "Efisiensi selalu meningkat",
+            "Efisiensi bergantung pada distribusi energi, bukan hanya energi masuk",
+            "Energi hilang",
+            "Mesin menjadi sempurna",
+            "Usaha tidak berubah"
+          ],
+          c: 1
+        },
+        {
+          q: "Evaluasi argumen: 'Mesin kalor dapat dibuat 100% efisien jika energi cukup besar.'",
+          a: [
+            "Benar, karena energi besar bisa jadi usaha semua",
+            "Salah, karena Hukum II Termodinamika membatasi efisiensi dan selalu ada energi yang terbuang ke reservoir dingin",
+            "Benar, jika suhu tinggi",
+            "Salah, karena mesin tidak butuh energi",
+            "Benar, karena kalor tidak terbatas"
+          ],
+          c: 1
         }
-
-        scores[k] = s;
-        totalScore += s;
-        const el = document.getElementById('sc-' + k);
-        if (el) el.textContent = s;
-      });
-
-      let avgScore = Math.round(totalScore / 4);
-      const xpEarned = avgScore * 2;
-      const state = ThermoGame.loadState();
-      if (!state.zones) state.zones = {};
-      if (!state.zones[ZONE]) state.zones[ZONE] = {};
-      ThermoGame.addXP(state, xpEarned);
-      state.zones[ZONE].score = avgScore;
-      state.zones[ZONE].scores = { all: scores };
-      state.zones[ZONE].completed = true;
-      ThermoGame.saveState(state);
-
-      const msgEl = document.getElementById('result-msg');
-      if (avgScore >= 80) {
-        msgEl.textContent = '🌟 Luar biasa! Tim kamu menunjukkan pemahaman yang sangat baik!';
-      } else if (avgScore >= 60) {
-        msgEl.textContent = '👍 Bagus! Tim kamu sudah cukup memahami materi ini.';
-      } else if (avgScore >= 40) {
-        msgEl.textContent = '📝 Cukup, tapi masih ada ruang untuk memperdalam jawaban.';
-      } else {
-        msgEl.textContent = '⚠️ Jawaban masih perlu diperdalam. Coba diskusikan lagi dengan timmu!';
-      }
-
-      document.getElementById('result-xp').textContent = '+' + xpEarned + ' XP';
-      document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
-      document.getElementById('result-screen').classList.add('show');
+      ]
     }
-
-    function initGameFlow() {
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.onclick = (e) => { e.preventDefault(); };
-        btn.style.cursor = 'default';
-      });
-
-      ['ct', 'st', 'sci', 'inn'].forEach(key => {
-        const panel = document.getElementById('panel-' + key);
-        if (!panel) return;
-
-        const header = panel.querySelector('.challenge-card-header');
-        if (!header) return;
-
-        const oldBtn = header.querySelector('button[onclick*="startTimer"]');
-        if (oldBtn) oldBtn.style.display = 'none';
-
-        const contentWrapper = document.createElement('div');
-        contentWrapper.className = 'challenge-content-wrapper';
-        contentWrapper.style.display = 'none';
-
-        let nextNode = header.nextSibling;
-        while (nextNode) {
-          const current = nextNode;
-          nextNode = nextNode.nextSibling;
-          contentWrapper.appendChild(current);
+  ],
+  inn: [
+    {
+      scenario: "Hukum II Termodinamika pada pembuatan es krim dengan batu es. Kalor mengalir dari campuran es krim (lebih tinggi) ke batu es (lebih rendah).",
+      questions: [
+        {
+          q: "Penyebab utama proses pembekuan menjadi kurang efisien adalah…",
+          a: [
+            "Campuran es krim tidak memiliki kalor sama sekali.",
+            "Batu es memberikan kalor ke campuran es krim.",
+            "Wadah yang kurang terisolasi membuat kalor dari lingkungan ikut masuk ke sistem.",
+            "Kalor berhenti berpindah karena suhu batu es lebih rendah.",
+            "Campuran es krim membeku karena energi panas musnah."
+          ],
+          c: 2
+        },
+        {
+          q: "Agar proses pembuatan es krim lebih efisien, kumpulan solusi yang paling tepat adalah…",
+          a: [
+            "Membuka wadah, mengurangi batu es.",
+            "Menutup wadah, menambahkan isolasi, menggunakan campuran es-garam, dan mengaduk secara teratur.",
+            "Menggunakan air panas, memperbesar wadah.",
+            "Membiarkan wadah di tempat terbuka.",
+            "Mengurangi batu es."
+          ],
+          c: 1
+        },
+        {
+          q: "Rancangan kreatif yang paling sesuai untuk meningkatkan efisiensi pembuatan es krim adalah…",
+          a: [
+            "Wadah dua lapis dengan ruang isolasi di antaranya, bagian luar berisi campuran es-garam, dan bagian dalam berisi adonan yang dapat diputar.",
+            "Wadah terbuka besar.",
+            "Wadah logam tipis tanpa penutup.",
+            "Wadah berwarna gelap di bawah matahari.",
+            "Wadah tanpa es."
+          ],
+          c: 0
+        },
+        {
+          q: "Hipotesis yang paling tepat untuk menguji rancangan sistem pendinginan es krim yang lebih efisien adalah…",
+          a: [
+            "Jika wadah dibuat lebih terbuka, maka es krim lebih cepat membeku.",
+            "Jika wadah diberi isolasi dan campuran es-garam digunakan, maka suhu adonan es krim akan turun lebih cepat dibandingkan wadah tanpa isolasi.",
+            "Jika jumlah adonan ditambah, maka es krim pasti lebih cepat membeku.",
+            "Jika batu es dikurangi, maka suhu sistem akan lebih rendah.",
+            "Jika wadah diletakkan di tempat panas, maka pembekuan akan lebih cepat."
+          ],
+          c: 1
         }
-        panel.appendChild(contentWrapper);
+      ]
+    }
+  ]
+};
 
-        const startScreen = document.createElement('div');
-        startScreen.className = 'challenge-start-screen';
-        startScreen.style.textAlign = 'center';
-        startScreen.style.padding = '80px 20px';
-        startScreen.innerHTML = `
-      <div style="font-size:5rem; margin-bottom:20px; animation: timerPulse 2s infinite;">🎮</div>
-      <h3 style="font-family: var(--font-heading); font-size:1.8rem; color:var(--text); margin-bottom:12px;">ZONA TANTANGAN SIAP</h3>
-      <p style="color:#6B7280; font-size:1rem; max-width:500px; margin:0 auto 30px;">Semua anggota tim harus bersiap. Setelah tombol ditekan, timer akan berdetak dan pertanyaan muncul. Jawab <strong>semua</strong> soal sebelum waktu habis!</p>
-      <button class="btn btn-primary" style="font-size:1.2rem; padding:16px 40px; box-shadow: 0 10px 25px rgba(124,58,237,0.3);" onclick="startChallenge('${key}')">🚀 MULAI MISI SEKARANG</button>
+let currentTab = 'quiz';
+let timerInterval = null;
+let timeRemaining = 18 * 60;
+let completedChallenges = [];
+let challengeScores = { ct: 0, st: 0, sci: 0, inn: 0 };
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
+  document.getElementById('panel-' + tab).style.display = 'block';
+  currentTab = tab;
+  if (tab !== 'quiz' && !timerInterval) startGlobalTimer();
+}
+
+function startGlobalTimer() {
+  const display = document.getElementById('timer-val');
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+    let m = Math.floor(timeRemaining / 60);
+    let s = timeRemaining % 60;
+    display.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    if (timeRemaining <= 60) document.getElementById('main-timer').classList.add('urgent');
+    if (timeRemaining <= 0) { clearInterval(timerInterval); finishLevel(3); }
+  }, 1000);
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = QUESTIONS.quiz.map((q, i) => `
+    <div class="question-block" id="quiz-q-${i}">
+      <div class="question-text"><strong>${i+1}. ${q.q}</strong></div>
+      <div class="options-grid">
+        ${q.a.map((opt, oi) => `
+          <label class="option-btn" onclick="selectOption('quiz', ${i}, ${oi})">
+            <input type="radio" name="quiz_q${i}" value="${oi}" style="display:none;">
+            <div class="option-key">${String.fromCharCode(65+oi)}</div>
+            <div>${opt}</div>
+          </label>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderChallenges() {
+  ['ct', 'st', 'sci', 'inn'].forEach(key => {
+    const container = document.getElementById('content-' + key);
+    const data = QUESTIONS[key][0];
+    container.innerHTML = `
+      <div class="scenario-box">
+        <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+        <div class="scenario-text">${data.scenario}</div>
+      </div>
+      ${data.questions.map((q, i) => `
+        <div class="question-block" id="${key}-q-${i}" style="margin-top:24px;">
+          <div class="question-text"><strong>${i+1}. ${q.q}</strong></div>
+          <div class="options-grid">
+            ${q.a.map((opt, oi) => `
+              <label class="option-btn" onclick="selectOption('${key}', ${i}, ${oi})">
+                <input type="radio" name="${key}_q${i}" value="${oi}" style="display:none;">
+                <div class="option-key">${String.fromCharCode(65+oi)}</div>
+                <div>${opt}</div>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+      `).join('')}
+      <div style="margin-top:24px; display:flex; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="submitChallenge('${key}')">✅ Simpan & Lanjut</button>
+      </div>
     `;
-        panel.insertBefore(startScreen, contentWrapper);
-      });
-    }
+  });
+}
 
-    function startChallenge(key) {
-      const panel = document.getElementById('panel-' + key);
-      const screen = panel.querySelector('.challenge-start-screen');
-      const content = panel.querySelector('.challenge-content-wrapper');
+function selectOption(type, qIdx, oIdx) {
+  const block = document.getElementById(`${type}-q-${qIdx}`);
+  block.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+  block.querySelectorAll('.option-btn')[oIdx].classList.add('selected');
+}
 
-      if (screen) screen.style.display = 'none';
-      if (content) {
-        content.style.display = 'block';
-        content.style.animation = 'fadeInUp 0.5s ease';
-      }
-
-      startTimer(300, null);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initGameFlow();
-      setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
-      const state = ThermoGame.loadState();
-      const navXp = document.getElementById('nav-xp-value');
-      if (navXp) navXp.textContent = (state.playerName && state.playerName !== 'Agent' ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
-      const cxp = document.getElementById('current-xp');
-      document.querySelectorAll('.open-answer').forEach(ta => { const saved = localStorage.getItem('ans_' + ta.id); if (saved) ta.value = saved; });
-      if (cxp) cxp.textContent = state.xp;
+function submitQuiz() {
+  const inputs = document.querySelectorAll('#panel-quiz input[type="radio"]:checked');
+  if (inputs.length < 10) return alert('Mohon jawab semua soal kuis!');
+  let score = 0;
+  QUESTIONS.quiz.forEach((q, i) => {
+    const selected = parseInt(document.querySelector(`input[name="quiz_q${i}"]:checked`).value);
+    const block = document.getElementById(`quiz-q-${i}`);
+    block.querySelectorAll('.option-btn').forEach((btn, bi) => {
+      btn.style.pointerEvents = 'none';
+      if (bi === q.c) btn.classList.add('correct');
+      else if (bi === selected) btn.classList.add('wrong');
     });
-  </script>
-</body>
+    if (selected === q.c) score += 10;
+  });
+  alert(`🎯 Kuis Selesai! Skor Tim: ${score}/100`);
+  document.getElementById('btn-submit-quiz').style.display = 'none';
+  document.getElementById('tab-quiz').classList.add('done');
+  switchTab('ct');
+}
 
+function submitChallenge(key) {
+  const inputs = document.querySelectorAll(`#panel-${key} input[type="radio"]:checked`);
+  if (inputs.length < QUESTIONS[key][0].questions.length) return alert('Mohon jawab semua soal!');
+  let score = 0;
+  const data = QUESTIONS[key][0];
+  data.questions.forEach((q, i) => {
+    const selected = parseInt(document.querySelector(`input[name="${key}_q${i}"]:checked`).value);
+    if (selected === q.c) score += 100 / data.questions.length;
+  });
+  challengeScores[key] = Math.round(score);
+  completedChallenges.push(key);
+  document.getElementById('tab-' + key).classList.add('done');
+  const order = ['ct', 'st', 'sci', 'inn'];
+  const idx = order.indexOf(key);
+  if (idx < order.length - 1) switchTab(order[idx + 1]);
+  else document.getElementById('finish-level-container').style.display = 'flex';
+}
+
+function finishLevel(ln) {
+  clearInterval(timerInterval);
+  const avgScore = Math.round((challengeScores.ct + challengeScores.st + challengeScores.sci + challengeScores.inn) / 4);
+  const xpEarned = avgScore * 2;
+  const state = ThermoGame.loadState();
+  state.zones[ZONE] = { completed: true, score: avgScore, scores: { all: challengeScores }, challengesDone: completedChallenges };
+  ThermoGame.addXP(state, xpEarned);
+  ThermoGame.saveState(state);
+  document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('result-xp').textContent = xpEarned;
+  document.getElementById('result-msg').textContent = avgScore >= 80 ? '🌟 Luar biasa!' : (avgScore >= 60 ? '👍 Bagus!' : '📝 Cukup.');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderQuiz(); renderChallenges();
+  setTimeout(() => { document.getElementById('loading-screen').classList.add('hidden'); }, 1000);
+  const state = ThermoGame.loadState();
+  document.getElementById('nav-xp-value').textContent = (state.playerName ? 'Tim ' + state.playerName + ' | ' : '') + state.xp + ' XP';
+  document.getElementById('current-xp').textContent = state.xp;
+});
+</script>
+</body>
 </html>
