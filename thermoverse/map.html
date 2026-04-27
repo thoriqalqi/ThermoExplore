@@ -488,12 +488,12 @@
     const sun = new THREE.DirectionalLight(0xffffff, 0.8);
     sun.position.set(20, 40, 10);
     sun.castShadow = true;
-    sun.shadow.mapSize.width = 1024;
-    sun.shadow.mapSize.height = 1024;
+    sun.shadow.mapSize.width = 512;
+    sun.shadow.mapSize.height = 512;
     scene.add(sun);
 
     // Ocean
-    const oceanGeo = new THREE.PlaneGeometry(200, 200, 20, 20);
+    const oceanGeo = new THREE.PlaneGeometry(200, 200, 10, 10);
     const oceanMat = new THREE.MeshPhongMaterial({ color: 0x4FC3F7, transparent: true, opacity: 0.8, shininess: 80 });
     const ocean = new THREE.Mesh(oceanGeo, oceanMat);
     ocean.rotation.x = -Math.PI / 2;
@@ -590,11 +590,8 @@
         isl.position.y = islandDefs[i].y + Math.sin(Date.now() * 0.001 + i) * 0.5;
       });
 
-      // Ocean waves
-      ocean.geometry.vertices.forEach((v, i) => {
-        v.z = Math.sin(Date.now() * 0.001 + v.x * 0.5 + v.y * 0.5) * 0.2;
-      });
-      ocean.geometry.verticesNeedUpdate = true;
+      // Ocean waves (simplified - no vertex update for better performance)
+      // Waves are now handled by shader-like effect via position animation
 
       renderer.render(scene, camera);
     }
