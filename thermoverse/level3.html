@@ -9,7 +9,7 @@
   <style>
     .l-accent { color: #10B981; }
     .l-bg { background: linear-gradient(135deg,#ECFDF5,#D1FAE5); border-color: #10B981; }
-    .l-badge { background: color: #059669; background: #D1FAE5;; }
+    .l-badge { background: #D1FAE5; }
     .l-header { background: linear-gradient(135deg,#10B981,#059669); }
     .tab-btn.active { background: linear-gradient(135deg,#10B981,#059669); }
     .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin-bottom: 20px; }
@@ -24,6 +24,10 @@
     .finish-btn-container { margin-top: 30px; display: flex; justify-content: center; }
     .lab-box { background: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 16px; padding: 20px; margin-bottom: 24px; }
     .lab-title { font-weight: 800; color: #475569; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .scenario-box { background: #F8FAFC; border-left: 4px solid #10B981; padding: 16px; margin-bottom: 20px; border-radius: 8px; }
+    .scenario-label { font-weight: 700; color: #10B981; margin-bottom: 8px; }
+    .scenario-text { color: #475569; line-height: 1.6; }
+    .indicator-label { display: inline-block; background: #D1FAE5; color: #065F46; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -47,7 +51,7 @@
       <div class="level-header-left">
         <div class="level-badge l-badge">LEVEL 3</div>
         <div class="level-title">Hukum 2 Termodinamika</div>
-        <div class="level-subtitle">Entropi dan Efisiensi • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
+        <div class="level-subtitle">Entropi & Efisiensi • 1 Kegiatan Awal & 4 Tantangan Berpikir Kompleks</div>
       </div>
       <div class="level-header-right">
         <div class="xp-counter">
@@ -159,205 +163,37 @@ const QUESTIONS = {
   ],
   ct: [
     {
-      scenario: "Gunakan simulasi PhET Gas Properties. Masukkan sejumlah partikel gas, pertahankan volume tetap, kemudian naikkan suhu gas secara bertahap.",
+      scenario: "Gunakan simulasi PhET Gas Properties. Masukkan sejumlah partikel gas, pertahankan volume tetap, kemudian naikkan suhu gas secara bertahap. Amati perubahan tekanan dan gerakan partikel.",
       questions: [
-        {
-          q: "Pada simulasi Gas Properties, saat suhu gas dinaikkan dalam wadah bervolume tetap, partikel gas terlihat bergerak lebih cepat dan tekanan meningkat. Makna paling tepat adalah…",
-          a: [
-            "Kenaikan suhu menyebabkan energi kinetik partikel gas meningkat sehingga tumbukan partikel dengan dinding wadah menjadi lebih sering dan kuat.",
-            "Kenaikan suhu menyebabkan partikel gas kehilangan energi sehingga tekanan meningkat.",
-            "Tekanan meningkat karena volume wadah bertambah besar saat suhu dinaikkan.",
-            "Partikel gas bergerak lebih cepat karena tekanan menurun.",
-            "Suhu tidak berhubungan dengan tekanan."
-          ],
-          c: 0
-        },
-        {
-          q: "Seorang peserta didik menaikkan suhu gas dalam wadah tertutup dengan volume tetap. Tekanan gas meningkat. Analisis hubungan konsep yang paling tepat adalah…",
-          a: [
-            "Suhu, energi kinetik, dan tekanan saling berhubungan; ketika suhu meningkat, energi kinetik partikel meningkat dan tekanan naik karena volume tetap.",
-            "Suhu hanya memengaruhi warna partikel.",
-            "Tekanan meningkat karena jumlah partikel gas berkurang.",
-            "Volume tetap menyebabkan energi kinetik partikel menjadi nol.",
-            "Suhu meningkat karena tekanan terlebih dahulu meningkat."
-          ],
-          c: 0
-        },
-        {
-          q: "Seorang peserta didik ingin menyelidiki pengaruh suhu terhadap tekanan gas. Ia mengubah suhu gas, tetapi pada saat yang sama juga mengubah volume wadah dan menambah jumlah partikel. Evaluasi paling tepat adalah…",
-          a: [
-            "Prosedur sudah tepat karena semakin banyak variabel diubah, semakin lengkap data.",
-            "Prosedur kurang tepat karena untuk mengetahui pengaruh suhu terhadap tekanan, variabel lain seperti volume dan jumlah partikel sebaiknya dibuat tetap.",
-            "Prosedur sudah tepat karena tekanan hanya dipengaruhi suhu.",
-            "Prosedur kurang tepat karena suhu tidak boleh diubah.",
-            "Prosedur benar karena Hukum II Termodinamika tidak membutuhkan pengendalian variabel."
-          ],
-          c: 1
-        },
-        {
-          q: "Pada simulasi, ketika gas dipanaskan, partikel bergerak semakin cepat dan tekanan meningkat. Penjelasan ilmiah paling sistematis yang sesuai dengan Hukum II Termodinamika adalah…",
-          a: [
-            "Pemanasan menyebabkan energi panas berpindah ke gas, energi kinetik partikel meningkat, tumbukan menjadi lebih kuat, dan sistem cenderung menyebarkan energi ke bentuk gerak partikel.",
-            "Pemanasan menyebabkan energi hilang sehingga partikel mencari energi baru.",
-            "Tekanan meningkat karena partikel berhenti bergerak.",
-            "Gas menjadi panas karena tekanan meningkat terlebih dahulu.",
-            "Kalor selalu berubah seluruhnya menjadi usaha."
-          ],
-          c: 0
-        }
+        { ind: "Interpretasi & Analisis", q: "Pada simulasi Gas Properties, saat suhu gas dinaikkan dalam wadah bervolume tetap, partikel gas terlihat bergerak lebih cepat dan tekanan meningkat. Makna paling tepat adalah…", a: ["Kenaikan suhu menyebabkan energi kinetik partikel gas meningkat sehingga tumbukan partikel dengan dinding wadah menjadi lebih sering dan kuat", "Kenaikan suhu menyebabkan partikel gas kehilangan energi sehingga tekanan meningkat", "Tekanan meningkat karena volume wadah bertambah besar saat suhu dinaikkan", "Partikel gas bergerak lebih cepat karena tekanan menurun"], c: 0 },
+        { ind: "Evaluasi Prosedur", q: "Seorang peserta didik ingin menyelidiki pengaruh suhu terhadap tekanan gas. Ia mengubah suhu gas, tetapi pada saat yang sama juga mengubah volume wadah dan menambah jumlah partikel. Evaluasi paling tepat adalah…", a: ["Prosedur sudah tepat karena semakin banyak variabel diubah, semakin lengkap data", "Prosedur kurang tepat karena untuk mengetahui pengaruh suhu terhadap tekanan, variabel lain seperti volume dan jumlah partikel sebaiknya dibuat tetap", "Prosedur sudah tepat karena tekanan hanya dipengaruhi suhu", "Prosedur kurang tepat karena suhu tidak boleh diubah"], c: 1 }
       ]
     }
   ],
   st: [
     {
-      scenario: "Gunakan simulasi PhET Energy Forms and Changes. Atur sumber energi ke Burner dan hubungkan dengan ketel/turbin/generator.",
+      scenario: "Gunakan simulasi PhET Energy Forms and Changes. Atur sumber energi ke Burner dan hubungkan dengan ketel/turbin/generator. Amati aliran energi masuk, energi berguna, dan energi terbuang.",
       questions: [
-        {
-          q: "Hubungan sistemik yang paling tepat antara komponen tersebut adalah…",
-          a: [
-            "Burner, ketel, dan turbin bekerja terpisah.",
-            "Burner berperan sebagai sumber kalor, ketel sebagai penerima dan penyalur energi, turbin/generator sebagai pengubah energi menjadi usaha mekanik, sedangkan lingkungan menerima energi yang terbuang.",
-            "Turbin menghasilkan kalor untuk memanaskan ketel.",
-            "Lingkungan tidak berhubungan dengan sistem.",
-            "Burner hanya menghasilkan energi mekanik."
-          ],
-          c: 1
-        },
-        {
-          q: "Dalam percobaan 120s, energi diserap 80 paket, terbuang 30 paket. Berapa efisiensi sistem? (η = (1 - Qlepas/Qserap) * 100%)",
-          a: [
-            "Efisiensi sistem 37,5%, artinya sebagian besar energi berubah menjadi usaha.",
-            "Efisiensi sistem 62,5%, artinya 62,5% energi yang diserap berubah menjadi usaha berguna dan 37,5% terbuang.",
-            "Efisiensi sistem 30%.",
-            "Efisiensi sistem 80%.",
-            "Efisiensi sistem 100%."
-          ],
-          c: 1
-        },
-        {
-          q: "Kesimpulan sistemik paling tepat dari pengamatan durasi 60s, 120s, dan 180s adalah…",
-          a: [
-            "Semakin lama pemanasan, semua energi pasti berubah menjadi usaha.",
-            "Pemanasan hanya memengaruhi burner.",
-            "Sistem menunjukkan bahwa energi dari burner mengalami perubahan bentuk dan distribusi: sebagian menjadi energi mekanik, sebagian tersimpan, dan sebagian terbuang ke lingkungan.",
-            "Energi yang terbuang menunjukkan hukum kekekalan energi tidak berlaku.",
-            "Turbin hanya dapat bekerja jika tidak ada energi yang terbuang."
-          ],
-          c: 2
-        },
-        {
-          q: "Evaluasi terhadap pernyataan: 'Jika waktu pemanasan diperpanjang, maka efisiensi mesin pasti selalu meningkat karena energi masuk semakin banyak.'",
-          a: [
-            "Benar, karena semakin banyak energi masuk.",
-            "Benar, karena efisiensi hanya bergantung waktu.",
-            "Kurang tepat, karena bertambahnya energi masuk belum tentu menaikkan efisiensi jika energi yang terbuang ke lingkungan juga bertambah.",
-            "Salah, karena energi dalam sistem pasti menjadi nol.",
-            "Salah, karena energi dari burner tidak dapat berpindah."
-          ],
-          c: 2
-        }
+        { ind: "Pemahaman Hubungan Sistem", q: "Hubungan sistemik yang paling tepat antara komponen tersebut adalah…", a: ["Burner, ketel, dan turbin bekerja terpisah", "Burner berperan sebagai sumber kalor, ketel sebagai penerima dan penyalur energi, turbin/generator sebagai pengubah energi menjadi usaha mekanik, sedangkan lingkungan menerima energi yang terbuang", "Turbin menghasilkan kalor untuk memanaskan ketel", "Lingkungan tidak berhubungan dengan sistem"], c: 1 },
+        { ind: "Analisis & Inferensi", q: "Dalam percobaan 120s, energi diserap 80 paket, terbuang 30 paket. Berapa efisiensi sistem? (η = (1 - Qlepas/Qserap) × 100%)", a: ["Efisiensi sistem 37,5%, artinya sebagian besar energi berubah menjadi usaha", "Efisiensi sistem 62,5%, artinya 62,5% energi yang diserap berubah menjadi usaha berguna dan 37,5% terbuang", "Efisiensi sistem 30%", "Efisiensi sistem 80%"], c: 1 }
       ]
     }
   ],
   sci: [
     {
-      scenario: "Simulasi Virtual Hukum Termodinamika II (Generator). Amati aliran energi masuk (panas), berguna (mekanik), dan terbuang (lingkungan).",
+      scenario: "Simulasi Virtual Hukum Termodinamika II (Generator). Amati aliran energi masuk (panas), berguna (mekanik), dan terbuang (lingkungan) pada berbagai kondisi suhu.",
       questions: [
-        {
-          q: "Setelah mengamati simulasi, pertanyaan penelitian paling tepat adalah…",
-          a: [
-            "Berapa banyak energi yang dihasilkan?",
-            "Mengapa tidak semua energi panas dapat diubah menjadi usaha pada mesin?",
-            "Apakah energi bisa hilang?",
-            "Bagaimana cara membuat mesin bekerja tanpa energi?",
-            "Apakah suhu selalu tetap?"
-          ],
-          c: 1
-        },
-        {
-          q: "Pendekatan eksperimen paling valid adalah…",
-          a: [
-            "Mengubah semua variabel sekaligus",
-            "Mengubah suhu saja, lalu menghitung rasio W/Q_in",
-            "Mengamati tanpa mencatat data",
-            "Menggunakan satu percobaan saja",
-            "Mengabaikan energi terbuang"
-          ],
-          c: 1
-        },
-        {
-          q: "Jika suhu sumber panas dinaikkan, tetapi energi terbuang juga meningkat, maka inferensi paling tepat adalah…",
-          a: [
-            "Efisiensi selalu meningkat",
-            "Efisiensi bergantung pada distribusi energi, bukan hanya energi masuk",
-            "Energi hilang",
-            "Mesin menjadi sempurna",
-            "Usaha tidak berubah"
-          ],
-          c: 1
-        },
-        {
-          q: "Evaluasi argumen: 'Mesin kalor dapat dibuat 100% efisien jika energi cukup besar.'",
-          a: [
-            "Benar, karena energi besar bisa jadi usaha semua",
-            "Salah, karena Hukum II Termodinamika membatasi efisiensi dan selalu ada energi yang terbuang ke reservoir dingin",
-            "Benar, jika suhu tinggi",
-            "Salah, karena mesin tidak butuh energi",
-            "Benar, karena kalor tidak terbatas"
-          ],
-          c: 1
-        }
+        { ind: "Inquiry & Hypothesis", q: "Setelah mengamati simulasi, pertanyaan penelitian paling tepat adalah…", a: ["Berapa banyak energi yang dihasilkan?", "Mengapa tidak semua energi panas dapat diubah menjadi usaha pada mesin?", "Apakah energi bisa hilang?", "Bagaimana cara membuat mesin bekerja tanpa energi?"], c: 1 },
+        { ind: "Analysis & Argumentation", q: "Jika suhu sumber panas dinaikkan, tetapi energi terbuang juga meningkat, maka inferensi paling tepat adalah…", a: ["Efisiensi selalu meningkat", "Efisiensi bergantung pada distribusi energi, bukan hanya energi masuk", "Energi hilang", "Mesin menjadi sempurna"], c: 1 }
       ]
     }
   ],
   inn: [
     {
-      scenario: "Hukum II Termodinamika pada pembuatan es krim dengan batu es. Kalor mengalir dari campuran es krim (lebih tinggi) ke batu es (lebih rendah).",
+      scenario: "Hukum II Termodinamika pada pembuatan es krim dengan batu es. Kalor mengalir dari campuran es krim (lebih tinggi) ke batu es (lebih rendah). Peserta didik diminta mengidentifikasi sistem, penyebab ketidakefisienan, dan merancang solusi inovatif.",
       questions: [
-        {
-          q: "Penyebab utama proses pembekuan menjadi kurang efisien adalah…",
-          a: [
-            "Campuran es krim tidak memiliki kalor sama sekali.",
-            "Batu es memberikan kalor ke campuran es krim.",
-            "Wadah yang kurang terisolasi membuat kalor dari lingkungan ikut masuk ke sistem.",
-            "Kalor berhenti berpindah karena suhu batu es lebih rendah.",
-            "Campuran es krim membeku karena energi panas musnah."
-          ],
-          c: 2
-        },
-        {
-          q: "Agar proses pembuatan es krim lebih efisien, kumpulan solusi yang paling tepat adalah…",
-          a: [
-            "Membuka wadah, mengurangi batu es.",
-            "Menutup wadah, menambahkan isolasi, menggunakan campuran es-garam, dan mengaduk secara teratur.",
-            "Menggunakan air panas, memperbesar wadah.",
-            "Membiarkan wadah di tempat terbuka.",
-            "Mengurangi batu es."
-          ],
-          c: 1
-        },
-        {
-          q: "Rancangan kreatif yang paling sesuai untuk meningkatkan efisiensi pembuatan es krim adalah…",
-          a: [
-            "Wadah dua lapis dengan ruang isolasi di antaranya, bagian luar berisi campuran es-garam, dan bagian dalam berisi adonan yang dapat diputar.",
-            "Wadah terbuka besar.",
-            "Wadah logam tipis tanpa penutup.",
-            "Wadah berwarna gelap di bawah matahari.",
-            "Wadah tanpa es."
-          ],
-          c: 0
-        },
-        {
-          q: "Hipotesis yang paling tepat untuk menguji rancangan sistem pendinginan es krim yang lebih efisien adalah…",
-          a: [
-            "Jika wadah dibuat lebih terbuka, maka es krim lebih cepat membeku.",
-            "Jika wadah diberi isolasi dan campuran es-garam digunakan, maka suhu adonan es krim akan turun lebih cepat dibandingkan wadah tanpa isolasi.",
-            "Jika jumlah adonan ditambah, maka es krim pasti lebih cepat membeku.",
-            "Jika batu es dikurangi, maka suhu sistem akan lebih rendah.",
-            "Jika wadah diletakkan di tempat panas, maka pembekuan akan lebih cepat."
-          ],
-          c: 1
-        }
+        { ind: "Identifying Issues", q: "Penyebab utama proses pembekuan menjadi kurang efisien adalah…", a: ["Campuran es krim tidak memiliki kalor sama sekali", "Batu es memberikan kalor ke campuran es krim", "Wadah yang kurang terisolasi membuat kalor dari lingkungan ikut masuk ke sistem", "Kalor berhenti berpindah karena suhu batu es lebih rendah"], c: 2 },
+        { ind: "Creative Solution & Hypothesis", q: "Rancangan kreatif yang paling sesuai untuk meningkatkan efisiensi pembuatan es krim adalah…", a: ["Wadah dua lapis dengan ruang isolasi di antaranya, bagian luar berisi campuran es-garam, dan bagian dalam berisi adonan yang dapat diputar. Hipotesis: Jika wadah diberi isolasi dan campuran es-garam digunakan, maka suhu adonan es krim akan turun lebih cepat dibandingkan wadah tanpa isolasi", "Wadah terbuka besar", "Wadah logam tipis tanpa penutup", "Wadah tanpa es"], c: 0 }
       ]
     }
   ]
@@ -367,7 +203,7 @@ let currentTab = 'quiz';
 let timerInterval = null;
 let timeRemaining = 18 * 60;
 let completedChallenges = [];
-let challengeScores = { ct: 0, st: 0, sci: 0, inn: 0 };
+let challengeScores = { quiz: 0, ct: 0, st: 0, sci: 0, inn: 0 };
 
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -414,11 +250,12 @@ function renderChallenges() {
     const data = QUESTIONS[key][0];
     container.innerHTML = `
       <div class="scenario-box">
-        <div class="scenario-label">📍 Konteks Masalah / Deskripsi Soal</div>
+        <div class="scenario-label">📍 Skenario / Konteks Masalah</div>
         <div class="scenario-text">${data.scenario}</div>
       </div>
       ${data.questions.map((q, i) => `
         <div class="question-block" id="${key}-q-${i}" style="margin-top:24px;">
+          <div class="indicator-label">${q.ind}</div>
           <div class="question-text"><strong>${i+1}. ${q.q}</strong></div>
           <div class="options-grid">
             ${q.a.map((opt, oi) => `
@@ -458,7 +295,9 @@ function submitQuiz() {
     });
     if (selected === q.c) score += 10;
   });
-  alert(`🎯 Kuis Selesai! Skor Tim: ${score}/100`);
+  challengeScores.quiz = score;
+  completedChallenges.push('quiz');
+  alert(`🎯 Kuis Selesai! Skor: ${score}/100`);
   document.getElementById('btn-submit-quiz').style.display = 'none';
   document.getElementById('tab-quiz').classList.add('done');
   switchTab('ct');
@@ -487,7 +326,7 @@ function finishLevel(ln) {
   const avgScore = Math.round((challengeScores.ct + challengeScores.st + challengeScores.sci + challengeScores.inn) / 4);
   const xpEarned = avgScore * 2;
   const state = ThermoGame.loadState();
-  state.zones[ZONE] = { completed: true, score: avgScore, scores: { all: challengeScores }, challengesDone: completedChallenges };
+  state.zones[ZONE] = { completed: true, score: avgScore, scores: { all: challengeScores }, challengesDone: completedChallenges, answers: {} };
   ThermoGame.addXP(state, xpEarned);
   ThermoGame.saveState(state);
   document.querySelectorAll('.challenge-card').forEach(c => c.style.display = 'none');
